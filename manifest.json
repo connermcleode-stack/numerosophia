@@ -1,0 +1,18 @@
+{
+  "name": "Numerosophia",
+  "short_name": "Numerosophia",
+  "description": "Strumento di Calcolo Pitagorico Integrato Completo",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#faf8f5",
+  "theme_color": "#8e7355",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2723/2723594.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
