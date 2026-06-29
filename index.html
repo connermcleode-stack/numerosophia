@@ -3,504 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numerosophia - Analisi Professionale Integrata</title>
-    
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#8e7355">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
+    <title>Numerosophia - Scegli il tuo Percorso</title>
     <style>
-        * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background: #faf8f5; color: #2c3e50; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); max-width: 800px; width: 100%; border: 1px solid #eae4da; }
-        h1 { text-align: center; color: #8e7355; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; }
-        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 35px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .form-group-full { grid-column: span 2; }
-        label { font-weight: 600; color: #4a5568; display: block; margin-top: 10px; font-size: 14px; }
-        input { width: 100%; padding: 12px; margin-top: 6px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px; background-color: #fcfbf9; transition: border 0.2s; }
-        input:focus { border-color: #8e7355; outline: none; }
-        button { width: 100%; background: #8e7355; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; letter-spacing: 0.5px; }
-        button:hover { background: #765f45; }
-        .btn-secondary { background: #e2e8f0; color: #4a5568; margin-top: 15px; }
-        .btn-secondary:hover { background: #cbd5e1; }
-        .risultati { margin-top: 40px; border-top: 2px solid #f1f5f9; padding-top: 25px; display: none; }
-        .sezione-titolo { font-size: 18px; color: #8e7355; border-bottom: 1px solid #eae4da; padding-bottom: 6px; margin-top: 35px; margin-bottom: 15px; font-weight: 600; }
-        .grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: #fdfbf7; border: 1px solid #f3ebe1; padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
-        .card h3 { margin: 0 0 8px 0; font-size: 14px; color: #5c4d3c; text-transform: uppercase; letter-spacing: 0.5px; }
-        .numero-evidenziato { font-size: 22px; font-weight: bold; color: #8e7355; margin-bottom: 5px; }
-        .archetipo-nome { font-weight: bold; color: #2c3e50; font-size: 15px; display: block; margin-bottom: 5px; }
-        .descrizione { font-size: 13.5px; color: #4a5568; line-height: 1.5; }
-        .ombra-testo { font-size: 13px; color: #94a3b8; margin-top: 6px; font-style: italic; }
-        @media(max-width: 600px) { .form-grid, .grid-cards { grid-template-columns: 1fr; } .form-group-full { grid-column: span 1; } }
-    </style>
+        :root {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --accent-gold: #c5a059;
+            --button-bg: #1e1e1e;
+            --button-hover: #2a2a2a;
+        }
 
-    <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(() => console.log('Numerosophia PWA registrata con successo!'))
-        .catch((err) => console.log('Errore Service Worker:', err));
-    }
-    </script>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        p.subtitle {
+            font-style: italic;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        .menu-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn-option {
+            background-color: var(--button-bg);
+            border: 2px solid var(--accent-gold);
+            color: var(--text-color);
+            padding: 20px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-option:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(197, 160, 89, 0.3);
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            opacity: 0.5;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>NUMEROSOPHIA</h1>
-    <div class="subtitle">Strumento di Calcolo Pitagorico Integrato Completo</div>
-    
-    <div class="form-grid">
-        <div>
-            <label for="nome">Nome (da Carta d'Identità):</label>
-            <input type="text" id="nome" placeholder="Es. Mario">
+    <div class="container">
+        <h1>NUMEROSOPHIA</h1>
+        <p class="subtitle">Esplora la geometria sacra dei tuoi numeri</p>
+        
+        <div class="menu-options">
+            <a href="pitagora.html" class="btn-option">Numerologia Pitagorica</a>
+            
+            <a href="caldea.html" class="btn-option">Numerologia Caldea</a>
         </div>
-        <div>
-            <label for="cognome">Cognome:</label>
-            <input type="text" id="cognome" placeholder="Es. Rossi">
-        </div>
-        <div class="form-group-full">
-            <label for="soprannome">Soprannome / Nome d'Arte (Opzionale):</label>
-            <input type="text" id="soprannome" placeholder="Es. Francy">
-        </div>
-        <div>
-            <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
-            <input type="text" id="dataNascita" placeholder="Es. 27/06/1989">
-        </div>
-        <div>
-            <label for="annoCorrente">Anno per l'Anno Personale:</label>
-            <input type="number" id="annoCorrente" value="2026">
+        
+        <div class="footer">
+            © 2026 Numerosophia
         </div>
     </div>
-    
-    <button onclick="eseguiCalcoloCompleto()">GENERA TAVOLA NUMEROLOGICA</button>
-    <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display:none;">COPIA ANALISI NEGLI APPUNTI</button>
-    
-    <div id="risultati" class="risultati">
-        
-        <div id="bloccoAnagrafica" style="display:none;">
-            <div class="sezione-titolo">I Numeri Fondamentali (Dall'Anagrafica)</div>
-            <div class="grid-cards">
-                <div class="card">
-                    <h3>Anima (Chi sei dentro)</h3>
-                    <div id="numAnima" class="numero-evidenziato"></div>
-                    <div id="descAnima"></div>
-                </div>
-                <div class="card">
-                    <h3>Persona (Come appari)</h3>
-                    <div id="numPersona" class="numero-evidenziato"></div>
-                    <div id="descPersona"></div>
-                </div>
-                <div class="card" style="grid-column: span 2;">
-                    <h3>Espressione / Io (Il Talento Nativo)</h3>
-                    <div id="numEspressione" class="numero-evidenziato"></div>
-                    <div id="descEspressione"></div>
-                </div>
-            </div>
-        </div>
 
-        <div id="bloccoData" style="display:none;">
-            <div class="sezione-titolo">Destino e Carattere (Dalla Data)</div>
-            <div class="grid-cards">
-                <div class="card">
-                    <h3>Giorno di Nascita (Attitudine)</h3>
-                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #27ae60;"></div>
-                    <div id="descGiornoIsolato"></div>
-                </div>
-                <div class="card">
-                    <h3>Destino / Cammino di Vita</h3>
-                    <div id="numCammino" class="numero-evidenziato"></div>
-                    <div id="descCammino"></div>
-                </div>
-                <div class="card" style="border-left-color: #6c5ce7;">
-                    <h3>Anno Personale</h3>
-                    <div id="numAnnoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
-                    <div id="descAnnoPers"></div>
-                </div>
-                <div class="card" style="border-left-color: #e67e22;">
-                    <h3>Giorno Personale (Oggi)</h3>
-                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
-                    <div id="descGiornoPers"></div>
-                </div>
-            </div>
-
-            <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi (Il Clima di Vita)</div>
-            <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
-                    <h3 style="font-size:12px;">Ciclo Formativo<br>(Mese)</h3>
-                    <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloForm" style="font-size:12px;"></div>
-                </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
-                    <h3 style="font-size:12px;">Ciclo Produttivo<br>(Giorno)</h3>
-                    <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloProd" style="font-size:12px;"></div>
-                </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
-                    <h3 style="font-size:12px;">Ciclo Conclusivo<br>(Anno)</h3>
-                    <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloConc" style="font-size:12px;"></div>
-                </div>
-            </div>
-            <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
-
-            <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Cicli di Realizzazione (Pinnacoli / Apogei)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>1° Pinnacolo</h3>
-                    <div id="numCiclo1" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo1" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo1"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>2° Pinnacolo</h3>
-                    <div id="numCiclo2" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo2" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo2"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>3° Pinnacolo</h3>
-                    <div id="numCiclo3" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo3" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo3"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>4° Pinnacolo</h3>
-                    <div id="numCiclo4" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo4" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo4"></div>
-                </div>
-            </div>
-
-            <div class="sezione-titolo">Le Ombre (Sfide Evolutive)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #e74c3c;">
-                    <h3>Ombra Giovinezza</h3>
-                    <div id="numOmbraGiov" class="numero-evidenziato" style="color: #e74c3c;"></div>
-                    <div id="descOmbraGiov"></div>
-                </div>
-                <div class="card" style="border-left-color: #e74c3c;">
-                    <h3>Ombra Maturità</h3>
-                    <div id="numOmbraMat" class="numero-evidenziato" style="color: #e74c3c;"></div>
-                    <div id="descOmbraMat"></div>
-                </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #c0392b;">
-                    <h3>Ombra Principale</h3>
-                    <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b;"></div>
-                    <div id="descOmbraPrinc"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="sezioneQuintessenza" style="display:none;">
-            <div class="sezione-titolo" style="color: #8e44ad; border-bottom-color: #e8daef; text-align: center; margin-top: 40px;">IL PUNTO D'ARRIVO</div>
-            <div class="grid-cards" style="grid-template-columns: 1fr;">
-                <div class="card" style="border-left-color: #8e44ad; text-align: center; background: #fdfafc;">
-                    <h3>La Quintessenza (L'Armonia Finale)</h3>
-                    <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad; font-size: 32px; margin: 10px 0;"></div>
-                    <div id="descQuintessenza" style="text-align: left; max-width: 600px; margin: 0 auto;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
-            <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">L'Energia Acquisita (Solo Soprannome)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #d35400;">
-                    <h3>Anima del Soprannome</h3>
-                    <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400;"></div>
-                    <div id="descAnimaSop"></div>
-                </div>
-                <div class="card" style="border-left-color: #d35400;">
-                    <h3>Persona del Soprannome</h3>
-                    <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400;"></div>
-                    <div id="descPersonaSop"></div>
-                </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #e67e22;">
-                    <h3>Espressione del Soprannome</h3>
-                    <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22;"></div>
-                    <div id="descEspressioneSop"></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<script>
-const databaseArchetipi = {
-    1: { nome: "Il Guerriero (Leader/Pioniere)", luce: "Iniziativa, indipendenza, coraggio, forte spinta all'azione autonoma.", ombra: "Egoismo, intolleranza, aggressività, paura di fallire." },
-    2: { nome: "Il Fanciullo (Collaboratore/Mediatore)", luce: "Sensibilità, diplomazia, capacità di ascolto e cooperazione, armonia.", ombra: "Dipendenza affettiva, ipersensibilità, indecisione cronica." },
-    3: { nome: "Il Giullare (Comunicatore/Creatore)", luce: "Espressione creativa, entusiasmo, socialità, ottimismo, comunicazione eloquente.", ombra: "Dispersione energetica, superficialità, tendenza a drammatizzare." },
-    4: { nome: "Il Costruttore (Metodico/Pratico)", luce: "Organizzazione, stabilità, senso del dovere, lealtà, pragmatismo incrollabile.", ombra: "Rigidità mentale, eccessivo attaccamento al controllo, paura del cambiamento." },
-    5: { nome: "Il Cercatore (Esploratore/Libero)", luce: "Amore per la libertà, adattabilità, curiosità intellettuale, spirito d'avventura.", ombra: "Irrequietezza, instabilità, fuga dalle responsabilità, eccessi." },
-    6: { nome: "L'Angelo (Custode/Insegnante)", luce: "Senso di responsabilità, cura degli altri, amore per l'armonia familiare e la bellezza.", ombra: "Senso di colpa, iper-protezione soffocante, svalutazione di sé." },
-    7: { nome: "Il Saggio (Ricercatore/Spirituale)", luce: "Profondità d'analisi, intuito, spiritualità, amore per lo studio e la verità profonda.", ombra: "Isolamento emotivo, cinismo, eccesso di intellettualizzazione, sfiducia." },
-    8: { nome: "Il Sovrano (Leader Organizzativo/Manager)", luce: "Autorevolezza, capacità di gestire il potere, ambizione costruttiva, senso di giustizia.", ombra: "Abuso di potere, materialismo sfrenato, intolleranza verso la debolezza." },
-    9: { nome: "Il Liberatore (Saggio Universale/Filantropo)", luce: "Amore universale, compassione, capacità di lasciare andare, idealismo evoluto.", ombra: "Incapacità di porre limiti, tendenza al martirio, delusioni idealistiche." },
-    11: { nome: "Il Genio (Numero Maestro)", luce: "Intuizione folgorante, visione ideale, canale spirituale, carisma che ispira gli altri.", ombra: "Tensione nervosa estrema, senso di alienazione, fanatismo." },
-    22: { nome: "Il Creatore di Strutture (Numero Maestro)", luce: "Capacità di tradurre grandi visioni spirituali in progetti concreti e planetari.", ombra: "Megalomane o, al contrario, totale blocco per paura delle proprie responsabilità." },
-    33: { nome: "Il Maestro Spirituale (Numero Maestro)", luce: "Amore cristico, guida empatica globale, protezione e insegnamento universale.", ombra: "Carico emotivo insostenibile, interferenza forzata nella vita altrui." }
-};
-
-const databaseOmbreMazzo = {
-    0: { nome: "L'Angelo caduto (Ombra 9)", sfida: "Sfida universale o assenza totale di vincoli predefiniti. Richiede di confrontarsi con il senso del vuoto evolutivo o la perdita di confini individuali per ritrovare l'Unità spirituale pura." },
-    1: { nome: "Il Ribelle", sfida: "Tendenza all'ostinazione cieca, all'aggressività reattiva o all'incapacità di accettare guide. La lezione è trasformare l'impulso distruttivo in sana indipendenza." },
-    2: { nome: "L'Orfano", sfida: "Paura profonda dell'abbandono, dipendenza emotiva e tendenza al vittimismo per ricevere attenzioni. La lezione è scoprire la propria stabilità interiore." },
-    3: { nome: "Lo Straniero", sfida: "Blocco della comunicazione espressiva, tendenza a isolarsi sentendosi non capiti. La lezione è trovare la propria autentica voce nel mondo." },
-    4: { nome: "Il Prigioniero", sfida: "Rigidità strutturale estrema, sottomissione a schemi limitanti e rifiuto del cambiamento. La lezione è evadere dalle prigioni mentali." },
-    5: { nome: "Il Girovago", sfida: "Irrequietezza cronica, fuga dalle responsabilità e dispersione in stimoli superficiali. La lezione è trovare la libertà all'interno." },
-    6: { nome: "Il Martire", sfida: "Senso di colpa radicato o tendenza a manipolare gli affetti sotto forma di troppa premura. La lezione è amare senza possedere." },
-    7: { nome: "Il Solitario", sfida: "Chiusura in una torre d'avorio, scetticismo cinico, paura dell'intimità emotiva. La lezione è integrare la mente con l'apertura del cuore." },
-    8: { nome: "Il Tiranno", sfida: "Eccessiva sete di controllo, materialismo o abuso di potere per mascherare fragilità. La lezione è esercitare una guida giusta." },
-    9: { nome: "L'Angelo caduto", sfida: "Tendenza al rifiuto della realtà materiale, alienazione o vittimismo idealistico. La lezione è manifestare la compassione universale." }
-};
-
-const databaseKarmici = {
-    13: "Sfida del cambiamento radicale e della rinascita (L'Alchimista).",
-    14: "Sfida della temperanza e della libertà interiore.",
-    16: "Sfida del crollo dell'Ego (La Torre).",
-    19: "Sfida dell'indipendenza equilibrata."
-};
-
-const tabellaPitagorica = {
-    'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
-    'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 6, 'P': 7, 'Q': 8, 'R': 9,
-    'S': 1, 'T': 2, 'U': 3, 'V': 4, 'W': 5, 'X': 6, 'Y': 7, 'Z': 8
-};
-
-function riduciNumero(numero, isDatiAnagrafici = false) {
-    const maestri = [11, 22, 33];
-    const karmici = [13, 14, 16, 19];
-    if (numero <= 9 || maestri.includes(numero) || (isDatiAnagrafici && karmici.includes(numero))) {
-        return numero;
-    }
-    let somma = numero.toString().split('').reduce((acc, cifra) => acc + parseInt(cifra), 0);
-    return riduciNumero(somma, isDatiAnagrafici);
-}
-
-function riduciMonocifraStretta(numero) {
-    if (numero <= 9) return numero;
-    let somma = numero.toString().split('').reduce((acc, cifra) => acc + parseInt(cifra), 0);
-    return riduciMonocifraStretta(somma);
-}
-
-function pulisciTesto(testo) {
-    return testo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/[^A-Z]/g, "");
-}
-
-function compilaScheda(numero, compatta = false) {
-    let base = riduciMonocifraStretta(numero);
-    let datiArchetipo = databaseArchetipi[numero] || databaseArchetipi[base];
-    let testoKarmico = databaseKarmici[numero] ? `<p style="color:#d35400; font-size:12px; margin:3px 0 0 0;"><strong>Nota Karmica:</strong> ${databaseKarmici[numero]}</p>` : "";
-    
-    if (compatta) {
-        return `<span class="archetipo-nome" style="font-size:13px;">${datiArchetipo.nome.split(' (')[0]}</span><div class="descrizione" style="font-size:12px; line-height:1.3;">${datiArchetipo.luce.substring(0, 65)}...</div>`;
-    }
-    return `<span class="archetipo-nome">${datiArchetipo.nome}</span><div class="descrizione">${datiArchetipo.luce}</div><div class="ombra-testo">Ombra: ${datiArchetipo.ombra}</div>${testoKarmico}`;
-}
-
-function compilaSchedaOmbra(valoreOmbra) {
-    let datiOmbra = databaseOmbreMazzo[valoreOmbra] || { nome: `Ombra ${valoreOmbra}`, sfida: "Sfida evolutiva." };
-    return `<span class="archetipo-nome" style="color: #c0392b;">${datiOmbra.nome}</span><div class="descrizione">${datiOmbra.sfida}</div>`;
-}
-
-function calcolaStringaNumerica(testo) {
-    const vocaliSet = ['A', 'E', 'I', 'O', 'U'];
-    let sAnima = 0, sPersona = 0, sEspressione = 0;
-    for (let l of testo) {
-        let v = tabellaPitagorica[l] || 0;
-        if (v > 0) {
-            sEspressione += v;
-            if (vocaliSet.includes(l)) { sAnima += v; } else { sPersona += v; }
-        }
-    }
-    return { anima: riduciNumero(sAnima, true), persona: riduciNumero(sPersona, true), espressione: riduciNumero(sEspressione, true) };
-}
-
-let testoCopiaGlobale = "";
-
-function eseguiCalcoloCompleto() {
-    const nome = document.getElementById('nome').value.trim();
-    const cognome = document.getElementById('cognome').value.trim();
-    const soprannome = document.getElementById('soprannome').value.trim();
-    const dataNascita = document.getElementById('dataNascita').value.trim();
-    const annoTarget = parseInt(document.getElementById('annoCorrente').value) || 2026;
-    
-    if(!nome && !cognome && !soprannome && !dataNascita) {
-        alert("Inserisci almeno un campo per generare la tavola.");
-        return;
-    }
-
-    function format(num) {
-        if ([11, 22, 33, 13, 14, 16, 19].includes(num)) return `${num}/${riduciMonocifraStretta(num)}`;
-        return num;
-    }
-
-    testoCopiaGlobale = "--- REPORT NUMEROSOPHIA COMPLETO ---\n\n";
-    let haCalcolatoQualcosa = false;
-    let espressionePerQuintessenza = null;
-    let camminoPerQuintessenza = null;
-
-    // 1. ANAGRAFICA
-    if (nome || cognome) {
-        const nomePulito = pulisciTesto(nome);
-        const cognomePulito = pulisciTesto(cognome);
-        const datiAnagrafica = calcolaStringaNumerica(nomePulito + cognomePulito);
-        
-        espressionePerQuintessenza = datiAnagrafica.espressione;
-
-        document.getElementById('numAnima').innerText = format(datiAnagrafica.anima);
-        document.getElementById('descAnima').innerHTML = compilaScheda(datiAnagrafica.anima);
-        document.getElementById('numPersona').innerText = format(datiAnagrafica.persona);
-        document.getElementById('descPersona').innerHTML = compilaScheda(datiAnagrafica.persona);
-        document.getElementById('numEspressione').innerText = format(datiAnagrafica.espressione);
-        document.getElementById('descEspressione').innerHTML = compilaScheda(datiAnagrafica.espressione);
-
-        document.getElementById('bloccoAnagrafica').style.display = 'block';
-        testoCopiaGlobale += `ANAGRAFICA:\nAnima: ${format(datiAnagrafica.anima)}\nPersona: ${format(datiAnagrafica.persona)}\nEspressione: ${format(datiAnagrafica.espressione)}\n\n`;
-        haCalcolatoQualcosa = true;
-    } else {
-        document.getElementById('bloccoAnagrafica').style.display = 'none';
-    }
-
-    // 2. DATA DI NASCITA
-    if (dataNascita) {
-        const partiData = dataNascita.split('/');
-        if(partiData.length === 3) {
-            const gNum = parseInt(partiData[0]);
-            const mNum = parseInt(partiData[1]);
-            const aNum = parseInt(partiData[2]);
-
-            const giornoR = riduciNumero(gNum, true); 
-            const meseR = riduciNumero(mNum, true);
-            const annoR = riduciNumero(aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0), true);
-            
-            const cammino = riduciNumero(riduciNumero(gNum) + riduciNumero(mNum) + riduciNumero(aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0)), true);
-            const camminoStretto = riduciMonocifraStretta(cammino);
-            camminoPerQuintessenza = cammino;
-
-            const fineC1 = 36 - camminoStretto;
-            const fineC2 = fineC1 + 9;
-            const fineC3 = fineC2 + 9;
-
-            // Grandi Cicli
-            document.getElementById('numCicloForm').innerText = format(meseR);
-            document.getElementById('descCicloForm').innerHTML = compilaScheda(meseR, true);
-            document.getElementById('numCicloProd').innerText = format(giornoR);
-            document.getElementById('descCicloProd').innerHTML = compilaScheda(giornoR, true);
-            document.getElementById('numCicloConc').innerText = format(annoR);
-            document.getElementById('descCicloConc').innerHTML = compilaScheda(annoR, true);
-
-            document.getElementById('infoEtaGrandiCicli').innerText = `Fasce: Formativo (0 a ${fineC1} anni) | Produttivo (${fineC1+1} a ${fineC2+9} anni) | Conclusivo (da ${fineC2+10} anni)`;
-
-            // Pinnacoli
-            const c1 = riduciNumero(riduciNumero(gNum) + riduciNumero(mNum), true);
-            const c2 = riduciNumero(riduciNumero(gNum) + annoR, true);
-            const c3 = riduciNumero(c1 + c2, true);
-            const c4 = riduciNumero(riduciNumero(mNum) + annoR, true);
-
-            document.getElementById('numCiclo1').innerText = format(c1);
-            document.getElementById('etaCiclo1').innerText = `Da 0 a ${fineC1} anni`;
-            document.getElementById('descCiclo1').innerHTML = compilaScheda(c1);
-
-            document.getElementById('numCiclo2').innerText = format(c2);
-            document.getElementById('etaCiclo2').innerText = `Da ${fineC1 + 1} a ${fineC2} anni`;
-            document.getElementById('descCiclo2').innerHTML = compilaScheda(c2);
-
-            document.getElementById('numCiclo3').innerText = format(c3);
-            document.getElementById('etaCiclo3').innerText = `Da ${fineC2 + 1} a ${fineC3} anni`;
-            document.getElementById('descCiclo3').innerHTML = compilaScheda(c3);
-
-            document.getElementById('numCiclo4').innerText = format(c4);
-            document.getElementById('etaCiclo4').innerText = `Da ${fineC3 + 1} anni in poi`;
-            document.getElementById('descCiclo4').innerHTML = compilaScheda(c4);
-
-            // Anno Personale e Giorno Personale di Oggi
-            const annoTargetRidotto = riduciNumero(annoTarget.toString().split('').reduce((a, b) => a + parseInt(b), 0));
-            const annoPersonale = riduciNumero(riduciNumero(gNum) + riduciNumero(mNum) + annoTargetRidotto, true);
-            
-            const oggi = new Date();
-            const gOggiRidotto = riduciNumero(oggi.getDate());
-            const mOggiRidotto = riduciNumero(oggi.getMonth() + 1);
-            const giornoPersonale = riduciNumero(annoPersonale + gOggiRidotto + mOggiRidotto, true);
-
-            // Ombre
-            const gStretto = riduciMonocifraStretta(gNum);
-            const mStretto = riduciMonocifraStretta(mNum);
-            const aStretto = riduciMonocifraStretta(aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0));
-            
-            const ombraGiov = Math.abs(gStretto - mStretto);
-            const ombraMat = Math.abs(gStretto - aStretto);
-            const ombraPrinc = Math.abs(ombraGiov - ombraMat);
-
-            document.getElementById('numGiornoIsolato').innerText = format(giornoR);
-            document.getElementById('descGiornoIsolato').innerHTML = compilaScheda(giornoR);
-            document.getElementById('numCammino').innerText = format(cammino);
-            document.getElementById('descCammino').innerHTML = compilaScheda(cammino);
-            document.getElementById('numAnnoPers').innerText = `${format(annoPersonale)} (Anno ${annoTarget})`;
-            document.getElementById('descAnnoPers').innerHTML = compilaScheda(annoPersonale);
-            document.getElementById('numGiornoPers').innerText = format(giornoPersonale);
-            document.getElementById('descGiornoPers').innerHTML = compilaScheda(giornoPersonale);
-
-            document.getElementById('numOmbraGiov').innerText = ombraGiov;
-            document.getElementById('descOmbraGiov').innerHTML = compilaSchedaOmbra(ombraGiov);
-            document.getElementById('numOmbraMat').innerText = ombraMat;
-            document.getElementById('descOmbraMat').innerHTML = compilaSchedaOmbra(ombraMat);
-            document.getElementById('numOmbraPrinc').innerText = ombraPrinc;
-            document.getElementById('descOmbraPrinc').innerHTML = compilaSchedaOmbra(ombraPrinc);
-
-            document.getElementById('bloccoData').style.display = 'block';
-            haCalcolatoQualcosa = true;
-        } else {
-            alert("Usa il formato GG/MM/AAAA.");
-        }
-    } else {
-        document.getElementById('bloccoData').style.display = 'none';
-    }
-
-    // 3. QUINTESSENZA
-    if (espressionePerQuintessenza && camminoPerQuintessenza) {
-        const quintessenza = riduciNumero(espressionePerQuintessenza + camminoPerQuintessenza, true);
-        document.getElementById('numQuintessenza').innerText = format(quintessenza);
-        document.getElementById('descQuintessenza').innerHTML = compilaScheda(quintessenza);
-        document.getElementById('sezioneQuintessenza').style.display = 'block';
-    } else {
-        document.getElementById('sezioneQuintessenza').style.display = 'none';
-    }
-
-    // 4. SOPRANNOME
-    if (soprannome) {
-        const soprannomePulito = pulisciTesto(soprannome);
-        const datiSoprannome = calcolaStringaNumerica(soprannomePulito);
-
-        document.getElementById('numAnimaSop').innerText = format(datiSoprannome.anima);
-        document.getElementById('descAnimaSop').innerHTML = compilaScheda(datiSoprannome.anima);
-        document.getElementById('numPersonaSop').innerText = format(datiSoprannome.persona);
-        document.getElementById('descPersonaSop').innerHTML = compilaScheda(datiSoprannome.persona);
-        document.getElementById('numEspressioneSop').innerText = format(datiSoprannome.espressione);
-        document.getElementById('descEspressioneSop').innerHTML = compilaScheda(datiSoprannome.espressione);
-
-        document.getElementById('sezioneSoprannome').style.display = 'block';
-        haCalcolatoQualcosa = true;
-    } else {
-        document.getElementById('sezioneSoprannome').style.display = 'none';
-    }
-
-    if (haCalcolatoQualcosa) {
-        document.getElementById('risultati').style.display = 'block';
-        document.getElementById('btnCopia').style.display = 'block';
-    }
-}
-
-function copiaMappaInAppunti() {
-    alert("Funzione di copia attiva!");
-}
-</script>
 </body>
 </html>
-
-
-
-
