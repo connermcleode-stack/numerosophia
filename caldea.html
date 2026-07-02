@@ -36,7 +36,14 @@
         .ombra-testo { font-size: 13px; color: #94a3b8; margin-top: 6px; font-style: italic; }
         .btn-home { background: #4a5568; color: white; max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
         @media(max-width: 600px) { .form-grid, .grid-cards { grid-template-columns: 1fr; } .form-group-full { grid-column: span 1; } }
-    </style>
+    </style><div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center;">
+    <div style="background-color: #fff; padding: 25px; border-radius: 12px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: sans-serif;">
+        <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 15px; font-size: 28px; font-weight: bold; cursor: pointer; color: #7f8c8d;">&times;</span>
+        <h2 id="modaleTitolo" style="margin-top: 0; color: #2c3e50; font-size: 22px;"></h2>
+        <h3 id="modaleSottotitolo" style="margin-top: 5px; color: #7f8c8d; font-size: 16px; font-weight: normal; border-bottom: 1px solid #eee; padding-bottom: 10px;"></h3>
+        <div id="modaleContenuto" style="margin-top: 15px; font-size: 14px; line-height: 1.5; color: #34495e;"></div>
+    </div>
+</div>
 </head>
 <body>
 
@@ -58,9 +65,7 @@
             <input type="text" id="soprannome" placeholder="Es. Francy">
         </div>
        <div>
-    <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
-    <input type="text" id="dataNascita" placeholder="Es. 27/06/1989" maxlength="10" 
-           oninput="this.value = this.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/, '$1/$2').replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3')">
+   <input type="date" id="dataNascita">
 </div>
         <div>
             <label for="annoCorrente">Anno per la Vibrazione Corrente:</label>
@@ -70,6 +75,7 @@
     
     <button onclick="eseguiCalcoloCompleto()">GENERA TAVOLA PLANETARIA</button>
     <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display:none;">COPIA ANALISI NEGLI APPUNTI</button>
+    <button id="btnSalva" type="button" style="background-color: #8e7355; color: white; display: none; margin-top: 15px;" onclick="salvaNelDatabase()">💾 SALVA IN ARCHIVIO</button>
     
     <a href="index.html" class="btn-home">⬅ Torna alla Scelta</a>
     
@@ -100,7 +106,76 @@
             <div class="sezione-titolo">Il Canale del Destino (Le Correnti del Tempo)</div>
             <div class="grid-cards">
                 <div class="card">
-                    <h3>Giorno di Nascita (Imprinting Radice)</h3>
+                    <h3>Numero Psichico (Imprinting Radice)</h3>
+                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #27ae60;"></div>
+                    <div id="descGiornoIsolato"></div>
+                </div>
+                <div class="card">
+                    <h3>Cammino di Vita / Destino</h3>
+                    <div id="numCammino" class="numero-evidenziato"></div>
+                    <div id="descCammino"></div>
+                </div>
+                <div class="card" style="border-left-color: #6c5ce7;">
+                    <h3>Ciclo Annuale Corrente</h3>
+                    <div id="numAnnoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
+                    <div id="descAnnoPers"></div>
+                </div>
+                <div class="card" style="border-left-color: #e67e22;">
+                    <h3>Vibrazione Giornaliera (Oggi)</h3>
+                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div id="descGiornoPers"></div>
+                </div>
+            </div>
+
+            <div class="sezione-titolo" style="color: #e74c3c; border-bottom-color: #fadbd8;">Afflizioni Planetarie (Le Prove Karmiche)</div>
+            <div class="grid-cards">
+                <div class="card" style="border-left-color: #e74c3c;">
+                    <h3>Sfida Energetica Minore I</h3>
+                    <div id="numOmbraGiov" class="numero-evidenziato" style="color: #e74c3c;"></div>
+                    <div id="descOmbraGiov"></div>
+                </div>
+                <div class="card" style="border-left-color: #e74c3c;">
+                    <h3>Sfida Energetica Minore II</h3>
+                    <div id="numOmbraMat" class="numero-evidenziato" style="color: #e74c3c;"></div>
+                    <div id="descOmbraMat"></div>
+                </div>
+                <div class="card" style="grid-column: span 2; border-left-color: #c0392b;">
+                    <h3>Afflizione Karmica Principale</h3>
+                    <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b;"></div>
+                    <div id="descOmbraPrinc"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
+            <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">Firma Alternativa (Soprannome / Pseudonimo)</div>
+            <div class="grid-cards">
+                <div class="card" style="border-left-color: #d35400;">
+                    <h3>Anima</h3>
+                    <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400;"></div>
+                    <div id="descAnimaSop"></div>
+                </div>
+                <div class="card" style="border-left-color: #d35400;">
+                    <h3>Persona</h3>
+                    <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400;"></div>
+                    <div id="descPersonaSop"></div>
+                </div>
+                <div class="card" style="grid-column: span 2; border-left-color: #e67e22;">
+                    <h3>Espressione</h3>
+                    <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div id="descEspressioneSop"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+        <div id="bloccoData" style="display:none;">
+            <div class="sezione-titolo">Il Canale del Destino (Le Correnti del Tempo)</div>
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>Numero Psichico (Imprinting Radice)</h3>
                     <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #27ae60;"></div>
                     <div id="descGiornoIsolato"></div>
                 </div>
@@ -189,17 +264,6 @@
             </div>
         </div>
 
-        <div id="sezioneQuintessenza" style="display:none;">
-            <div class="sezione-titolo" style="color: #8e44ad; border-bottom-color: #e8daef; text-align: center; margin-top: 40px;">LA QUINTESSENZA ALCHEMICA</div>
-            <div class="grid-cards" style="grid-template-columns: 1fr;">
-                <div class="card" style="border-left-color: #8e44ad; text-align: center; background: #fdfafc;">
-                    <h3>Il Punto d'Incontro tra Nome e Destino</h3>
-                    <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad; font-size: 32px; margin: 10px 0;"></div>
-                    <div id="descQuintessenza" style="text-align: left; max-width: 600px; margin: 0 auto;"></div>
-                </div>
-            </div>
-        </div>
-
         <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
             <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">Firma Alternativa (Soprannome / Pseudonimo)</div>
             <div class="grid-cards">
@@ -230,62 +294,111 @@ const databaseArchetipi = {
     1: { 
         nome: "Il Sole ☉ (Emanazione, Volontà, Principio Creatore)", 
         luce: "Energia vitale, individualità pura, potere di manifestare la propria luce. È il motore immobile, l'ispirazione divina e l'autorità spirituale.", 
-        ombra: "Orgoglio accecante, egocentrismo, dispotismo o totale incapacità di riconoscere il proprio valore autonomo." 
+        ombra: "Orgoglio accecante, egocentrismo, dispotismo o totale incapacità di riconoscere il proprio valore autonomo.",
+	Sblocco: "Sviluppa la vera leadership interiore, che non ha bisogno di dominare né di compiacere. Impara a brillare di luce propria senza oscurare gli altri. Il rimedio consiste nel riconoscere il proprio valore unico indipendentemente dal giudizio o dall'approvazione del mondo esterno. Smetti di cercare costantemente conferme e impara ad agire con sana indipendenza."
     },
     2: { 
         nome: "La Luna ☽ (Magnetismo, Ricettività, Flusso Inconscio)", 
-        luce: "Forza attrattiva e riflessiva. Intuizione profonda, immaginazione fertile, capacità di accogliere le correnti invisibili e mediare tra gli opposti.", 
-        ombra: "Ipersensibilità instabile, dipendenza dalle maree emotive altrui, passività o paura del vuoto." 
+        luce: "Forza attrattiva e riflessiva. Intuizione profonda, immaginazione fertile, capacità di accogliere le correnti invisibili e mediare entre gli opposti.", 
+        ombra: "Ipersensibilità instabile, dipendenza dalle maree emotive altrui, passività o paura del vuoto.",
+	Sblocco: "Trova il tuo centro emotivo all'interno, non nelle relazioni. La Luna Nera si supera integrando l'archetipo dell'osservatore: quando senti l'onda emotiva o la paura dell'abbandono, non proiettarla all'esterno, ma accoglila in solitudine. Impara a nutrire te stesso emotivamente e a stabilire confini sani per non dipendere dal riflesso altrui."
     },
     3: { 
         nome: "Giove ♃ (Espansione, Legge Cosmica, Abbondanza)", 
         luce: "La vibrazione della crescita materiale e spirituale. Ottimismo superiore, saggezza filosofica, expressione creativa e connessione con la buona sorte.", 
-        ombra: "Eccesso, presunzione intellettuale, dispersione dei propri talenti in piaceri effimeri o fanatismo." 
+        ombra: "Eccesso, presunzione intellettuale, dispersione dei propri talenti in piaceri effimeri o fanatismo.",
+	Sblocco: "Pratica la focalizzazione intenzionale. Scegli un solo progetto o talento alla volta e portalo a compimento prima di passare al successivo. Impara a dire di no alle distrazioni e trasforma la superbia in generosità d'animo, mettendo la tua conoscenza e la tua gioia al servizio degli altri senza pretendere applausi o riconoscimenti."
     },
     4: { 
         nome: "Urano / Rahu ☊ (L'Ombra Occulta, Rivoluzione, Rottura degli Schemi)", 
         luce: "Tradizionalmente legato all'elettricità e alle inversioni repentine del destino. Genialità fuori dal tempo, percezione delle verità nascoste, originalità radicale.", 
-        ombra: "Irrequietezza distruttiva, isolamento, attrazione per il caos o sfortuna improvvisa dovuta a rigidità." 
+        ombra: "Irrequietezza distruttiva, isolamento, attrazione per il caos o sfortuna improvvisa dovuta a rigidità.",
+	Sblocco: "Pratica l'arte del lasciare andare e della flessibilità. Quando le cose non vanno come pianificato, non irrigidirti nel controllo, ma chiediti quale nuova prospettiva si sta aprendo. Trova una via di mezzo tra il bisogno di stabilità e l'impulso alla ribellione distruttiva, canalizzando l'energia in attività manuali, strutturate o creative."
     },
     5: { 
         nome: "Mercurio ☿ (Il Messaggero, Flusso, Intelletto Alchemico)", 
         luce: "Movimento perpetuo e rapidità mentale. Il ponte tra il visibile e l'invisibile, commercio, comunicazione magica, adattabilità e alchimia mentale.", 
-        ombra: "Inganno, instabilità nervosa estrema, cinismo o tendenza a manipolare la verità attraverso la parola." 
+        ombra: "Inganno, instabilità nervosa estrema, cinismo o tendenza a manipolare la verità attraverso la parola.",
+	Sblocco: "Radica la mente nel corpo e nel momento presente. Usa la parola e la comunicazione con assoluta integrità, evitando il pettegolezzo o la distorsione della verità. Quando l'ansia o l'irrequietezza aumentano, stacca dai dispositivi digitali, rallenta il ritmo e pratica il silenzio per calmare il sistema nervoso."
     },
     6: { 
         nome: "Venere ♀ (Armonia Cosmica, Attrazione, Bellezza Sacra)", 
         luce: "L'equilibrio geometrico dell'universo. Amore elevato, pace, arte, capacità di creare alleanze sacre e di sanare i conflitti portando armonia.", 
-        ombra: "Attaccamento superficiale alla forma, pigrizia spirituale, ricerca del piacere senza etica o dipendenza affettiva." 
+        ombra: "Attaccamento superficiale alla forma, pigrizia spirituale, ricerca del piacere senza etica o dipendenza affettiva.",
+	Sblocco: "Accetta l'imperfezione, sia in te stesso che negli altri. Smetti di cercare l'armonia assoluta a costo di subire o di pretendere che gli altri cambino per compiacerti. Il rimedio sta nel coltivare un amore incondizionato che parte dall'auto-accettazione, guarendo il bisogno di approvazione estetica o relazionale."
     },
     7: { 
         nome: "Nettuno / Ketu ☋ (Il Misticismo, Distacco Iniziatore, Il Segreto)", 
         luce: "La vibrazione del tempio interiore. Rinuncia alle illusioni materiali (Maya), chiaroveggenza, spiritualità monastica e comprensione dei misteri del sonno e del sogno.", 
-        ombra: "Illusione totale, tendenza alla fuga dalla realtà, segreti distruttivi o senso di alienazione dal mondo." 
+        ombra: "Illusione totale, tendenza alla fuga dalla realtà, segreti distruttivi o senso di alienazione dal mondo.",
+	Sblocco: "Sviluppa un sano discernimento spirituale e pratico. Non usare la spiritualità o l'isolamento come scusa per fuggire dalle responsabilità materiali. Trova dei canali di espressione concreti (come l'arte, la musica o la scrittura) per dare forma alle tue intuizioni, mantenendo i piedi ben piantati a terra." 
     },
     8: { 
         nome: "Saturno ♄ (Il Signore del Tempo, Karma, Rigore Inizatico)", 
         luce: "La vibrazione più intensa nel sistema caldeo. Rappresenta il destino inevitabile, la purificazione attraverso la prova, la maestria strutturale e la giustizia infallibile.", 
-        ombra: "Malinconia profonda, ostacoli apparentemente insormontabili, durezza di cuore o restrizioni materiali severe." 
+        ombra: "Malinconia profonda, ostacoli apparentemente insormontabili, durezza di cuore o restrizioni materiali severe.",
+	Sblocco: "Trasforma il senso di colpa in responsabilità consapevole e la rigidità in saggezza compassionevole. Alleggerisci il carico emotivo accettando che non tutto dipende dal tuo sforzo. Impara a perdonare i tuoi fallimenti e celebra i piccoli traguardi, vedendo il tempo non come un nemico o una limitazione, ma come un maestro di maestria interiore."
     },
     9: { 
         nome: "Marte ♂ (Il Fuoco Sacro, Trasmutazione, Consumazione del Ciclo)", 
         luce: "Il numero sacro che i Caldei tenevano isolato. Rappresenta la forza che distrugge il vecchio per far nascere il nuovo. Coraggio spirituale, energia guerriera pura, determinazione.", 
-        ombra: "Rabbia distruttiva, violenza verbale o fisica, conflitti continui con l'esterno per proiezioni interne." 
+        ombra: "Rabbia distruttiva, violenza verbale o fisica, conflitti continui con l'esterno per proiezioni interne.",
+	Sblocco: "Canalizza l'immensa energia vitale in modo costruttivo e non distruttivo. Prima di reagire a una provocazione, fermati e respira per disinnescare l'impulso bellicoso. Usa l'attività fisica, lo sport o il lavoro focalizzato come valvole di sfogo sane per la rabbia, trasformando l'aggressività in coraggio focalizzato e protezione."
     }
 };
 
 // DATABASE AFFLIZIONI PLANETARIE (OMBRE CALDEE)
 const databaseOmbreMazzo = {
-    0: { nome: "L'Abisso Neutro (Prova del Vuoto)", sfida: "Assenza temporanea di coordinate karmiche prestabilite. Richiede di confrontarsi con il senso del vuoto evolutivo per ritrovare l'Unità spirituale pura senza aggrapparsi a vecchie strutture." },
-    1: { nome: "L'Oscuramento del Sole (Ego / Orgoglio)", sfida: "Tendenza all'ostinazione cieca, all'egocentrismo reattivo o al contrario all'incapacità di irradiare la propria luce autonoma, sottomettendosi al volere altrui." },
-    2: { nome: "La Luna Nera (Instabilità Emotiva)", sfida: "Paura viscerale del rifiuto e dell'abbandono, fluttuazioni umorali subite passivamente e tendenza a proiettare l'insicurezza sulle relazioni intime." },
-    3: { nome: "Il Blocco di Giove (Dispersione / Superbia)", sfida: "Espressione bloccata o iper-amplificata. Rischio di presunzione intellettuale, spreco energetico e difficoltà a canalizzare costruttivamente i propri talenti." },
-    4: { nome: "L'Urto di Urano (Resistenza al Caos)", sfida: "Rigidità strutturale che attira crolli improvvisi ed eventi destabilizzanti. La lezione richiede di abbracciare l'imprevedibile ed evadere dalle gabbie mentali." },
-    5: { nome: "L'Inganno di Mercurio (Instabilità Mentale)", sfida: "Iperattivazione del sistema nervoso, superficialità comunicativa, tendenza a razionalizzare l'intuito o a manipolare la verità per difendersi dal mondo." },
-    6: { nome: "L'Ombra di Venere (Dipendenza Armonica)", sfida: "Ricerca ossessiva del compiacimento altrui e della bellezza formale, mascherando conflitti irrisolti. Paura della solitudine e compromessi affettivi tossici." },
-    7: { nome: "La Nebbia di Nettuno (Illusione / Fuga)", sfida: "Tendenza a perdersi in illusioni utopiche, fanatismi o rifugi mentali (e dipendenze) per sfuggire alla densità e alla durezza della realtà materiale." },
-    8: { nome: "La Morsa di Saturno (Blocco Karmico / Rigore)", sfida: "Senso di colpa atavico, ritardi sistematici, senso di pesantezza esistenziale o freddezza emotiva. Richiede di superare la paura della privazione." },
-    9: { nome: "Il Conflitto di Marte (Rabbia / Distruzione)", sfida: "Forza distruttiva mal canalizzata che si esprime come irritazione, aggressività verbale o auto-sabotaggio. Richiede la trasmutazione del fuoco interiore." }
+    0: { 
+        nome: "L'Abisso Neutro (Prova del Vuoto)", 
+        sfida: "Assenza temporanea di coordinate karmiche prestabilite. Richiede di confrontarsi con il senso del vuoto evolutivo per ritrovare l'Unità spirituale pura senza aggrapparsi a vecchie strutture.", 
+        sblocco: "Accetta il vuoto come uno spazio di potenziale puro. Non forzare l'azione, ma rimani in ascolto e coltiva la pazienza prima della nuova manifestazione." 
+    },
+    1: { 
+        nome: "L'Oscuramento del Sole (Ego / Orgoglio)", 
+        sfida: "Tendenza all'ostinazione cieca, all'egocentrismo reattivo o al contrario all'incapacità di irradiare la propria luce autonoma, sottomettendosi al volere altrui.",
+        sblocco: "Sviluppa la vera leadership interiore, che non ha bisogno di dominare né di compiacere. Impara a brillare di luce propria senza oscurare gli altri. Il rimedio consiste nel riconoscere il proprio valore unico indipendentemente dal giudizio o dall'approvazione del mondo esterno. Smetti di cercare costantemente conferme e impara ad agire con sana indipendenza." 
+    },
+    2: { 
+        nome: "La Luna Nera (Instabilità Emotiva)", 
+        sfida: "Paura viscerale del rifiuto e dell'abbandono, fluttuazioni umorali subite passivamente e tendenza a proiettare l'insicurezza sulle relazioni intime.",
+        sblocco: "Trova il tuo centro emotivo all'interno, non nelle relazioni. La Luna Nera si supera integrando l'archetipo dell'osservatore: quando senti l'onda emotiva o la paura dell'abbandono, non proiettarla all'esterno, ma accoglila in solitudine. Impara a nutrire te stesso emotivamente e a stabilire confini sani per non dipendere dal riflesso altrui." 
+    },
+    3: { 
+        nome: "Il Blocco di Giove (Dispersione / Superbia)", 
+        sfida: "Espressione bloccata o iper-amplificata. Rischio di presunzione intellettuale, spreco energetico e difficoltà a canalizzare costruttivamente i propri talenti.",
+        sblocco: "Pratica la focalizzazione intenzionale. Scegli un solo progetto o talento alla volta e portalo a compimento prima di passare al successivo. Impara a dire di no alle distrazioni e trasforma la superbia in generosità d'animo, mettendo la tua conoscenza e la tua gioia al servizio degli altri senza pretendere applausi o riconoscimenti." 
+    },
+    4: { 
+        nome: "L'Urto di Urano (Resistenza al Caos)", 
+        sfida: "Rigidità strutturale che attira crolli improvvisi ed eveneti destabilizzanti. La lezione richiede di abbracciare l'imprevedibile ed evadere dalle gabbie mentali.",
+        sblocco: "Pratica l'arte del lasciare andare e della flessibilità. Quando le cose non vanno come pianificato, non irrigidirti nel controllo, ma chiediti quale nuova prospettiva si sta aprendo. Trova una via di mezzo tra il bisogno di stabilità e l'impulso alla ribellione distruttiva, canalizzando l'energia in attività manuali, strutturate o creative." 
+    },
+    5: { 
+        nome: "L'Inganno di Mercurio (Instabilità Mentale)", 
+        sfida: "Iperattivazione del sistema nervoso, superficialità comunicativa, tendenza a razionalizzare l'intuito o a manipolare la verità per difendersi dal mondo.",
+        sblocco: "Radica la mente nel corpo e nel momento presente. Usa la parola e la comunicazione con assoluta integrità, evitando il pettegolezzo o la distorsione della verità. Quando l'ansia o l'irrequietezza aumentano, stacca dai dispositivi digitali, rallenta il ritmo e pratica il silenzio per calmare il sistema nervoso." 
+    },
+    6: { 
+        nome: "L'Ombra di Venere (Dipendenza Armonica)", 
+        sfida: "Ricerca ossessiva del compiacimento altrui e della bellezza formale, mascherando conflitti irrisolti. Paura della solitudine e compromessi affettivi tossici.",
+        sblocco: "Accetta l'imperfezione, sia in te stesso che negli altri. Smetti di cercare l'armonia assoluta a costo di subire o di pretendere che gli altri cambino per compiacerti. Il rimedio sta nel coltivare un amore incondizionato che parte dall'auto-accettazione, guarendo il bisogno di approvazione estetica o relazionale." 
+    },
+    7: { 
+        nome: "La Nebbia di Nettuno (Illusione / Fuga)", 
+        sfida: "Tendenza a perdersi in illusioni utopiche, fanatismi o rifugi mentali (e dipendenze) per sfuggire alla densità e alla durezza della realtà materiale.",
+        sblocco: "Sviluppa un sano discernment spirituale e pratico. Non usare la spiritualità o l'isolamento come scusa per fuggire dalle responsabilità materiali. Trova dei canali di espressione concreti (como l'arte, la musica o la scrittura) per dare forma alle tue intuizioni, mantenendo i piedi ben piantati a terra." 
+    },
+    8: { 
+        nome: "La Morsa di Saturno (Blocco Karmico / Rigore)", 
+        sfida: "Senso di colpa atavico, ritardi sistematici, senso di pesantezza esistenziale o freddezza emotiva. Richiede di superare la paura della privazione.",
+        sblocco: "Trasforma il senso di colpa in responsabilità consapevole e la rigidità in saggezza compassionevole. Alleggerisci il carico emotivo accettando che non tutto dipende dal tuo sforzo. Impara a perdonare i tuoi fallimenti e celebra i piccoli traguardi, vedendo il tempo non come un nemico o una limitazione, ma come un maestro di maestria interiore." 
+    },
+    9: { 
+        nome: "Il Conflitto di Marte (Rabbia / Distruzione)", 
+        sfida: "Forza distruttiva mal canalizzata che si esprime come irritazione, aggressività verbale o auto-sabotaggio. Richiede la trasmutazione del fuoco interiore.",
+        sblocco: "Canalizza l'immensa energia vitale in modo costruttivo e non distruttivo. Prima di reagire a una provocazione, fermati e respira per disinnescare l'impulso bellicoso. Usa l'attività fisica, lo sport o il lavoro focalizzato come valvole di sfogo sane per la rabbia, trasformando l'aggressività in coraggio focalizzato e protezione." 
+    }
 };
 
 // TABELLA DI CONVERSIONE CALDEA
@@ -322,8 +435,19 @@ function compilaScheda(numero, compatta = false) {
 
 function compilaSchedaOmbra(valoreOmbra) {
     let base = riduciMonocifraStretta(valoreOmbra);
-    let datiOmbra = databaseOmbreMazzo[base] || { nome: `Prova Energetica ${valoreOmbra}`, sfida: "Attrito vibrazionale da trasmutare." };
-    return `<span class="archetipo-nome" style="color: #c0392b;">${datiOmbra.nome}</span><div class="descrizione">${datiOmbra.sfida}</div>`;
+    
+    let datiOmbra = databaseOmbreMazzo[base] || { 
+        nome: `Prova Energetica ${valoreOmbra}`, 
+        sfida: "Attrito vibrazionale da trasmutare.",
+        sblocco: "Integra l'archetipo e fluisci con l'energia." 
+    };
+    
+    // Aggiunto il trigger per l'apertura approfondimento specifico per le ombre
+    return `<div style="cursor: pointer;" onclick="apriApprofondimentoOmbra('${base}', '${valoreOmbra}')">
+                <span class="archetipo-nome" style="color: #c0392b;">${datiOmbra.nome}</span>
+                <div class="descrizione"><strong>Sfida:</strong> ${datiOmbra.sfida}</div>
+                <div class="sblocco-testo" style="margin-top: 6px; font-style: italic; color: #2e7d32;"><strong>Sblocco:</strong> ${datiOmbra.sblocco}</div>
+            </div>`;
 }
 
 function calcolaStringaCaldea(testo) {
@@ -345,17 +469,19 @@ function eseguiCalcoloCompleto() {
     const nome = document.getElementById('nome').value.trim();
     const cognome = document.getElementById('cognome').value.trim();
     const soprannome = document.getElementById('soprannome').value.trim();
-    const dataNascita = document.getElementById('dataNascita').value.trim();
+    const dataRaw = document.getElementById('dataNascita').value.trim();
+  let dataNascita = "";
+  if (dataRaw) {
+      const parti = dataRaw.split("-");
+      dataNascita = `${parti[2]}/${parti[1]}/${parti[0]}`;
+  }
     const annoTarget = parseInt(document.getElementById('annoCorrente').value) || 2026;
     
+    let haCalcolatoQualcosa = false;
+
     if(!nome && !cognome && !soprannome && !dataNascita) {
         alert("Inserisci almeno un campo per generare la mappa planetaria.");
         return;
-    }
-
-    function formatCaldeo(num) {
-        if (num <= 9) return num;
-        return `${num}/${riduciMonocifraStretta(num)}`;
     }
 
     testoCopiaGlobale = "--- TAVOLA NUMEROLOGICA CALDEO-PLANETARIA ---\n";
@@ -364,102 +490,78 @@ function eseguiCalcoloCompleto() {
     if(dataNascita) testoCopiaGlobale += `Data di Nascita: ${dataNascita}\n`;
     testoCopiaGlobale += `----------------------------------------------\n\n`;
 
-    let haCalcolatoQualcosa = false;
-    let espressionePerQuintessenza = null;
-    let camminoPerQuintessenza = null;
-
-    // 1. NOME E COGNOME
+    // 1. ANAGRAFICA CALDEA
     if (nome || cognome) {
         const nomePulito = pulisciTesto(nome);
         const cognomePulito = pulisciTesto(cognome);
         const datiAnagrafica = calcolaStringaCaldea(nomePulito + cognomePulito);
-        
-        espressionePerQuintessenza = riduciMonocifraStretta(datiAnagrafica.espressione);
 
-        document.getElementById('numAnima').innerText = formatCaldeo(datiAnagrafica.anima);
+        function formatEsitoCaldeo(totale) {
+            let mono = riduciMonocifraStretta(totale);
+            return totale > 9 ? `${totale}/${mono}` : totale;
+        }
+
+        document.getElementById('numAnima').innerText = formatEsitoCaldeo(datiAnagrafica.anima);
         document.getElementById('descAnima').innerHTML = compilaScheda(datiAnagrafica.anima);
-        document.getElementById('numPersona').innerText = formatCaldeo(datiAnagrafica.persona);
+        document.getElementById('numPersona').innerText = formatEsitoCaldeo(datiAnagrafica.persona);
         document.getElementById('descPersona').innerHTML = compilaScheda(datiAnagrafica.persona);
-        document.getElementById('numEspressione').innerText = formatCaldeo(datiAnagrafica.espressione);
+        document.getElementById('numEspressione').innerText = formatEsitoCaldeo(datiAnagrafica.espressione);
         document.getElementById('descEspressione').innerHTML = compilaScheda(datiAnagrafica.espressione);
 
         document.getElementById('bloccoAnagrafica').style.display = 'block';
+        
+        testoCopiaGlobale += `FREQUENZE CELESTI DEL NOME (CALDEA):\n`;
+        testoCopiaGlobale += `- Anima: ${formatEsitoCaldeo(datiAnagrafica.anima)}\n`;
+        testoCopiaGlobale += `- Persona: ${formatEsitoCaldeo(datiAnagrafica.persona)}\n`;
+        testoCopiaGlobale += `- Espressione: ${formatEsitoCaldeo(datiAnagrafica.espressione)}\n\n`;
         haCalcolatoQualcosa = true;
-
-        testoCopiaGlobale += `FREQUENZE DEL NOME (CALDEO):\n`;
-        testoCopiaGlobale += `- Anima (Spinta Interiore): ${formatCaldeo(datiAnagrafica.anima)} (${databaseArchetipi[riduciMonocifraStretta(datiAnagrafica.anima)]?.nome || ''})\n`;
-        testoCopiaGlobale += `- Persona (Riflesso Esterno): ${formatCaldeo(datiAnagrafica.persona)} (${databaseArchetipi[riduciMonocifraStretta(datiAnagrafica.persona)]?.nome || ''})\n`;
-        testoCopiaGlobale += `- Espressione (Sintesi): ${formatCaldeo(datiAnagrafica.espressione)} (${databaseArchetipi[riduciMonocifraStretta(datiAnagrafica.espressione)]?.nome || ''})\n\n`;
     } else {
         document.getElementById('bloccoAnagrafica').style.display = 'none';
     }
 
-    // 2. DATA DI NASCITA
+    // 2. DATA DI NASCITA E DIRETTRICI PLANETARIE (Solo Caldea Pura)
     if (dataNascita) {
         const partiData = dataNascita.split('/');
         if(partiData.length === 3) {
-            const gNum = parseInt(partiData[0]);
-            const mNum = parseInt(partiData[1]);
-            const aNum = parseInt(partiData[2]);
+            const gNum = parseInt(partiData[0]); 
+            const mNum = parseInt(partiData[1]); 
+            const aNum = parseInt(partiData[2]); 
 
-            const sommaDataDiretta = gNum + mNum + aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0);
-            const camminoStretto = riduciMonocifraStretta(sommaDataDiretta);
-            camminoPerQuintessenza = camminoStretto;
+            const giornoR = riduciMonocifraStretta(gNum); 
+            const meseR = riduciMonocifraStretta(mNum);
+            const sommaCifreAnno = aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0);
+            const annoR = riduciMonocifraStretta(sommaCifreAnno);
 
-            const fineC1 = 36 - camminoStretto;
-            const fineC2 = fineC1 + 9;
-            const fineC3 = fineC2 + 9;
+            // --- DESTINO CALDEO ---
+            const sommaDataTotale = gNum + mNum + aNum; 
+            const camminoMonocifra = riduciMonocifraStretta(sommaDataTotale);
+            const camminoFormattato = sommaDataTotale > 9 ? `${sommaDataTotale}/${camminoMonocifra}` : camminoMonocifra;
 
-            document.getElementById('numCicloForm').innerText = formatCaldeo(mNum);
-            document.getElementById('descCicloForm').innerHTML = compilaScheda(mNum, true);
-            document.getElementById('numCicloProd').innerText = formatCaldeo(gNum);
-            document.getElementById('descCicloProd').innerHTML = compilaScheda(gNum, true);
+            document.getElementById('numGiornoIsolato').innerText = gNum; 
+            document.getElementById('descGiornoIsolato').innerHTML = compilaScheda(gNum);
             
-            const annoSomma = aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0);
-            document.getElementById('numCicloConc').innerText = formatCaldeo(annoSomma);
-            document.getElementById('descCicloConc').innerHTML = compilaScheda(annoSomma, true);
+            document.getElementById('numCammino').innerText = camminoFormattato;
+            document.getElementById('descCammino').innerHTML = compilaScheda(sommaDataTotale);
 
-            document.getElementById('infoEtaGrandiCicli').innerText = `Soglie d'Età: Iniziazione (0 a ${fineC1} anni) | Manifestazione (${fineC1+1} a ${fineC2} anni) | Trascendenza (da ${fineC2+1} anni)`;
-
-            const c1 = gNum + mNum;
-            const c2 = gNum + annoSomma;
-            const c3 = c1 + c2;
-            const c4 = mNum + annoSomma;
-
-            document.getElementById('numCiclo1').innerText = formatCaldeo(c1);
-            document.getElementById('etaCiclo1').innerText = `Fase attiva: 0 a ${fineC1} anni`;
-            document.getElementById('descCiclo1').innerHTML = compilaScheda(c1);
-
-            document.getElementById('numCiclo2').innerText = formatCaldeo(c2);
-            document.getElementById('etaCiclo2').innerText = `Fase attiva: ${fineC1 + 1} a ${fineC2} anni`;
-            document.getElementById('descCiclo2').innerHTML = compilaScheda(c2);
-
-            document.getElementById('numCiclo3').innerText = formatCaldeo(c3);
-            document.getElementById('etaCiclo3').innerText = `Fase attiva: ${fineC2 + 1} a ${fineC3} anni`;
-            document.getElementById('descCiclo3').innerHTML = compilaScheda(c3);
-
-            document.getElementById('numCiclo4').innerText = formatCaldeo(c4);
-            document.getElementById('etaCiclo4').innerText = `Fase attiva: ${fineC3 + 1} anni in poi`;
-            document.getElementById('descCiclo4').innerHTML = compilaScheda(c4);
-
-            const annoTargetSomma = annoTarget.toString().split('').reduce((a, b) => a + parseInt(b), 0);
-            const annoPersonale = riduciMonocifraStretta(gNum + mNum + annoTargetSomma);
+            // --- TEMPO PRESENTE ---
+            const annoTargetRidotto = riduciMonocifraStretta(annoTarget.toString().split('').reduce((a, b) => a + parseInt(b), 0));
+            const annoPersonale = riduciMonocifraStretta(giornoR + meseR + annoTargetRidotto);
             
             const oggi = new Date();
-            const giornoPersonale = riduciMonocifraStretta(annoPersonale + oggi.getDate() + (oggi.getMonth() + 1));
+            const gOggiRidotto = riduciMonocifraStretta(oggi.getDate());
+            const mOggiRidotto = riduciMonocifraStretta(oggi.getMonth() + 1);
+            const giornoPersonale = riduciMonocifraStretta(annoPersonale + gOggiRidotto + mOggiRidotto);
 
-            const ombraGiov = Math.abs(riduciMonocifraStretta(gNum) - riduciMonocifraStretta(mNum));
-            const ombraMat = Math.abs(riduciMonocifraStretta(gNum) - riduciMonocifraStretta(annoSomma));
-            const ombraPrinc = Math.abs(ombraGiov - ombraMat);
-
-            document.getElementById('numGiornoIsolato').innerText = formatCaldeo(gNum);
-            document.getElementById('descGiornoIsolato').innerHTML = compilaScheda(gNum);
-            document.getElementById('numCammino').innerText = formatCaldeo(sommaDataDiretta);
-            document.getElementById('descCammino').innerHTML = compilaScheda(sommaDataDiretta);
-            document.getElementById('numAnnoPers').innerText = `${annoPersonale} (Anno ${annoTarget})`;
-            document.getElementById('descAnnoPers').innerHTML = compilaScheda(annoPersonale);
+            // Sostituisci la vecchia riga del numAnnoPers con questa:
+	    document.getElementById('numAnnoPers').innerText = `${annoPersonale} (Anno ${annoTarget})`;
+	    document.getElementById('descAnnoPers').innerHTML = compilaScheda(annoPersonale);
             document.getElementById('numGiornoPers').innerText = giornoPersonale;
             document.getElementById('descGiornoPers').innerHTML = compilaScheda(giornoPersonale);
+
+            // --- AFFLIZIONI PLANETARIE (OMBRE) ---
+            const ombraGiov = Math.abs(giornoR - meseR);
+            const ombraMat = Math.abs(giornoR - annoR);
+            const ombraPrinc = Math.abs(ombraGiov - ombraMat);
 
             document.getElementById('numOmbraGiov').innerText = ombraGiov;
             document.getElementById('descOmbraGiov').innerHTML = compilaSchedaOmbra(ombraGiov);
@@ -469,27 +571,19 @@ function eseguiCalcoloCompleto() {
             document.getElementById('descOmbraPrinc').innerHTML = compilaSchedaOmbra(ombraPrinc);
 
             document.getElementById('bloccoData').style.display = 'block';
+            
+            testoCopiaGlobale += `CORRENTI DEL TEMPO E DESTINO (CALDEA):\n`;
+            testoCopiaGlobale += `- Giorno di Nascita Puro: ${gNum}\n`;
+            testoCopiaGlobale += `- Cammino di Vita: ${camminoFormattato}\n`;
+            testoCopiaGlobale += `- Ciclo Annuale Corrente (${annoTarget}): ${annoPersonale}\n`;
+            testoCopiaGlobale += `- Vibrazione Giornaliera (Oggi): ${giornoPersonale}\n\n`;
+            
+            testoCopiaGlobale += `AFFLIZIONI PLANETARIE (PROVE):\n`;
+            testoCopiaGlobale += `- Sfida Minore I: ${ombraGiov} (${databaseOmbreMazzo[ombraGiov]?.nome || ''})\n`;
+            testoCopiaGlobale += `- Sfida Minore II: ${ombraMat} (${databaseOmbreMazzo[ombraMat]?.nome || ''})\n`;
+            testoCopiaGlobale += `- Afflizione Principale: ${ombraPrinc} (${databaseOmbreMazzo[ombraPrinc]?.nome || ''})\n\n`;
+            
             haCalcolatoQualcosa = true;
-
-            testoCopiaGlobale += `IL CANALE DEL DESTINO:\n`;
-            testoCopiaGlobale += `- Giorno di Nascita: ${formatCaldeo(gNum)} (${databaseArchetipi[riduciMonocifraStretta(gNum)]?.nome || ''})\n`;
-            testoCopiaGlobale += `- Cammino di Vita: ${formatCaldeo(sommaDataDiretta)} (${databaseArchetipi[riduciMonocifraStretta(sommaDataDiretta)]?.nome || ''})\n`;
-            testoCopiaGlobale += `- Anno Personale (${annoTarget}): ${annoPersonale}\n`;
-            testoCopiaGlobale += `- Vibrazione Odierna: ${giornoPersonale}\n\n`;
-
-            testoCopiaGlobale += `I 4 PINNACOLI (CULMINI PLANETARI):\n`;
-            testoCopiaGlobale += `- 1° Culmine (Età 0-${fineC1}): ${formatCaldeo(c1)} (${databaseArchetipi[riduciMonocifraStretta(c1)]?.nome || ''})\n`;
-            testoCopiaGlobale += `- 2° Culmine (Età ${fineC1+1}-${fineC2}): ${formatCaldeo(c2)} (${databaseArchetipi[riduciMonocifraStretta(c2)]?.nome || ''})\n`;
-            testoCopiaGlobale += `- 3° Culmine (Età ${fineC2+1}-${fineC3}): ${formatCaldeo(c3)} (${databaseArchetipi[riduciMonocifraStretta(c3)]?.nome || ''})\n`;
-            testoCopiaGlobale += `- 4° Culmine (Età ${fineC3+1}+): ${formatCaldeo(c4)} (${databaseArchetipi[riduciMonocifraStretta(c4)]?.nome || ''})\n\n`;
-
-            testoCopiaGlobale += `AFFLIZIONI PLANETARIE (LE PROVE KARMICHE):\n`;
-            testoCopiaGlobale += `- Sfida Energetica Minore I (Giovinezza): ${ombraGiov} -> ${databaseOmbreMazzo[ombraGiov]?.nome || 'Ombra ' + ombraGiov}\n`;
-            testoCopiaGlobale += `  Sfida: ${databaseOmbreMazzo[ombraGiov]?.sfida || ''}\n\n`;
-            testoCopiaGlobale += `- Sfida Energetica Minore II (Maturità): ${ombraMat} -> ${databaseOmbreMazzo[ombraMat]?.nome || 'Ombra ' + ombraMat}\n`;
-            testoCopiaGlobale += `  Sfida: ${databaseOmbreMazzo[ombraMat]?.sfida || ''}\n\n`;
-            testoCopiaGlobale += `- Afflizione Karmica Principale: ${ombraPrinc} -> ${databaseOmbreMazzo[ombraPrinc]?.nome || 'Ombra ' + ombraPrinc}\n`;
-            testoCopiaGlobale += `  Sfida: ${databaseOmbreMazzo[ombraPrinc]?.sfida || ''}\n\n`;
         } else {
             alert("Usa il formato GG/MM/AAAA.");
         }
@@ -497,56 +591,213 @@ function eseguiCalcoloCompleto() {
         document.getElementById('bloccoData').style.display = 'none';
     }
 
-    // 3. QUINTESSENZA ALCHEMICA
-    if (espressionePerQuintessenza && camminoPerQuintessenza) {
-        const quintessenza = riduciMonocifraStretta(espressionePerQuintessenza + camminoPerQuintessenza);
-        document.getElementById('numQuintessenza').innerText = quintessenza;
-        document.getElementById('descQuintessenza').innerHTML = compilaScheda(quintessenza);
-        document.getElementById('sezioneQuintessenza').style.display = 'block';
-
-        testoCopiaGlobale += `LA QUINTESSENZA ALCHEMICA:\n`;
-        testoCopiaGlobale += `- Punto d'Incontro: ${quintessenza} (${databaseArchetipi[quintessenza]?.nome || ''})\n\n`;
-    } else {
-        document.getElementById('sezioneQuintessenza').style.display = 'none';
-    }
-
-    // 4. SOPRANNOME
+    // 3. SOPRANNOME / FIRMA ALTERNATIVA
     if (soprannome) {
         const soprannomePulito = pulisciTesto(soprannome);
         const datiSoprannome = calcolaStringaCaldea(soprannomePulito);
 
-        document.getElementById('numAnimaSop').innerText = formatCaldeo(datiSoprannome.anima);
+        function formatEsitoCaldeo(totale) {
+            let mono = riduciMonocifraStretta(totale);
+            return totale > 9 ? `${totale}/${mono}` : totale;
+        }
+
+        document.getElementById('numAnimaSop').innerText = formatEsitoCaldeo(datiSoprannome.anima);
         document.getElementById('descAnimaSop').innerHTML = compilaScheda(datiSoprannome.anima);
-        document.getElementById('numPersonaSop').innerText = formatCaldeo(datiSoprannome.persona);
+        document.getElementById('numPersonaSop').innerText = formatEsitoCaldeo(datiSoprannome.persona);
         document.getElementById('descPersonaSop').innerHTML = compilaScheda(datiSoprannome.persona);
-        document.getElementById('numEspressioneSop').innerText = formatCaldeo(datiSoprannome.espressione);
+        document.getElementById('numEspressioneSop').innerText = formatEsitoCaldeo(datiSoprannome.espressione);
         document.getElementById('descEspressioneSop').innerHTML = compilaScheda(datiSoprannome.espressione);
 
         document.getElementById('sezioneSoprannome').style.display = 'block';
+        
+        testoCopiaGlobale += `FIRMA ALTERNATIVA (SOPRANNOME):\n`;
+        testoCopiaGlobale += `- Anima: ${formatEsitoCaldeo(datiSoprannome.anima)}\n`;
+        testoCopiaGlobale += `- Persona: ${formatEsitoCaldeo(datiSoprannome.persona)}\n`;
+        testoCopiaGlobale += `- Espressione: ${formatEsitoCaldeo(datiSoprannome.espressione)}\n\n`;
+        
         haCalcolatoQualcosa = true;
-
-        testoCopiaGlobale += `VIBRAZIONI DEL SOPRANNOME / PSEUDONIMO:\n`;
-        testoCopiaGlobale += `- Anima: ${formatCaldeo(datiSoprannome.anima)}\n`;
-        testoCopiaGlobale += `- Persona: ${formatCaldeo(datiSoprannome.persona)}\n`;
-        testoCopiaGlobale += `- Espressione: ${formatCaldeo(datiSoprannome.espressione)}\n`;
     } else {
         document.getElementById('sezioneSoprannome').style.display = 'none';
     }
 
+   // Attivazione click controllata e potenziata per la logica Caldea
+    setTimeout(() => {
+        document.querySelectorAll('.risultato-box, .card').forEach(card => {
+            if (!card.querySelector('[onclick*="apriApprofondimentoOmbra"]')) {
+                card.style.cursor = 'pointer';
+                card.setAttribute('onclick', 'apriApprofondimento(this)');
+            }
+        });
+    }, 100);
+
     if (haCalcolatoQualcosa) {
         document.getElementById('risultati').style.display = 'block';
         document.getElementById('btnCopia').style.display = 'block';
+        document.getElementById('btnSalva').style.display = 'block';
     }
 }
 
 function copiaMappaInAppunti() {
     if (!testoCopiaGlobale) return;
     navigator.clipboard.writeText(testoCopiaGlobale).then(() => {
-        alert("Analisi completa (con le Ombre Caldee corrette) copiata negli appunti!");
+        alert("Analisi copiata correttamente negli appunti!");
     }).catch(err => {
         console.error("Errore durante la copia: ", err);
-        alert("Impossibile copiare il testo negli appunti automaticamente.");
+        alert("Impossibile copiare automaticamente. Seleziona il testo manualmente.");
     });
+}
+
+// ==========================================
+// GESTIONE POP-UP APPROFONDIMENTI (MODALE)
+// ==========================================
+
+function apriApprofondimento(elementoCard) {
+    const titoloSezione = elementoCard.querySelector('h3')?.innerText || "Approfondimento";
+    
+    // Identifichiamo l'ID dell'elemento numerico interno per una precisione assoluta
+    const spanNumero = elementoCard.querySelector('span[id^="num"], div[id^="num"], .numero-evidenziato');
+    let numeroElemento = spanNumero ? spanNumero.innerText.trim() : "0";
+    
+    // Pulizia da diciture d'appoggio come " (Anno 2026)"
+    if (numeroElemento.includes('(')) {
+        numeroElemento = numeroElemento.split(' (')[0].trim();
+    }
+
+   // Se c'è una barra (es. 34/7), prendiamo direttamente il numero ridotto finale (il 7)
+    let numeroRidotto = numeroElemento.includes('/') ? numeroElemento.split('/')[1].trim() : numeroElemento;
+    
+    // Altrimenti, se è un numero composto puro senza barra, lo riduciamo a monocifra
+    if (isNaN(numeroRidotto) || numeroRidotto > 9) {
+        numeroRidotto = riduciMonocifraStretta(numeroRidotto);
+    }
+
+    let datiArchetipo = databaseArchetipi[numeroRidotto];
+    
+    if (datiArchetipo) {
+        document.getElementById('modaleTitolo').innerText = `${titoloSezione}: ${numeroElemento}`;
+        document.getElementById('modaleSottotitolo').innerText = datiArchetipo.nome;
+        
+        // Creiamo il testo completo di Luce, Ombra e Sblocco
+        let testoCompleto = `
+            // Sostituisci datiArchetipo.sblocco con datiArchetipo.Sblocco
+	    <p><strong>Chiave di Sblocco Evolutivo:</strong><br>${datiArchetipo.Sblocco || 'Descrizione non disponibile.'}</p>
+            <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px;"><strong>✨ Espressione in Luce:</strong><br>${datiArchetipo.luce || 'Non specificata.'}</p>
+            <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px;"><strong>⚠️ Espressione in Ombra:</strong><br>${datiArchetipo.ombra || 'Non specificata.'}</p>
+        `;
+        
+        document.getElementById('modaleContenuto').innerHTML = testoCompleto;
+        document.getElementById('modaleApprofondimento').style.display = 'flex';
+    } else {
+        console.log("Nessun archetipo trovato nel database Caldeo per il valore:", numeroElemento);
+    }
+}
+
+// Funzione specifica creata per gestire il database alternativo delle Ombre Caldee
+function apriApprofondimentoOmbra(baseNumero, valoreReale) {
+    let datiOmbra = databaseOmbreMazzo[baseNumero];
+    
+    if (datiOmbra) {
+        document.getElementById('modaleTitolo').innerText = `Afflizione Planetaria: Frequenza ${valoreReale}`;
+        document.getElementById('modaleSottotitolo').innerText = datiOmbra.nome;
+        
+        let testoCompleto = `
+            <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                <strong>⚠️ La Sfida dell'Ombra:</strong><br>${datiOmbra.sfida}
+            </p>
+            <p style="color: #1b5e20; background-color: #e8f5e9; padding: 10px; border-radius: 6px; border-left: 5px solid #2e7d32;">
+                <strong>🔑 Chiave di Sblocco Evolutivo:</strong><br>${datiOmbra.sblocco}
+            </p>
+        `;
+        
+        document.getElementById('modaleContenuto').innerHTML = testoCompleto;
+        document.getElementById('modaleApprofondimento').style.display = 'flex';
+    }
+}
+
+function chiudiModale() {
+    document.getElementById('modaleApprofondimento').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modale = document.getElementById('modaleApprofondimento');
+    if (event.target == modale) {
+        modale.style.display = "none";
+    }
+}
+
+// ==========================================
+// GESTIONE ARCHIVIO LOCALE (INDEXEDDB)
+// ==========================================
+
+const DB_NAME = 'NumerologiaDB';
+const DB_VERSION = 2;
+let db;
+
+const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+request.onupgradeneeded = function(event) {
+    db = event.target.result;
+    if (!db.objectStoreNames.contains('clienti')) {
+        db.createObjectStore('clienti', { keyPath: 'id', autoIncrement: true });
+    }
+};
+
+request.onsuccess = function(event) {
+    db = event.target.result;
+    // Se il DB è pronto, controlla se la pagina è stata aperta dall'Archivio con dati nell'URL
+    controllaParametriURL();
+};
+
+request.onerror = function(event) {
+    console.error("Errore nell'apertura dell'archivio:", event.target.error);
+};
+
+function salvaNelDatabase() {
+    const nome = document.getElementById('nome').value.trim();
+    const cognome = document.getElementById('cognome').value.trim();
+    const dataNascita = document.getElementById('dataNascita').value.trim();
+
+    if (!nome || !cognome || !dataNascita) {
+        alert("Inserisci Nome, Cognome e Data di Nascita validi per poter effettuare il salvataggio.");
+        return;
+    }
+
+    const transaction = db.transaction(['clienti'], 'readwrite');
+    const store = transaction.objectStore('clienti');
+
+    const nuovoCliente = {
+        nome: nome,
+        cognome: cognome,
+        data_nascita: dataNascita,
+        metodo: 'caldea',
+        data_salvataggio: new Date().toISOString()
+    };
+
+    const requestAdd = store.add(nuovoCliente);
+
+    requestAdd.onsuccess = function() {
+        alert(`Il quadro numerologico di ${nome} ${cognome} è stato salvato correttamente in archivio (Metodo Caldeo)!`);
+    };
+
+    requestAdd.onerror = function(event) {
+        console.error("Errore durante il salvataggio:", event.target.error);
+        alert("Impossibile salvare i dati nell'archivio.");
+    };
+}
+
+function controllaParametriURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nomeUrl = urlParams.get('nome');
+    const cognomeUrl = urlParams.get('cognome');
+    const dataUrl = urlParams.get('data');
+
+    if (nomeUrl && cognomeUrl && dataUrl) {
+        document.getElementById('nome').value = nomeUrl;
+        document.getElementById('cognome').value = cognomeUrl;
+        document.getElementById('dataNascita').value = dataUrl;
+
+        eseguiCalcoloCompleto();
+    }
 }
 </script>
 </body>

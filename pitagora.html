@@ -34,9 +34,25 @@
         .archetipo-nome { font-weight: bold; color: #2c3e50; font-size: 15px; display: block; margin-bottom: 5px; }
         .descrizione { font-size: 13.5px; color: #4a5568; line-height: 1.5; }
         .ombra-testo { font-size: 13px; color: #94a3b8; margin-top: 6px; font-style: italic; }
-	.btn-home { background: #4a5568; color: white; max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
+        .btn-home { background: #4a5568; color: white; max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
         @media(max-width: 600px) { .form-grid, .grid-cards { grid-template-columns: 1fr; } .form-group-full { grid-column: span 1; } }
-    </style>
+    </style> <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <div style="background-color: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; animation: compariModale 0.3s ease;">
+        <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #aaa;">&times;</span>
+        <h2 id="modaleTitolo" style="color: #8e7355; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
+        <h4 id="modaleSottotitolo" style="color: #7f8c8d; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
+        <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #2c3e50; max-height: 400px; overflow-y: auto; padding-right: 5px;">
+            </div>
+    </div>
+</div>
+
+<style>
+@keyframes compariModale {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+</style>
 
     <script>
     if ('serviceWorker' in navigator) {
@@ -65,11 +81,9 @@
             <label for="soprannome">Soprannome / Nome d'Arte (Opzionale):</label>
             <input type="text" id="soprannome" placeholder="Es. Francy">
         </div>
-       <div>
-    <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
-    <input type="text" id="dataNascita" placeholder="Es. 27/06/1989" maxlength="10" 
-           oninput="this.value = this.value.replace(/\D/g, '').replace(/^(\d{2})(\d)/, '$1/$2').replace(/^(\d{2})\/(\d{2})(\d)/, '$1/$2/$3')">
-</div>
+        <div>
+            <input type="date" id="dataNascita">
+        </div>
         <div>
             <label for="annoCorrente">Anno per l'Anno Personale:</label>
             <input type="number" id="annoCorrente" value="2026">
@@ -78,6 +92,7 @@
     
     <button onclick="eseguiCalcoloCompleto()">GENERA TAVOLA NUMEROLOGICA</button>
     <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display:none;">COPIA ANALISI NEGLI APPUNTI</button>
+    <button id="btnSalva" type="button" style="background-color: #8e7355; color: white; display: none; margin-top: 15px;" onclick="salvaNelDatabase()">💾 SALVA IN ARCHIVIO</button>
 
     <a href="index.html" class="btn-home">⬅ Torna alla Scelta</a>
     
@@ -86,18 +101,18 @@
         <div id="bloccoAnagrafica" style="display:none;">
             <div class="sezione-titolo">I Numeri Fondamentali (Dall'Anagrafica)</div>
             <div class="grid-cards">
-                <div class="card">
+                <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Anima (Chi sei dentro)</h3>
                     <div id="numAnima" class="numero-evidenziato"></div>
                     <div id="descAnima"></div>
                 </div>
-                <div class="card">
+                <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Persona (Come appari)</h3>
                     <div id="numPersona" class="numero-evidenziato"></div>
                     <div id="descPersona"></div>
                 </div>
-                <div class="card" style="grid-column: span 2;">
-                    <h3>Espressione / Io (Il Talento Nativo)</h3>
+                <div class="card" style="grid-column: span 2; border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3>Io (Il Talento Nativo)</h3>
                     <div id="numEspressione" class="numero-evidenziato"></div>
                     <div id="descEspressione"></div>
                 </div>
@@ -105,24 +120,24 @@
         </div>
 
         <div id="bloccoData" style="display:none;">
-            <div class="sezione-titolo">Destino e Carattere (Dalla Data)</div>
+            <div class="sezione-titolo" style="color: #e67e22;">Destino e Carattere (Dalla Data)</div>
             <div class="grid-cards">
-                <div class="card">
+                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Giorno di Nascita (Attitudine)</h3>
-                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #27ae60;"></div>
+                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #e67e22;"></div>
                     <div id="descGiornoIsolato"></div>
                 </div>
-                <div class="card">
-                    <h3>Destino / Cammino di Vita</h3>
-                    <div id="numCammino" class="numero-evidenziato"></div>
+                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3>Destino</h3>
+                    <div id="numCammino" class="numero-evidenziato" style="color: #e67e22;"></div>
                     <div id="descCammino"></div>
                 </div>
-                <div class="card" style="border-left-color: #6c5ce7;">
-                    <h3>Anno Personale</h3>
-                    <div id="numAnnoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
+                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3>Anno Personale (Anno 2026)</h3>
+                    <div id="numAnnoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
                     <div id="descAnnoPers"></div>
                 </div>
-                <div class="card" style="border-left-color: #e67e22;">
+                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Giorno Personale (Oggi)</h3>
                     <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
                     <div id="descGiornoPers"></div>
@@ -131,17 +146,17 @@
 
             <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi (Il Clima di Vita)</div>
             <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
+                <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3 style="font-size:12px;">Ciclo Formativo<br>(Mese)</h3>
                     <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
                     <div id="descCicloForm" style="font-size:12px;"></div>
                 </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
+                <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3 style="font-size:12px;">Ciclo Produttivo<br>(Giorno)</h3>
                     <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
                     <div id="descCicloProd" style="font-size:12px;"></div>
                 </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
+                <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3 style="font-size:12px;">Ciclo Conclusivo<br>(Anno)</h3>
                     <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
                     <div id="descCicloConc" style="font-size:12px;"></div>
@@ -149,28 +164,28 @@
             </div>
             <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
 
-            <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Cicli di Realizzazione (Pinnacoli / Apogei)</div>
+            <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Cicli di Realizzazione</div>
             <div class="grid-cards">
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>1° Pinnacolo</h3>
+                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3>1° Picco</h3>
                     <div id="numCiclo1" class="numero-evidenziato" style="color: #2980b9;"></div>
                     <div id="etaCiclo1" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
                     <div id="descCiclo1"></div>
                 </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>2° Pinnacolo</h3>
+                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3>2° Picco</h3>
                     <div id="numCiclo2" class="numero-evidenziato" style="color: #2980b9;"></div>
                     <div id="etaCiclo2" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
                     <div id="descCiclo2"></div>
                 </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>3° Pinnacolo</h3>
+                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3>3° Picco</h3>
                     <div id="numCiclo3" class="numero-evidenziato" style="color: #2980b9;"></div>
                     <div id="etaCiclo3" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
                     <div id="descCiclo3"></div>
                 </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>4° Pinnacolo</h3>
+                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3>4° Picco</h3>
                     <div id="numCiclo4" class="numero-evidenziato" style="color: #2980b9;"></div>
                     <div id="etaCiclo4" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
                     <div id="descCiclo4"></div>
@@ -179,17 +194,17 @@
 
             <div class="sezione-titolo">Le Ombre (Sfide Evolutive)</div>
             <div class="grid-cards">
-                <div class="card" style="border-left-color: #e74c3c;">
+                <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Ombra Giovinezza</h3>
-                    <div id="numOmbraGiov" class="numero-evidenziato" style="color: #e74c3c;"></div>
+                    <div id="numOmbraGiov" class="numero-evidenziato" style="color: #c0392b;"></div>
                     <div id="descOmbraGiov"></div>
                 </div>
-                <div class="card" style="border-left-color: #e74c3c;">
+                <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Ombra Maturità</h3>
-                    <div id="numOmbraMat" class="numero-evidenziato" style="color: #e74c3c;"></div>
+                    <div id="numOmbraMat" class="numero-evidenziato" style="color: #c0392b;"></div>
                     <div id="descOmbraMat"></div>
                 </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #c0392b;">
+                <div class="card" style="grid-column: span 2; border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Ombra Principale</h3>
                     <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b;"></div>
                     <div id="descOmbraPrinc"></div>
@@ -200,7 +215,7 @@
         <div id="sezioneQuintessenza" style="display:none;">
             <div class="sezione-titolo" style="color: #8e44ad; border-bottom-color: #e8daef; text-align: center; margin-top: 40px;">IL PUNTO D'ARRIVO</div>
             <div class="grid-cards" style="grid-template-columns: 1fr;">
-                <div class="card" style="border-left-color: #8e44ad; text-align: center; background: #fdfafc;">
+                <div class="card" style="border-left-color: #8e44ad; text-align: center; background: #fdfafc; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>La Quintessenza (L'Armonia Finale)</h3>
                     <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad; font-size: 32px; margin: 10px 0;"></div>
                     <div id="descQuintessenza" style="text-align: left; max-width: 600px; margin: 0 auto;"></div>
@@ -211,17 +226,17 @@
         <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
             <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">L'Energia Acquisita (Solo Soprannome)</div>
             <div class="grid-cards">
-                <div class="card" style="border-left-color: #d35400;">
+                <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Anima del Soprannome</h3>
                     <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400;"></div>
                     <div id="descAnimaSop"></div>
                 </div>
-                <div class="card" style="border-left-color: #d35400;">
+                <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Persona del Soprannome</h3>
                     <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400;"></div>
                     <div id="descPersonaSop"></div>
                 </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #e67e22;">
+                <div class="card" style="grid-column: span 2; border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
                     <h3>Espressione del Soprannome</h3>
                     <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22;"></div>
                     <div id="descEspressioneSop"></div>
@@ -234,20 +249,79 @@
 
 <script>
 const databaseArchetipi = {
-    1: { nome: "Il Guerriero (Leader/Pioniere)", luce: "Iniziativa, indipendenza, coraggio, forte spinta all'azione autonoma.", ombra: "Egoismo, intolleranza, aggressività, paura di fallire." },
-    2: { nome: "Il Fanciullo (Collaboratore/Mediatore)", luce: "Sensibilità, diplomazia, capacità di ascolto e cooperazione, armonia.", ombra: "Dipendenza affettiva, ipersensibilità, indecisione cronica." },
-    3: { nome: "Il Giullare (Comunicatore/Creatore)", luce: "Espressione creativa, entusiasmo, socialità, ottimismo, comunicazione eloquente.", ombra: "Dispersione energetica, superficialità, tendenza a drammatizzare." },
-    4: { nome: "Il Costruttore (Metodico/Pratico)", luce: "Organizzazione, stabilità, senso del dovere, lealtà, pragmatismo incrollabile.", ombra: "Rigidità mentale, eccessivo attaccamento al controllo, paura del cambiamento." },
-    5: { nome: "Il Cercatore (Esploratore/Libero)", luce: "Amore per la libertà, adattabilità, curiosità intellettuale, spirito d'avventura.", ombra: "Irrequietezza, instabilità, fuga dalle responsabilità, eccessi." },
-    6: { nome: "L'Angelo (Custode/Insegnante)", luce: "Senso di responsabilità, cura degli altri, amore per l'armonia familiare e la bellezza.", ombra: "Senso di colpa, iper-protezione soffocante, svalutazione di sé." },
-    7: { nome: "Il Saggio (Ricercatore/Spirituale)", luce: "Profondità d'analisi, intuito, spiritualità, amore per lo studio e la verità profonda.", ombra: "Isolamento emotivo, cinismo, eccesso di intellettualizzazione, sfiducia." },
-    8: { nome: "Il Sovrano (Leader Organizzativo/Manager)", luce: "Autorevolezza, capacità di gestire il potere, ambizione costruttiva, senso di giustizia.", ombra: "Abuso di potere, materialismo sfrenato, intolleranza verso la debolezza." },
-    9: { nome: "Il Liberatore (Saggio Universale/Filantropo)", luce: "Amore universale, compassione, capacità di lasciare andare, idealismo evoluto.", ombra: "Incapacità di porre limiti, tendenza al martirio, delusioni idealistiche." },
-    11: { nome: "Il Genio (Numero Maestro)", luce: "Intuizione folgorante, visione ideale, canale spirituale, carisma che ispira gli altri.", ombra: "Tensione nervosa estrema, senso di alienazione, fanatismo." },
-    22: { nome: "Il Creatore di Strutture (Numero Maestro)", luce: "Capacità di tradurre grandi visioni spirituali in progetti concreti e planetari.", ombra: "Megalomane o, al contrario, totale blocco per paura delle proprie responsabilità." },
-    33: { nome: "Il Maestro Spirituale (Numero Maestro)", luce: "Amore cristico, guida empatica globale, protezione e insegnamento universale.", ombra: "Carico emotivo insostenibile, interferenza forzata nella vita altrui." }
+    1: { 
+        nome: "Il Guerriero (Leader/Pioniere)", 
+        significato: "Rappresenta l'impulso iniziale, la capacità di aprire nuove strade e di affermare la propria individualità superando la paura del giudizio.",
+        luce: "Iniziativa, indipendenza, coraggio, forte spinta all'azione autonoma.", 
+        ombra: "Egoismo, intolleranza, aggressività, paura di fallire." 
+    },
+    2: { 
+        nome: "Il Fanciullo (Collaboratore/Mediatore)", 
+        significato: "Rappresenta la ricerca di armonia attraverso la relazione, lo sviluppo della sensibilità ricettiva e la maestria della cooperazione senza annullarsi.",
+        luce: "Sensibilità, diplomazia, capacità di ascolto e cooperazione, armonia.", 
+        ombra: "Dipendenza affettiva, ipersensibilità, indecisione cronica." 
+    },
+    3: { 
+        nome: "Il Giullare (Comunicatore/Creatore)", 
+        significato: "Rappresenta la gioia di vivere espressa attraverso la creatività, l'entusiasmo e la condivisione delle proprie intuizioni con il mondo.",
+        luce: "Espressione creativa, entusiasmo, socialità, ottimismo, comunicazione eloquente.", 
+        ombra: "Dispersione energetica, superficialità, tendenza a drammatizzare." 
+    },
+   4: { 
+        nome: "Il Costruttore (Metodico/Pratico)", 
+        significato: "Rappresenta la capacità di dare forma tangibile alle idee, creando basi stabili e sicure nel mondo materiale attraverso la pazienza, la disciplina e il lavoro costante.",
+        luce: "Organizzazione, stabilità, senso del dovere, lealtà, pragmatismo incrollabile.", 
+        ombra: "Rigidità mentale, eccessivo attaccamento al controllo, paura del cambiamento." 
+    },
+    5: { 
+        nome: "Il Cercatore (Esploratore/Libero)", 
+        significato: "Rappresenta il viaggio dell'anima verso l'esperienza diretta, la spinta al cambiamento e la capacità di vivere la libertà interiore come strumento di evoluzione.",
+        luce: "Amore per la libertà, adattabilità, curiosità intellettuale, spirito d'avventura.", 
+        ombra: "Irrequietezza, instabilità, fuga dalle responsabilità, eccessi." 
+    },
+    6: { 
+        nome: "L'Angelo (Custode/Insegnante)", 
+        significato: "Rappresenta l'archetipo dell'amore incondizionato, dell'assunzione di responsabilità verso la comunità e della ricerca del bello e del sacro nelle relazioni umane.",
+        luce: "Senso di responsabilità, cura degli altri, amore per l'armonia familiare e la bellezza.", 
+        ombra: "Senso di colpa, iper-protezione soffocante, svalutazione di sé." 
+    },
+    7: { 
+        nome: "Il Saggio (Ricercatore/Spirituale)", 
+        significato: "Rappresenta il cammino dell'introspezione e della comprensione profonda, volto a unire l'analisi della mente logica con il mistero della verità spirituale.",
+        luce: "Profondità d'analisi, intuito, spiritualità, amore per lo studio e la verità profonda.", 
+        ombra: "Isolamento emotivo, cinismo, eccesso di intellettualizzazione, sfiducia." 
+    },
+    8: { 
+        nome: "Il Sovrano (Leader Organizzativo/Manager)", 
+        significato: "Rappresenta la padronanza delle leggi materiali e spirituali, l'equilibrio tra dare e ricevere e la capacità di manifestare l'abbondanza per il bene comune.",
+        luce: "Autorevolezza, capacità di gestire il potere, ambizione costruttiva, senso di giustizia.", 
+        ombra: "Abuso di potere, materialismo sfrenato, intolleranza verso la debolezza." 
+    },
+    9: { 
+        nome: "Il Liberatore (Saggio Universale/Filantropo)", 
+        significato: "Rappresenta la chiusura del ciclo, la totale trasmutazione dell'ego attraverso la compassione universale, il servizio disinteressato e l'arte di lasciare andare.",
+        luce: "Amore universale, compassione, capacità di lasciare andare, idealismo evoluto.", 
+        ombra: "Incapacità di porre limiti, tendenza al martirio, delusioni idealistiche." 
+    },
+   11: { 
+        nome: "Il Genio (Numero Maestro)", 
+        significato: "Rappresenta un canale di pura illuminazione e intuizione spirituale, chiamato a fare da ponte tra i mondi invisibili e la coscienza terrena per ispirare il prossimo.",
+        luce: "Intuizione folgorante, visione ideale, canale spirituale, carisma che ispira gli altri.", 
+        ombra: "Tensione nervosa estrema, senso di alienazione, fanatismo." 
+    },
+    22: { 
+        nome: "Il Creatore di Strutture (Numero Maestro)", 
+        significato: "Rappresenta la chiamata superiore a concretizzare sogni e ideali universali su vastissima scala, traducendo la spiritualità in strutture pratiche utili all'umanità.",
+        luce: "Capacità di tradurre grandi visioni spirituali in progetti concreti e planetari.", 
+        ombra: "Megalomane o, al contrario, totale blocco per paura delle proprie responsabilità." 
+    },
+    33: {
+        nome: "Il Maestro Spirituale (Numero Maestro)",
+        significato: "Rappresenta l'altissimo potenziale del servizio guidato dal cuore, volto alla guarigione emotiva collettiva e all'insegnamento dell'amore puro attraverso l'esempio personale.",
+        luce: "Amore cristico, guida empatica globale, protezione e insegnamento universale.",
+        ombra: "Carico emotivo insostenibile, interferenza forzata nella vita altrui."
+    },
 };
-
 const databaseOmbreMazzo = {
     0: { nome: "L'Angelo caduto (Ombra 9)", sfida: "Sfida universale o assenza totale di vincoli predefiniti. Richiede di confrontarsi con il senso del vuoto evolutivo o la perdita di confini individuali per ritrovare l'Unità spirituale pura." },
     1: { nome: "Il Ribelle", sfida: "Tendenza all'ostinazione cieca, all'aggressività reattiva o all'incapacità di accettare guide. La lezione è trasformare l'impulso distruttivo in sana indipendenza." },
@@ -262,9 +336,9 @@ const databaseOmbreMazzo = {
 };
 
 const databaseKarmici = {
-    13: "Sfida del cambiamento radicale e della rinascita (L'Alchimista).",
+    13: "Sfida del cambiamento radicale e della rinascita.",
     14: "Sfida della temperanza e della libertà interiore.",
-    16: "Sfida del crollo dell'Ego (La Torre).",
+    16: "Sfida del crollo dell'Ego.",
     19: "Sfida dell'indipendenza equilibrata."
 };
 
@@ -333,7 +407,12 @@ function eseguiCalcoloCompleto() {
     const nome = document.getElementById('nome').value.trim();
     const cognome = document.getElementById('cognome').value.trim();
     const soprannome = document.getElementById('soprannome').value.trim();
-    const dataNascita = document.getElementById('dataNascita').value.trim();
+    const dataRaw = document.getElementById('dataNascita').value.trim();
+  let dataNascita = "";
+  if (dataRaw) {
+      const parti = dataRaw.split("-");
+      dataNascita = `${parti[2]}/${parti[1]}/${parti[0]}`;
+  }
     const annoTarget = parseInt(document.getElementById('annoCorrente').value) || 2026;
     
     if(!nome && !cognome && !soprannome && !dataNascita) {
@@ -456,7 +535,7 @@ function eseguiCalcoloCompleto() {
             document.getElementById('descGiornoIsolato').innerHTML = compilaScheda(giornoR);
             document.getElementById('numCammino').innerText = format(cammino);
             document.getElementById('descCammino').innerHTML = compilaScheda(cammino);
-            document.getElementById('numAnnoPers').innerText = `${format(annoPersonale)} (Anno ${annoTarget})`;
+            document.getElementById('numAnnoPers').innerText = format(annoPersonale);
             document.getElementById('descAnnoPers').innerHTML = compilaScheda(annoPersonale);
             document.getElementById('numGiornoPers').innerText = format(giornoPersonale);
             document.getElementById('descGiornoPers').innerHTML = compilaScheda(giornoPersonale);
@@ -540,6 +619,8 @@ function eseguiCalcoloCompleto() {
     if (haCalcolatoQualcosa) {
         document.getElementById('risultati').style.display = 'block';
         document.getElementById('btnCopia').style.display = 'block';
+        // MOSTRA IL TASTO SALVA DOPO UN CALCOLO RIUSCITO
+        document.getElementById('btnSalva').style.display = 'block';
     }
 }
 
@@ -551,6 +632,126 @@ function copiaMappaInAppunti() {
         console.error("Errore durante la copia: ", err);
         alert("Impossibile copiare automaticamente. Seleziona il testo manualmente.");
     });
+}
+
+// ==========================================
+// GESTIONE ARCHIVIO LOCALE (INDEXEDDB)
+// ==========================================
+
+const DB_NAME = 'NumerologiaDB';
+const DB_VERSION = 2;
+let db;
+
+// Apertura/Inizializzazione DB
+const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+request.onupgradeneeded = function(event) {
+    db = event.target.result;
+    if (!db.objectStoreNames.contains('clienti')) {
+        db.createObjectStore('clienti', { keyPath: 'id', autoIncrement: true });
+    }
+};
+
+request.onsuccess = function(event) {
+    db = event.target.result;
+    // Se il DB è pronto, controlla se la pagina è stata aperta dall'Archivio con dati nell'URL
+    controllaParametriURL();
+};
+
+request.onerror = function(event) {
+    console.error("Errore nell'apertura dell'archivio:", event.target.error);
+};
+
+// Funzione di Salvataggio
+function salvaNelDatabase() {
+    const nome = document.getElementById('nome').value.trim();
+    const cognome = document.getElementById('cognome').value.trim();
+    const dataNascita = document.getElementById('dataNascita').value.trim();
+
+    if (!nome || !cognome || !dataNascita) {
+        alert("Inserisci Nome, Cognome e Data di Nascita validi per poter effettuare il salvataggio.");
+        return;
+    }
+
+    const transaction = db.transaction(['clienti'], 'readwrite');
+    const store = transaction.objectStore('clienti');
+
+    const nuovoCliente = {
+        nome: nome,
+        cognome: cognome,
+        data_nascita: dataNascita,
+        metodo: 'pitagora', 
+        data_salvataggio: new Date().toISOString()
+    };
+
+    const requestAdd = store.add(nuovoCliente);
+
+    requestAdd.onsuccess = function() {
+        alert(`Il quadro numerologico di ${nome} ${cognome} è stato salvato correttamente in archivio!`);
+    };
+
+    requestAdd.onerror = function(event) {
+        console.error("Errore durante il salvataggio:", event.target.error);
+        alert("Impossibile salvare i dati nell'archivio.");
+    };
+}
+
+// Controllo dei parametri ricevuti dall'Archivio
+function controllaParametriURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nomeUrl = urlParams.get('nome');
+    const cognomeUrl = urlParams.get('cognome');
+    const dataUrl = urlParams.get('data');
+
+    if (nomeUrl && cognomeUrl && dataUrl) {
+        document.getElementById('nome').value = nomeUrl;
+        document.getElementById('cognome').value = cognomeUrl;
+        document.getElementById('dataNascita').value = dataUrl;
+
+        // Esegue il calcolo in automatico
+        eseguiCalcoloCompleto();
+    }
+}
+
+function apriApprofondimento(elementoCard) {
+    // Leggiamo i dati interni alla card cliccata
+    const titoloSezione = elementoCard.querySelector('h3').innerText;
+    const numeroElemento = elementoCard.querySelector('.numero-evidenziato').innerText;
+    
+    // Cerchiamo l'archetipo completo dentro il tuo database esistente
+    // Nota: usiamo la funzione di riduzione se il numero è composto, per pescare l'archetipo base
+    let baseNumero = numeroElemento.includes('/') ? numeroElemento.split('/')[1] : numeroElemento;
+    let datiArchetipo = databaseArchetipi[numeroElemento] || databaseArchetipi[baseNumero];
+    
+    if (datiArchetipo) {
+        // Prepariamo i testi da mostrare nel pop-up
+        document.getElementById('modaleTitolo').innerText = `${titoloSezione}: ${numeroElemento}`;
+        document.getElementById('modaleSottotitolo').innerText = datiArchetipo.nome;
+        
+        // Creiamo il testo completo di Luce e Ombra senza tagli
+        let testoCompleto = `
+            <p><strong>Significato Evolutivo:</strong><br>${datiArchetipo.significato || 'Descrizione non disponibile.'}</p>
+            <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px;"><strong>✨ Espressione in Luce:</strong><br>${datiArchetipo.luce || 'Non specificata.'}</p>
+            <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px;"><strong>⚠️ Espressione in Ombra:</strong><br>${datiArchetipo.ombra || 'Non specificata.'}</p>
+        `;
+        
+        document.getElementById('modaleContenuto').innerHTML = testoCompleto;
+        
+        // Mostriamo la modale a schermo usando flex
+        document.getElementById('modaleApprofondimento').style.display = 'flex';
+    }
+}
+
+function chiudiModale() {
+    document.getElementById('modaleApprofondimento').style.display = 'none';
+}
+
+// Chiude la modale anche se l'utente clicca fuori dal riquadro bianco
+window.onclick = function(event) {
+    const modale = document.getElementById('modaleApprofondimento');
+    if (event.target == modale) {
+        modale.style.display = "none";
+    }
 }
 </script>
 </body>
