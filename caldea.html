@@ -96,11 +96,11 @@
         <div>
             <label for="cognome">Cognome:</label>
             <input type="text" id="cognome" placeholder="Es. Rossi">
-        </div>
+       </div>
        <div>
-	    <label for="dataNascita">Data di Nascita:</label>
-   	    <input type="date" id="dataNascita">
-</div>
+    	    <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
+    	    <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
+	</div>
         <div>
             <label for="annoCorrente">Anno per la Vibrazione Corrente:</label>
             <input type="number" id="annoCorrente" value="2026">
@@ -323,6 +323,30 @@
 </div>
 
 <script>
+// FUNZIONE PER FORMATTARE E VALIDARE LA DATA IN TEMPO REALE
+function formattaEValidaData(input) {
+    let v = input.value.replace(/\D/g, '').slice(0, 8);
+    
+    if (v.length >= 2) {
+        let giorno = parseInt(v.slice(0, 2), 10);
+        if (giorno > 31) v = '31' + v.slice(2);
+        if (giorno === 0) v = '01' + v.slice(2);
+    }
+    
+    if (v.length >= 4) {
+        let mese = parseInt(v.slice(2, 4), 10);
+        if (mese > 12) v = v.slice(0, 2) + '12' + v.slice(4);
+        if (mese === 0) v = v.slice(0, 2) + '01' + v.slice(4);
+    }
+    
+    if (v.length >= 5) {
+        input.value = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+    } else if (v.length >= 3) {
+        input.value = `${v.slice(0, 2)}/${v.slice(2)}`;
+    } else {
+        input.value = v;
+    }
+}
 // DATABASE ESOTERICO CALDEO-PLANETARIO
 const databaseArchetipi = {
     1: { 
@@ -504,11 +528,12 @@ function eseguiCalcoloCompleto() {
     const cognome = document.getElementById('cognome').value.trim();
     let soprannome = "";
     const dataRaw = document.getElementById('dataNascita').value.trim();
-  let dataNascita = "";
-  if (dataRaw) {
-      const parti = dataRaw.split("-");
-      dataNascita = `${parti[2]}/${parti[1]}/${parti[0]}`;
-  }
+ if (!dataRaw || dataRaw.length < 10) {
+        alert("Per favore, inserisci una data di nascita completa (GG/MM/AAAA)");
+        return;
+    }
+
+    let dataNascita = dataRaw;
     const annoTarget = parseInt(document.getElementById('annoCorrente').value) || 2026;
     
     let haCalcolatoQualcosa = false;
