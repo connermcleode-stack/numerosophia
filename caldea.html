@@ -97,12 +97,9 @@
             <label for="cognome">Cognome:</label>
             <input type="text" id="cognome" placeholder="Es. Rossi">
         </div>
-        <div class="form-group-full">
-            <label for="soprannome">Soprannome / Nome d'Arte (Opzionale):</label>
-            <input type="text" id="soprannome" placeholder="Es. Francy">
-        </div>
        <div>
-   <input type="date" id="dataNascita">
+	    <label for="dataNascita">Data di Nascita:</label>
+   	    <input type="date" id="dataNascita">
 </div>
         <div>
             <label for="annoCorrente">Anno per la Vibrazione Corrente:</label>
@@ -505,7 +502,7 @@ let testoCopiaGlobale = "";
 function eseguiCalcoloCompleto() {
     const nome = document.getElementById('nome').value.trim();
     const cognome = document.getElementById('cognome').value.trim();
-    const soprannome = document.getElementById('soprannome').value.trim();
+    let soprannome = "";
     const dataRaw = document.getElementById('dataNascita').value.trim();
   let dataNascita = "";
   if (dataRaw) {
