@@ -217,16 +217,64 @@ function esportaInExcel() {
                 return 0;
             });
 
-            let csvContent = "Cognome;Nome;Data di Nascita;Metodo;Data Salvataggio\n";
+            // Intestazione con TUTTI i campi unificati di Pitagora e Caldea
+            let headers = [
+                "Cognome", "Nome", "Data di Nascita", "Metodo", "Data Salvataggio",
+                // Campi Pitagora
+                "P_Anima", "P_Persona", "P_Io", "P_GiornoNascita", "P_Destino", "P_AnnoPersonale", "P_GiornoPersonale",
+                "P_GrandiCicliEvolutivi", "P_CicliRealizzazione", "P_Ombre", "P_Quintessenza",
+                // Campi Caldea
+                "C_Anima", "C_Persona", "C_Espressione", "C_NumeroPsichico", "C_CamminoVita", 
+                "C_CicloAnnualeCorrente", "C_VibrazioneGiornaliera", "C_AfflizioniPlanetarie"
+            ];
+
+            let csvContent = headers.join(";") + "\n";
+
+            // Funzione di utilità per pulire i dati ed evitare rotture nel CSV
+            const pulisciDato = (valore) => {
+                if (valore === undefined || valore === null) return "";
+                // Se è un array o un oggetto strutturato (es. i cicli o le ombre), lo convertiamo in stringa leggibile
+                if (typeof valore === 'object') {
+                    return JSON.stringify(valore).replace(/;/g, ",").replace(/"/g, "'");
+                }
+                return String(valore).replace(/;/g, ",").trim();
+            };
 
             elencoClienti.forEach(cliente => {
-                let cognome = (cliente.cognome || "").replace(/;/g, ","); 
-                let nome = (cliente.nome || "").replace(/;/g, ",");
-                let dataNascita = cliente.data_nascita || "";
-                let metodo = (cliente.metodo || "").toUpperCase();
-                let dataSalvataggio = cliente.data_salvataggio ? cliente.data_salvataggio.substring(0, 10) : "";
+                let rigaDati = [];
+                let isPitagora = (cliente.metodo || "").toLowerCase() === "pitagora";
 
-                csvContent += `${cognome};${nome};${dataNascita};${metodo};${dataSalvataggio}\n`;
+                // Dati Generali Comuni
+                rigaDati.push(pulisciDato(cliente.cognome));
+                rigaDati.push(pulisciDato(cliente.nome));
+                rigaDati.push(pulisciDato(cliente.data_nascita));
+                rigaDati.push(pulisciDato(cliente.metodo ? cliente.metodo.toUpperCase() : ""));
+                rigaDati.push(cliente.data_salvataggio ? cliente.data_salvataggio.substring(0, 10) : "");
+
+                // COLONNE PITAGORA (Se il profilo è Caldeo, questi campi rimarranno vuoti)
+                rigaDati.push(isPitagora ? pulisciDato(cliente.anima) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.persona) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.io) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.giorno_nascita || cliente.giornoNascita) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.destino) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.anno_personale || cliente.annoPersonale) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.giorno_personale || cliente.giornoPersonale) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.grandi_cicli || cliente.grandiCicli) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.cicli_realizzazione || cliente.cicliRealizzazione) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.ombre) : "");
+                rigaDati.push(isPitagora ? pulisciDato(cliente.quintessenza) : "");
+
+                // COLONNE CALDEA (Se il profilo è Pitagora, questi campi rimarranno vuoti)
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.anima) : "");
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.persona) : "");
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.espressione) : "");
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.numero_psichico || cliente.numeroPsichico) : "");
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.cammino_vita || cliente.camminoVita) : "");
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.ciclo_annuale || cliente.cicloAnnuale) : "");
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.vibrazione_giornaliera || cliente.vibrazioneGiornaliera) : "");
+                rigaDati.push(!isPitagora ? pulisciDato(cliente.afflizioni || cliente.afflizioniPlanetarie) : "");
+
+                csvContent += rigaDati.join(";") + "\n";
             });
 
             const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: "text/csv;charset=utf-8;" });
@@ -234,7 +282,7 @@ function esportaInExcel() {
             const link = document.createElement("a");
             const url = URL.createObjectURL(blob);
             link.setAttribute("href", url);
-            link.setAttribute("download", "Archivio_Numerosophia.csv");
+            link.setAttribute("download", "Archivio_Completo_Numerosophia.csv");
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();

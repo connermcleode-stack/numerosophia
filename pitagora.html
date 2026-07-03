@@ -719,7 +719,7 @@ request.onerror = function(event) {
     console.error("Errore nell'apertura dell'archivio:", event.target.error);
 };
 
-// Funzione di Salvataggio
+// Funzione di Salvataggio Avanzata per Pitagora
 function salvaNelDatabase() {
     const nome = document.getElementById('nome').value.trim();
     const cognome = document.getElementById('cognome').value.trim();
@@ -730,21 +730,65 @@ function salvaNelDatabase() {
         return;
     }
 
+    // Estrazione dei valori calcolati a video dai rispettivi ID della pagina
+    const anima = document.getElementById('numAnima')?.innerText || "";
+    const persona = document.getElementById('numPersona')?.innerText || "";
+    const io = document.getElementById('numEspressione')?.innerText || ""; // L'Io corrisponde al numero di Espressione anagrafica
+    const giornoNascita = document.getElementById('numGiornoIsolato')?.innerText || "";
+    const destino = document.getElementById('numCammino')?.innerText || ""; // Il Destino corrisponde al Cammino di Vita
+    const annoPersonale = document.getElementById('numAnnoPers')?.innerText || "";
+    const giornoPersonale = document.getElementById('numGiornoPers')?.innerText || "";
+
+    // Compattazione dei 3 Grandi Cicli Evolutivi
+    const cForm = document.getElementById('numCicloForm')?.innerText || "";
+    const cProd = document.getElementById('numCicloProd')?.innerText || "";
+    const cConc = document.getElementById('numCicloConc')?.innerText || "";
+    const grandiCicli = `Formativo: ${cForm} | Produttivo: ${cProd} | Conclusivo: ${cConc}`;
+
+    // Compattazione dei 4 Cicli di Realizzazione (Pinnacoli)
+    const p1 = document.getElementById('numCiclo1')?.innerText || "";
+    const p2 = document.getElementById('numCiclo2')?.innerText || "";
+    const p3 = document.getElementById('numCiclo3')?.innerText || "";
+    const p4 = document.getElementById('numCiclo4')?.innerText || "";
+    const cicliRealizzazione = `1°: ${p1} | 2°: ${p2} | 3°: ${p3} | 4°: ${p4}`;
+
+    // Compattazione delle Ombre
+    const oGiov = document.getElementById('numOmbraGiov')?.innerText || "";
+    const oMat = document.getElementById('numOmbraMat')?.innerText || "";
+    const oPrinc = document.getElementById('numOmbraPrinc')?.innerText || "";
+    const ombre = `Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}`;
+
+    const quintessenza = document.getElementById('numQuintessenza')?.innerText || "";
+
     const transaction = db.transaction(['clienti'], 'readwrite');
     const store = transaction.objectStore('clienti');
 
+    // Creazione del record completo con tutti i dati estratti
     const nuovoCliente = {
         nome: nome,
         cognome: cognome,
         data_nascita: dataNascita,
         metodo: 'pitagora', 
-        data_salvataggio: new Date().toISOString()
+        data_salvataggio: new Date().toISOString(),
+        
+        // Dati Numerologici Pitagorici aggiunti
+        anima: anima,
+        persona: persona,
+        io: io,
+        giorno_nascita: giornoNascita,
+        destino: destino,
+        anno_personale: annoPersonale,
+        giorno_personale: giornoPersonale,
+        grandi_cicli: grandiCicli,
+        cicli_realizzazione: cicliRealizzazione,
+        ombre: ombre,
+        quintessenza: quintessenza
     };
 
     const requestAdd = store.add(nuovoCliente);
 
     requestAdd.onsuccess = function() {
-        alert(`Il quadro numerologico di ${nome} ${cognome} è stato salvato correttamente in archivio!`);
+        alert(`Il quadro numerologico completo di ${nome} ${cognome} è stato salvato correttamente in archivio!`);
     };
 
     requestAdd.onerror = function(event) {
