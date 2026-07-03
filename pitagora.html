@@ -35,7 +35,6 @@
         .descrizione { font-size: 13.5px; color: #4a5568; line-height: 1.5; }
         .ombra-testo { font-size: 13px; color: #94a3b8; margin-top: 6px; font-style: italic; }
         .btn-home { background: #4a5568; color: white; max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
-        @media(max-width: 600px) { .form-grid, .grid-cards { grid-template-columns: 1fr; } .form-group-full { grid-column: span 1; } }
     </style> <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
     <div style="background-color: white; padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; animation: compariModale 0.3s ease;">
         <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #aaa;">&times;</span>
@@ -50,8 +49,41 @@
 @keyframes compariModale {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
-}
+} /* <--- Ora l'animazione è chiusa correttamente! */
 
+@media (max-width: 600px) {
+    /* Sblocca la rigidità del body sul telefono */
+    body {
+        display: block !important;
+        padding: 10px !important;
+    }
+    
+    /* Forza il contenitore principale a prendere tutta la larghezza disponibile */
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* Forzatura assoluta: prende qualsiasi div che gestisce le griglie e lo mette a 1 colonna */
+    .grid-cards, .form-grid, [class*="grid"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+        display: grid !important;
+    }
+
+    /* Forza anche i singoli elementi interni (le card) a occupare tutta la larghezza */
+    .card, .grid-cards div {
+        grid-column: span 1 !important;
+        width: 100% !important;
+    }
+
+    /* Sistema i moduli di input a larghezza intera */
+    .form-group-full {
+        grid-column: span 1 !important;
+    }
+}
 </style>
 
     <script>
