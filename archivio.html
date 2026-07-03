@@ -5,27 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numerosophia - Archivio Clienti</title>
     <style>
-        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #faf8f5; color: #2c3e50; padding: 30px; display: flex; flex-direction: column; align-items: center; }
-        .container { max-width: 800px; width: 100%; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h1 { text-align: center; color: #8e7355; margin-bottom: 30px; }
+        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #faf8f5; color: #2c3e50; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 800px; width: 100%; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
+        h1 { text-align: center; color: #8e7355; margin-bottom: 25px; font-size: 24px; }
         
-        /* Layout per barra di ricerca e tasto esporta */
+        /* Layout fluido per barra di ricerca e tasto esporta */
         .actions-bar { display: flex; gap: 10px; margin-bottom: 20px; width: 100%; }
-        .search-input { flex-grow: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; box-sizing: border-box; font-family: inherit; transition: border-color 0.2s; }
+        .search-input { flex-grow: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; box-sizing: border-box; font-family: inherit; transition: border-color 0.2s; width: 100%; }
         .search-input:focus { border-color: #8e7355; outline: none; box-shadow: 0 0 5px rgba(142, 115, 85, 0.2); }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #f4eee1; color: #8e7355; }
-        .btn { display: inline-block; padding: 8px 12px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; }
+        /* Contenitore responsivo per far scorrere la tabella su mobile */
+        .table-responsive { 
+            width: 100%; 
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+            border-radius: 8px; 
+            border: 1px solid #ddd; 
+            margin-top: 10px;
+            background: white;
+        }
+        
+        /* Forza la comparsa della barra di scorrimento sui sistemi che la nascondono */
+        .table-responsive::-webkit-scrollbar {
+            height: 6px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        table { width: 100%; border-collapse: collapse; min-width: 650px; }
+        th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #ddd; white-space: nowrap; }
+        
+        /* Rimuoviamo il blocco totale del testo a capo per permettere una gestione fluida delle colonne */
+        th { background-color: #f4eee1; color: #8e7355; font-size: 14px; white-space: nowrap; }
+        td { font-size: 15px; }
+        
+        .btn { display: inline-block; padding: 8px 12px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; white-space: nowrap; }
         .btn-open { background-color: #8e7355; color: white; margin-right: 5px; }
         .btn-delete { background-color: #c0392b; color: white; }
-        .btn-export { background-color: #27ae60; color: white; font-size: 15px; padding: 12px 20px; border-radius: 6px; display: flex; align-items: center; gap: 5px; transition: background-color 0.2s; }
+        .btn-export { background-color: #27ae60; color: white; font-size: 15px; padding: 12px 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background-color 0.2s; cursor: pointer; font-family: inherit; }
         .btn-export:hover { background-color: #219653; }
-        .btn-home { background-color: #2c3e50; color: white; margin-bottom: 20px; text-decoration: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; }
-        .metodo-badge { padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+        .btn-home { background-color: #2c3e50; color: white; margin-bottom: 20px; text-decoration: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; font-size: 15px; align-self: flex-start; }
+        .metodo-badge { padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
         .badge-pitagora { background-color: #d4efdf; color: #196f3d; }
         .badge-caldea { background-color: #ebdef0; color: #6c3483; }
+
+        /* Media Query specifica per Smartphone */
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 15px; }
+            .btn-home { align-self: center; width: 100%; text-align: center; box-sizing: border-box; }
+            .actions-bar { flex-direction: column; gap: 12px; }
+            .btn-export { width: 100%; padding: 14px; }
+            h1 { font-size: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -40,18 +74,20 @@
             <button onclick="esportaInExcel()" class="btn btn-export">🟢 Esporta in Excel</button>
         </div>
 
-        <table id="tabellaClienti">
-            <thead>
-                <tr>
-                    <th>Cognome e Nome</th>
-                    <th>Data di Nascita</th>
-                    <th>Metodo</th>
-                    <th>Azioni</th>
-                </tr>
-            </thead>
-            <tbody id="corpoTabella">
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table id="tabellaClienti">
+                <thead>
+                    <tr>
+                        <th>Cognome e Nome</th>
+                        <th>Data di Nascita</th>
+                        <th>Metodo</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabella">
+                </tbody>
+            </table>
+        </div>
     </div>
 
 <script>
@@ -117,7 +153,7 @@ function mostraClienti() {
                         <td>${cliente.data_nascita}</td>
                         <td><span class="metodo-badge badge-${cliente.metodo}">${cliente.metodo}</span></td>
                         <td>
-                            <a href="${urlMappa}" class="btn btn-open">👁️ Apri Mappa</a>
+                            <a href="${urlMappa}" class="btn btn-open">👁️ Apri</a>
                             <button onclick="eliminaCliente(${cliente.id})" class="btn btn-delete">🗑️ Elimina</button>
                         </td>
                     `;
@@ -151,7 +187,6 @@ function filtraClienti() {
     }
 }
 
-// NUOVA FUNZIONE PER ESPORTARE L'ARCHIVIO IN EXCEL (CSV)
 function esportaInExcel() {
     if (!db) return;
 
@@ -170,7 +205,6 @@ function esportaInExcel() {
                 return;
             }
 
-            // Ordiniamo l'elenco prima di esportarlo (stesso ordine dell'archivio)
             elencoClienti.sort((a, b) => {
                 let cogA = (a.cognome || "").trim().toUpperCase();
                 let cogB = (b.cognome || "").trim().toUpperCase();
@@ -183,12 +217,10 @@ function esportaInExcel() {
                 return 0;
             });
 
-            // Creiamo l'intestazione delle colonne (Usiamo il punto e virgola ';' ideale per Excel in italiano)
             let csvContent = "Cognome;Nome;Data di Nascita;Metodo;Data Salvataggio\n";
 
-            // Popoliamo le righe con i dati dei clienti
             elencoClienti.forEach(cliente => {
-                let cognome = (cliente.cognome || "").replace(/;/g, ","); // Sostituiamo eventuali ';' per non rompere le colonne
+                let cognome = (cliente.cognome || "").replace(/;/g, ","); 
                 let nome = (cliente.nome || "").replace(/;/g, ",");
                 let dataNascita = cliente.data_nascita || "";
                 let metodo = (cliente.metodo || "").toUpperCase();
@@ -197,10 +229,8 @@ function esportaInExcel() {
                 csvContent += `${cognome};${nome};${dataNascita};${metodo};${dataSalvataggio}\n`;
             });
 
-            // BOM UTF-8 per forzare Excel a leggere correttamente i caratteri accentati italiani
             const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: "text/csv;charset=utf-8;" });
             
-            // Generiamo il download automatico del file
             const link = document.createElement("a");
             const url = URL.createObjectURL(blob);
             link.setAttribute("href", url);

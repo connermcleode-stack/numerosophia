@@ -462,11 +462,14 @@ function eseguiCalcoloCompleto() {
     const cognome = document.getElementById('cognome').value.trim();
     let soprannome = "";
     const dataRaw = document.getElementById('dataNascita').value.trim();
- if (!dataRaw || dataRaw.length < 10) {
-        alert("Per favore, inserisci una data di nascita completa (GG/MM/AAAA)");
+// Se l'utente ha scritto qualcosa nella data, controlla che sia completa
+    if (dataRaw && dataRaw.length < 10) {
+        alert("Per favore, inserisci una data di nascita completa (GG/MM/AAAA) oppure svuota il campo.");
         return;
     }
-    let dataNascita = dataRaw;
+
+    // Se è vuota rimarrà una stringa vuota, altrimenti prenderà il valore inserito
+    let dataNascita = dataRaw ? dataRaw : "";
     const annoTarget = parseInt(document.getElementById('annoCorrente').value) || 2026;
     
     if(!nome && !cognome && !soprannome && !dataNascita) {
