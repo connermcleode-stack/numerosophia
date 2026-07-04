@@ -813,6 +813,8 @@ request.onerror = function(event) {
     console.error("Errore nell'apertura dell'archivio:", event.target.error);
 };
 
+// Funzione di Salvataggio Definitiva per Caldea
+// Funzione di Salvataggio Definitiva Ultra-Blindata per Caldea
 function salvaNelDatabase() {
     const nome = document.getElementById('nome').value.trim();
     const cognome = document.getElementById('cognome').value.trim();
@@ -823,6 +825,50 @@ function salvaNelDatabase() {
         return;
     }
 
+    // Funzione interna per ripulire i testi ed evitare conversioni automatiche in data su Excel
+    const bloccaDataExcel = (id) => {
+        let val = document.getElementById(id)?.innerText?.trim() || "";
+        if (!val) return "";
+        // Se contiene barre o trattini, mette l'apice singolo protettivo per Excel
+        return val.replace(/\//g, '.').replace(/-/g, '.');
+    };
+
+    // Estrazione dati anagrafici con protezione Excel
+    const anima = bloccaDataExcel('numAnima');
+    const persona = bloccaDataExcel('numPersona').replace(/\//g, '.').replace(/-/g, '.');
+    const espressione = bloccaDataExcel('numEspressione');
+    
+    // Tentativo di recupero ID per canali planetari e afflizioni
+    let numeroPsichico = bloccaDataExcel('numPsichico') || bloccaDataExcel('numNumeroPsichico');
+    let camminoVita = bloccaDataExcel('numCammino');
+    let cicloAnnuale = bloccaDataExcel('numCicloAnnuale');
+    let vibrazioneGiornaliera = bloccaDataExcel('numVibrazioneGiornaliera');
+    let afflizioni = bloccaDataExcel('numAfflizioni');
+
+    // STRATEGIA DI RISERVA: Se i campi planetari sono vuoti, li estraiamo direttamente da testoCopiaGlobale!
+    if (typeof testoCopiaGlobale !== 'undefined' && testoCopiaGlobale) {
+        if (!numeroPsichico) {
+            const matchPsichico = testoCopiaGlobale.match(/Numero Psichico.*?:\s*([^\n]+)/i);
+            if (matchPsichico) numeroPsichico = matchPsichico[1].trim();
+        }
+        if (!camminoVita) {
+            const matchCammino = testoCopiaGlobale.match(/Cammino di Vita.*?:\s*([^\n]+)/i);
+            if (matchCammino) camminoVita = (matchCammino[1].includes('/') ? "'" : "") + matchCammino[1].trim();
+        }
+        if (!cicloAnnuale) {
+            const matchCiclo = testoCopiaGlobale.match(/Ciclo Annuale Corrente.*?:\s*([^\n]+)/i);
+            if (matchCiclo) cicloAnnuale = matchCiclo[1].trim();
+        }
+        if (!vibrazioneGiornaliera) {
+            const matchVib = testoCopiaGlobale.match(/Vibrazione Giornaliera.*?:\s*([^\n]+)/i);
+            if (matchVib) vibrazioneGiornaliera = matchVib[1].trim();
+        }
+        if (!afflizioni) {
+            const matchAffl = testoCopiaGlobale.match(/Afflizione.*?:\s*([^\n]+)/i);
+            if (matchAffl) afflizioni = matchAffl[1].trim();
+        }
+    }
+
     const transaction = db.transaction(['clienti'], 'readwrite');
     const store = transaction.objectStore('clienti');
 
@@ -831,13 +877,22 @@ function salvaNelDatabase() {
         cognome: cognome,
         data_nascita: dataNascita,
         metodo: 'caldea',
-        data_salvataggio: new Date().toISOString()
+        data_salvataggio: new Date().toISOString(),
+        
+        anima: anima,
+        persona: persona,
+        espressione: espressione,
+        numero_psichico: numeroPsichico,
+        cammino_vita: camminoVita,
+        ciclo_annuale: cicloAnnuale,
+        vibrazione_giornaliera: vibrazioneGiornaliera,
+        afflizioni: afflizioni
     };
 
     const requestAdd = store.add(nuovoCliente);
 
     requestAdd.onsuccess = function() {
-        alert(`Il quadro numerologico di ${nome} ${cognome} è stato salvato correttamente in archivio (Metodo Caldeo)!`);
+        alert(`Il quadro numerologico caldeo di ${nome} ${cognome} è stato salvato correttamente!`);
     };
 
     requestAdd.onerror = function(event) {
