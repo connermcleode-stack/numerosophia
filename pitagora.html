@@ -487,11 +487,10 @@ function eseguiCalcoloCompleto() {
         return (databaseArchetipi[num] || databaseArchetipi[base]).nome;
     }
 
-    testoCopiaGlobale = "--- QUADRO NUMEROLOGICO PITAGORICO COMPLETO ---\n\n";
-      if(nome || cognome) testoCopiaGlobale += `Analisi per: ${nome} ${cognome}\n`;
-    if(soprannome) testoCopiaGlobale += `Firma Alternativa: ${soprannome}\n`;
-    if(dataNascita) testoCopiaGlobale += `Data di Nascita: ${dataNascita}\n`;
-    testoCopiaGlobale += `----------------------------------------------\n\n`;
+    testoCopiaGlobale = "--- REPORT NUMEROSOPHIA COMPLETO ---\n\n";
+    let haCalcolatoQualcosa = false;
+    let espressionePerQuintessenza = null;
+    let camminoPerQuintessenza = null;
 
     // 1. ANAGRAFICA
     if (nome || cognome) {
