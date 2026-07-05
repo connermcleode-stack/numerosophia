@@ -9,10 +9,17 @@
         .container { max-width: 800px; width: 100%; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
         h1 { text-align: center; color: #8e7355; margin-bottom: 25px; font-size: 24px; }
         
-        /* Layout fluido per barra di ricerca e tasto esporta */
-        .actions-bar { display: flex; gap: 10px; margin-bottom: 20px; width: 100%; }
+        /* Layout fluido per barra di ricerca e tasti */
+        .actions-bar { display: flex; gap: 10px; margin-bottom: 20px; width: 100%; align-items: center; }
         .search-input { flex-grow: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; box-sizing: border-box; font-family: inherit; transition: border-color 0.2s; width: 100%; }
         .search-input:focus { border-color: #8e7355; outline: none; box-shadow: 0 0 5px rgba(142, 115, 85, 0.2); }
+
+        /* Pulsanti di Esportazione e Importazione */
+        .btn-action-container { display: flex; gap: 10px; }
+        .btn-export { background-color: #27ae60; color: white; }
+        .btn-export:hover { background-color: #219653; }
+        .btn-import { background-color: #2980b9; color: white; }
+        .btn-import:hover { background-color: #1f6696; }
 
         /* Contenitore responsivo per far scorrere la tabella su mobile */
         .table-responsive { 
@@ -25,7 +32,6 @@
             background: white;
         }
         
-        /* Forza la comparsa della barra di scorrimento sui sistemi che la nascondono */
         .table-responsive::-webkit-scrollbar {
             height: 6px;
         }
@@ -37,15 +43,13 @@
         table { width: 100%; border-collapse: collapse; min-width: 650px; }
         th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #ddd; white-space: nowrap; }
         
-        /* Rimuoviamo il blocco totale del testo a capo per permettere una gestione fluida delle colonne */
         th { background-color: #f4eee1; color: #8e7355; font-size: 14px; white-space: nowrap; }
         td { font-size: 15px; }
         
-        .btn { display: inline-block; padding: 8px 12px; text-decoration: none; border-radius: 4px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; white-space: nowrap; }
-        .btn-open { background-color: #8e7355; color: white; margin-right: 5px; }
-        .btn-delete { background-color: #c0392b; color: white; }
-        .btn-export { background-color: #27ae60; color: white; font-size: 15px; padding: 12px 20px; border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background-color 0.2s; cursor: pointer; font-family: inherit; }
-        .btn-export:hover { background-color: #219653; }
+        .btn { display: inline-block; padding: 12px 18px; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; border: none; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background-color 0.2s; font-family: inherit; }
+        .btn-table { padding: 8px 12px; font-size: 14px; border-radius: 4px; }
+        .btn-open { background-color: #8e7355; color: white; margin-right: 5px; display: inline-flex; }
+        .btn-delete { background-color: #c0392b; color: white; display: inline-flex; }
         .btn-home { background-color: #2c3e50; color: white; margin-bottom: 20px; text-decoration: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; font-size: 15px; align-self: flex-start; }
         .metodo-badge { padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
         .badge-pitagora { background-color: #d4efdf; color: #196f3d; }
@@ -57,7 +61,8 @@
             .container { padding: 15px; }
             .btn-home { align-self: center; width: 100%; text-align: center; box-sizing: border-box; }
             .actions-bar { flex-direction: column; gap: 12px; }
-            .btn-export { width: 100%; padding: 14px; }
+            .btn-action-container { width: 100%; flex-direction: column; gap: 10px; }
+            .btn { width: 100%; padding: 14px; }
             h1 { font-size: 20px; }
         }
     </style>
@@ -71,7 +76,12 @@
         
         <div class="actions-bar">
             <input type="text" id="inputRicerca" onkeyup="filtraClienti()" placeholder="🔍 Cerca per Cognome o Nome..." class="search-input">
-            <button onclick="esportaInExcel()" class="btn btn-export">🟢 Esporta in Excel</button>
+            <div class="btn-action-container">
+                <button onclick="esportaInExcel()" class="btn btn-export">🟢 Esporta</button>
+                <!-- Input nascosto per caricare il file -->
+                <input type="file" id="fileImport" accept=".csv" style="display: none;" onchange="importaDaExcel(this)">
+                <button onclick="document.getElementById('fileImport').click()" class="btn btn-import">🔵 Importa</button>
+            </div>
         </div>
 
         <div class="table-responsive">
@@ -145,16 +155,29 @@ function mostraClienti() {
 
                 elencoClienti.forEach(cliente => {
                     const riga = document.createElement('tr');
-                    const fileDestinazione = cliente.metodo === 'caldea' ? 'caldea.html' : 'pitagora.html';
-                    const urlMappa = `${fileDestinazione}?nome=${encodeURIComponent(cliente.nome)}&cognome=${encodeURIComponent(cliente.cognome)}&data=${encodeURIComponent(cliente.data_nascita)}`;
+                    const fileDestinazione = (cliente.metodo || "").toLowerCase() === 'caldea' ? 'caldea.html' : 'pitagora.html';
+                    
+                    // Gestione pulita delle stringhe nulle o vuote per i link URL e la visualizzazione
+                    const nomeVal = cliente.nome || "";
+                    const cognomeVal = cliente.cognome || "";
+                    const dataVal = cliente.data_nascita || "";
+                    const metodoVal = (cliente.metodo || "pitagora").toLowerCase();
+
+                    const urlMappa = `${fileDestinazione}?nome=${encodeURIComponent(nomeVal)}&cognome=${encodeURIComponent(cognomeVal)}&data=${encodeURIComponent(dataVal)}`;
+
+                 // Visualizzazione nome visualizzato: mostra solo nome/cognome se presenti, altrimenti un trattino
+		    let nomeVisualizzato = `${cognomeVal} ${nomeVal}`.trim();
+	            if (!nomeVisualizzato) {
+    			 nomeVisualizzato = "-";
+}
 
                     riga.innerHTML = `
-                        <td><strong>${cliente.cognome} ${cliente.nome}</strong></td>
-                        <td>${cliente.data_nascita}</td>
-                        <td><span class="metodo-badge badge-${cliente.metodo}">${cliente.metodo}</span></td>
+                        <td><strong>${nomeVisualizzato}</strong></td>
+                        <td>${dataVal || "-"}</td>
+                        <td><span class="metodo-badge badge-${metodoVal}">${metodoVal}</span></td>
                         <td>
-                            <a href="${urlMappa}" class="btn btn-open">👁️ Apri</a>
-                            <button onclick="eliminaCliente(${cliente.id})" class="btn btn-delete">🗑️ Elimina</button>
+                            <a href="${urlMappa}" class="btn btn-table btn-open">👁️ Apri</a>
+                            <button onclick="eliminaCliente(${cliente.id})" class="btn btn-table btn-delete">🗑️ Elimina</button>
                         </td>
                     `;
                     corpoTabella.appendChild(riga);
@@ -187,6 +210,15 @@ function filtraClienti() {
     }
 }
 
+// Struttura fissa delle colonne dell'archivio (Unificata per l'interscambio con Excel/Fogli Google)
+const HEADERS_CSV = [
+    "Cognome", "Nome", "Data di Nascita", "Metodo", "Data Salvataggio",
+    "P_Anima", "P_Persona", "P_Io", "P_GiornoNascita", "P_Destino", "P_AnnoPersonale", "P_GiornoPersonale",
+    "P_GrandiCicliEvolutivi", "P_CicliRealizzazione", "P_Ombre", "P_Quintessenza",
+    "C_Anima", "C_Persona", "C_Espressione", "C_NumeroPsichico", "C_CamminoVita", 
+    "C_CicloAnnualeCorrente", "C_VibrazioneGiornaliera", "C_AfflizioniPlanetarie"
+];
+
 function esportaInExcel() {
     if (!db) return;
 
@@ -205,53 +237,41 @@ function esportaInExcel() {
                 return;
             }
 
-            elencoClienti.sort((a, b) => {
-                let cogA = (a.cognome || "").trim().toUpperCase();
-                let cogB = (b.cognome || "").trim().toUpperCase();
-                if (cogA < cogB) return -1;
-                if (cogA > cogB) return 1;
-                let nomA = (a.nome || "").trim().toUpperCase();
-                let nomB = (b.nome || "").trim().toUpperCase();
-                if (nomA < nomB) return -1;
-                if (nomA > nomB) return 1;
-                return 0;
-            });
+            let csvContent = HEADERS_CSV.join(";") + "\n";
 
-            // Intestazione con TUTTI i campi unificati di Pitagora e Caldea
-            let headers = [
-                "Cognome", "Nome", "Data di Nascita", "Metodo", "Data Salvataggio",
-                // Campi Pitagora
-                "P_Anima", "P_Persona", "P_Io", "P_GiornoNascita", "P_Destino", "P_AnnoPersonale", "P_GiornoPersonale",
-                "P_GrandiCicliEvolutivi", "P_CicliRealizzazione", "P_Ombre", "P_Quintessenza",
-                // Campi Caldea
-                "C_Anima", "C_Persona", "C_Espressione", "C_NumeroPsichico", "C_CamminoVita", 
-                "C_CicloAnnualeCorrente", "C_VibrazioneGiornaliera", "C_AfflizioniPlanetarie"
-            ];
-
-            let csvContent = headers.join(";") + "\n";
-
-            // Funzione di utilità per pulire i dati ed evitare rotture nel CSV
+       // Funzione di utilità per pulire i dati ed evitare strutture vuote nel CSV
             const pulisciDato = (valore) => {
                 if (valore === undefined || valore === null) return "";
-                // Se è un array o un oggetto strutturato (es. i cicli o le ombre), lo convertiamo in stringa leggibile
+                
                 if (typeof valore === 'object') {
                     return JSON.stringify(valore).replace(/;/g, ",").replace(/"/g, "'");
                 }
-                return String(valore).replace(/;/g, ",").trim();
+                
+                let stringa = String(valore).replace(/;/g, ",").replace(/\r?\n|\r/g, " ").trim();
+                
+                // Pulisce le strutture vuote dei Grandi Cicli Evolutivi
+                if (stringa === "Formativo: | Produttivo: | Conclusivo:") return "";
+                
+                // Pulisce le strutture vuote dei Cicli di Realizzazione (Pinnacoli)
+                if (stringa === "1°: | 2°: | 3°: | 4°:") return "";
+                
+                // Pulisce le strutture vuote delle Ombre
+                if (stringa === "Giovinezza: | Maturità: | Principale:" || stringa === "Giovinezza:  | Maturità:  | Principale: ") return "";
+                
+                return stringa;
             };
 
             elencoClienti.forEach(cliente => {
                 let rigaDati = [];
-                let isPitagora = (cliente.metodo || "").toLowerCase() === "pitagora";
+                let isPitagora = (cliente.metodo || "").toLowerCase() === "pitagora" || (cliente.metodo || "") === "";
 
-                // Dati Generali Comuni
                 rigaDati.push(pulisciDato(cliente.cognome));
                 rigaDati.push(pulisciDato(cliente.nome));
                 rigaDati.push(pulisciDato(cliente.data_nascita));
-                rigaDati.push(pulisciDato(cliente.metodo ? cliente.metodo.toUpperCase() : ""));
-                rigaDati.push(cliente.data_salvataggio ? cliente.data_salvataggio.substring(0, 10) : "");
+                rigaDati.push(pulisciDato(cliente.metodo ? cliente.metodo.toLowerCase() : "pitagora"));
+                rigaDati.push(cliente.data_salvataggio ? cliente.data_salvataggio.substring(0, 10) : new Date().toISOString().substring(0,10));
 
-                // COLONNE PITAGORA (Se il profilo è Caldeo, questi campi rimarranno vuoti)
+                // Campi Pitagora
                 rigaDati.push(isPitagora ? pulisciDato(cliente.anima) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.persona) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.io) : "");
@@ -264,7 +284,7 @@ function esportaInExcel() {
                 rigaDati.push(isPitagora ? pulisciDato(cliente.ombre) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.quintessenza) : "");
 
-                // COLONNE CALDEA (Se il profilo è Pitagora, questi campi rimarranno vuoti)
+                // Campi Caldea
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.anima) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.persona) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.espressione) : "");
@@ -278,7 +298,6 @@ function esportaInExcel() {
             });
 
             const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: "text/csv;charset=utf-8;" });
-            
             const link = document.createElement("a");
             const url = URL.createObjectURL(blob);
             link.setAttribute("href", url);
@@ -289,6 +308,97 @@ function esportaInExcel() {
             document.body.removeChild(link);
         }
     };
+}
+
+function importaDaExcel(input) {
+    if (!db) return;
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const linee = text.split(/\r?\n/);
+        if (linee.length <= 1) {
+            alert("Il file caricato sembra essere vuoto o non valido.");
+            return;
+        }
+
+        // Analizziamo la prima riga delle intestazioni per mappare gli indici delle colonne
+        const intestazioniRilevate = linee[0].replace(/^\uFEFF/, "").split(";").map(h => h.trim());
+        
+        const transaction = db.transaction(['clienti'], 'readwrite');
+        const store = transaction.objectStore('clienti');
+        let contatoreImportati = 0;
+
+        for (let i = 1; i < linee.length; i++) {
+            if (!linee[i].trim()) continue; // Salta le righe vuote di fine file
+
+            const colonne = linee[i].split(";");
+            
+            // Creiamo una mappa temporanea basata sulle intestazioni reali rilevate nel CSV
+            let datoEstratto = {};
+            intestazioniRilevate.forEach((intestazione, index) => {
+                datoEstratto[intestazione] = colonne[index] ? colonne[index].trim() : "";
+            });
+
+            // Se la riga non contiene alcun dato rilevante, la salta
+            if (!datoEstratto["Cognome"] && !datoEstratto["Nome"] && !datoEstratto["Data di Nascita"]) {
+                continue;
+            }
+
+            let metodoSelezionato = (datoEstratto["Metodo"] || "pitagora").toLowerCase();
+            let isPitagora = metodoSelezionato === "pitagora";
+
+            // Ricostruiamo l'oggetto del cliente esattamente come l'applicazione si aspetta di trovarlo
+            let nuovoCliente = {
+                cognome: datoEstratto["Cognome"] || "",
+                nome: datoEstratto["Nome"] || "",
+                data_nascita: datoEstratto["Data di Nascita"] || "",
+                metodo: metodoSelezionato,
+                data_salvataggio: datoEstratto["Data Salvataggio"] || new Date().toISOString()
+            };
+
+            if (isPitagora) {
+                nuovoCliente.anima = datoEstratto["P_Anima"] || "";
+                nuovoCliente.persona = datoEstratto["P_Persona"] || "";
+                nuovoCliente.io = datoEstratto["P_Io"] || "";
+                nuovoCliente.giorno_nascita = datoEstratto["P_GiornoNascita"] || "";
+                nuovoCliente.destino = datoEstratto["P_Destino"] || "";
+                nuovoCliente.anno_personale = datoEstratto["P_AnnoPersonale"] || "";
+                nuovoCliente.giorno_personale = datoEstratto["P_GiornoPersonale"] || "";
+                nuovoCliente.grandi_cicli = datoEstratto["P_GrandiCicliEvolutivi"] || "";
+                nuovoCliente.cicli_realizzazione = datoEstratto["P_CicliRealizzazione"] || "";
+                nuovoCliente.ombre = datoDust = datoEstratto["P_Ombre"] || "";
+                nuovoCliente.quintessenza = datoEstratto["P_Quintessenza"] || "";
+            } else {
+                nuovoCliente.anima = datoEstratto["C_Anima"] || "";
+                nuovoCliente.persona = datoEstratto["C_Persona"] || "";
+                nuovoCliente.espressione = datoEstratto["C_Espressione"] || "";
+                nuovoCliente.numero_psichico = datoEstratto["C_NumeroPsichico"] || "";
+                nuovoCliente.cammino_vita = datoEstratto["C_CamminoVita"] || "";
+                nuovoCliente.ciclo_annuale = datoEstratto["C_CicloAnnualeCorrente"] || "";
+                nuovoCliente.vibrazione_giornaliera = datoEstratto["C_VibrazioneGiornaliera"] || "";
+                nuovoCliente.afflizioni = datoEstratto["C_AfflizioniPlanetarie"] || "";
+            }
+
+            store.add(nuovoCliente);
+            contatoreImportati++;
+        }
+
+        transaction.oncomplete = function() {
+            alert(`Importazione completata con successo! Recuperati ${contatoreImportati} profili numerologici.`);
+            input.value = ""; // Resetta l'input file
+            mostraClienti(); // Aggiorna la tabella all'istante
+        };
+
+        transaction.onerror = function(event) {
+            console.error("Errore durante l'importazione nel database:", event.target.error);
+            alert("Si è verificato un errore durante il salvataggio dei dati importati.");
+        };
+    };
+
+    reader.readAsText(file, "UTF-8");
 }
 
 function eliminaCliente(id) {
