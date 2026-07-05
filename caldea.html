@@ -551,16 +551,16 @@ function eseguiCalcoloCompleto() {
     if(dataNascita) testoCopiaGlobale += `Data di Nascita: ${dataNascita}\n`;
     testoCopiaGlobale += `----------------------------------------------\n\n`;
 
-    // 1. ANAGRAFICA CALDEA
+// 1. ANAGRAFICA CALDEA
+    function formatEsitoCaldeo(totale) {
+        let mono = riduciMonocifraStretta(totale);
+        return totale > 9 ? `${totale}/${mono}` : totale;
+    }
+
     if (nome || cognome) {
         const nomePulito = pulisciTesto(nome);
         const cognomePulito = pulisciTesto(cognome);
         const datiAnagrafica = calcolaStringaCaldea(nomePulito + cognomePulito);
-
-        function formatEsitoCaldeo(totale) {
-            let mono = riduciMonocifraStretta(totale);
-            return totale > 9 ? `${totale}/${mono}` : totale;
-        }
 
         document.getElementById('numAnima').innerText = formatEsitoCaldeo(datiAnagrafica.anima);
         document.getElementById('descAnima').innerHTML = compilaScheda(datiAnagrafica.anima);
@@ -577,7 +577,10 @@ function eseguiCalcoloCompleto() {
         testoCopiaGlobale += `- Espressione: ${formatEsitoCaldeo(datiAnagrafica.espressione)}\n\n`;
         haCalcolatoQualcosa = true;
     } else {
-        document.getElementById('bloccoAnagrafica').style.display = 'none';
+        // Se nome e cognome sono vuoti, nasconde il blocco anagrafica anziché andare in errore
+        if (document.getElementById('bloccoAnagrafica')) {
+            document.getElementById('bloccoAnagrafica').style.display = 'none';
+        }
     }
 
     // 2. DATA DI NASCITA E DIRETTRICI PLANETARIE (Solo Caldea Pura)

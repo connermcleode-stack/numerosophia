@@ -493,12 +493,12 @@ function eseguiCalcoloCompleto() {
     if(dataNascita) testoCopiaGlobale += `Data di Nascita: ${dataNascita}\n`;
     testoCopiaGlobale += `----------------------------------------------\n\n`;
 
-    // 1. ANAGRAFICA
+// // 1. ANAGRAFICA
     if (nome || cognome) {
         const nomePulito = pulisciTesto(nome);
         const cognomePulito = pulisciTesto(cognome);
         const datiAnagrafica = calcolaStringaNumerica(nomePulito + cognomePulito);
-        
+
         espressionePerQuintessenza = datiAnagrafica.espressione;
 
         document.getElementById('numAnima').innerText = format(datiAnagrafica.anima);
@@ -515,7 +515,12 @@ function eseguiCalcoloCompleto() {
         testoCopiaGlobale += `- Espressione: ${format(datiAnagrafica.espressione)} (${estraiNomeArchetipo(datiAnagrafica.espressione)})\n\n`;
         haCalcolatoQualcosa = true;
     } else {
-        document.getElementById('bloccoAnagrafica').style.display = 'none';
+        // Se il nome non c'è, impostiamo a 0 la variabile per evitare errori nei calcoli successivi
+        espressionePerQuintessenza = 0; 
+        
+        if (document.getElementById('bloccoAnagrafica')) {
+            document.getElementById('bloccoAnagrafica').style.display = 'none';
+        }
     }
 
     // 2. DATA DI NASCITA
@@ -637,13 +642,13 @@ function eseguiCalcoloCompleto() {
         document.getElementById('bloccoData').style.display = 'none';
     }
 
-    // 3. QUINTESSENZA
-    if (espressionePerQuintessenza && camminoPerQuintessenza) {
+ // // 3. QUINTESSENZA
+    if ((nome || cognome) && dataNascita && espressionePerQuintessenza && camminoPerQuintessenza) {
         const quintessenza = riduciNumero(riduciMonocifraStretta(espressionePerQuintessenza) + riduciMonocifraStretta(camminoPerQuintessenza), true);
         document.getElementById('numQuintessenza').innerText = format(quintessenza);
         document.getElementById('descQuintessenza').innerHTML = compilaScheda(quintessenza);
         document.getElementById('sezioneQuintessenza').style.display = 'block';
-        
+
         testoCopiaGlobale += `IL PUNTO D'ARRIVO:\n`;
         testoCopiaGlobale += `- La Quintessenza: ${format(quintessenza)} (${estraiNomeArchetipo(quintessenza)})\n\n`;
     } else {
