@@ -731,8 +731,15 @@ function salvaNelDatabase() {
     const cognome = document.getElementById('cognome').value.trim();
     const dataNascita = document.getElementById('dataNascita').value.trim();
 
-    if (!nome || !cognome || !dataNascita) {
-        alert("Inserisci Nome, Cognome e Data di Nascita validi per poter effettuare il salvataggio.");
+    // Blocca il salvataggio solo se TUTTI i campi principali sono vuoti
+    if (!nome && !cognome && !dataNascita) {
+        alert("Inserisci almeno un dato (Nome, Cognome o Data di Nascita) per poter effettuare il salvataggio.");
+        return;
+    }
+
+    // Se l'utente ha provato a scrivere la data, controlla che sia completa (GG/MM/AAAA)
+    if (dataNascita && dataNascita.length < 10) {
+        alert("Per favore, inserisci una data di nascita completa (GG/MM/AAAA) oppure svuota il campo per salvare solo i dati testuali.");
         return;
     }
 
@@ -810,10 +817,11 @@ function controllaParametriURL() {
     const cognomeUrl = urlParams.get('cognome');
     const dataUrl = urlParams.get('data');
 
-    if (nomeUrl && cognomeUrl && dataUrl) {
-        document.getElementById('nome').value = nomeUrl;
-        document.getElementById('cognome').value = cognomeUrl;
-        document.getElementById('dataNascita').value = dataUrl;
+// Si attiva se è presente almeno un dato utile dall'archivio
+    if (nomeUrl || cognomeUrl || dataUrl) {
+        document.getElementById('nome').value = nomeUrl || "";
+        document.getElementById('cognome').value = cognomeUrl || "";
+        document.getElementById('dataNascita').value = dataUrl || "";
 
         // Esegue il calcolo in automatico
         eseguiCalcoloCompleto();

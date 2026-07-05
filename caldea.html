@@ -815,19 +815,23 @@ request.onerror = function(event) {
     console.error("Errore nell'apertura dell'archivio:", event.target.error);
 };
 
-// Funzione di Salvataggio Definitiva per Caldea
-// Funzione di Salvataggio Definitiva Ultra-Blindata per Caldea
+// Funzione di Salvataggio Avanzata per Caldea
 function salvaNelDatabase() {
     const nome = document.getElementById('nome').value.trim();
     const cognome = document.getElementById('cognome').value.trim();
     const dataNascita = document.getElementById('dataNascita').value.trim();
 
-   // Controlla che sia stato inserito ALMENO un dato tra Nome, Cognome o Data di Nascita
-if (!nome && !cognome && !dataNascita) {
-    alert("Inserisci almeno un dato (Nome, Cognome o Data di Nascita) per poter effettuare il salvataggio.");
-    return;
-}
+    // Blocca il salvataggio solo se TUTTI i campi principali sono vuoti
+    if (!nome && !cognome && !dataNascita) {
+        alert("Inserisci almeno un dato (Nome, Cognome o Data di Nascita) per poter effettuare il salvataggio.");
+        return;
+    }
 
+    // Se l'utente ha provato a scrivere la data, controlla che sia completa (GG/MM/AAAA)
+    if (dataNascita && dataNascita.length < 10) {
+        alert("Per favore, inserisci una data di nascita completa (GG/MM/AAAA) oppure svuota il campo per salvare solo i dati testuali.");
+        return;
+    }
     // Funzione interna per ripulire i testi ed evitare conversioni automatiche in data su Excel
     const bloccaDataExcel = (id) => {
         let val = document.getElementById(id)?.innerText?.trim() || "";
@@ -904,19 +908,20 @@ if (!nome && !cognome && !dataNascita) {
     };
 }
 
+// Controllo dei parametri ricevuti dall'Archivio
 function controllaParametriURL() {
     const urlParams = new URLSearchParams(window.location.search);
     const nomeUrl = urlParams.get('nome');
     const cognomeUrl = urlParams.get('cognome');
     const dataUrl = urlParams.get('data');
 
-    // Se c'è ALMENO uno dei tre parametri, procediamo a riempire i campi
+    // Si attiva se è presente almeno un dato utile dall'archivio
     if (nomeUrl || cognomeUrl || dataUrl) {
-        if (nomeUrl) document.getElementById('nome').value = nomeUrl;
-        if (cognomeUrl) document.getElementById('cognome').value = cognomeUrl;
-        if (dataUrl) document.getElementById('dataNascita').value = dataUrl;
+        document.getElementById('nome').value = nomeUrl || "";
+        document.getElementById('cognome').value = cognomeUrl || "";
+        document.getElementById('dataNascita').value = dataUrl || "";
 
-        // Avvia il calcolo con i dati disponibili
+        // Esegue il calcolo in automatico
         eseguiCalcoloCompleto();
     }
 }
