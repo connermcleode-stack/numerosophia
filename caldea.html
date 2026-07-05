@@ -137,16 +137,16 @@
         </div>
 
         <div id="bloccoData" style="display:none;">
-            <div class="sezione-titolo">Il Canale del Destino (Le Correnti del Tempo)</div>
+            <div class="sezione-titolo" style="color: #6c5ce7;">Il Canale del Destino (Le Correnti del Tempo)</div>
             <div class="grid-cards">
-                <div class="card">
+                <div class="card" style="border-left-color: #6c5ce7;">
                     <h3>Numero Psichico (Imprinting Radice)</h3>
-                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #27ae60;"></div>
+                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descGiornoIsolato"></div>
                 </div>
-                <div class="card">
+                <div class="card" style="border-left-color: #6c5ce7;">
                     <h3>Cammino di Vita / Destino</h3>
-                    <div id="numCammino" class="numero-evidenziato"></div>
+                    <div id="numCammino" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descCammino"></div>
                 </div>
                 <div class="card" style="border-left-color: #6c5ce7;">
@@ -154,9 +154,9 @@
                     <div id="numAnnoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descAnnoPers"></div>
                 </div>
-                <div class="card" style="border-left-color: #e67e22;">
+                <div class="card" style="border-left-color: #6c5ce7;">
                     <h3>Vibrazione Giornaliera (Oggi)</h3>
-                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descGiornoPers"></div>
                 </div>
             </div>
@@ -208,14 +208,14 @@
         <div id="bloccoData" style="display:none;">
             <div class="sezione-titolo">Il Canale del Destino (Le Correnti del Tempo)</div>
             <div class="grid-cards">
-                <div class="card">
+                <div class="card" style="border-left-color: #6c5ce7;">
                     <h3>Numero Psichico (Imprinting Radice)</h3>
-                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #27ae60;"></div>
+                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descGiornoIsolato"></div>
                 </div>
-                <div class="card">
+                <div class="card" style="border-left-color: #6c5ce7;">
                     <h3>Cammino di Vita / Destino</h3>
-                    <div id="numCammino" class="numero-evidenziato"></div>
+                    <div id="numCammino" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descCammino"></div>
                 </div>
                 <div class="card" style="border-left-color: #6c5ce7;">
@@ -223,9 +223,9 @@
                     <div id="numAnnoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descAnnoPers"></div>
                 </div>
-                <div class="card" style="border-left-color: #e67e22;">
+                <div class="card" style="border-left-color: #6c5ce7;">
                     <h3>Vibrazione Giornaliera (Oggi)</h3>
-                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
                     <div id="descGiornoPers"></div>
                 </div>
             </div>
@@ -740,7 +740,6 @@ function apriApprofondimento(elementoCard) {
         
         // Creiamo il testo completo di Luce, Ombra e Sblocco
         let testoCompleto = `
-            // Sostituisci datiArchetipo.sblocco con datiArchetipo.Sblocco
 	    <p><strong>Chiave di Sblocco Evolutivo:</strong><br>${datiArchetipo.Sblocco || 'Descrizione non disponibile.'}</p>
             <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px;"><strong>✨ Espressione in Luce:</strong><br>${datiArchetipo.luce || 'Non specificata.'}</p>
             <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px;"><strong>⚠️ Espressione in Ombra:</strong><br>${datiArchetipo.ombra || 'Non specificata.'}</p>
@@ -820,10 +819,11 @@ function salvaNelDatabase() {
     const cognome = document.getElementById('cognome').value.trim();
     const dataNascita = document.getElementById('dataNascita').value.trim();
 
-    if (!nome || !cognome || !dataNascita) {
-        alert("Inserisci Nome, Cognome e Data di Nascita validi per poter effettuare il salvataggio.");
-        return;
-    }
+   // Controlla che sia stato inserito ALMENO un dato tra Nome, Cognome o Data di Nascita
+if (!nome && !cognome && !dataNascita) {
+    alert("Inserisci almeno un dato (Nome, Cognome o Data di Nascita) per poter effettuare il salvataggio.");
+    return;
+}
 
     // Funzione interna per ripulire i testi ed evitare conversioni automatiche in data su Excel
     const bloccaDataExcel = (id) => {
@@ -907,11 +907,13 @@ function controllaParametriURL() {
     const cognomeUrl = urlParams.get('cognome');
     const dataUrl = urlParams.get('data');
 
-    if (nomeUrl && cognomeUrl && dataUrl) {
-        document.getElementById('nome').value = nomeUrl;
-        document.getElementById('cognome').value = cognomeUrl;
-        document.getElementById('dataNascita').value = dataUrl;
+    // Se c'è ALMENO uno dei tre parametri, procediamo a riempire i campi
+    if (nomeUrl || cognomeUrl || dataUrl) {
+        if (nomeUrl) document.getElementById('nome').value = nomeUrl;
+        if (cognomeUrl) document.getElementById('cognome').value = cognomeUrl;
+        if (dataUrl) document.getElementById('dataNascita').value = dataUrl;
 
+        // Avvia il calcolo con i dati disponibili
         eseguiCalcoloCompleto();
     }
 }
