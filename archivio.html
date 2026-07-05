@@ -6,7 +6,7 @@
     <title>Numerosophia - Archivio Clienti</title>
     <style>
         body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #faf8f5; color: #2c3e50; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { max-width: 800px; width: 100%; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
+        .container { max-width: 850px; width: 100%; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
         h1 { text-align: center; color: #8e7355; margin-bottom: 25px; font-size: 24px; }
         
         /* Layout fluido per barra di ricerca e tasti */
@@ -20,6 +20,10 @@
         .btn-export:hover { background-color: #219653; }
         .btn-import { background-color: #2980b9; color: white; }
         .btn-import:hover { background-color: #1f6696; }
+        .btn-select-mode { background-color: #7f8c8d; color: white; }
+        .btn-select-mode:hover { background-color: #6c7a7d; }
+        .btn-delete-all { background-color: #d35400; color: white; display: none; }
+        .btn-delete-all:hover { background-color: #e67e22; }
 
         /* Contenitore responsivo per far scorrere la tabella su mobile */
         .table-responsive { 
@@ -46,6 +50,10 @@
         th { background-color: #f4eee1; color: #8e7355; font-size: 14px; white-space: nowrap; }
         td { font-size: 15px; }
         
+        /* Colonna di selezione nascosta inizialmente */
+        .col-select { display: none; width: 40px; text-align: center; }
+        .checkbox-importante { transform: scale(1.3); cursor: pointer; }
+
         .btn { display: inline-block; padding: 12px 18px; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; border: none; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background-color 0.2s; font-family: inherit; }
         .btn-table { padding: 8px 12px; font-size: 14px; border-radius: 4px; }
         .btn-open { background-color: #8e7355; color: white; margin-right: 5px; display: inline-flex; }
@@ -56,7 +64,7 @@
         .badge-caldea { background-color: #ebdef0; color: #6c3483; }
 
         /* Media Query specifica per Smartphone */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             body { padding: 10px; }
             .container { padding: 15px; }
             .btn-home { align-self: center; width: 100%; text-align: center; box-sizing: border-box; }
@@ -77,8 +85,9 @@
         <div class="actions-bar">
             <input type="text" id="inputRicerca" onkeyup="filtraClienti()" placeholder="🔍 Cerca per Cognome o Nome..." class="search-input">
             <div class="btn-action-container">
+                <button onclick="toggleModalitaSelezione()" id="btnSelezione" class="btn btn-select-mode">☑️ Seleziona Multipla</button>
+                <button onclick="eliminaSelezionati()" id="btnEliminaMassa" class="btn btn-delete-all">🔥 Elimina Selezionati</button>
                 <button onclick="esportaInExcel()" class="btn btn-export">🟢 Esporta</button>
-                <!-- Input nascosto per caricare il file -->
                 <input type="file" id="fileImport" accept=".csv" style="display: none;" onchange="importaDaExcel(this)">
                 <button onclick="document.getElementById('fileImport').click()" class="btn btn-import">🔵 Importa</button>
             </div>
@@ -88,6 +97,7 @@
             <table id="tabellaClienti">
                 <thead>
                     <tr>
+                        <th class="col-select" id="th-select"><input type="checkbox" id="selectAll" onclick="selezionaTuttiCheckbox(this)" class="checkbox-importante"></th>
                         <th>Cognome e Nome</th>
                         <th>Data di Nascita</th>
                         <th>Metodo</th>
@@ -104,8 +114,8 @@
 const DB_NAME = 'NumerologiaDB';
 const DB_VERSION = 2; 
 let db;
+let modalitaSelezioneAttiva = false;
 
-// Apriamo il database comune
 const request = indexedDB.open(DB_NAME, DB_VERSION);
 
 request.onupgradeneeded = function(event) {
@@ -157,7 +167,6 @@ function mostraClienti() {
                     const riga = document.createElement('tr');
                     const fileDestinazione = (cliente.metodo || "").toLowerCase() === 'caldea' ? 'caldea.html' : 'pitagora.html';
                     
-                    // Gestione pulita delle stringhe nulle o vuote per i link URL e la visualizzazione
                     const nomeVal = cliente.nome || "";
                     const cognomeVal = cliente.cognome || "";
                     const dataVal = cliente.data_nascita || "";
@@ -165,13 +174,16 @@ function mostraClienti() {
 
                     const urlMappa = `${fileDestinazione}?nome=${encodeURIComponent(nomeVal)}&cognome=${encodeURIComponent(cognomeVal)}&data=${encodeURIComponent(dataVal)}`;
 
-                 // Visualizzazione nome visualizzato: mostra solo nome/cognome se presenti, altrimenti un trattino
-		    let nomeVisualizzato = `${cognomeVal} ${nomeVal}`.trim();
-	            if (!nomeVisualizzato) {
-    			 nomeVisualizzato = "-";
-}
+                    let nomeVisualizzato = `${cognomeVal} ${nomeVal}`.trim();
+                    if (!nomeVisualizzato) {
+                        nomeVisualizzato = "-";
+                    }
+
+                    // Determina se la colonna selezione deve essere visibile al rinfresco
+                    const displayStile = modalitaSelezioneAttiva ? "table-cell" : "none";
 
                     riga.innerHTML = `
+                        <td class="col-select" style="display: ${displayStile}; text-align:center;"><input type="checkbox" value="${cliente.id}" class="checkbox-cliente checkbox-importante"></td>
                         <td><strong>${nomeVisualizzato}</strong></td>
                         <td>${dataVal || "-"}</td>
                         <td><span class="metodo-badge badge-${metodoVal}">${metodoVal}</span></td>
@@ -183,12 +195,82 @@ function mostraClienti() {
                     corpoTabella.appendChild(riga);
                 });
                 
+                // Mantieni lo stato corretto dell'intestazione selezione
+                document.getElementById('th-select').style.display = modalitaSelezioneAttiva ? "table-cell" : "none";
                 filtraClienti();
             } else {
-                corpoTabella.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#999;">Nessun profilo salvato in archivio.</td></tr>`;
+                corpoTabella.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#999;">Nessun profilo salvato in archivio.</td></tr>`;
             }
         }
     };
+}
+
+function toggleModalitaSelezione() {
+    modalitaSelezioneAttiva = !modalitaSelezioneAttiva;
+    const btn = document.getElementById('btnSelezione');
+    const btnMassa = document.getElementById('btnEliminaMassa');
+    const thSelect = document.getElementById('th-select');
+    const colRighe = document.querySelectorAll('.col-select');
+
+    if (modalitaSelezioneAttiva) {
+        btn.innerText = "❌ Annulla Selezione";
+        btn.style.backgroundColor = "#e74c3c";
+        btnMassa.style.display = "flex";
+        thSelect.style.display = "table-cell";
+        colRighe.forEach(td => td.style.display = "table-cell");
+    } else {
+        btn.innerText = "☑️ Seleziona Multipla";
+        btn.style.backgroundColor = "#7f8c8d";
+        btnMassa.style.display = "none";
+        thSelect.style.display = "none";
+        colRighe.forEach(td => td.style.display = "none");
+        document.getElementById('selectAll').checked = false;
+        selezionaTuttiCheckbox({ checked: false });
+    }
+}
+
+function selezionaTuttiCheckbox(master) {
+    const checkboxes = document.querySelectorAll('.checkbox-cliente');
+    checkboxes.forEach(cb => {
+        // Seleziona solo le righe attualmente visibili (non filtrate dalla ricerca)
+        if (cb.closest('tr').style.display !== "none") {
+            cb.checked = master.checked;
+        }
+    });
+}
+
+function eliminaSelezionati() {
+    const selezionati = document.querySelectorAll('.checkbox-cliente:checked');
+    if (selezionati.length === 0) {
+        alert("Nessun profilo selezionato da eliminare.");
+        return;
+    }
+
+    if (confirm(`Sei sicuro di voler eliminare definitivamente ${selezionati.length} profili in un colpo solo?`)) {
+        const transaction = db.transaction(['clienti'], 'readwrite');
+        const store = transaction.objectStore('clienti');
+
+        selezionati.forEach(cb => {
+            const id = parseInt(cb.value);
+            store.delete(id);
+        });
+
+        transaction.oncomplete = function() {
+            alert("Eliminazione multipla completata con successo.");
+            modalitaSelezioneAttiva = false;
+            // Ripristina lo stato grafico dei pulsanti
+            document.getElementById('btnSelezione').innerText = "☑️ Seleziona Multipla";
+            document.getElementById('btnSelezione').style.backgroundColor = "#7f8c8d";
+            document.getElementById('btnEliminaMassa').style.display = "none";
+            document.getElementById('selectAll').checked = false;
+            mostraClienti();
+        };
+
+        transaction.onerror = function(event) {
+            console.error("Errore durante l'eliminazione multipla:", event.target.error);
+            alert("Si è verificato un errore durante l'eliminazione dei profili.");
+        };
+    }
 }
 
 function filtraClienti() {
@@ -198,19 +280,21 @@ function filtraClienti() {
     const righe = tabella.getElementsByTagName('tr');
 
     for (let i = 0; i < righe.length; i++) {
-        const colonnaNomeCognome = righe[i].getElementsByTagName('td')[0];
+        const colonnaNomeCognome = righe[i].getElementsByTagName('td')[1]; // Spostato all'indice 1 per via della colonna checkbox
         if (colonnaNomeCognome) {
             const testoContenuto = colonnaNomeCognome.textContent || colonnaNomeCognome.innerText;
             if (testoContenuto.toUpperCase().indexOf(filtro) > -1) {
                 righe[i].style.display = ""; 
             } else {
                 righe[i].style.display = "none"; 
+                // Se la riga viene nascosta dal filtro, deseleziona l'eventuale checkbox interna
+                const cb = righe[i].querySelector('.checkbox-cliente');
+                if (cb) cb.checked = false;
             }
         }
     }
 }
 
-// Struttura fissa delle colonne dell'archivio (Unificata per l'interscambio con Excel/Fogli Google)
 const HEADERS_CSV = [
     "Cognome", "Nome", "Data di Nascita", "Metodo", "Data Salvataggio",
     "P_Anima", "P_Persona", "P_Io", "P_GiornoNascita", "P_Destino", "P_AnnoPersonale", "P_GiornoPersonale",
@@ -239,23 +323,15 @@ function esportaInExcel() {
 
             let csvContent = HEADERS_CSV.join(";") + "\n";
 
-       // Funzione di utilità per pulire i dati ed evitare strutture vuote nel CSV
             const pulisciDato = (valore) => {
                 if (valore === undefined || valore === null) return "";
-                
                 if (typeof valore === 'object') {
                     return JSON.stringify(valore).replace(/;/g, ",").replace(/"/g, "'");
                 }
                 
                 let stringa = String(valore).replace(/;/g, ",").replace(/\r?\n|\r/g, " ").trim();
-                
-                // Pulisce le strutture vuote dei Grandi Cicli Evolutivi
                 if (stringa === "Formativo: | Produttivo: | Conclusivo:") return "";
-                
-                // Pulisce le strutture vuote dei Cicli di Realizzazione (Pinnacoli)
                 if (stringa === "1°: | 2°: | 3°: | 4°:") return "";
-                
-                // Pulisce le strutture vuote delle Ombre
                 if (stringa === "Giovinezza: | Maturità: | Principale:" || stringa === "Giovinezza:  | Maturità:  | Principale: ") return "";
                 
                 return stringa;
@@ -271,7 +347,6 @@ function esportaInExcel() {
                 rigaDati.push(pulisciDato(cliente.metodo ? cliente.metodo.toLowerCase() : "pitagora"));
                 rigaDati.push(cliente.data_salvataggio ? cliente.data_salvataggio.substring(0, 10) : new Date().toISOString().substring(0,10));
 
-                // Campi Pitagora
                 rigaDati.push(isPitagora ? pulisciDato(cliente.anima) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.persona) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.io) : "");
@@ -284,7 +359,6 @@ function esportaInExcel() {
                 rigaDati.push(isPitagora ? pulisciDato(cliente.ombre) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.quintessenza) : "");
 
-                // Campi Caldea
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.anima) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.persona) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.espressione) : "");
@@ -318,8 +392,6 @@ function importaDaExcel(input) {
     const reader = new FileReader();
     reader.onload = function(e) {
         const text = e.target.result;
-        
-        // CORREZIONE MOBILE: Riconosce e standardizza qualsiasi tipo di ritorno a capo (\r\n, \r, \n)
         const linee = text.replace(/\r\n|\r/g, "\n").split("\n");
         
         if (linee.length <= 1 || !linee[0].trim()) {
@@ -327,11 +399,9 @@ function importaDaExcel(input) {
             return;
         }
 
-        // Rimuove il carattere BOM invisibile che i telefoni e Excel spesso inseriscono all'inizio
         const primaLinea = linee[0].replace(/^\uFEFF/, "").trim();
         const intestazioniRilevate = primaLinea.split(";").map(h => h.trim());
         
-        // Verifica minima per essere sicuri che sia il file corretto
         if (!intestazioniRilevate.includes("Cognome") && !intestazioniRilevate.includes("Nome")) {
             alert("Formato file non riconosciuto. Assicurati che sia il CSV corretto di Numerosophia.");
             return;
@@ -343,7 +413,7 @@ function importaDaExcel(input) {
 
         for (let i = 1; i < linee.length; i++) {
             const lineaCorrente = linee[i].trim();
-            if (!lineaCorrente) continue; // Salta le righe vuote
+            if (!lineaCorrente) continue;
 
             const colonne = lineaCorrente.split(";");
             
@@ -352,7 +422,6 @@ function importaDaExcel(input) {
                 datoEstratto[intestazione] = colonne[index] ? colonne[index].trim() : "";
             });
 
-            // Salta la riga se non contiene i dati minimi
             if (!datoEstratto["Cognome"] && !datoEstratto["Nome"] && !datoEstratto["Data di Nascita"]) {
                 continue;
             }
