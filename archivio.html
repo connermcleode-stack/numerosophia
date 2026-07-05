@@ -318,31 +318,41 @@ function importaDaExcel(input) {
     const reader = new FileReader();
     reader.onload = function(e) {
         const text = e.target.result;
-        const linee = text.split(/\r?\n/);
-        if (linee.length <= 1) {
+        
+        // CORREZIONE MOBILE: Riconosce e standardizza qualsiasi tipo di ritorno a capo (\r\n, \r, \n)
+        const linee = text.replace(/\r\n|\r/g, "\n").split("\n");
+        
+        if (linee.length <= 1 || !linee[0].trim()) {
             alert("Il file caricato sembra essere vuoto o non valido.");
             return;
         }
 
-        // Analizziamo la prima riga delle intestazioni per mappare gli indici delle colonne
-        const intestazioniRilevate = linee[0].replace(/^\uFEFF/, "").split(";").map(h => h.trim());
+        // Rimuove il carattere BOM invisibile che i telefoni e Excel spesso inseriscono all'inizio
+        const primaLinea = linee[0].replace(/^\uFEFF/, "").trim();
+        const intestazioniRilevate = primaLinea.split(";").map(h => h.trim());
         
+        // Verifica minima per essere sicuri che sia il file corretto
+        if (!intestazioniRilevate.includes("Cognome") && !intestazioniRilevate.includes("Nome")) {
+            alert("Formato file non riconosciuto. Assicurati che sia il CSV corretto di Numerosophia.");
+            return;
+        }
+
         const transaction = db.transaction(['clienti'], 'readwrite');
         const store = transaction.objectStore('clienti');
         let contatoreImportati = 0;
 
         for (let i = 1; i < linee.length; i++) {
-            if (!linee[i].trim()) continue; // Salta le righe vuote di fine file
+            const lineaCorrente = linee[i].trim();
+            if (!lineaCorrente) continue; // Salta le righe vuote
 
-            const colonne = linee[i].split(";");
+            const colonne = lineaCorrente.split(";");
             
-            // Creiamo una mappa temporanea basata sulle intestazioni reali rilevate nel CSV
             let datoEstratto = {};
             intestazioniRilevate.forEach((intestazione, index) => {
                 datoEstratto[intestazione] = colonne[index] ? colonne[index].trim() : "";
             });
 
-            // Se la riga non contiene alcun dato rilevante, la salta
+            // Salta la riga se non contiene i dati minimi
             if (!datoEstratto["Cognome"] && !datoEstratto["Nome"] && !datoEstratto["Data di Nascita"]) {
                 continue;
             }
@@ -350,13 +360,12 @@ function importaDaExcel(input) {
             let metodoSelezionato = (datoEstratto["Metodo"] || "pitagora").toLowerCase();
             let isPitagora = metodoSelezionato === "pitagora";
 
-            // Ricostruiamo l'oggetto del cliente esattamente come l'applicazione si aspetta di trovarlo
             let nuovoCliente = {
                 cognome: datoEstratto["Cognome"] || "",
                 nome: datoEstratto["Nome"] || "",
                 data_nascita: datoEstratto["Data di Nascita"] || "",
                 metodo: metodoSelezionato,
-                data_salvataggio: datoEstratto["Data Salvataggio"] || new Date().toISOString()
+                data_salvataggio: datoEstratto["Data Salvataggio"] || new Date().toISOString().substring(0, 10)
             };
 
             if (isPitagora) {
@@ -369,7 +378,7 @@ function importaDaExcel(input) {
                 nuovoCliente.giorno_personale = datoEstratto["P_GiornoPersonale"] || "";
                 nuovoCliente.grandi_cicli = datoEstratto["P_GrandiCicliEvolutivi"] || "";
                 nuovoCliente.cicli_realizzazione = datoEstratto["P_CicliRealizzazione"] || "";
-                nuovoCliente.ombre = datoDust = datoEstratto["P_Ombre"] || "";
+                nuovoCliente.ombre = datoEstratto["P_Ombre"] || "";
                 nuovoCliente.quintessenza = datoEstratto["P_Quintessenza"] || "";
             } else {
                 nuovoCliente.anima = datoEstratto["C_Anima"] || "";
@@ -387,14 +396,14 @@ function importaDaExcel(input) {
         }
 
         transaction.oncomplete = function() {
-            alert(`Importazione completata con successo! Recuperati ${contatoreImportati} profili numerologici.`);
-            input.value = ""; // Resetta l'input file
-            mostraClienti(); // Aggiorna la tabella all'istante
+            alert("Importazione completata! Recuperati " + contatoreImportati + " profili.");
+            input.value = ""; 
+            mostraClienti(); 
         };
 
         transaction.onerror = function(event) {
-            console.error("Errore durante l'importazione nel database:", event.target.error);
-            alert("Si è verificato un errore durante il salvataggio dei dati importati.");
+            console.error("Errore durante l'importazione:", event.target.error);
+            alert("Errore nel salvataggio dei dati sul telefono.");
         };
     };
 
