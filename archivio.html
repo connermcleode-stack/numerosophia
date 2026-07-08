@@ -109,7 +109,7 @@
                 <button onclick="eliminaSelezionati()" id="btnEliminaMassa" class="btn-icon-top btn-delete-all" title="Elimina Profili Selezionati">🗑️</button>
                 
                 <button onclick="esportaInExcel()" class="btn btn-export">🟢 Esporta</button>
-                <input type="file" id="fileImport" accept=".csv" style="display: none;" onchange="importaDaExcel(this)">
+                <input type="file" id="fileImport" accept=".csv, text/csv, text/comma-separated-values, application/csv, application/vnd.ms-excel" style="display: none;" onchange="importaDaExcel(this)">
                 <button onclick="document.getElementById('fileImport').click()" class="btn btn-import">🔵 Importa</button>
             </div>
         </div>
