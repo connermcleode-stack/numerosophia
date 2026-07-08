@@ -260,9 +260,9 @@
                         <input type="text" id="p1-cognome" class="input-field" placeholder="Es. Rossi">
                     </div>
                     <div class="form-group">
-                        <label>Data di Nascita:</label>
-                        <input type="date" id="p1-data" class="input-field" max="9999-12-31">
-                    </div>
+    			<label>Data di Nascita (GG/MM/AAAA):</label>
+   			 <input type="text" id="p1-data" class="input-field" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
+		    </div>
                     <div class="form-group" style="margin-top: 15px;">
                         <label style="color: var(--accent-gold);">Oppure seleziona da Archivio:</label>
                         <select id="comp-partner-a" class="select-box" onchange="caricaDaArchivio(1)">
@@ -283,9 +283,9 @@
                         <input type="text" id="p2-cognome" class="input-field" placeholder="Es. Bianchi">
                     </div>
                     <div class="form-group">
-                        <label>Data di Nascita:</label>
-                        <input type="date" id="p2-data" class="input-field" max="9999-12-31">
-                    </div>
+    			<label>Data di Nascita (GG/MM/AAAA):</label>
+    			<input type="text" id="p2-data" class="input-field" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
+		    </div>
                     <div class="form-group" style="margin-top: 15px;">
                         <label style="color: var(--accent-gold);">Oppure seleziona da Archivio:</label>
                         <select id="comp-partner-b" class="select-box" onchange="caricaDaArchivio(2)">
@@ -385,6 +385,12 @@
     </div>
 
     <script>
+function formattaEValidaData(input) {
+    let v = input.value.replace(/\D/g, ''); // Rimuove tutto ciò che non è un numero
+    if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+    if (v.length > 5) v = v.substring(0, 5) + '/' + v.substring(5, 9);
+    input.value = v;
+}
         // =========================================================================
         // DATABASE TESTI DELLE AFFINITÀ (SINASTRIA) - STRUTTURA COMPLETA
         // Inserire le coppie SEMPRE in ordine crescente (es. "1-3", "5-11", "9-22")
