@@ -423,14 +423,41 @@ function pulisciTesto(testo) {
 }
 
 function compilaScheda(numero, compatta = false) {
-    let base = riduciMonocifraStretta(numero);
-    let datiArchetipo = databaseArchetipi[numero] || databaseArchetipi[base];
-    let testoKarmico = databaseKarmici[numero] ? `<p style="color:#d35400; font-size:12px; margin:3px 0 0 0;"><strong>Nota Karmica:</strong> ${databaseKarmici[numero]}</p>` : "";
+    // Gestiamo sia numeri puri (es. 13) sia stringhe formattate (es. "13/4")
+    let numeroPulito = numero.toString().includes('/') ? parseInt(numero.toString().split('/')[0], 10) : parseInt(numero, 10);
+    let base = riduciMonocifraStretta(numeroPulito);
+    
+    let datiArchetipoBase = databaseArchetipi[base];
+    let testoKarmico = databaseKarmici[numeroPulito] ? `<p style="color:#d35400; font-size:12px; margin:3px 0 0 0;"><strong>Nota Karmica:</strong> ${databaseKarmici[numeroPulito]}</p>` : "";
+    
+    let nomeVisualizzato = datiArchetipoBase.nome;
+    let luceVisualizzata = datiArchetipoBase.luce;
+    let ombraVisualizzata = datiArchetipoBase.ombra;
+
+    // Se il numero è un Maestro (11, 22, 33), sovrascriviamo con i dati del Maestro
+    if (databaseArchetipi[numeroPulito] && [11, 22, 33].includes(numeroPulito)) {
+        nomeVisualizzato = databaseArchetipi[numeroPulito].nome;
+        luceVisualizzata = databaseArchetipi[numeroPulito].luce;
+        ombraVisualizzata = databaseArchetipi[numeroPulito].ombra;
+    } 
+    // Se è un numero Karmico, arricchiamo il titolo e integriamo la descrizione
+    else if (databaseKarmici[numeroPulito]) {
+        let nomeKarmico = "";
+        switch(numeroPulito) {
+            case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
+            case 14: nomeKarmico = "L'Equilibrista / Temperanza"; break;
+            case 16: nomeKarmico = "La Torre / Crollo dell'Ego"; break;
+            case 19: nomeKarmico = "Il Sole / Rinascita Solitaria"; break;
+        }
+        nomeVisualizzato = `${datiArchetipoBase.nome} <span style="color:#d35400; font-size:13px;">(da Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
+        luceVisualizzata = `[Sfida ${numeroPulito}]: ${databaseKarmici[numeroPulito]} <br><strong style="color: #196f3d;">In Luce (Talento del ${base}):</strong> ${datiArchetipoBase.luce}`;
+    }
     
     if (compatta) {
-        return `<span class="archetipo-nome" style="font-size:13px;">${datiArchetipo.nome.split(' (')[0]}</span><div class="descrizione" style="font-size:12px; line-height:1.3;">${datiArchetipo.luce.substring(0, 65)}...</div>`;
+        return `<span class="archetipo-nome" style="font-size:13px;">${nomeVisualizzato.split(' (')[0]}</span><div class="descrizione" style="font-size:12px; line-height:1.3;">${luceVisualizzata.substring(0, 65)}...</div>`;
     }
-    return `<span class="archetipo-nome">${datiArchetipo.nome}</span><div class="descrizione">${datiArchetipo.luce}</div><div class="ombra-testo">Ombra: ${datiArchetipo.ombra}</div>${testoKarmico}`;
+    
+    return `<span class="archetipo-nome">${nomeVisualizzato}</span><div class="descrizione">${luceVisualizzata}</div><div class="ombra-testo">Ombra: ${ombraVisualizzata}</div>${testoKarmico}`;
 }
 
 function compilaSchedaOmbra(valoreOmbra) {
@@ -439,19 +466,19 @@ function compilaSchedaOmbra(valoreOmbra) {
 }
 
 function calcolaStringaNumerica(testo) {
-    const vocaliSet = ['A', 'E', 'I', 'O', 'U'];
+    const vocaliset = ['A', 'E', 'I', 'O', 'U'];
     let sAnima = 0, sPersona = 0, sEspressione = 0;
     for (let l of testo) {
         let v = tabellaPitagorica[l] || 0;
         if (v > 0) {
             sEspressione += v;
-            if (vocaliSet.includes(l)) { sAnima += v; } else { sPersona += v; }
+            if (vocaliset.includes(l)) { sAnima += v; } else { sPersona += v; }
         }
     }
-    return { 
-        anima: riduciNumero(sAnima, true), 
-        persona: riduciNumero(sPersona, true), 
-        espressione: riduciNumero(sEspressione, true) 
+    return {
+        anima: riduciNumero(sAnima, true),
+        persona: riduciNumero(sPersona, true),
+        espressione: riduciNumero(sEspressione, true)
     };
 }
 
@@ -840,21 +867,42 @@ function apriApprofondimento(elementoCard) {
     const titoloSezione = elementoCard.querySelector('h3').innerText;
     const numeroElemento = elementoCard.querySelector('.numero-evidenziato').innerText;
     
-    // Cerchiamo l'archetipo completo dentro il tuo database esistente
-    // Nota: usiamo la funzione di riduzione se il numero è composto, per pescare l'archetipo base
-    let baseNumero = numeroElemento.includes('/') ? numeroElemento.split('/')[1] : numeroElemento;
-    let datiArchetipo = databaseArchetipi[numeroElemento] || databaseArchetipi[baseNumero];
+    // Gestiamo l'estrazione pulita in caso di formati composti come "13/4" o "19/1"
+    let numeroPulito = numeroElemento.includes('/') ? parseInt(numeroElemento.split('/')[0], 10) : parseInt(numeroElemento, 10);
+    let base = riduciMonocifraStretta(numeroPulito);
+    
+    let datiArchetipo = databaseArchetipi[numeroElemento] || databaseArchetipi[base];
     
     if (datiArchetipo) {
-        // Prepariamo i testi da mostrare nel pop-up
         document.getElementById('modaleTitolo').innerText = `${titoloSezione}: ${numeroElemento}`;
-        document.getElementById('modaleSottotitolo').innerText = datiArchetipo.nome;
         
-        // Creiamo il testo completo di Luce e Ombra senza tagli
+        let sottotitolo = datiArchetipo.nome;
+        let significatoTesto = datiArchetipo.significato || 'Descrizione non disponibile.';
+        let luceTesto = datiArchetipo.luce || 'Non specificata.';
+        let ombraTesto = datiArchetipo.ombra || 'Non specificata.';
+        
+        // Se è un numero Karmico, arricchiamo i testi anche nella modale
+        if (databaseKarmici[numeroPulito]) {
+            let nomeKarmico = "";
+            switch(numeroPulito) {
+                case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
+                case 14: nomeKarmico = "L'Equilibrista / Temperanza"; break;
+                case 16: nomeKarmico = "La Torre / Crollo dell'Ego"; break;
+                case 19: nomeKarmico = "Il Sole / Rinascita Solitaria"; break;
+            }
+            sottotitolo = `${datiArchetipo.nome} <span style="color:#d35400; font-size:14px; block-size:auto;">(Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
+            
+            // Inseriamo la sfida karmica in cima al significato evolutivo
+            significatoTesto = `<strong style="color:#d35400;">[SFIDA DEL KARMA ${numeroPulito}]:</strong> ${databaseKarmici[numeroPulito]}<br><br><strong>Integrazione con la Base (${base}):</strong><br>${datiArchetipo.significato}`;
+        }
+        
+        document.getElementById('modaleSottotitolo').innerHTML = sottotitolo;
+        
+        // Prepariamo il contenuto HTML della modale
         let testoCompleto = `
-            <p><strong>Significato Evolutivo:</strong><br>${datiArchetipo.significato || 'Descrizione non disponibile.'}</p>
-            <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px;"><strong>✨ Espressione in Luce:</strong><br>${datiArchetipo.luce || 'Non specificata.'}</p>
-            <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px;"><strong>⚠️ Espressione in Ombra:</strong><br>${datiArchetipo.ombra || 'Non specificata.'}</p>
+            <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
+            <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
+            <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
         `;
         
         document.getElementById('modaleContenuto').innerHTML = testoCompleto;
