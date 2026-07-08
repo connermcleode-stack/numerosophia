@@ -1502,11 +1502,21 @@ function recuperaTestoAffinita(livello, num1, num2) {
 function eseguiCalcoloAffinita() {
     const p1Nome = document.getElementById('p1-nome') ? document.getElementById('p1-nome').value.trim() : "";
     const p1Cognome = document.getElementById('p1-cognome') ? document.getElementById('p1-cognome').value.trim() : "";
-    const p1Data = document.getElementById('p1-data') ? document.getElementById('p1-data').value : "";
+    let p1Data = document.getElementById('p1-data') ? document.getElementById('p1-data').value.trim() : "";
 
     const p2Nome = document.getElementById('p2-nome') ? document.getElementById('p2-nome').value.trim() : "";
     const p2Cognome = document.getElementById('p2-cognome') ? document.getElementById('p2-cognome').value.trim() : "";
-    const p2Data = document.getElementById('p2-data') ? document.getElementById('p2-data').value : "";
+    let p2Data = document.getElementById('p2-data') ? document.getElementById('p2-data').value.trim() : "";
+
+    // CONVERSIONE SMART DEL FORMATO DATA (Risolve il blocco su smartphone)
+    if (p1Data.includes('/')) {
+        const parti1 = p1Data.split('/');
+        if (parti1.length === 3) p1Data = `${parti1[2]}-${parti1[1].padStart(2, '0')}-${parti1[0].padStart(2, '0')}`;
+    }
+    if (p2Data.includes('/')) {
+        const parti2 = p2Data.split('/');
+        if (parti2.length === 3) p2Data = `${parti2[2]}-${parti2[1].padStart(2, '0')}-${parti2[0].padStart(2, '0')}`;
+    }
 
     // 1. CONTROLLO DI SICUREZZA: Tutto vuoto
     if (!p1Nome && !p1Cognome && !p1Data && !p2Nome && !p2Cognome && !p2Data) {
