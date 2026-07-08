@@ -28,7 +28,9 @@
         .btn-icon-top { width: 45px; height: 45px; padding: 0; border-radius: 6px; font-size: 18px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; transition: background-color 0.2s; }
         .btn-select-mode { background-color: #7f8c8d; color: white; }
         .btn-select-mode:hover { background-color: #6c7a7d; }
-        .btn-select-active { background-color: #e74c3c !important; } /* Diventa rosso quando è attivo l'annulla */
+        
+        /* Modifica Grafica: X nera senza quadrato di sfondo rosso */
+        .btn-select-active { background-color: transparent !important; color: #000000 !important; border: 1px solid #7f8c8d !important; font-size: 16px; font-weight: bold; }
         
         /* Il cestino di massa parte nascosto e ha il suo stile rosso */
         .btn-delete-all { background-color: #d35400; color: white; display: none; }
@@ -231,14 +233,14 @@ function toggleModalitaSelezione() {
     const colRighe = document.querySelectorAll('.col-select');
 
     if (modalitaSelezioneAttiva) {
-        btn.innerText = "❌";
+        btn.innerHTML = "✖"; // X nera di testo pura senza emoji o quadratoni di sfondo
         btn.classList.add('btn-select-active');
         btn.title = "Annulla Selezione";
         btnMassa.style.display = "inline-flex";
         thSelect.style.display = "table-cell";
         colRighe.forEach(td => td.style.display = "table-cell");
     } else {
-        btn.innerText = "☑️";
+        btn.innerHTML = "☑️";
         btn.classList.remove('btn-select-active');
         btn.title = "Attiva Selezione Multipla";
         btnMassa.style.display = "none";
@@ -258,7 +260,7 @@ function selezionaTuttiCheckbox(master) {
     });
 }
 
-function GridMultipla() { // Mantenuta firma originale se invocata altrove
+function GridMultipla() { 
     eliminaSelezionati();
 }
 
@@ -282,9 +284,9 @@ function eliminaSelezionati() {
             alert("Eliminazione multipla completata con successo.");
             modalitaSelezioneAttiva = false;
             
-            // Ripristina lo stato iniziale della barra dei bottoni
+            // Ripristina lo stato iniziale della barra dei bottoni con la configurazione pulita
             const btn = document.getElementById('btnSelezione');
-            btn.innerText = "☑️";
+            btn.innerHTML = "☑️";
             btn.classList.remove('btn-select-active');
             document.getElementById('btnEliminaMassa').style.display = "none";
             document.getElementById('selectAll').checked = false;
