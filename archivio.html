@@ -394,21 +394,50 @@ function importaDaExcel(input) {
         const text = e.target.result;
         const linee = text.replace(/\r\n|\r/g, "\n").split("\n");
         if (linee.length <= 1 || !linee[0].trim()) { alert("Il file caricato sembra essere vuoto o non valido."); return; }
-        const primaLinea = linee[0].replace(/^\uFEFF/, "").trim();
-        const intestazioniRilevate = primaLinea.split(";").map(h => h.trim());
-        if (!intestazioniRilevate.includes("Cognome") && !intestazioniRilevate.includes("Nome")) { alert("Formato file non riconosciuto."); return; }
+        
+        // Pulizia della prima linea da BOM e virgolette (tipiche degli smartphone)
+        const primaLinea = linee[0].replace(/^\uFEFF/, "").replace(/"/g, "").trim();
+        const intestazioniRilevate = primaLinea.split(";").map(h => h.trim().toLowerCase());
+        
+        // Controllo flessibile ottimizzato per smartphone
+        const indiceCognome = intestazioniRilevate.findIndex(h => h.includes("cognome"));
+        const indiceNome = intestazioniRilevate.findIndex(h => h.includes("nome"));
+        
+        if (indiceCognome === -1 && indiceNome === -1) { 
+            alert("Formato file non riconosciuto."); 
+            return; 
+        }
+        
+        // Mappiamo gli indici corretti di tutte le colonne basandoci sulla posizione nell'array originale HEADERS_CSV
+        const mappaIndici = {};
+        HEADERS_CSV.forEach(header => {
+            const index = intestazioniRilevate.findIndex(h => h.includes(header.toLowerCase()));
+            mappaIndici[header] = index;
+        });
+
         const transaction = db.transaction(['clienti'], 'readwrite');
         const store = transaction.objectStore('clienti');
         let contatoreImportati = 0;
+        
         for (let i = 1; i < linee.length; i++) {
-            const lineaCorrente = linee[i].trim();
+            let lineaCorrente = linee[i].trim();
             if (!lineaCorrente) continue;
+            
+            // Pulisce la linea dalle virgolette dei browser mobile
+            lineaCorrente = lineaCorrente.replace(/"/g, "");
             const colonne = lineaCorrente.split(";");
+            
             let datoEstratto = {};
-            intestazioniRilevate.forEach((intestazione, index) => { datoEstratto[intestazione] = colonne[index] ? colonne[index].trim() : ""; });
+            HEADERS_CSV.forEach(header => {
+                const idx = mappaIndici[header];
+                datoEstratto[header] = (idx !== undefined && idx !== -1 && colonne[idx]) ? colonne[idx].trim() : "";
+            });
+            
             if (!datoEstratto["Cognome"] && !datoEstratto["Nome"] && !datoEstratto["Data di Nascita"]) continue;
+            
             let metodoSelezionato = (datoEstratto["Metodo"] || "pitagora").toLowerCase();
-            let isPitagora = metodoSelezionato === "pitagora";
+            let isPitagora = metodoSelezionato === "pitagora" || metodoSelezionato === "";
+            
             let nuovoCliente = {
                 cognome: datoEstratto["Cognome"] || "",
                 nome: datoEstratto["Nome"] || "",
@@ -416,15 +445,38 @@ function importaDaExcel(input) {
                 metodo: metodoSelezionato,
                 data_salvataggio: datoEstratto["Data Salvataggio"] || new Date().toISOString().substring(0, 10)
             };
+            
             if (isPitagora) {
-                nuovoCliente.anima = datoEstratto["P_Anima"] || ""; nuovoCliente.persona = datoEstratto["P_Persona"] || ""; nuovoCliente.io = datoEstratto["P_Io"] || ""; nuovoCliente.giorno_nascita = datoEstratto["P_GiornoNascita"] || ""; nuovoCliente.destino = datoEstratto["P_Destino"] || ""; nuovoCliente.anno_personale = datoEstratto["P_AnnoPersonale"] || ""; nuovoCliente.giorno_personale = datoEstratto["P_GiornoPersonale"] || ""; nuovoCliente.grandi_cicli = datoEstratto["P_GrandiCicliEvolutivi"] || ""; nuovoCliente.cicli_realizzazione = datoEstratto["P_CicliRealizzazione"] || ""; nuovoCliente.ombre = datoEstratto["P_Ombre"] || ""; nuovoCliente.quintessenza = datoEstratto["P_Quintessenza"] || "";
+                nuovoCliente.anima = datoEstratto["P_Anima"] || ""; 
+                nuovoCliente.persona = datoEstratto["P_Persona"] || ""; 
+                nuovoCliente.io = datoEstratto["P_Io"] || ""; 
+                nuovoCliente.giorno_nascita = datoEstratto["P_GiornoNascita"] || ""; 
+                nuovoCliente.destino = datoEstratto["P_Destino"] || ""; 
+                nuovoCliente.anno_personale = datoEstratto["P_AnnoPersonale"] || ""; 
+                nuovoCliente.giorno_personale = datoEstratto["P_GiornoPersonale"] || ""; 
+                nuovoCliente.grandi_cicli = datoEstratto["P_GrandiCicliEvolutivi"] || ""; 
+                nuovoCliente.cicli_realizzazione = datoEstratto["P_CicliRealizzazione"] || ""; 
+                nuovoCliente.ombre = datoEstratto["P_Ombre"] || ""; 
+                nuovoCliente.quintessenza = datoEstratto["P_Quintessenza"] || "";
             } else {
-                nuovoCliente.anima = datoEstratto["C_Anima"] || ""; nuovoCliente.persona = datoEstratto["C_Persona"] || ""; nuovoCliente.espressione = datoEstratto["C_Espressione"] || ""; nuovoCliente.numero_psichico = datoEstratto["C_NumeroPsichico"] || ""; nuovoCliente.cammino_vita = datoEstratto["C_CamminoVita"] || ""; nuovoCliente.ciclo_annuale = datoEstratto["C_CicloAnnualeCorrente"] || ""; nuovoCliente.vibrazione_giornaliera = datoEstratto["C_VibrazioneGiornaliera"] || ""; nuovoCliente.afflizioni = datoEstratto["C_AfflizioniPlanetarie"] || "";
+                nuovoCliente.anima = datoEstratto["C_Anima"] || ""; 
+                nuovoCliente.persona = datoEstratto["C_Persona"] || ""; 
+                nuovoCliente.espressione = datoEstratto["C_Espressione"] || ""; 
+                nuovoCliente.numero_psichico = datoEstratto["C_NumeroPsichico"] || ""; 
+                nuovoCliente.cammino_vita = datoEstratto["C_CamminoVita"] || ""; 
+                nuovoCliente.ciclo_annuale = datoEstratto["C_CicloAnnualeCorrente"] || ""; 
+                nuovoCliente.vibrazione_giornaliera = datoEstratto["C_VibrazioneGiornaliera"] || ""; 
+                nuovoCliente.afflizioni = datoEstratto["C_AfflizioniPlanetarie"] || "";
             }
+            
             store.add(nuovoCliente);
             contatoreImportati++;
         }
-        transaction.oncomplete = function() { alert("Importazione completata! Recuperati " + contatoreImportati + " profili."); input.value = ""; mostraClienti(); };
+        transaction.oncomplete = function() { 
+            alert("Importazione completata! Recuperati " + contatoreImportati + " profili."); 
+            input.value = ""; 
+            mostraClienti(); 
+        };
     };
     reader.readAsText(file, "UTF-8");
 }
