@@ -523,7 +523,7 @@ function eseguiCalcoloCompleto() {
         }
     }
 
-    // 2. DATA DI NASCITA
+    // 2. DATA DI NASCITA (LOGICA LINEARE GUIDO ROSSETTI AGGIORNATA)
     if (dataNascita) {
         const partiData = dataNascita.split('/');
         if(partiData.length === 3) {
@@ -536,7 +536,14 @@ function eseguiCalcoloCompleto() {
             const sommaCifreAnno = aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0);
             const annoR = riduciNumero(sommaCifreAnno, true);
             
-            const cammino = riduciNumero(riduciMonocifraStretta(gNum) + riduciMonocifraStretta(mNum) + riduciMonocifraStretta(sommaCifreAnno), true);
+            // --- CALCOLO DEL DESTINO IN LINEA RETTA (METODO ROSSETTI) ---
+            const stringaSoloCifre = dataNascita.replace(/\D/g, '');
+            let sommaLineareData = 0;
+            for (let i = 0; i < stringaSoloCifre.length; i++) {
+                sommaLineareData += parseInt(stringaSoloCifre[i], 10);
+            }
+            // Assegna il valore ottenuto alla variabile del Cammino di Vita (Destino) proteggendo i Karmici
+            const cammino = riduciNumero(sommaLineareData, true);
             const camminoStretto = riduciMonocifraStretta(cammino);
             camminoPerQuintessenza = cammino;
 

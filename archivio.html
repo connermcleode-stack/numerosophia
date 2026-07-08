@@ -14,63 +14,81 @@
         .search-input { flex-grow: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; box-sizing: border-box; font-family: inherit; transition: border-color 0.2s; width: 100%; }
         .search-input:focus { border-color: #8e7355; outline: none; box-shadow: 0 0 5px rgba(142, 115, 85, 0.2); }
 
-        /* Pulsanti di Esportazione e Importazione */
-        .btn-action-container { display: flex; gap: 10px; }
+        /* Pulsanti d'azione superiori */
+        .btn-action-container { display: flex; gap: 10px; align-items: center; }
+        
+        /* Stile base per pulsanti normali ed esportazione/importazione */
+        .btn { display: inline-block; padding: 12px 18px; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; border: none; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background-color 0.2s; font-family: inherit; }
         .btn-export { background-color: #27ae60; color: white; }
         .btn-export:hover { background-color: #219653; }
         .btn-import { background-color: #2980b9; color: white; }
         .btn-import:hover { background-color: #1f6696; }
+        
+        /* Tasti Iconici Compatti Superiori (Selezione ed Elimina Massa) */
+        .btn-icon-top { width: 45px; height: 45px; padding: 0; border-radius: 6px; font-size: 18px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; transition: background-color 0.2s; }
         .btn-select-mode { background-color: #7f8c8d; color: white; }
         .btn-select-mode:hover { background-color: #6c7a7d; }
+        .btn-select-active { background-color: #e74c3c !important; } /* Diventa rosso quando è attivo l'annulla */
+        
+        /* Il cestino di massa parte nascosto e ha il suo stile rosso */
         .btn-delete-all { background-color: #d35400; color: white; display: none; }
-        .btn-delete-all:hover { background-color: #e67e22; }
+        .btn-delete-all:hover { background-color: #c0392b; }
 
-        /* Contenitore responsivo per far scorrere la tabella su mobile */
+        /* Contenitore responsivo modificato per altezza bloccata e scorrimento touch */
         .table-responsive { 
             width: 100%; 
             overflow-x: auto; 
-            -webkit-overflow-scrolling: touch; 
+            overflow-y: auto;
+            max-height: 70vh; /* Forza la barra orizzontale a rimanere fissa in fondo all'area visibile */
+            -webkit-overflow-scrolling: touch; /* Permette lo scorrimento trascinando il dito su smartphone */
             border-radius: 8px; 
             border: 1px solid #ddd; 
             margin-top: 10px;
             background: white;
         }
         
-        .table-responsive::-webkit-scrollbar {
-            height: 6px;
+        /* Personalizzazione visiva avanzata delle barre di scorrimento */
+        .table-responsive::-webkit-scrollbar { 
+            height: 10px; 
+            width: 10px;
         }
-        .table-responsive::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
-            border-radius: 3px;
+        .table-responsive::-webkit-scrollbar-thumb { 
+            background-color: #a0aec0; 
+            border-radius: 5px; 
+        }
+        .table-responsive::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
         }
 
         table { width: 100%; border-collapse: collapse; min-width: 650px; }
         th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #ddd; white-space: nowrap; }
-        
         th { background-color: #f4eee1; color: #8e7355; font-size: 14px; white-space: nowrap; }
         td { font-size: 15px; }
         
-        /* Colonna di selezione nascosta inizialmente */
+        /* Colonna di selezione */
         .col-select { display: none; width: 40px; text-align: center; }
         .checkbox-importante { transform: scale(1.3); cursor: pointer; }
 
-        .btn { display: inline-block; padding: 12px 18px; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; border: none; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background-color 0.2s; font-family: inherit; }
+        /* Bottone Apri Profilo Singolo */
         .btn-table { padding: 8px 12px; font-size: 14px; border-radius: 4px; }
-        .btn-open { background-color: #8e7355; color: white; margin-right: 5px; display: inline-flex; }
-        .btn-delete { background-color: #c0392b; color: white; display: inline-flex; }
+        .btn-open { background-color: #8e7355; color: white; display: inline-flex; width: 36px; height: 36px; padding: 0; align-items: center; justify-content: center; border-radius: 6px; font-size: 16px; text-decoration: none; }
+        .btn-open:hover { background-color: #755e43; }
+        
         .btn-home { background-color: #2c3e50; color: white; margin-bottom: 20px; text-decoration: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; font-size: 15px; align-self: flex-start; }
         .metodo-badge { padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
         .badge-pitagora { background-color: #d4efdf; color: #196f3d; }
         .badge-caldea { background-color: #ebdef0; color: #6c3483; }
 
-        /* Media Query specifica per Smartphone */
+        /* Media Query Smartphone */
         @media (max-width: 768px) {
             body { padding: 10px; }
             .container { padding: 15px; }
             .btn-home { align-self: center; width: 100%; text-align: center; box-sizing: border-box; }
             .actions-bar { flex-direction: column; gap: 12px; }
-            .btn-action-container { width: 100%; flex-direction: column; gap: 10px; }
-            .btn { width: 100%; padding: 14px; }
+            .btn-action-container { width: 100%; justify-content: space-between; gap: 8px; }
+            .btn { flex-grow: 1; padding: 14px; text-align: center; }
+            .btn-icon-top { width: 50px; height: 50px; flex-shrink: 0; }
             h1 { font-size: 20px; }
         }
     </style>
@@ -85,8 +103,11 @@
         <div class="actions-bar">
             <input type="text" id="inputRicerca" onkeyup="filtraClienti()" placeholder="🔍 Cerca per Cognome o Nome..." class="search-input">
             <div class="btn-action-container">
-                <button onclick="toggleModalitaSelezione()" id="btnSelezione" class="btn btn-select-mode">☑️ Seleziona Multipla</button>
-                <button onclick="eliminaSelezionati()" id="btnEliminaMassa" class="btn btn-delete-all">🔥 Elimina Selezionati</button>
+                <!-- Tasto attivazione selezione (diventato iconico) -->
+                <button onclick="toggleModalitaSelezione()" id="btnSelezione" class="btn-icon-top btn-select-mode" title="Attiva Selezione Multipla">☑️</button>
+                <!-- Tasto elimina (Cestino) che appare solo se la selezione è attiva -->
+                <button onclick="eliminaSelezionati()" id="btnEliminaMassa" class="btn-icon-top btn-delete-all" title="Elimina Profili Selezionati">🗑️</button>
+                
                 <button onclick="esportaInExcel()" class="btn btn-export">🟢 Esporta</button>
                 <input type="file" id="fileImport" accept=".csv" style="display: none;" onchange="importaDaExcel(this)">
                 <button onclick="document.getElementById('fileImport').click()" class="btn btn-import">🔵 Importa</button>
@@ -179,7 +200,6 @@ function mostraClienti() {
                         nomeVisualizzato = "-";
                     }
 
-                    // Determina se la colonna selezione deve essere visibile al rinfresco
                     const displayStile = modalitaSelezioneAttiva ? "table-cell" : "none";
 
                     riga.innerHTML = `
@@ -188,14 +208,12 @@ function mostraClienti() {
                         <td>${dataVal || "-"}</td>
                         <td><span class="metodo-badge badge-${metodoVal}">${metodoVal}</span></td>
                         <td>
-                            <a href="${urlMappa}" class="btn btn-table btn-open">👁️ Apri</a>
-                            <button onclick="eliminaCliente(${cliente.id})" class="btn btn-table btn-delete">🗑️ Elimina</button>
+                            <a href="${urlMappa}" class="btn btn-table btn-open" title="Apri Profilo">👁️</a>
                         </td>
                     `;
                     corpoTabella.appendChild(riga);
                 });
                 
-                // Mantieni lo stato corretto dell'intestazione selezione
                 document.getElementById('th-select').style.display = modalitaSelezioneAttiva ? "table-cell" : "none";
                 filtraClienti();
             } else {
@@ -213,14 +231,16 @@ function toggleModalitaSelezione() {
     const colRighe = document.querySelectorAll('.col-select');
 
     if (modalitaSelezioneAttiva) {
-        btn.innerText = "❌ Annulla Selezione";
-        btn.style.backgroundColor = "#e74c3c";
-        btnMassa.style.display = "flex";
+        btn.innerText = "❌";
+        btn.classList.add('btn-select-active');
+        btn.title = "Annulla Selezione";
+        btnMassa.style.display = "inline-flex";
         thSelect.style.display = "table-cell";
         colRighe.forEach(td => td.style.display = "table-cell");
     } else {
-        btn.innerText = "☑️ Seleziona Multipla";
-        btn.style.backgroundColor = "#7f8c8d";
+        btn.innerText = "☑️";
+        btn.classList.remove('btn-select-active');
+        btn.title = "Attiva Selezione Multipla";
         btnMassa.style.display = "none";
         thSelect.style.display = "none";
         colRighe.forEach(td => td.style.display = "none");
@@ -232,7 +252,6 @@ function toggleModalitaSelezione() {
 function selezionaTuttiCheckbox(master) {
     const checkboxes = document.querySelectorAll('.checkbox-cliente');
     checkboxes.forEach(cb => {
-        // Seleziona solo le righe attualmente visibili (non filtrate dalla ricerca)
         if (cb.closest('tr').style.display !== "none") {
             cb.checked = master.checked;
         }
@@ -240,17 +259,17 @@ function selezionaTuttiCheckbox(master) {
 }
 
 function eliminaSelezionati() {
-    const selezionati = document.querySelectorAll('.checkbox-cliente:checked');
-    if (selezionati.length === 0) {
+    const Grid = document.querySelectorAll('.checkbox-cliente:checked');
+    if (Grid.length === 0) {
         alert("Nessun profilo selezionato da eliminare.");
         return;
     }
 
-    if (confirm(`Sei sicuro di voler eliminare definitivamente ${selezionati.length} profili in un colpo solo?`)) {
+    if (confirm(`Sei sicuro di voler eliminare definitivamente ${Grid.length} profili in un colpo solo?`)) {
         const transaction = db.transaction(['clienti'], 'readwrite');
         const store = transaction.objectStore('clienti');
 
-        selezionati.forEach(cb => {
+        Grid.forEach(cb => {
             const id = parseInt(cb.value);
             store.delete(id);
         });
@@ -258,9 +277,11 @@ function eliminaSelezionati() {
         transaction.oncomplete = function() {
             alert("Eliminazione multipla completata con successo.");
             modalitaSelezioneAttiva = false;
-            // Ripristina lo stato grafico dei pulsanti
-            document.getElementById('btnSelezione').innerText = "☑️ Seleziona Multipla";
-            document.getElementById('btnSelezione').style.backgroundColor = "#7f8c8d";
+            
+            // Ripristina lo stato iniziale della barra dei bottoni
+            const btn = document.getElementById('btnSelezione');
+            btn.innerText = "☑️";
+            btn.classList.remove('btn-select-active');
             document.getElementById('btnEliminaMassa').style.display = "none";
             document.getElementById('selectAll').checked = false;
             mostraClienti();
@@ -280,14 +301,13 @@ function filtraClienti() {
     const righe = tabella.getElementsByTagName('tr');
 
     for (let i = 0; i < righe.length; i++) {
-        const colonnaNomeCognome = righe[i].getElementsByTagName('td')[1]; // Spostato all'indice 1 per via della colonna checkbox
+        const colonnaNomeCognome = righe[i].getElementsByTagName('td')[1]; 
         if (colonnaNomeCognome) {
             const testoContenuto = colonnaNomeCognome.textContent || colonnaNomeCognome.innerText;
             if (testoContenuto.toUpperCase().indexOf(filtro) > -1) {
                 righe[i].style.display = ""; 
             } else {
                 righe[i].style.display = "none"; 
-                // Se la riga viene nascosta dal filtro, deseleziona l'eventuale checkbox interna
                 const cb = righe[i].querySelector('.checkbox-cliente');
                 if (cb) cb.checked = false;
             }
@@ -305,48 +325,32 @@ const HEADERS_CSV = [
 
 function esportaInExcel() {
     if (!db) return;
-
     const transaction = db.transaction(['clienti'], 'readonly');
     const store = transaction.objectStore('clienti');
     const elencoClienti = [];
-
     store.openCursor().onsuccess = function(event) {
         const cursor = event.target.result;
         if (cursor) {
             elencoClienti.push(cursor.value);
             cursor.continue();
         } else {
-            if (elencoClienti.length === 0) {
-                alert("Non ci sono profili da esportare.");
-                return;
-            }
-
+            if (elencoClienti.length === 0) { alert("Non ci sono profili da esportare."); return; }
             let csvContent = HEADERS_CSV.join(";") + "\n";
-
             const pulisciDato = (valore) => {
                 if (valore === undefined || valore === null) return "";
-                if (typeof valore === 'object') {
-                    return JSON.stringify(valore).replace(/;/g, ",").replace(/"/g, "'");
-                }
-                
+                if (typeof valore === 'object') return JSON.stringify(valore).replace(/;/g, ",").replace(/"/g, "'");
                 let stringa = String(valore).replace(/;/g, ",").replace(/\r?\n|\r/g, " ").trim();
-                if (stringa === "Formativo: | Produttivo: | Conclusivo:") return "";
-                if (stringa === "1°: | 2°: | 3°: | 4°:") return "";
-                if (stringa === "Giovinezza: | Maturità: | Principale:" || stringa === "Giovinezza:  | Maturità:  | Principale: ") return "";
-                
+                if (stringa === "Formativo: | Produttivo: | Conclusivo:" || stringa === "1°: | 2°: | 3°: | 4°:" || stringa === "Giovinezza: | Maturità: | Principale:" || stringa === "Giovinezza:  | Maturità:  | Principale ") return "";
                 return stringa;
             };
-
             elencoClienti.forEach(cliente => {
                 let rigaDati = [];
                 let isPitagora = (cliente.metodo || "").toLowerCase() === "pitagora" || (cliente.metodo || "") === "";
-
                 rigaDati.push(pulisciDato(cliente.cognome));
                 rigaDati.push(pulisciDato(cliente.nome));
                 rigaDati.push(pulisciDato(cliente.data_nascita));
                 rigaDati.push(pulisciDato(cliente.metodo ? cliente.metodo.toLowerCase() : "pitagora"));
                 rigaDati.push(cliente.data_salvataggio ? cliente.data_salvataggio.substring(0, 10) : new Date().toISOString().substring(0,10));
-
                 rigaDati.push(isPitagora ? pulisciDato(cliente.anima) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.persona) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.io) : "");
@@ -358,7 +362,6 @@ function esportaInExcel() {
                 rigaDati.push(isPitagora ? pulisciDato(cliente.cicli_realizzazione || cliente.cicliRealizzazione) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.ombre) : "");
                 rigaDati.push(isPitagora ? pulisciDato(cliente.quintessenza) : "");
-
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.anima) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.persona) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.espressione) : "");
@@ -367,10 +370,8 @@ function esportaInExcel() {
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.ciclo_annuale || cliente.cicloAnnuale) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.vibrazione_giornaliera || cliente.vibrazioneGiornaliera) : "");
                 rigaDati.push(!isPitagora ? pulisciDato(cliente.afflizioni || cliente.afflizioniPlanetarie) : "");
-
                 csvContent += rigaDati.join(";") + "\n";
             });
-
             const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: "text/csv;charset=utf-8;" });
             const link = document.createElement("a");
             const url = URL.createObjectURL(blob);
@@ -388,47 +389,26 @@ function importaDaExcel(input) {
     if (!db) return;
     const file = input.files[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = function(e) {
         const text = e.target.result;
         const linee = text.replace(/\r\n|\r/g, "\n").split("\n");
-        
-        if (linee.length <= 1 || !linee[0].trim()) {
-            alert("Il file caricato sembra essere vuoto o non valido.");
-            return;
-        }
-
+        if (linee.length <= 1 || !linee[0].trim()) { alert("Il file caricato sembra essere vuoto o non valido."); return; }
         const primaLinea = linee[0].replace(/^\uFEFF/, "").trim();
         const intestazioniRilevate = primaLinea.split(";").map(h => h.trim());
-        
-        if (!intestazioniRilevate.includes("Cognome") && !intestazioniRilevate.includes("Nome")) {
-            alert("Formato file non riconosciuto. Assicurati che sia il CSV corretto di Numerosophia.");
-            return;
-        }
-
+        if (!intestazioniRilevate.includes("Cognome") && !intestazioniRilevate.includes("Nome")) { alert("Formato file non riconosciuto."); return; }
         const transaction = db.transaction(['clienti'], 'readwrite');
         const store = transaction.objectStore('clienti');
         let contatoreImportati = 0;
-
         for (let i = 1; i < linee.length; i++) {
             const lineaCorrente = linee[i].trim();
             if (!lineaCorrente) continue;
-
             const colonne = lineaCorrente.split(";");
-            
             let datoEstratto = {};
-            intestazioniRilevate.forEach((intestazione, index) => {
-                datoEstratto[intestazione] = colonne[index] ? colonne[index].trim() : "";
-            });
-
-            if (!datoEstratto["Cognome"] && !datoEstratto["Nome"] && !datoEstratto["Data di Nascita"]) {
-                continue;
-            }
-
+            intestazioniRilevate.forEach((intestazione, index) => { datoEstratto[intestazione] = colonne[index] ? colonne[index].trim() : ""; });
+            if (!datoEstratto["Cognome"] && !datoEstratto["Nome"] && !datoEstratto["Data di Nascita"]) continue;
             let metodoSelezionato = (datoEstratto["Metodo"] || "pitagora").toLowerCase();
             let isPitagora = metodoSelezionato === "pitagora";
-
             let nuovoCliente = {
                 cognome: datoEstratto["Cognome"] || "",
                 nome: datoEstratto["Nome"] || "",
@@ -436,64 +416,17 @@ function importaDaExcel(input) {
                 metodo: metodoSelezionato,
                 data_salvataggio: datoEstratto["Data Salvataggio"] || new Date().toISOString().substring(0, 10)
             };
-
             if (isPitagora) {
-                nuovoCliente.anima = datoEstratto["P_Anima"] || "";
-                nuovoCliente.persona = datoEstratto["P_Persona"] || "";
-                nuovoCliente.io = datoEstratto["P_Io"] || "";
-                nuovoCliente.giorno_nascita = datoEstratto["P_GiornoNascita"] || "";
-                nuovoCliente.destino = datoEstratto["P_Destino"] || "";
-                nuovoCliente.anno_personale = datoEstratto["P_AnnoPersonale"] || "";
-                nuovoCliente.giorno_personale = datoEstratto["P_GiornoPersonale"] || "";
-                nuovoCliente.grandi_cicli = datoEstratto["P_GrandiCicliEvolutivi"] || "";
-                nuovoCliente.cicli_realizzazione = datoEstratto["P_CicliRealizzazione"] || "";
-                nuovoCliente.ombre = datoEstratto["P_Ombre"] || "";
-                nuovoCliente.quintessenza = datoEstratto["P_Quintessenza"] || "";
+                nuovoCliente.anima = datoEstratto["P_Anima"] || ""; nuovoCliente.persona = datoEstratto["P_Persona"] || ""; nuovoCliente.io = datoEstratto["P_Io"] || ""; nuovoCliente.giorno_nascita = datoEstratto["P_GiornoNascita"] || ""; nuovoCliente.destino = datoEstratto["P_Destino"] || ""; nuovoCliente.anno_personale = datoEstratto["P_AnnoPersonale"] || ""; nuovoCliente.giorno_personale = datoEstratto["P_GiornoPersonale"] || ""; nuovoCliente.grandi_cicli = datoEstratto["P_GrandiCicliEvolutivi"] || ""; nuovoCliente.cicli_realizzazione = datoEstratto["P_CicliRealizzazione"] || ""; nuovoCliente.ombre = datoEstratto["P_Ombre"] || ""; nuovoCliente.quintessenza = datoEstratto["P_Quintessenza"] || "";
             } else {
-                nuovoCliente.anima = datoEstratto["C_Anima"] || "";
-                nuovoCliente.persona = datoEstratto["C_Persona"] || "";
-                nuovoCliente.espressione = datoEstratto["C_Espressione"] || "";
-                nuovoCliente.numero_psichico = datoEstratto["C_NumeroPsichico"] || "";
-                nuovoCliente.cammino_vita = datoEstratto["C_CamminoVita"] || "";
-                nuovoCliente.ciclo_annuale = datoEstratto["C_CicloAnnualeCorrente"] || "";
-                nuovoCliente.vibrazione_giornaliera = datoEstratto["C_VibrazioneGiornaliera"] || "";
-                nuovoCliente.afflizioni = datoEstratto["C_AfflizioniPlanetarie"] || "";
+                nuovoCliente.anima = datoEstratto["C_Anima"] || ""; nuovoCliente.persona = datoEstratto["C_Persona"] || ""; nuovoCliente.espressione = datoEstratto["C_Espressione"] || ""; nuovoCliente.numero_psichico = datoEstratto["C_NumeroPsichico"] || ""; nuovoCliente.cammino_vita = datoEstratto["C_CamminoVita"] || ""; nuovoCliente.ciclo_annuale = datoEstratto["C_CicloAnnualeCorrente"] || ""; nuovoCliente.vibrazione_giornaliera = datoEstratto["C_VibrazioneGiornaliera"] || ""; nuovoCliente.afflizioni = datoEstratto["C_AfflizioniPlanetarie"] || "";
             }
-
             store.add(nuovoCliente);
             contatoreImportati++;
         }
-
-        transaction.oncomplete = function() {
-            alert("Importazione completata! Recuperati " + contatoreImportati + " profili.");
-            input.value = ""; 
-            mostraClienti(); 
-        };
-
-        transaction.onerror = function(event) {
-            console.error("Errore durante l'importazione:", event.target.error);
-            alert("Errore nel salvataggio dei dati sul telefono.");
-        };
+        transaction.oncomplete = function() { alert("Importazione completata! Recuperati " + contatoreImportati + " profili."); input.value = ""; mostraClienti(); };
     };
-
     reader.readAsText(file, "UTF-8");
-}
-
-function eliminaCliente(id) {
-    if (confirm("Sei sicuro di voler eliminare questo profilo dall'archivio?")) {
-        const transaction = db.transaction(['clienti'], 'readwrite');
-        const store = transaction.objectStore('clienti');
-        const requestDelete = store.delete(id);
-
-        requestDelete.onsuccess = function() {
-            alert("Profilo eliminato con successo.");
-            mostraClienti(); 
-        };
-        
-        requestDelete.onerror = function(event) {
-            console.error("Errore durante l'eliminazione:", event.target.error);
-        };
-    }
 }
 </script>
 </body>

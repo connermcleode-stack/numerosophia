@@ -63,6 +63,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: block;
         }
 
         .btn-option:hover {
@@ -77,6 +78,32 @@
             font-size: 0.9rem;
             opacity: 0.5;
         }
+/* ===================================================
+   OTTIMIZZAZIONE RESPONSIVE PER SMARTPHONE (INDEX)
+   =================================================== */
+@media (max-width: 480px) {
+    /* Riduce il titolo principale per non farlo tagliare */
+    h1, .main-title, .titolo-principale { 
+        font-size: 28px !important; 
+        letter-spacing: 2px !important;
+        padding: 0 10px !important;
+        word-wrap: break-word;
+    }
+
+    /* Regola il sottotitolo */
+    h2, .subtitle, .sottotitolo {
+        font-size: 14px !important;
+        padding: 0 15px !important;
+    }
+
+    /* Rende i pulsanti del menu più proporzionati */
+    .menu-btn, button, a.button {
+        width: 85% !important; /* Evita che tocchino i bordi dello schermo */
+        font-size: 16px !important;
+        padding: 12px 10px !important;
+        margin: 8px auto !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -89,6 +116,9 @@
             <a href="pitagora.html" class="btn-option">Numerologia Pitagorica</a>
             
             <a href="caldea.html" class="btn-option">Numerologia Caldea</a>
+            
+            <!-- Il tasto Affinità che rimanda alla pagina dedicata -->
+            <a href="compatibilita.html" class="btn-option"> Affinità e Compatibilità</a>
             
             <a href="archivio.html" class="btn-option" style="background-color: #2c3e50; color: white; margin-top: 15px;">📁 Accedi all'Archivio</a>
         </div>
