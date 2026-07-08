@@ -65,7 +65,15 @@
 
         table { width: 100%; border-collapse: collapse; min-width: 650px; }
         th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #ddd; white-space: nowrap; }
-        th { background-color: #f4eee1; color: #8e7355; font-size: 14px; white-space: nowrap; }
+        th { 
+        background-color: #f4eee1; 
+        color: #8e7355; 
+        font-size: 14px; 
+        white-space: nowrap; 
+        position: sticky;
+        top: 0;
+        z-index: 10;
+}
         td { font-size: 15px; }
         
         /* Colonna di selezione */
