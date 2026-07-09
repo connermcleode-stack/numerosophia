@@ -33,25 +33,26 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center; /* Centra verticalmente l'intero blocco per schermi piccoli */
+            align-items: center; 
             padding: 12px 16px;
-            overflow: hidden; /* Blocca lo scroll indesiderato */
+            overflow: hidden; 
             position: relative;
         }
 
-        /* Sfondo geometrico leggero */
+        /* Sfondo mistico con polvere di stelle e nebulosa dorata */
         body::before {
             content: '';
             position: absolute;
-            top: -50px;
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100vw;
-            height: 450px;
+            width: 140vw;
+            height: 600px;
             background: 
-                radial-gradient(circle, transparent 40%, rgba(214, 175, 55, 0.02) 41%, transparent 60%),
-                radial-gradient(circle, transparent 20%, rgba(214, 175, 55, 0.01) 21%, transparent 40%);
-            opacity: 0.6;
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.12) 0%, rgba(170, 124, 17, 0.04) 35%, transparent 70%),
+                radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px) 0 0 / 40px 40px,
+                radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
+            opacity: 0.75;
             pointer-events: none;
             z-index: 1;
         }
@@ -64,19 +65,30 @@
             z-index: 2;
         }
 
-        /* Logo e testata ottimizzati negli spazi verticali */
+        /* Logo e testata ottimizzati */
         .header-logo {
             margin-bottom: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+        }
+
+        /* Contenitore per isolare l'effetto di sfondo della geometria sacra */
+        .sacred-geometry-wrapper {
+            position: relative;
+            width: clamp(140px, 28vh, 180px);
+            height: clamp(140px, 28vh, 180px);
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .sacred-triangle {
-            width: clamp(80px, 16vh, 100px);
-            height: clamp(80px, 16vh, 100px);
-            margin-bottom: 6px;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+            width: 100%;
+            height: 100%;
+            overflow: visible;
         }
 
         h1 {
@@ -127,13 +139,13 @@
             margin: 0 auto;
         }
 
-        /* Intestazione di sezione ridotta negli spazi verticali */
+        /* Intestazione di sezione */
         .section-title {
             font-family: 'Cinzel', serif;
             font-size: 0.72rem;
             letter-spacing: 2px;
             color: #f5f1e9;
-            margin: 16px 0 10px 0;
+            margin: 14px 0 8px 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -174,7 +186,7 @@
             flex-shrink: 0;
         }
 
-        /* Pulsanti (quadranti) resi più compatti */
+        /* Pulsanti (quadranti) compatti */
         .menu-button {
             display: flex;
             align-items: center;
@@ -182,8 +194,8 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 10px;
-            padding: clamp(10px, 2.8vw, 12px) clamp(12px, 3.5vw, 16px);
-            margin-bottom: 8px;
+            padding: clamp(9px, 2.5vw, 11px) clamp(12px, 3.5vw, 16px);
+            margin-bottom: 7px;
             cursor: pointer;
             text-decoration: none;
             color: #ffffff;
@@ -201,8 +213,8 @@
         }
 
         .icon-container {
-            width: clamp(38px, 10vw, 42px);
-            height: clamp(38px, 10vw, 42px);
+            width: clamp(36px, 9vw, 40px);
+            height: clamp(36px, 9vw, 40px);
             border-radius: 50%;
             border: 1px solid rgba(212, 175, 55, 0.35);
             display: flex;
@@ -268,11 +280,11 @@
 
         /* Footer compatto */
         footer {
-            margin-top: 14px;
+            margin-top: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .footer-dots {
@@ -309,17 +321,60 @@
 
     <div class="container">
         
-        <!-- Intestazione con logo geometrico -->
+        <!-- Intestazione con logo e Geometria Sacra complessa sul retro -->
         <div class="header-logo">
-            <svg class="sacred-triangle" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="42" stroke="#d4af37" stroke-width="1" fill="none"/>
-                <circle cx="50" cy="50" r="38" stroke="#d4af37" stroke-width="0.5" fill="none" stroke-dasharray="1 2"/>
-                <polygon points="50,26 28,64 72,64" stroke="#d4af37" stroke-width="1.5" fill="none"/>
-                <text x="50" y="21" fill="#f3e5ab" font-family="Cinzel" font-size="8.5" text-anchor="middle">7</text>
-                <text x="21" y="68" fill="#f3e5ab" font-family="Cinzel" font-size="8.5" text-anchor="middle">4</text>
-                <text x="79" y="68" fill="#f3e5ab" font-family="Cinzel" font-size="8.5" text-anchor="middle">3</text>
-                <text x="50" y="52" fill="#f3e5ab" font-family="Cinzel" font-size="12" text-anchor="middle" font-weight="bold">5</text>
-            </svg>
+            <div class="sacred-geometry-wrapper">
+                <svg class="sacred-triangle" viewBox="0 0 100 100">
+                    <defs>
+                        <!-- Gradiente per un alone morbido dorato -->
+                        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#aa7c11" stop-opacity="0.5" />
+                            <stop offset="60%" stop-color="#0b0a08" stop-opacity="0.8" />
+                            <stop offset="100%" stop-color="#0b0a08" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Alone centrale di fondo per dare profondità -->
+                    <circle cx="50" cy="50" r="48" fill="url(#glow)" />
+
+                    <!-- GEOMETRIA SACRA DI SFONDO (Fiore della Vita e Nodi di Orbite - Sottile ed Esoterica) -->
+                    <g stroke="#aa7c11" stroke-width="0.25" fill="none" opacity="0.35">
+                        <!-- Cerchi del Fiore della vita intersecati esternamente -->
+                        <circle cx="50" cy="22" r="28" />
+                        <circle cx="50" cy="78" r="28" />
+                        <circle cx="22" cy="50" r="28" />
+                        <circle cx="78" cy="50" r="28" />
+                        
+                        <!-- Orbite diagonali e linee di costellazione stellari -->
+                        <circle cx="31" cy="31" r="22" />
+                        <circle cx="69" cy="31" r="22" />
+                        <circle cx="31" cy="69" r="22" />
+                        <circle cx="69" cy="69" r="22" />
+                        
+                        <!-- Raggiera mistica interna -->
+                        <line x1="50" y1="2" x2="50" y2="98" stroke-dasharray="1 3" />
+                        <line x1="2" y1="50" x2="98" y2="50" stroke-dasharray="1 3" />
+                        <line x1="16" y1="16" x2="84" y2="84" stroke-width="0.15" />
+                        <line x1="16" y1="84" x2="84" y2="16" stroke-width="0.15" />
+
+                        <!-- Stella a 8 punte finissima sullo sfondo -->
+                        <polygon points="50,15 60,40 85,50 60,60 50,85 40,60 15,50 40,40" stroke-width="0.2" />
+                    </g>
+                    
+                    <!-- PRIMO PIANO: Il cerchio doppio e il triangolo originale (Invariati e nitidi) -->
+                    <circle cx="50" cy="50" r="26" fill="#0b0a08" stroke="#d4af37" stroke-width="1.2" />
+                    <circle cx="50" cy="50" r="23.5" stroke="#d4af37" stroke-width="0.5" fill="none" stroke-dasharray="0.8 1.5"/>
+                    
+                    <!-- Triangolo proporzionato internamente -->
+                    <polygon points="50,35 36,59 64,59" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+                    
+                    <!-- Numeri perfettamente posizionati -->
+                    <text x="50" y="31.5" fill="#f3e5ab" font-family="Cinzel" font-size="6" font-weight="bold" text-anchor="middle">7</text>
+                    <text x="31" y="62" fill="#f3e5ab" font-family="Cinzel" font-size="6" font-weight="bold" text-anchor="middle">4</text>
+                    <text x="69" y="62" fill="#f3e5ab" font-family="Cinzel" font-size="6" font-weight="bold" text-anchor="middle">3</text>
+                    <text x="50" y="52" fill="#f3e5ab" font-family="Cinzel" font-size="8.5" text-anchor="middle" font-weight="bold">5</text>
+                </svg>
+            </div>
 
             <h1>NUMEROSOPHIA</h1>
             
