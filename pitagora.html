@@ -445,9 +445,9 @@ function compilaScheda(numero, compatta = false) {
         let nomeKarmico = "";
         switch(numeroPulito) {
             case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
-            case 14: nomeKarmico = "L'Equilibrista / Temperanza"; break;
-            case 16: nomeKarmico = "La Torre / Crollo dell'Ego"; break;
-            case 19: nomeKarmico = "Il Sole / Rinascita Solitaria"; break;
+            case 14: nomeKarmico = "L'Amante / Temperanza"; break;
+            case 16: nomeKarmico = "Il Perfezionista / Crollo dell'Ego"; break;
+            case 19: nomeKarmico = "Il Condottiero / Rinascita Solitaria"; break;
         }
         nomeVisualizzato = `${datiArchetipoBase.nome} <span style="color:#d35400; font-size:13px;">(da Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
         luceVisualizzata = `[Sfida ${numeroPulito}]: ${databaseKarmici[numeroPulito]} <br><strong style="color: #196f3d;">In Luce (Talento del ${base}):</strong> ${datiArchetipoBase.luce}`;
@@ -886,9 +886,9 @@ function apriApprofondimento(elementoCard) {
             let nomeKarmico = "";
             switch(numeroPulito) {
                 case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
-                case 14: nomeKarmico = "L'Equilibrista / Temperanza"; break;
-                case 16: nomeKarmico = "La Torre / Crollo dell'Ego"; break;
-                case 19: nomeKarmico = "Il Sole / Rinascita Solitaria"; break;
+                case 14: nomeKarmico = "L'Amante / Temperanza"; break;
+                case 16: nomeKarmico = "Il Perfezionista / Crollo dell'Ego"; break;
+                case 19: nomeKarmico = "Il Condottiero / Rinascita Solitaria"; break;
             }
             sottotitolo = `${datiArchetipo.nome} <span style="color:#d35400; font-size:14px; block-size:auto;">(Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
             
