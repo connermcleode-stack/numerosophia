@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numerosophia</title>
-    <!-- Importazione dei font eleganti da Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700&family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght=300;400;500&display=swap" rel="stylesheet">
@@ -39,7 +38,6 @@
             position: relative;
         }
 
-        /* Sfondo mistico con polvere di stelle e nebulosa dorata */
         body::before {
             content: '';
             position: absolute;
@@ -49,9 +47,9 @@
             width: 140vw;
             height: 600px;
             background: 
-                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.12) 0%, rgba(170, 124, 17, 0.04) 35%, transparent 70%),
-                radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px) 0 0 / 40px 40px,
-                radial-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.1) 0%, rgba(170, 124, 17, 0.03) 35%, transparent 70%),
+                radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px) 0 0 / 40px 40px,
+                radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
             opacity: 0.75;
             pointer-events: none;
             z-index: 1;
@@ -65,7 +63,6 @@
             z-index: 2;
         }
 
-        /* Logo e testata ottimizzati */
         .header-logo {
             margin-bottom: 12px;
             display: flex;
@@ -74,7 +71,6 @@
             position: relative;
         }
 
-        /* Contenitore per isolare l'effetto di sfondo della geometria sacra */
         .sacred-geometry-wrapper {
             position: relative;
             width: clamp(140px, 28vh, 180px);
@@ -139,7 +135,6 @@
             margin: 0 auto;
         }
 
-        /* Intestazione di sezione */
         .section-title {
             font-family: 'Cinzel', serif;
             font-size: 0.72rem;
@@ -186,7 +181,6 @@
             flex-shrink: 0;
         }
 
-        /* Pulsanti (quadranti) compatti */
         .menu-button {
             display: flex;
             align-items: center;
@@ -278,7 +272,6 @@
             transform: translateX(2px);
         }
 
-        /* Footer compatto */
         footer {
             margin-top: 10px;
             display: flex;
@@ -321,24 +314,12 @@
 
     <div class="container">
         
-        <!-- Intestazione con logo e Geometria Sacra di Sfondo -->
         <div class="header-logo">
             <div class="sacred-geometry-wrapper">
                 <svg class="sacred-triangle" viewBox="0 0 100 100">
-                    <defs>
-                        <!-- Gradiente per un alone morbido dorato di sfondo generale -->
-                        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#aa7c11" stop-opacity="0.5" />
-                            <stop offset="60%" stop-color="#0b0a08" stop-opacity="0.8" />
-                            <stop offset="100%" stop-color="#0b0a08" stop-opacity="0" />
-                        </radialGradient>
-                    </defs>
-
-                    <!-- Alone centrale di fondo per dare profondità -->
-                    <circle cx="50" cy="50" r="48" fill="url(#glow)" />
-
-                    <!-- GEOMETRIA SACRA DI SFONDO (Sottile ed Esoterica) -->
-                    <g stroke="#aa7c11" stroke-width="0.25" fill="none" opacity="0.35">
+                    
+                    <!-- GEOMETRIA SACRA DI SFONDO (Tratti puliti e opachi) -->
+                    <g stroke="#aa7c11" stroke-width="0.25" fill="none" opacity="0.3">
                         <circle cx="50" cy="22" r="28" />
                         <circle cx="50" cy="78" r="28" />
                         <circle cx="22" cy="50" r="28" />
@@ -357,18 +338,18 @@
                         <polygon points="50,15 60,40 85,50 60,60 50,85 40,60 15,50 40,40" stroke-width="0.2" />
                     </g>
                     
-                    <!-- PRIMO PIANO: Il cerchio doppio con riempimento scuro solido nativo privo di bug -->
-                    <circle cx="50" cy="50" r="26" fill="#0b0a08" stroke="#d4af37" stroke-width="1.2" />
+                    <!-- CERCHIO CENTRALE (Risolto l'errore del bianco su Mobile usando riempimento solido #0b0a08) -->
+                    <circle cx="50" cy="50" r="26" fill="#0b0a08" stroke="#d4af37" stroke-width="1.3" />
                     <circle cx="50" cy="50" r="23.5" stroke="#d4af37" stroke-width="0.5" fill="none" stroke-dasharray="0.8 1.5"/>
 
-                    <!-- Triangolo proporzionato internamente -->
-                    <polygon points="50,35 36,59 64,59" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+                    <!-- Triangolo Dorato -->
+                    <polygon points="50,34 35,60 65,60" stroke="#d4af37" stroke-width="1.3" fill="none"/>
                     
-                    <!-- Numeri perfettamente visibili con ombra netta protettiva -->
-                    <text x="50" y="32.5" fill="#f3e5ab" font-family="Cinzel" font-size="6" font-weight="bold" text-anchor="middle" style="text-shadow: 0px 1px 2px #0b0a08, 0px 0px 2px #0b0a08;">7</text>
-                    <text x="31" y="62" fill="#f3e5ab" font-family="Cinzel" font-size="6" font-weight="bold" text-anchor="middle">4</text>
-                    <text x="69" y="62" fill="#f3e5ab" font-family="Cinzel" font-size="6" font-weight="bold" text-anchor="middle">3</text>
-                    <text x="50" y="52" fill="#f3e5ab" font-family="Cinzel" font-size="8.5" text-anchor="middle" font-weight="bold">5</text>
+                    <!-- Disposizione Numeri (7, 5, 4, 3) -->
+                    <text x="50" y="29.5" fill="#f3e5ab" font-family="'Cinzel', serif" font-size="6.5" font-weight="bold" text-anchor="middle">7</text>
+                    <text x="30" y="63" fill="#f3e5ab" font-family="'Cinzel', serif" font-size="6.5" font-weight="bold" text-anchor="middle">4</text>
+                    <text x="70" y="63" fill="#f3e5ab" font-family="'Cinzel', serif" font-size="6.5" font-weight="bold" text-anchor="middle">3</text>
+                    <text x="50" y="52" fill="#f3e5ab" font-family="'Cinzel', serif" font-size="9" font-weight="bold" text-anchor="middle">5</text>
                 </svg>
             </div>
 
@@ -381,12 +362,10 @@
             <p class="subtitle">Ogni numero racconta una parte di te.</p>
         </div>
 
-        <!-- Sezione Metodi -->
         <div class="section-title">
             <span>Scegli il metodo</span>
         </div>
 
-        <!-- Numerologia Pitagorica -->
         <a href="pitagora.html" class="menu-button">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24">
@@ -409,7 +388,6 @@
             <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
 
-        <!-- Numerologia Caldea -->
         <a href="caldea.html" class="menu-button">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24">
@@ -424,7 +402,6 @@
             <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
 
-        <!-- Affinità e Compatibilità -->
         <a href="compatibilita.html" class="menu-button">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
@@ -439,12 +416,10 @@
             <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
 
-        <!-- Sezione Consulti -->
         <div class="section-title">
             <span>I tuoi consulti</span>
         </div>
 
-        <!-- Archivio -->
         <a href="archivio.html" class="menu-button">
             <div class="icon-container">
                 <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary);">
@@ -458,7 +433,6 @@
             <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
 
-        <!-- Footer dell'applicazione -->
         <footer>
             <div class="gold-divider" style="margin: 0;">
                 <svg viewBox="0 0 10 10"><polygon points="5,0 10,5 5,10 0,5"/></svg>
