@@ -240,7 +240,7 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
-        }
+            }
 
         .button-category {
             font-size: 0.6rem;
@@ -336,8 +336,8 @@
                         <!-- Gradiente ad opacità nativa super compatibile per la luce in alto -->
                         <radialGradient id="top-flare" cx="50%" cy="20%" r="35%">
                             <stop offset="0%" stop-color="rgba(255, 245, 204, 0.85)" />
-                            <stop offset="30%" stop-color="rgba(214, 175, 87, 0.5)" />
-                            <stop offset="70%" stop-color="rgba(170, 124, 17, 0.15)" />
+                            <stop offset="30%" stop-color="rgba(214, 175, 87, 0.45)" />
+                            <stop offset="70%" stop-color="rgba(170, 124, 17, 0.1)" />
                             <stop offset="100%" stop-color="rgba(11, 10, 8, 0)" />
                         </radialGradient>
                     </defs>
@@ -365,13 +365,13 @@
                         <polygon points="50,15 60,40 85,50 60,60 50,85 40,60 15,50 40,40" stroke-width="0.2" />
                     </g>
                     
-                    <!-- PRIMO PIANO: Il cerchio doppio e lo sfondo scuro solido antierrore mobile -->
-                    <circle cx="50" cy="50" r="26" fill="#0b0a08" stroke="#d4af37" stroke-width="1.2" />
+                    <!-- PRIMO PIANO: Il cerchio doppio e lo sfondo scuro solido con stile inline forzato -->
+                    <circle cx="50" cy="50" r="26" style="fill: #0b0a08 !important;" stroke="#d4af37" stroke-width="1.2" />
                     <circle cx="50" cy="50" r="23.5" stroke="#d4af37" stroke-width="0.5" fill="none" stroke-dasharray="0.8 1.5"/>
                     
-                    <!-- EFFETTO LUCE IN ALTO COMPATIBILE (Senza mix-blend-mode problematici) -->
+                    <!-- EFFETTO LUCE IN ALTO COMPATIBILE (Poggiato sopra lo sfondo solido) -->
                     <ellipse cx="50" cy="24" rx="14" ry="4" fill="url(#top-flare)" />
-                    <circle cx="50" cy="24" r="1" fill="#ffffff" opacity="0.6" />
+                    <circle cx="50" cy="24" r="0.8" fill="#ffffff" opacity="0.6" />
 
                     <!-- Triangolo proporzionato internamente -->
                     <polygon points="50,35 36,59 64,59" stroke="#d4af37" stroke-width="1.2" fill="none"/>
