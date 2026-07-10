@@ -2,104 +2,265 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numerosophia - Archivio Clienti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Numerosophia - Archivio Profili</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8e7355">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <style>
-        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #faf8f5; color: #2c3e50; padding: 20px; display: flex; flex-direction: column; align-items: center; }
-        .container { max-width: 850px; width: 100%; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
-        h1 { text-align: center; color: #8e7355; margin-bottom: 25px; font-size: 24px; }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
         
-        /* Layout fluido per barra di ricerca e tasti */
-        .actions-bar { display: flex; gap: 10px; margin-bottom: 20px; width: 100%; align-items: center; }
-        .search-input { flex-grow: 1; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; box-sizing: border-box; font-family: inherit; transition: border-color 0.2s; width: 100%; }
-        .search-input:focus { border-color: #8e7355; outline: none; box-shadow: 0 0 5px rgba(142, 115, 85, 0.2); }
+        * { box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: #0b0a08; 
+            color: #e0dbd1; 
+            margin: 0; 
+            padding: 15px; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px) 0 0 / 40px 40px,
+                radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container { 
+            background: rgba(25, 23, 20, 0.96); 
+            padding: 25px 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            max-width: 850px; 
+            width: 100%; 
+            border: 1px solid rgba(142, 115, 85, 0.3); 
+        }
+
+        h1 { 
+            text-align: center; 
+            color: #d4af37; 
+            font-family: 'Cinzel', serif; 
+            font-size: 22px; 
+            margin-top: 5px;
+            margin-bottom: 20px; 
+            font-weight: 600; 
+            letter-spacing: 1px; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+
+        .btn-home { 
+            background: #2a2724; 
+            color: #c4beb3; 
+            border: 1px solid rgba(142, 115, 85, 0.2); 
+            margin-bottom: 15px; 
+            text-decoration: none; 
+            padding: 8px 14px; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            font-size: 13px; 
+            align-self: flex-start;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn-home:hover { 
+            background: #36322e; 
+            color: #f5f2eb; 
+        }
+        
+        /* Layout fluido per barra di ricerca e controlli */
+        .actions-bar { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            margin-bottom: 15px; 
+            width: 100%; 
+        }
+
+        .search-row {
+            display: flex;
+            width: 100%;
+            gap: 8px;
+        }
+        
+        .search-input { 
+            flex-grow: 1; 
+            padding: 10px 12px; 
+            border: 1px solid rgba(142, 115, 85, 0.3); 
+            border-radius: 6px; 
+            font-size: 14px; 
+            background-color: #1a1816; 
+            color: #f5f2eb; 
+            font-family: inherit;
+            transition: border-color 0.2s, background-color 0.2s; 
+        }
+        .search-input:focus { 
+            border-color: #d4af37; 
+            outline: none; 
+            background-color: #221f1c;
+        }
 
         /* Pulsanti d'azione superiori */
-        .btn-action-container { display: flex; gap: 10px; align-items: center; }
+        .btn-action-container { 
+            display: flex; 
+            gap: 6px; 
+            align-items: center; 
+            width: 100%;
+            justify-content: space-between;
+        }
         
-        /* Stile base per pulsanti normali ed esportazione/importazione */
-        .btn { display: inline-block; padding: 12px 18px; text-decoration: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; border: none; white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 5px; transition: background-color 0.2s; font-family: inherit; }
-        .btn-export { background-color: #27ae60; color: white; }
-        .btn-export:hover { background-color: #219653; }
-        .btn-import { background-color: #2980b9; color: white; }
-        .btn-import:hover { background-color: #1f6696; }
+        /* Stile pulsanti compattati */
+        .btn { 
+            display: inline-flex; 
+            padding: 10px 14px; 
+            text-decoration: none; 
+            border-radius: 6px; 
+            font-size: 13px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border: none; 
+            white-space: nowrap; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 4px; 
+            transition: background 0.2s, transform 0.1s; 
+            font-family: inherit; 
+            color: white;
+            flex: 1; /* Distribuisce equamente lo spazio */
+        }
+        .btn:active { transform: scale(0.98); }
         
-        /* Tasti Iconici Compatti Superiori (Selezione ed Elimina Massa) */
-        .btn-icon-top { width: 45px; height: 45px; padding: 0; border-radius: 6px; font-size: 18px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; transition: background-color 0.2s; }
-        .btn-select-mode { background-color: #7f8c8d; color: white; }
-        .btn-select-mode:hover { background-color: #6c7a7d; }
+        .btn-export { background-color: #1e4620; border: 1px solid rgba(46, 125, 50, 0.4); }
+        .btn-export:hover { background-color: #2e5c31; }
         
-        /* Modifica Grafica: X nera senza quadrato di sfondo rosso */
-        .btn-select-active { background-color: transparent !important; color: #000000 !important; border: 1px solid #7f8c8d !important; font-size: 16px; font-weight: bold; }
+        .btn-import { background-color: #1a3a5c; border: 1px solid rgba(21, 101, 192, 0.4); }
+        .btn-import:hover { background-color: #254f7d; }
         
-        /* Il cestino di massa parte nascosto e ha il suo stile rosso */
-        .btn-delete-all { background-color: #d35400; color: white; display: none; }
-        .btn-delete-all:hover { background-color: #c0392b; }
+        /* Tasti Iconici Compatti */
+        .btn-icon-top { 
+            width: 38px; 
+            height: 38px; 
+            padding: 0; 
+            border-radius: 6px; 
+            font-size: 16px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            border: 1px solid rgba(142, 115, 85, 0.2); 
+            background-color: #2a2724;
+            transition: background-color 0.2s; 
+            flex-shrink: 0;
+        }
+        .btn-select-mode:hover { background-color: #36322e; }
+        
+        /* Selezione attiva */
+        .btn-select-active { 
+            background-color: transparent !important; 
+            color: #d4af37 !important; 
+            border: 1px solid #d4af37 !important; 
+            font-size: 14px; 
+            font-weight: bold; 
+        }
+        
+        /* Cestino di massa */
+        .btn-delete-all { background-color: #5c1d1d; border: 1px solid rgba(198, 40, 40, 0.4); display: none; }
+        .btn-delete-all:hover { background-color: #7d2828; }
 
-        /* Contenitore responsivo modificato per altezza bloccata e scorrimento touch */
+        /* Contenitore tabella responsiva scura */
         .table-responsive { 
             width: 100%; 
             overflow-x: auto; 
             overflow-y: auto;
-            max-height: 70vh; /* Forza la barra orizzontale a rimanere fissa in fondo all'area visibile */
-            -webkit-overflow-scrolling: touch; /* Permette lo scorrimento trascinando il dito su smartphone */
+            max-height: 60vh; 
+            -webkit-overflow-scrolling: touch; 
             border-radius: 8px; 
-            border: 1px solid #ddd; 
-            margin-top: 10px;
-            background: white;
+            border: 1px solid rgba(142, 115, 85, 0.3); 
+            margin-top: 5px;
+            background: #1f1d1a;
         }
         
-        /* Personalizzazione visiva avanzata delle barre di scorrimento */
-        .table-responsive::-webkit-scrollbar { 
-            height: 10px; 
-            width: 10px;
-        }
-        .table-responsive::-webkit-scrollbar-thumb { 
-            background-color: #a0aec0; 
-            border-radius: 5px; 
-        }
-        .table-responsive::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 5px;
-        }
+        /* Scrollbar stilizzate */
+        .table-responsive::-webkit-scrollbar { height: 6px; width: 6px; }
+        .table-responsive::-webkit-scrollbar-thumb { background-color: #544738; border-radius: 3px; }
+        .table-responsive::-webkit-scrollbar-track { background: #151412; }
 
-        table { width: 100%; border-collapse: collapse; min-width: 650px; }
-        th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #ddd; white-space: nowrap; }
+        table { width: 100%; border-collapse: collapse; min-width: 500px; }
+        th, td { padding: 10px 8px; text-align: left; border-bottom: 1px solid rgba(142, 115, 85, 0.15); white-space: nowrap; }
+        
         th { 
-        background-color: #f4eee1; 
-        color: #8e7355; 
-        font-size: 14px; 
-        white-space: nowrap; 
-        position: sticky;
-        top: 0;
-        z-index: 10;
-}
-        td { font-size: 15px; }
+            background-color: #151412; 
+            color: #d4af37; 
+            font-family: 'Cinzel', serif;
+            font-size: 11px; 
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 2px solid rgba(142, 115, 85, 0.3);
+        }
+        td { font-size: 13px; color: #e8e3d9; }
+        tr:hover td { background-color: rgba(142, 115, 85, 0.05); }
         
-        /* Colonna di selezione */
-        .col-select { display: none; width: 40px; text-align: center; }
-        .checkbox-importante { transform: scale(1.3); cursor: pointer; }
+        /* Colonna selezione */
+        .col-select { display: none; width: 35px; text-align: center; }
+        .checkbox-importante { 
+            transform: scale(1.1); 
+            cursor: pointer; 
+            accent-color: #d4af37;
+        }
 
-        /* Bottone Apri Profilo Singolo */
-        .btn-table { padding: 8px 12px; font-size: 14px; border-radius: 4px; }
-        .btn-open { background-color: #8e7355; color: white; display: inline-flex; width: 36px; height: 36px; padding: 0; align-items: center; justify-content: center; border-radius: 6px; font-size: 16px; text-decoration: none; }
-        .btn-open:hover { background-color: #755e43; }
+        /* Bottone Apri Profilo */
+        .btn-open { 
+            background: #8e7355; 
+            color: white; 
+            display: inline-flex; 
+            width: 32px; 
+            height: 32px; 
+            padding: 0; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 6px; 
+            font-size: 14px; 
+            text-decoration: none; 
+            transition: background 0.2s;
+            border: none;
+        }
+        .btn-open:hover { background: #765f45; }
         
-        .btn-home { background-color: #2c3e50; color: white; margin-bottom: 20px; text-decoration: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; font-size: 15px; align-self: flex-start; }
-        .metodo-badge { padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
-        .badge-pitagora { background-color: #d4efdf; color: #196f3d; }
-        .badge-caldea { background-color: #ebdef0; color: #6c3483; }
+        /* Badges Metodi */
+        .metodo-badge { padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-pitagora { background-color: rgba(46, 125, 50, 0.2); color: #a3cfab; border: 1px solid rgba(46, 125, 50, 0.4); }
+        .badge-caldea { background-color: rgba(123, 31, 162, 0.2); color: #e1bee7; border: 1px solid rgba(123, 31, 162, 0.4); }
 
-        /* Media Query Smartphone */
+        /* Media Query specifica per Smartphone */
         @media (max-width: 768px) {
-            body { padding: 10px; }
-            .container { padding: 15px; }
-            .btn-home { align-self: center; width: 100%; text-align: center; box-sizing: border-box; }
-            .actions-bar { flex-direction: column; gap: 12px; }
-            .btn-action-container { width: 100%; justify-content: space-between; gap: 8px; }
-            .btn { flex-grow: 1; padding: 14px; text-align: center; }
-            .btn-icon-top { width: 50px; height: 50px; flex-shrink: 0; }
-            h1 { font-size: 20px; }
+            body { padding: 8px; }
+            .container { padding: 15px 10px; border-radius: 8px; }
+            .btn-home { align-self: stretch; text-align: center; display: block; margin-bottom: 10px; }
+            h1 { font-size: 18px; margin-bottom: 15px; }
+            
+            /* Ottimizzazione testi bottoni per non farli tagliare */
+            .btn-export span::after { content: ""; }
+            .btn-import span::after { content: ""; }
+            
+            .btn { padding: 10px 8px; font-size: 12px; }
+            .btn-icon-top { width: 38px; height: 38px; }
+            
+            th, td { padding: 8px 6px; }
+            td { font-size: 12px; }
+            th { font-size: 10px; }
         }
     </style>
 </head>
@@ -108,19 +269,21 @@
     <a href="index.html" class="btn-home">← Torna alla Home</a>
 
     <div class="container">
-        <h1>📁 Archivio Profili Numerologici</h1>
+        <h1>📁 Archivio Profili</h1>
         
         <div class="actions-bar">
-            <input type="text" id="inputRicerca" onkeyup="filtraClienti()" placeholder="🔍 Cerca per Cognome o Nome..." class="search-input">
-            <div class="btn-action-container">
-                <!-- Tasto attivazione selezione (diventato iconico) -->
+            <!-- Riga superiore con Cerca + Selezione + Cestino -->
+            <div class="search-row">
+                <input type="text" id="inputRicerca" onkeyup="filtraClienti()" placeholder="🔍 Cerca per Cognome o Nome..." class="search-input">
                 <button onclick="toggleModalitaSelezione()" id="btnSelezione" class="btn-icon-top btn-select-mode" title="Attiva Selezione Multipla">☑️</button>
-                <!-- Tasto elimina (Cestino) che appare solo se la selezione è attiva -->
                 <button onclick="eliminaSelezionati()" id="btnEliminaMassa" class="btn-icon-top btn-delete-all" title="Elimina Profili Selezionati">🗑️</button>
-                
-                <button onclick="esportaInExcel()" class="btn btn-export">🟢 Esporta</button>
+            </div>
+            
+            <!-- Riga inferiore con Esporta ed Importa distribuiti uniformemente -->
+            <div class="btn-action-container">
+                <button onclick="esportaInExcel()" class="btn btn-export">🟢 <span>Esporta</span></button>
                 <input type="file" id="fileImport" accept=".csv, text/csv, text/comma-separated-values, application/csv, application/vnd.ms-excel" style="display: none;" onchange="importaDaExcel(this)">
-                <button onclick="document.getElementById('fileImport').click()" class="btn btn-import">🔵 Importa</button>
+                <button onclick="document.getElementById('fileImport').click()" class="btn btn-import">🔵 <span>Importa</span></button>
             </div>
         </div>
 
@@ -218,7 +381,7 @@ function mostraClienti() {
                         <td>${dataVal || "-"}</td>
                         <td><span class="metodo-badge badge-${metodoVal}">${metodoVal}</span></td>
                         <td>
-                            <a href="${urlMappa}" class="btn btn-table btn-open" title="Apri Profilo">👁️</a>
+                            <a href="${urlMappa}" class="btn-open" title="Apri Profilo">👁️</a>
                         </td>
                     `;
                     corpoTabella.appendChild(riga);
@@ -227,7 +390,7 @@ function mostraClienti() {
                 document.getElementById('th-select').style.display = modalitaSelezioneAttiva ? "table-cell" : "none";
                 filtraClienti();
             } else {
-                corpoTabella.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#999;">Nessun profilo salvato in archivio.</td></tr>`;
+                corpoTabella.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#8e7355; font-style: italic; font-size:13px;">Nessun profilo in archivio.</td></tr>`;
             }
         }
     };
@@ -241,7 +404,7 @@ function toggleModalitaSelezione() {
     const colRighe = document.querySelectorAll('.col-select');
 
     if (modalitaSelezioneAttiva) {
-        btn.innerHTML = "✖"; // X nera di testo pura senza emoji o quadratoni di sfondo
+        btn.innerHTML = "✖"; 
         btn.classList.add('btn-select-active');
         btn.title = "Annulla Selezione";
         btnMassa.style.display = "inline-flex";
@@ -279,7 +442,7 @@ function eliminaSelezionati() {
         return;
     }
 
-    if (confirm(`Sei sicuro di voler eliminare definitivamente ${Grid.length} profili in un colpo solo?`)) {
+    if (confirm(`Sei sicuro di voler eliminare definitivamente ${Grid.length} profili?`)) {
         const transaction = db.transaction(['clienti'], 'readwrite');
         const store = transaction.objectStore('clienti');
 
@@ -289,10 +452,9 @@ function eliminaSelezionati() {
         });
 
         transaction.oncomplete = function() {
-            alert("Eliminazione multipla completata con successo.");
+            alert("Eliminazione multipla completata.");
             modalitaSelezioneAttiva = false;
             
-            // Ripristina lo stato iniziale della barra dei bottoni con la configurazione pulita
             const btn = document.getElementById('btnSelezione');
             btn.innerHTML = "☑️";
             btn.classList.remove('btn-select-active');
@@ -302,8 +464,8 @@ function eliminaSelezionati() {
         };
 
         transaction.onerror = function(event) {
-            console.error("Errore durante l'eliminazione multipla:", event.target.error);
-            alert("Si è verificato un errore durante l'eliminazione dei profili.");
+            console.error(event.target.error);
+            alert("Errore durante l'eliminazione.");
         };
     }
 }
@@ -407,13 +569,11 @@ function importaDaExcel(input) {
     reader.onload = function(e) {
         const text = e.target.result;
         const linee = text.replace(/\r\n|\r/g, "\n").split("\n");
-        if (linee.length <= 1 || !linee[0].trim()) { alert("Il file caricato sembra essere vuoto o non valido."); return; }
+        if (linee.length <= 1 || !linee[0].trim()) { alert("File non valido."); return; }
         
-        // Pulizia della prima linea da BOM e virgolette (tipiche degli smartphone)
         const primaLinea = linee[0].replace(/^\uFEFF/, "").replace(/"/g, "").trim();
         const intestazioniRilevate = primaLinea.split(";").map(h => h.trim().toLowerCase());
         
-        // Controllo flessibile ottimizzato per smartphone
         const indiceCognome = intestazioniRilevate.findIndex(h => h.includes("cognome"));
         const indiceNome = intestazioniRilevate.findIndex(h => h === "nome" || (h.includes("nome") && !h.includes("cognome")));
         
@@ -422,7 +582,6 @@ function importaDaExcel(input) {
             return; 
         }
         
-        // Mappiamo gli indici corretti di tutte le colonne basandoci sulla posizione nell'array originale HEADERS_CSV
         const mappaIndici = {};
         HEADERS_CSV.forEach(header => {
             let index;
@@ -442,7 +601,6 @@ function importaDaExcel(input) {
             let lineaCorrente = linee[i].trim();
             if (!lineaCorrente) continue;
             
-            // Pulisce la linea dalle virgolette dei browser mobile
             lineaCorrente = lineaCorrente.replace(/"/g, "");
             const colonne = lineaCorrente.split(";");
             
@@ -492,7 +650,7 @@ function importaDaExcel(input) {
             contatoreImportati++;
         }
         transaction.oncomplete = function() { 
-            alert("Importazione completata! Recuperati " + contatoreImportati + " profili."); 
+            alert("Importato " + contatoreImportati + " profili."); 
             input.value = ""; 
             mostraClienti(); 
         };
