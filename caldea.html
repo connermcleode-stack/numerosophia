@@ -10,77 +10,110 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <style>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
         * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background: #faf8f5; color: #2c3e50; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); max-width: 800px; width: 100%; border: 1px solid #eae4da; }
-        h1 { text-align: center; color: #8e7355; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; }
-        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 35px; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: #120a1c; /* Viola ametista scuro e profondo */ 
+            color: #e0dbd1; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.13) 0%, transparent 65%),
+                radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 40px 40px,
+                radial-gradient(rgba(255, 255, 255, 0.04) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
+            opacity: 0.75;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .container { 
+            background: rgba(23, 13, 36, 0.94); 
+            padding: 40px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+            max-width: 800px; 
+            width: 100%; 
+            border: 1px solid rgba(212, 175, 55, 0.25); 
+        }
+        h1 { text-align: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .subtitle { text-align: center; color: #a69f95; font-size: 14px; margin-bottom: 35px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .form-group-full { grid-column: span 2; }
-        label { font-weight: 600; color: #4a5568; display: block; margin-top: 10px; font-size: 14px; }
-        input { width: 100%; padding: 12px; margin-top: 6px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 16px; background-color: #fcfbf9; transition: border 0.2s; }
-        input:focus { border-color: #8e7355; outline: none; }
+        label { font-weight: 600; color: #c4beb3; display: block; margin-top: 10px; font-size: 14px; }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 6px; 
+            border: 1px solid rgba(142, 115, 85, 0.3); 
+            border-radius: 8px; 
+            font-size: 16px; 
+            background-color: #1c102b; 
+            color: #f5f2eb; 
+            transition: border 0.2s; 
+        }
+        input:focus { border-color: #d4af37; outline: none; background-color: #26163a; }
         button { width: 100%; background: #8e7355; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; letter-spacing: 0.5px; }
         button:hover { background: #765f45; }
-        .btn-secondary { background: #e2e8f0; color: #4a5568; margin-top: 15px; }
-        .btn-secondary:hover { background: #cbd5e1; }
-        .risultati { margin-top: 40px; border-top: 2px solid #f1f5f9; padding-top: 25px; display: none; }
-        .sezione-titolo { font-size: 18px; color: #8e7355; border-bottom: 1px solid #eae4da; padding-bottom: 6px; margin-top: 35px; margin-bottom: 15px; font-weight: 600; }
+        .btn-secondary { background: #26163a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 15px; }
+        .btn-secondary:hover { background: #351f50; color: #f5f2eb; }
+        .risultati { margin-top: 40px; border-top: 1px solid rgba(142, 115, 85, 0.2); padding-top: 25px; display: none; }
+        .sezione-titolo { font-size: 18px; color: #d4af37; font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(142, 115, 85, 0.3); padding-bottom: 6px; margin-top: 35px; margin-bottom: 15px; font-weight: 600; }
         .grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: #fdfbf7; border: 1px solid #f3ebe1; padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
-        .card h3 { margin: 0 0 8px 0; font-size: 14px; color: #5c4d3c; text-transform: uppercase; letter-spacing: 0.5px; }
-        .numero-evidenziato { font-size: 22px; font-weight: bold; color: #8e7355; margin-bottom: 5px; }
-        .archetipo-nome { font-weight: bold; color: #2c3e50; font-size: 15px; display: block; margin-bottom: 5px; }
-        .descrizione { font-size: 13.5px; color: #4a5568; line-height: 1.5; }
-        .ombra-testo { font-size: 13px; color: #94a3b8; margin-top: 6px; font-style: italic; }
-        .btn-home { background: #4a5568; color: white; max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
+        .card { background: #1c102b; border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
+        .card h3 { margin: 0 0 8px 0; font-size: 14px; color: #c4beb3; text-transform: uppercase; letter-spacing: 0.5px; }
+        .numero-evidenziato { font-size: 22px; font-weight: bold; color: #d4af37; margin-bottom: 5px; }
+        .archetipo-nome { font-weight: bold; color: #e8e3d9; font-size: 15px; display: block; margin-bottom: 5px; }
+        .descrizione { font-size: 13.5px; color: #c4beb3; line-height: 1.5; }
+        .ombra-testo { font-size: 13px; color: #a49db0; margin-top: 6px; font-style: italic; }
+        .btn-home { background: #26163a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
+        
         @keyframes compariModale {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
 
-@media (max-width: 600px) {
-    /* Sblocca la rigidità del body sul telefono */
-    body {
-        display: block !important;
-        padding: 10px !important;
-    }
-    
-    /* Forza il contenitore principale a prendere tutta la larghezza disponibile */
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 15px !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* Forzatura assoluta: prende qualsiasi div che gestisce le griglie e lo mette a 1 colonna */
-    .grid-cards, .form-grid, [class*="grid"] {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-        display: grid !important;
-    }
+        @media (max-width: 600px) {
+            body {
+                display: block !important;
+                padding: 10px !important;
+            }
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 15px !important;
+                box-sizing: border-box !important;
+            }
+            .grid-cards, .form-grid, [class*="grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+                display: grid !important;
+            }
+            .card, .grid-cards div {
+                grid-column: span 1 !important;
+                width: 100% !important;
+            }
+            .form-group-full {
+                grid-column: span 1 !important;
+            }
+        }
+    </style>
 
-    /* Forza anche i singoli elementi interni (le card) a occupare tutta la larghezza */
-    .card, .grid-cards div {
-        grid-column: span 1 !important;
-        width: 100% !important;
-    }
-
-    /* Sistema i moduli di input a larghezza intera */
-    .form-group-full {
-        grid-column: span 1 !important;
-    }
-}
-    </style><div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center;">
-    <div style="background-color: #fff; padding: 25px; border-radius: 12px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: sans-serif;">
-        <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 15px; font-size: 28px; font-weight: bold; cursor: pointer; color: #7f8c8d;">&times;</span>
-        <h2 id="modaleTitolo" style="margin-top: 0; color: #2c3e50; font-size: 22px;"></h2>
-        <h3 id="modaleSottotitolo" style="margin-top: 5px; color: #7f8c8d; font-size: 16px; font-weight: normal; border-bottom: 1px solid #eee; padding-bottom: 10px;"></h3>
-        <div id="modaleContenuto" style="margin-top: 15px; font-size: 14px; line-height: 1.5; color: #34495e;"></div>
+    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center;">
+        <div style="background-color: #170d24; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.8); font-family: 'Montserrat', sans-serif;">
+            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 15px; font-size: 28px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
+            <h2 id="modaleTitolo" style="margin-top: 0; color: #d4af37; font-family: 'Cinzel', serif; font-size: 22px;"></h2>
+            <h3 id="modaleSottotitolo" style="margin-top: 5px; color: #a69f95; font-size: 16px; font-weight: normal; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; font-style: italic;"></h3>
+            <div id="modaleContenuto" style="margin-top: 15px; font-size: 14px; line-height: 1.5; color: #e8e3d9;"></div>
+        </div>
     </div>
-</div>
 </head>
 <body>
 

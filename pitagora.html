@@ -11,53 +11,57 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <style>
-	@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
         * { box-sizing: border-box; }
         body { 
-    	font-family: 'Montserrat', sans-serif; 
-    	background: #0b0a08; 
-    	color: #e0dbd1; 
-   	 margin: 0; 
-    	padding: 20px; 
-    	display: flex; 
-    	justify-content: center; 
+        font-family: 'Montserrat', sans-serif; 
+        background: #080f1d; /* Nuovo colore: Blu notte profondo ed elegante */ 
+        color: #e0dbd1; 
+        margin: 0; 
+        padding: 20px; 
+        display: flex; 
+        justify-content: center; 
 }
 body::before {
     content: '';
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: 
-        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+        /* Incrementata leggermente la luce oro centrale sul blu */
+        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.14) 0%, transparent 65%),
         radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px) 0 0 / 40px 40px,
         radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
-    opacity: 0.6;
+    opacity: 0.7;
     pointer-events: none;
     z-index: -1;
 }
-        .container { background: rgba(25, 23, 20, 0.96); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 800px; width: 100%; border: 1px solid rgba(142, 115, 85, 0.3); }
+        /* Contenitore principale adattato per sfumare sul blu */
+        .container { background: rgba(13, 22, 41, 0.94); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 800px; width: 100%; border: 1px solid rgba(212, 175, 55, 0.25); }
         h1 { text-align: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .subtitle { text-align: center; color: #a69f95; font-size: 14px; margin-bottom: 35px; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .form-group-full { grid-column: span 2; }
         label { font-weight: 600; color: #c4beb3; display: block; margin-top: 10px; font-size: 14px; }
-        input { width: 100%; padding: 12px; margin-top: 6px; border: 1px solid rgba(142, 115, 85, 0.3); border-radius: 8px; font-size: 16px; background-color: #1a1816; color: #f5f2eb; transition: border 0.2s; }
-        input:focus { border-color: #d4af37; outline: none; background-color: #221f1c; }
+        /* Campi di input armonizzati con il blu scuro */
+        input { width: 100%; padding: 12px; margin-top: 6px; border: 1px solid rgba(142, 115, 85, 0.3); border-radius: 8px; font-size: 16px; background-color: #0f192b; color: #f5f2eb; transition: border 0.2s; }
+        input:focus { border-color: #d4af37; outline: none; background-color: #14223a; }
         button { width: 100%; background: #8e7355; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; letter-spacing: 0.5px; }
         button:hover { background: #765f45; }
-        .btn-secondary { background: #2a2724; color: #c4beb3; border: 1px solid rgba(142, 115, 85, 0.2); margin-top: 15px; }
-        .btn-secondary:hover { background: #36322e; color: #f5f2eb; }
+        .btn-secondary { background: #14223a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 15px; }
+        .btn-secondary:hover { background: #1c2f4f; color: #f5f2eb; }
         .risultati { margin-top: 40px; border-top: 1px solid rgba(142, 115, 85, 0.2); padding-top: 25px; display: none; }
         .sezione-titolo { font-size: 18px; color: #d4af37; font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(142, 115, 85, 0.3); padding-bottom: 6px; margin-top: 35px; margin-bottom: 15px; font-weight: 600; }
         .grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: #1f1d1a; border: 1px solid rgba(142, 115, 85, 0.2); padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
+        /* Schede dei risultati armonizzate con il blu scuro */
+        .card { background: #0f192b; border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
         .card h3 { margin: 0 0 8px 0; font-size: 14px; color: #c4beb3; text-transform: uppercase; letter-spacing: 0.5px; }
         .numero-evidenziato { font-size: 22px; font-weight: bold; color: #d4af37; margin-bottom: 5px; }
         .archetipo-nome { font-weight: bold; color: #e8e3d9; font-size: 15px; display: block; margin-bottom: 5px; }
         .descrizione { font-size: 13.5px; color: #c4beb3; line-height: 1.5; }
         .ombra-testo { font-size: 13px; color: #8a94a6; margin-top: 6px; font-style: italic; }
-        .btn-home { background: #2a2724; color: #c4beb3; border: 1px solid rgba(142, 115, 85, 0.2); max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
-    </style> <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.75); align-items: center; justify-content: center;">
-    <div style="background-color: #191714; border: 1px solid rgba(142, 115, 85, 0.4); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.7); position: relative; animation: compariModale 0.3s ease;">
+        .btn-home { background: #14223a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
+    </style> <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
+    <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
         <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
         <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
         <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
@@ -102,6 +106,37 @@ body::before {
     /* Sistema i moduli di input a larghezza intera */
     .form-group-full {
         grid-column: span 1 !important;
+    }
+
+    /* ==========================================================
+       OTTIMIZZAZIONE POPUP/MODALE SU SMARTPHONE
+       ========================================================== */
+    #modaleApprofondimento {
+        padding: 10px !important; 
+    }
+
+    #modaleApprofondimento > div {
+        width: 96% !important;
+        max-width: 96% !important;
+        padding: 20px 15px 15px 15px !important;
+        max-height: 90vh !important;
+        border-radius: 12px !important;
+    }
+
+    #modaleApprofondimento span[onclick] {
+        top: 8px !important;
+        right: 12px !important;
+        font-size: 32px !important;
+        padding: 5px;
+    }
+
+    #modaleTitolo {
+        font-size: 18px !important;
+        padding-right: 25px;
+    }
+    
+    #modaleSottotitolo {
+        font-size: 14px !important;
     }
 }
 </style>

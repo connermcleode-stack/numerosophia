@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numerosophia - L'Affinità Numerosofica</title>
-<style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
+
         :root {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --accent-gold: #c5a059;
-            --button-bg: #1e1e1e;
+            --bg-color: #1a080e;         /* Splendido Rosa Rubino/Granato estremamente scuro */
+            --panel-bg: rgba(31, 13, 19, 0.94); /* Sfondo dei pannelli coerente e profondo */
+            --inner-bg: #240f16;         /* Sfondo interno per input e badge */
+            --text-color: #e0dbd1;       /* Testo chiaro morbido */
+            --accent-gold: #d4af37;      /* Oro luminoso coordinato */
+            --button-bg: #240f16;
+            --border-color: rgba(212, 175, 55, 0.25); /* Bordi dorati sfumati */
         }
 
+        * { box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -22,6 +29,20 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
+        }
+
+        /* Sfondo mistico con texture stellata e bagliore oro centrale */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.14) 0%, transparent 65%),
+                radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 40px 40px,
+                radial-gradient(rgba(255, 255, 255, 0.04) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
+            opacity: 0.75;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .sezione-dinamica {
@@ -33,10 +54,10 @@
 
         .btn-back {
             background-color: var(--button-bg);
-            border: 2px solid var(--accent-gold);
-            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            color: #c4beb3;
             padding: 10px 20px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
@@ -47,30 +68,48 @@
         }
 
         .btn-back:hover {
-            background-color: var(--accent-gold);
-            color: var(--bg-color);
+            background-color: #3d1a25;
+            color: #f5f2eb;
+            border-color: var(--accent-gold);
         }
 
         .ns-header-banner {
-            border: 1px solid var(--accent-gold);
-            padding: 20px;
+            border: 1px solid var(--border-color);
+            padding: 30px 20px;
             text-align: center;
             margin-bottom: 30px;
-            background-color: #1a1a1a;
-            border-radius: 8px;
+            background-color: var(--panel-bg);
+            border-radius: 16px;
             box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .ns-header-banner h1 {
+            margin: 0;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .ns-header-banner p {
+            color: #a69f95;
+            font-size: 0.95rem;
+            margin-top: 8px;
+            margin-bottom: 0;
         }
 
         .ns-calc-panel {
-            background: #1e1e1e;
-            border: 1px solid #333;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
             padding: 25px;
             margin-bottom: 30px;
-            border-radius: 8px;
+            border-radius: 16px;
             box-sizing: border-box;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Gestione affiancamento profili su PC */
         .flex-container-profili {
             display: flex;
             gap: 20px;
@@ -81,20 +120,23 @@
         .partner-block {
             flex: 1;
             min-width: 280px;
-            background: #161616;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #2a2a2a;
+            background: var(--inner-bg);
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
             box-sizing: border-box;
         }
 
         .partner-title {
             color: var(--accent-gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
             margin-top: 0;
             margin-bottom: 15px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(142, 115, 85, 0.25);
+            padding-bottom: 6px;
             font-size: 1.1rem;
+            letter-spacing: 0.5px;
         }
 
         .form-group {
@@ -103,68 +145,80 @@
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-size: 0.85rem;
             font-weight: 600;
-            opacity: 0.9;
+            color: #c4beb3;
         }
 
         .input-field, .select-box {
             width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #444;
-            background: #121212;
-            color: var(--text-color);
-            border-radius: 4px;
+            padding: 10px 12px;
+            border: 1px solid rgba(142, 115, 85, 0.3);
+            background: var(--bg-color);
+            color: #f5f2eb;
+            border-radius: 6px;
             font-size: 0.95rem;
             box-sizing: border-box;
+            transition: border-color 0.2s, background-color 0.2s;
         }
 
         .input-field:focus, .select-box:focus {
             border-color: var(--accent-gold);
+            background-color: #31151e;
             outline: none;
+        }
+
+        /* Adattamento stilistico delle opzioni interne alle select box */
+        .select-box option {
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
 
         .btn-calc {
             width: 100%;
             padding: 15px;
-            background-color: var(--accent-gold);
-            color: var(--bg-color);
+            background-color: #8e7355; /* Mantenuto coerente con i bottoni principali dell'ecosistema */
+            color: white;
             border: none;
             font-size: 1.1rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             margin-top: 10px;
             box-sizing: border-box;
+            letter-spacing: 0.5px;
         }
 
         .btn-calc:hover {
-            opacity: 0.9;
+            background-color: #765f45;
             transform: translateY(-2px);
         }
 
-        /* Stili per l'area Risultati */
         .ns-level-container {
             margin-bottom: 25px;
-            background: #1a1a1a;
+            background: var(--panel-bg);
             padding: 20px;
-            border-radius: 6px;
-            border-left: 4px solid var(--accent-gold);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #8e7355;
             box-sizing: border-box;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         .ns-level-title {
+            font-family: 'Cinzel', serif;
             font-size: 1.2rem;
             font-weight: bold;
             color: var(--accent-gold);
             margin-bottom: 4px;
+            letter-spacing: 0.5px;
         }
 
         .ns-level-meta {
             font-size: 0.85rem;
-            opacity: 0.7;
+            color: #bda6ad;
             font-style: italic;
             display: block;
             margin-bottom: 12px;
@@ -173,10 +227,11 @@
         .ns-results-display {
             display: flex;
             gap: 15px;
-            margin-bottom: 15px;
-            background: #121212;
-            padding: 10px;
-            border-radius: 4px;
+            margin-bottom: 18px;
+            background: var(--inner-bg);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
             justify-content: space-around;
             box-sizing: border-box;
         }
@@ -184,6 +239,7 @@
         .result-badge {
             text-align: center;
             font-size: 0.9rem;
+            color: #c4beb3;
         }
 
         .result-number {
@@ -191,41 +247,46 @@
             font-weight: bold;
             color: var(--accent-gold);
             display: block;
+            margin-bottom: 2px;
         }
 
         .ns-level-desc {
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
+            color: #c4beb3;
             text-align: justify;
         }
 
         .footer {
             margin-top: 50px;
-            font-size: 0.9rem;
-            opacity: 0.5;
+            font-size: 0.85rem;
+            color: #a69f95;
+            opacity: 0.6;
             text-align: center;
+            letter-spacing: 0.5px;
         }
 
-        /* MEDIA QUERY PER SMARTPHONE (Fino a 600px) */
         @media (max-width: 600px) {
             body {
-                padding: 20px 10px; /* Riduce lo spazio ai bordi dello schermo dello smartphone */
+                padding: 20px 10px;
             }
 
             .ns-calc-panel {
-                padding: 15px; /* Rende il pannello di controllo più snello */
+                padding: 15px;
+                border-radius: 12px;
             }
 
             .partner-block {
-                min-width: 100%; /* I blocchi Primo/Secondo Profilo vanno uno sotto l'altro occupando tutto lo spazio */
+                min-width: 100%;
             }
 
             .ns-level-container {
-                padding: 15px; /* Ottimizza l'area dei responsi */
+                padding: 15px;
+                border-radius: 10px;
             }
 
             .ns-level-desc {
-                text-align: left; /* Evita brutti spazi bianchi nel testo giustificato su schermi stretti */
+                text-align: left;
             }
         }
     </style>
