@@ -419,7 +419,7 @@ const databaseArchetipi = {
         ombra: "Tensione nervosa estrema, senso di alienazione, fanatismo." 
     },
     22: { 
-        nome: "Il Creatore di Strutture (Numero Maestro)", 
+        nome: "Il Creatore (Numero Maestro)", 
         significato: "Rappresenta la chiamata superiore a concretizzare sogni e ideali universali su vastissima scala, traducendo la spiritualità in strutture pratiche utili all'umanità.",
         luce: "Capacità di tradurre grandi visioni spirituali in progetti concreti e planetari.", 
         ombra: "Megalomane o, al contrario, totale blocco per paura delle proprie responsabilità." 
@@ -482,21 +482,17 @@ function compilaScheda(numero, compatta = false) {
     let numeroPulito = numero.toString().includes('/') ? parseInt(numero.toString().split('/')[0], 10) : parseInt(numero, 10);
     let base = riduciMonocifraStretta(numeroPulito);
     
-    let datiArchetipoBase = databaseArchetipi[base];
     let testoKarmico = databaseKarmici[numeroPulito] ? `<p style="color:#d35400; font-size:12px; margin:3px 0 0 0;"><strong>Nota Karmica:</strong> ${databaseKarmici[numeroPulito]}</p>` : "";
     
+    let isMaestro = [11, 22, 33].includes(numeroPulito);
+    let datiArchetipoBase = isMaestro ? databaseArchetipi[numeroPulito] : databaseArchetipi[base];
+
     let nomeVisualizzato = datiArchetipoBase.nome;
     let luceVisualizzata = datiArchetipoBase.luce;
     let ombraVisualizzata = datiArchetipoBase.ombra;
-
-    // Se il numero è un Maestro (11, 22, 33), sovrascriviamo con i dati del Maestro
-    if (databaseArchetipi[numeroPulito] && [11, 22, 33].includes(numeroPulito)) {
-        nomeVisualizzato = databaseArchetipi[numeroPulito].nome;
-        luceVisualizzata = databaseArchetipi[numeroPulito].luce;
-        ombraVisualizzata = databaseArchetipi[numeroPulito].ombra;
-    } 
+    
     // Se è un numero Karmico, arricchiamo il titolo e integriamo la descrizione
-    else if (databaseKarmici[numeroPulito]) {
+    if (!isMaestro && databaseKarmici[numeroPulito]) {
         let nomeKarmico = "";
         switch(numeroPulito) {
             case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
@@ -926,7 +922,9 @@ function apriApprofondimento(elementoCard) {
     let numeroPulito = numeroElemento.includes('/') ? parseInt(numeroElemento.split('/')[0], 10) : parseInt(numeroElemento, 10);
     let base = riduciMonocifraStretta(numeroPulito);
     
-    let datiArchetipo = databaseArchetipi[numeroElemento] || databaseArchetipi[base];
+    let isMaestro = [11, 22, 33].includes(numeroPulito);
+    let chiaveFinestra = [11, 22, 33].includes(parseInt(numeroElemento, 10)) ? parseInt(numeroElemento, 10) : base;
+    let datiArchetipo = databaseArchetipi[chiaveFinestra];
     
     if (datiArchetipo) {
         document.getElementById('modaleTitolo').innerText = `${titoloSezione}: ${numeroElemento}`;
