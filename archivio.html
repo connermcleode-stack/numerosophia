@@ -295,7 +295,6 @@
                         <th>Cognome e Nome</th>
                         <th>Data di Nascita</th>
                         <th>Metodo</th>
-                        <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody id="corpoTabella">
@@ -359,6 +358,8 @@ function mostraClienti() {
 
                 elencoClienti.forEach(cliente => {
                     const riga = document.createElement('tr');
+                    
+                    // --- LOGICA ORIGINALE REINTEGRATA AL 100% ---
                     const fileDestinazione = (cliente.metodo || "").toLowerCase() === 'caldea' ? 'caldea.html' : 'pitagora.html';
                     
                     const nomeVal = cliente.nome || "";
@@ -375,22 +376,25 @@ function mostraClienti() {
 
                     const displayStile = modalitaSelezioneAttiva ? "table-cell" : "none";
 
+                    // Costruzione della riga con il click diretto sulla cella del nome
                     riga.innerHTML = `
-                        <td class="col-select" style="display: ${displayStile}; text-align:center;"><input type="checkbox" value="${cliente.id}" class="checkbox-cliente checkbox-importante"></td>
-                        <td><strong>${nomeVisualizzato}</strong></td>
+                        <td class="col-select" style="display: ${displayStile}; text-align:center;">
+                            <input type="checkbox" value="${cliente.id}" class="checkbox-cliente checkbox-importante">
+                        </td>
+                        <td style="cursor: pointer;" onclick="window.location.href='${urlMappa}'">
+                            <strong>${nomeVisualizzato}</strong>
+                        </td>
                         <td>${dataVal || "-"}</td>
                         <td><span class="metodo-badge badge-${metodoVal}">${metodoVal}</span></td>
-                        <td>
-                            <a href="${urlMappa}" class="btn-open" title="Apri Profilo">👁️</a>
-                        </td>
                     `;
+                    
                     corpoTabella.appendChild(riga);
                 });
                 
                 document.getElementById('th-select').style.display = modalitaSelezioneAttiva ? "table-cell" : "none";
                 filtraClienti();
             } else {
-                corpoTabella.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#8e7355; font-style: italic; font-size:13px;">Nessun profilo in archivio.</td></tr>`;
+                corpoTabella.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#8e7355; font-style: italic; font-size:13px;">Nessun profilo in archivio.</td></tr>`;
             }
         }
     };

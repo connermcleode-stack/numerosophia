@@ -72,17 +72,26 @@
             padding-top: 20px; /* Spazio per bilanciare l'assenza della figura superiore */
         }
 
-        h1 {
+       h1 {
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.4rem, 6.5vw, 1.8rem);
-            letter-spacing: clamp(2px, 1vw, 3px);
-            color: var(--gold-primary);
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-primary) 50%, var(--gold-dark) 100%);
+            font-weight: 400;
+            font-size: 34px;
+            letter-spacing: 6px;
+            background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
+            filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9));
             margin-bottom: 4px;
-            white-space: nowrap;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Adattamento specifico per smartphone molto stretti */
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 25px;       /* Riduce la dimensione per farlo stare a schermo */
+                letter-spacing: 3px;   /* Avvicina leggermente le lettere quanto basta */
+            }
         }
 
         .gold-divider {
@@ -299,10 +308,41 @@
 
     <div class="container">
         
-        <div class="header-logo">
-            <!-- La zona superiore è stata completamente ripulita e liberata da ogni figura -->
+       <div class="header-logo">
+        <!-- La zona superiore è stata completamente ripulita e liberata da ogni figura -->
 
-            <h1>NUMEROSOPHIA</h1>
+        <!-- Cerchio Dorato Luminoso con Effetto Bagliore -->
+        <svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
+            <!-- Il Cerchio Dorato Esterno -->
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#ffdf70" stroke-width="2.5" />
+            
+            <!-- Il Triangolo Dorato Interno -->
+            <polygon points="50,23 26,67 74,67" fill="none" stroke="#ffdf70" stroke-width="2.5" stroke-linejoin="round" />
+            
+            <!-- I Numeri Bilanciati a Metà Spazio -->
+            <!-- 7 (Perfetto, mantenuto) -->
+            <text x="50" y="19" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">7</text>
+            
+            <!-- 3 accentrato (x riportato a 19, y alzato leggermente a 72) -->
+            <text x="19" y="72" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">3</text>
+            
+            <!-- 4 accentrato (x riportato a 81, y alzato leggermente a 72) -->
+            <text x="81" y="72" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">4</text>
+            
+            <!-- 5 (Perfetto al centro) -->
+            <text x="50" y="56" fill="#ffdf70" font-family="'Cinzel', serif" font-size="14" font-weight="bold" text-anchor="middle">5</text>
+        </svg>
+
+        <h1 style="
+    font-family: 'Cinzel', serif; 
+    font-weight: 400;
+    letter-spacing: 6px; 
+    margin: 0;
+    background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9));
+">NUMEROSOPHIA</h1>
             
             <div class="gold-divider">
                 <svg viewBox="0 0 10 10"><polygon points="5,0 10,5 5,10 0,5"/></svg>
