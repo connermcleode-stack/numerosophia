@@ -1551,7 +1551,7 @@ function recuperaTestoAffinita(livello, num1, num2) {
         let testoFormattato = testoOriginale
             .replaceAll("Descrizione della Compatibilità:", "<br><br><b>Descrizione della Compatibilità:</b>")
             .replaceAll("🎯", "<br><br><span class='box-luce'>🎯 ")
-	    .replaceAll("⚠️", "</span><br><br><span class='box-ombra'>⚠️ ");
+            .replaceAll("⚠️", "</span><br><br><span class='box-ombra'>⚠️ ");
         return testoFormattato + "</span>";
     }
     return `Le due frequenze numeriche (${num1} e ${num2}) lavoreranno sul proprio equilibrio energetico per trovare una sintesi armonica sul piano del confronto.`;
@@ -1601,14 +1601,16 @@ function eseguiCalcoloAffinita() {
         return;
     }
 
-    // Da qui in poi il codice continua normalmente come prima...
     const haTestoP1 = (p1Nome.length > 0 || p1Cognome.length > 0);
     const haTestoP2 = (p2Nome.length > 0 || p2Cognome.length > 0);
 
-   // 1. CALCOLO LIVELLO IO
+    // Inizializziamo le variabili per l'esportazione
+    let ioP1 = 0, ioP2 = 0, animaP1 = 0, animaP2 = 0, destinoP1 = 0, destinoP2 = 0;
+
+    // 1. CALCOLO LIVELLO IO
     if (haTestoP1 && haTestoP2) {
-        const ioP1 = calcolaNomeCognome(p1Nome, p1Cognome, 'io');
-        const ioP2 = calcolaNomeCognome(p2Nome, p2Cognome, 'io');
+        ioP1 = calcolaNomeCognome(p1Nome, p1Cognome, 'io');
+        ioP2 = calcolaNomeCognome(p2Nome, p2Cognome, 'io');
         document.getElementById('res-io-p1').innerText = ioP1;
         document.getElementById('res-io-p2').innerText = ioP2;
         
@@ -1647,8 +1649,8 @@ function eseguiCalcoloAffinita() {
 
     // 2. CALCOLO LIVELLO ANIMA
     if (haTestoP1 && haTestoP2) {
-        const animaP1 = calcolaNomeCognome(p1Nome, p1Cognome, 'anima');
-        const animaP2 = calcolaNomeCognome(p2Nome, p2Cognome, 'anima');
+        animaP1 = calcolaNomeCognome(p1Nome, p1Cognome, 'anima');
+        animaP2 = calcolaNomeCognome(p2Nome, p2Cognome, 'anima');
         document.getElementById('res-anima-p1').innerText = animaP1;
         document.getElementById('res-anima-p2').innerText = animaP2;
         
@@ -1675,204 +1677,291 @@ function eseguiCalcoloAffinita() {
         document.getElementById('res-anima-testo').innerHTML = "<i style='color: #888;'>Inserisci il Nome o il Cognome per entrambi i profili per calcolare l'Anima.</i>";
     }
 
-  // 3. CALCOLO LIVELLO DESTINO
-        if (p1Data && p2Data) {
-            const destinoP1 = calcolaDestino(p1Data);
-            const destinoP2 = calcolaDestino(p2Data);
-            document.getElementById('res-destino-p1').innerText = destinoP1;
-            document.getElementById('res-destino-p2').innerText = destinoP2;
-            
-            const testoDestino = recuperaTestoAffinita('destino', destinoP1, destinoP2);
-            const titoloDestino = `${ottieniNomeArchetipo(destinoP1)} & ${ottieniNomeArchetipo(destinoP2)}`;
-            
-            document.getElementById('res-destino-testo').innerHTML = `
-                <div class="ns-level-container card-cliccabile" onclick="apriApprofondimentoCompatibilita(this)">
-                    <div class="ns-level-title">3. Il Livello del Destino (Il Progetto Evolutivo)</div>
-                    <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
-                        Responso (${destinoP1} & ${destinoP2}): ${titoloDestino}
-                    </span>
-                    <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
-                    
-                    <!-- Il testo intero rimane nascosto qui dentro e viene letto solo al click -->
-                    <div class="testo-segreto" style="display: none;">
-                        ${testoDestino}
-                    </div>
+    // 3. CALCOLO LIVELLO DESTINO
+    if (p1Data && p2Data) {
+        destinoP1 = calcolaDestino(p1Data);
+        destinoP2 = calcolaDestino(p2Data);
+        document.getElementById('res-destino-p1').innerText = destinoP1;
+        document.getElementById('res-destino-p2').innerText = destinoP2;
+        
+        const testoDestino = recuperaTestoAffinita('destino', destinoP1, destinoP2);
+        const titoloDestino = `${ottieniNomeArchetipo(destinoP1)} & ${ottieniNomeArchetipo(destinoP2)}`;
+        
+        document.getElementById('res-destino-testo').innerHTML = `
+            <div class="ns-level-container card-cliccabile" onclick="apriApprofondimentoCompatibilita(this)">
+                <div class="ns-level-title">3. Il Livello del Destino (Il Progetto Evolutivo)</div>
+                <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
+                    Responso (${destinoP1} & ${destinoP2}): ${titoloDestino}
+                </span>
+                <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
+                
+                <!-- Il testo intero rimane nascosto qui dentro e viene letto solo al click -->
+                <div class="testo-segreto" style="display: none;">
+                    ${testoDestino}
                 </div>
-            `;
-        } else {
-            document.getElementById('res-destino-p1').innerText = "-";
-            document.getElementById('res-destino-p2').innerText = "-";
-            document.getElementById('res-destino-testo').innerHTML = "<i style='color: #888;'>Inserisci la Data di Nascita di entrambi per calcolare il Destino.</i>";
-        }
+            </div>
+        `;
+    } else {
+        document.getElementById('res-destino-p1').innerText = "-";
+        document.getElementById('res-destino-p2').innerText = "-";
+        document.getElementById('res-destino-testo').innerHTML = "<i style='color: #888;'>Inserisci la Data di Nascita di entrambi per calcolare il Destino.</i>";
+    }
 
-        // MOSTRA RISULTATI E SCROLL
+    // ==========================================================================
+    // INTEGRAZIONE ESPORTAZIONE: SALVATAGGIO DEI DATI E GENERAZIONE DINAMICA PULSANTE
+    // ==========================================================================
+    try {
+        // Valori percentuali indicativi per il layout grafico
+        const percentualeIo = ioP1 && ioP2 ? 82 : 0; 
+        const percentualeAnima = animaP1 && animaP2 ? 68 : 0;
+        const percentualeDestino = destinoP1 && destinoP2 ? 91 : 0;
+        const percentualeTotale = Math.round((percentualeIo + percentualeAnima + percentualeDestino) / 3);
+
+        // Helper interno per convertire YYYY-MM-DD nel formato GG/MM/AAAA grafico
+        const formattaDataLeggibile = (dataIso) => {
+            if (!dataIso) return '--/--/----';
+            const parti = dataIso.split('-');
+            return parti.length === 3 ? `${parti[2]}/${parti[1]}/${parti[0]}` : dataIso;
+        };
+
+     const datiDaSalvare = {
+            // AGGIUNTA DEI NOMI E COGNOMI DEI PARTNER PER L'ESPORTAZIONE Grafica
+            nomeP1: p1Nome || "Profilo 1",
+            cognomeP1: p1Cognome || "", // <-- Ora prende correttamente il cognome del Profilo 1
+            nomeP2: p2Nome || "Profilo 2",
+            cognomeP2: p2Cognome || "", // <-- Ora prende correttamente il cognome del Profilo 2
+            
+            dataLui: formattaDataLeggibile(p1Data),
+            dataLei: formattaDataLeggibile(p2Data),
+            
+            ioLui: ioP1,
+            ioLei: ioP2,
+            percentualeIo: percentualeIo,
+            descrizioneIo: "Buona sintonia nell'esprimersi e nel comunicare. Entrambi indipendenti e determinati, riuscite a motivarvi a vicenda.",
+            
+            animaLui: animaP1,
+            animaLei: animaP2,
+            percentualeAnima: percentualeAnima,
+            descrizioneAnima: "Connessione autentica ma con differenze da armonizzare. Serve ascolto e compreensão per trasformare le sensibilità.",
+            
+            destinoLui: destinoP1,
+            destinoLei: destinoP2,
+            percentualeDestino: percentualeDestino,
+            descrizioneDestino: "Grande potenziale di realizzazione insieme. Unite libertà e ispirazione, potete creare qualcosa di importante.",
+            
+            percentualeTotale: percentualeTotale,
+            descrizioneTotale: "Relazione caratterizzata da una buona sintonia generale. Io e Destino mostrano una forte armonia e una visione comune."
+        };
+
+        localStorage.setItem('risultatoCompatibilita', JSON.stringify(datiDaSalvare));
+
+        // Creazione dinamica del tasto grafico "Esporta affinità"
         const contenitoreRisultati = document.getElementById('risultati-sinastria');
         if (contenitoreRisultati) {
-            contenitoreRisultati.style.display = 'block';
-            contenitoreRisultati.scrollIntoView({ behavior: 'smooth' });
-        }
-    } // Chiusura corretta della funzione principale di calcolo
+            // Rimuove un tasto preesistente per pulire l'interfaccia in caso di calcoli ripetuti
+            const vecchioTasto = document.getElementById('btn-esporta-affinita');
+            if (vecchioTasto) vecchioTasto.remove();
 
-    function caricaDaArchivio(partnerNum) {
-        console.log("Caricamento profilo per partner " + partnerNum);
-    }
-
-  // ==========================================
-    // GESTIONE POPUP COMPATIBILITÀ (STILE PITAGORA)
-    // ==========================================
-    function apriApprofondimentoCompatibilita(elementoCard) {
-        const titoloSezione = elementoCard.querySelector('.ns-level-title').innerText;
-        const infoResponso = elementoCard.querySelector('.info-responso').innerText;
-        const testoCompleto = elementoCard.querySelector('.testo-segreto').innerHTML;
-        
-        document.getElementById('modaleTitolo').innerText = titoloSezione;
-        document.getElementById('modaleSottotitolo').innerText = infoResponso;
-        document.getElementById('modaleContenuto').innerHTML = testoCompleto;
-        
-        document.getElementById('modaleApprofondimento').style.display = 'flex';
-    }
-
-    function chiudiModale() {
-        document.getElementById('modaleApprofondimento').style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-        const modale = document.getElementById('modaleApprofondimento');
-        const modaleArc = document.getElementById('modaleArchivio');
-        if (event.target == modale) {
-            modale.style.display = "none";
-        }
-        if (event.target == modaleArc) {
-            modaleArc.style.display = "none";
-        }
-    }
-
-    // ==========================================
-    // INIZIALIZZAZIONE E INTEGRAZIONE ARCHIVIO (INDEXEDDB)
-    // ==========================================
-    const DB_NAME = 'NumerologiaDB';
-    const DB_VERSION = 2;
-    let db;
-    let profiloAttivo = 1; // Tiene traccia di quale profilo stiamo compilando (1 o 2)
-
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-    request.onupgradeneeded = function(event) {
-        db = event.target.result;
-        if (!db.objectStoreNames.contains('clienti')) {
-            db.createObjectStore('clienti', { keyPath: 'id', autoIncrement: true });
-        }
-    };
-
-    request.onsuccess = function(event) {
-        db = event.target.result;
-        // Configura i trigger sui select per aprire il popup personalizzato
-        configuraTriggerArchivio();
-    };
-
-    request.onerror = function(event) {
-        console.error("Errore nell'apertura dell'archivio:", event.target.error);
-    };
-
-    // Blocca l'apertura delle tendine di default e mostra il popup custom
-    function configuraTriggerArchivio() {
-        const select1 = document.querySelectorAll('select')[0];
-        const select2 = document.querySelectorAll('select')[1];
-
-        if (select1) {
-            select1.addEventListener('mousedown', function(e) {
-                e.preventDefault();
-                apriPopupArchivio(1);
-            });
-        }
-        if (select2) {
-            select2.addEventListener('mousedown', function(e) {
-                e.preventDefault();
-                apriPopupArchivio(2);
-            });
-        }
-    }
-
-    // Apre la modale e popola dinamicamente la lista clienti dall'Archivio
-    function apriPopupArchivio(numeroProfilo) {
-        profiloAttivo = numeroProfilo;
-        const listaContenitore = document.getElementById('listaClientiArchivio');
-        if (!listaContenitore) return;
-
-        listaContenitore.innerHTML = "<p style='text-align:center; color:#7f8c8d;'>Caricamento archivio...</p>";
-
-        const transaction = db.transaction(['clienti'], 'readonly');
-        const store = transaction.objectStore('clienti');
-        const requestGetAll = store.getAll();
-
-        requestGetAll.onsuccess = function(event) {
-            const clienti = event.target.result;
+            // Costruzione elemento 
+            const tastoEsporta = document.createElement('a');
+            tastoEsporta.id = 'btn-esporta-affinita';
+            tastoEsporta.href = 'condividi-compatibilita.html';
+            tastoEsporta.innerText = 'Esporta affinità';
             
-            if (clienti.length === 0) {
-                listaContenitore.innerHTML = "<p style='text-align:center; color:#7f8c8d; padding: 10px;'>Nessun profilo salvato in archivio.</p>";
-                document.getElementById('modaleArchivio').style.display = 'flex';
-                return;
-            }
+            // Stile inline coerente
+            tastoEsporta.style.cssText = `
+                display: block;
+                width: fit-content;
+                margin: 25px auto 10px auto;
+                padding: 12px 30px;
+                background-color: var(--accent-gold, #c5a059);
+                color: #000000;
+                font-weight: bold;
+                text-align: center;
+                text-decoration: none;
+                border-radius: 6px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                transition: transform 0.2s, opacity 0.2s;
+                font-size: 16px;
+                letter-spacing: 0.5px;
+            `;
 
-            // Ordinamento alfabetico
-            clienti.sort((a, b) => a.nome.localeCompare(b.nome));
+            // Micro-interazioni hover via JS
+            tastoEsporta.onmouseover = () => tastoEsporta.style.transform = 'scale(1.03)';
+            tastoEsporta.onmouseout = () => tastoEsporta.style.transform = 'scale(1)';
 
-            let htmlPulsanti = "";
-            clienti.forEach(cliente => {
-                const dettagli = cliente.data_nascita ? ` <span style="font-size:12px; color:#7f8c8d; font-style:italic;">(${cliente.data_nascita})</span>` : '';
-                
-                htmlPulsanti += `
-                    <div onclick="selezionaEIniettaProfilo(${cliente.id})" 
-                         style="padding: 12px; margin-bottom: 8px; background-color: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; transition: background 0.2s; font-size: 14px; color: #2c3e50; font-weight: bold; text-align: left;"
-                         onmouseover="this.style.backgroundColor='#f1f5f9'; this.style.borderColor='#c5a059';" 
-                         onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.borderColor='#e2e8f0';">
-                        👤 ${cliente.nome || ''} ${cliente.cognome || ''}${dettagli}
-                    </div>`;
-            });
+            // Iniezione in fondo al div dei risultati
+            contenitoreRisultati.appendChild(tastoEsporta);
+        }
+    } catch (error) {
+        console.error("Errore durante la scrittura in localStorage o creazione tasto:", error);
+    }
+    // ==========================================================================
 
-            listaContenitore.innerHTML = htmlPulsanti;
+    // MOSTRA RISULTATI E SCROLL
+    const contenitoreRisultati = document.getElementById('risultati-sinastria');
+    if (contenitoreRisultati) {
+        contenitoreRisultati.style.display = 'block';
+        contenitoreRisultati.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// ==========================================
+// GESTIONE POPUP COMPATIBILITÀ (STILE PITAGORA)
+// ==========================================
+function apriApprofondimentoCompatibilita(elementoCard) {
+    const titoloSezione = elementoCard.querySelector('.ns-level-title').innerText;
+    const infoResponso = elementoCard.querySelector('.info-responso').innerText;
+    const testoCompleto = elementoCard.querySelector('.testo-segreto').innerHTML;
+    
+    document.getElementById('modaleTitolo').innerText = titoloSezione;
+    document.getElementById('modaleSottotitolo').innerText = infoResponso;
+    document.getElementById('modaleContenuto').innerHTML = testoCompleto;
+    
+    document.getElementById('modaleApprofondimento').style.display = 'flex';
+}
+
+function chiudiModale() {
+    document.getElementById('modaleApprofondimento').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modale = document.getElementById('modaleApprofondimento');
+    const modaleArc = document.getElementById('modaleArchivio');
+    if (event.target == modale) {
+        modale.style.display = "none";
+    }
+    if (event.target == modaleArc) {
+        modaleArc.style.display = "none";
+    }
+}
+
+// ==========================================
+// INIZIALIZZAZIONE E INTEGRAZIONE ARCHIVIO (INDEXEDDB)
+// ==========================================
+const DB_NAME = 'NumerologiaDB';
+const DB_VERSION = 2;
+let db;
+let profiloAttivo = 1; // Tiene traccia di quale profilo stiamo compilando (1 o 2)
+
+const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+request.onupgradeneeded = function(event) {
+    db = event.target.result;
+    if (!db.objectStoreNames.contains('clienti')) {
+        db.createObjectStore('clienti', { keyPath: 'id', autoIncrement: true });
+    }
+};
+
+request.onsuccess = function(event) {
+    db = event.target.result;
+    // Configura i trigger sui select per aprire il popup personalizzato
+    configuraTriggerArchivio();
+};
+
+request.onerror = function(event) {
+    console.error("Errore nell'apertura dell'archivio:", event.target.error);
+};
+
+// Blocca l'apertura delle tendine di default e mostra il popup custom
+function configuraTriggerArchivio() {
+    const select1 = document.querySelectorAll('select')[0];
+    const select2 = document.querySelectorAll('select')[1];
+
+    if (select1) {
+        select1.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            apriPopupArchivio(1);
+        });
+    }
+    if (select2) {
+        select2.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            apriPopupArchivio(2);
+        });
+    }
+}
+
+// Apre la modale e popola dinamicamente la lista clienti dall'Archivio
+function apriPopupArchivio(numeroProfilo) {
+    profiloAttivo = numeroProfilo;
+    const listaContenitore = document.getElementById('listaClientiArchivio');
+    if (!listaContenitore) return;
+
+    listaContenitore.innerHTML = "<p style='text-align:center; color:#7f8c8d;'>Caricamento archivio...</p>";
+
+    const transaction = db.transaction(['clienti'], 'readonly');
+    const store = transaction.objectStore('clienti');
+    const requestGetAll = store.getAll();
+
+    requestGetAll.onsuccess = function(event) {
+        const clienti = event.target.result;
+        
+        if (clienti.length === 0) {
+            listaContenitore.innerHTML = "<p style='text-align:center; color:#7f8c8d; padding: 10px;'>Nessun profilo salvato in archivio.</p>";
             document.getElementById('modaleArchivio').style.display = 'flex';
-        };
-    }
+            return;
+        }
 
- // Inserisce i dati estratti nei rispettivi input a schermo (convertendo la data nel formato corretto)
-    function selezionaEIniettaProfilo(id_cliente) {
-        const transaction = db.transaction(['clienti'], 'readonly');
-        const store = transaction.objectStore('clienti');
-        const requestGet = store.get(Number(id_cliente));
+        // Ordinamento alfabetico
+        clienti.sort((a, b) => a.nome.localeCompare(b.nome));
 
-        requestGet.onsuccess = function(event) {
-            const cliente = event.target.result;
-            if (cliente) {
-                // Funzione interna per convertire la data da GG/MM/AAAA a AAAA-MM-DD
-                let dataFormattata = "";
-                if (cliente.data_nascita && cliente.data_nascita.includes('/')) {
-                    const parti = cliente.data_nascita.split('/');
-                    if (parti.length === 3) {
-                        // Inverte l'ordine: Anno - Mese - Giorno
-                        dataFormattata = `${parti[2]}-${parti[1]}-${parti[0]}`;
-                    }
-                } else {
-                    dataFormattata = cliente.data_nascita || "";
+        let htmlPulsanti = "";
+        clienti.forEach(cliente => {
+            const dettagli = cliente.data_nascita ? ` <span style="font-size:12px; color:#7f8c8d; font-style:italic;">(${cliente.data_nascita})</span>` : '';
+            
+            htmlPulsanti += `
+                <div onclick="selezionaEIniettaProfilo(${cliente.id})" 
+                     style="padding: 12px; margin-bottom: 8px; background-color: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; transition: background 0.2s; font-size: 14px; color: #2c3e50; font-weight: bold; text-align: left;"
+                     onmouseover="this.style.backgroundColor='#f1f5f9'; this.style.borderColor='#c5a059';" 
+                     onmouseout="this.style.backgroundColor='#f8f9fa'; this.style.borderColor='#e2e8f0';">
+                    👤 ${cliente.nome || ''} ${cliente.cognome || ''}${dettagli}
+                </div>`;
+        });
+
+        listaContenitore.innerHTML = htmlPulsanti;
+        document.getElementById('modaleArchivio').style.display = 'flex';
+    };
+}
+
+// Inserisce i dati estratti nei rispettivi input a schermo (convertendo la data nel formato corretto)
+function selezionaEIniettaProfilo(id_cliente) {
+    const transaction = db.transaction(['clienti'], 'readonly');
+    const store = transaction.objectStore('clienti');
+    const requestGet = store.get(Number(id_cliente));
+
+    requestGet.onsuccess = function(event) {
+        const cliente = event.target.result;
+        if (cliente) {
+            // Funzione interna per convertire la data da GG/MM/AAAA a AAAA-MM-DD
+            let dataFormattata = "";
+            if (cliente.data_nascita && cliente.data_nascita.includes('/')) {
+                const parti = cliente.data_nascita.split('/');
+                if (parti.length === 3) {
+                    // Inverte l'ordine: Anno - Mese - Giorno
+                    dataFormattata = `${parti[2]}-${parti[1]}-${parti[0]}`;
                 }
-
-                if (profiloAttivo === 1) {
-                    if (document.getElementById('p1-nome')) document.getElementById('p1-nome').value = cliente.nome || "";
-                    if (document.getElementById('p1-cognome')) document.getElementById('p1-cognome').value = cliente.cognome || "";
-                    if (document.getElementById('p1-data')) document.getElementById('p1-data').value = dataFormattata;
-                } else {
-                    if (document.getElementById('p2-nome')) document.getElementById('p2-nome').value = cliente.nome || "";
-                    if (document.getElementById('p2-cognome')) document.getElementById('p2-cognome').value = cliente.cognome || "";
-                    if (document.getElementById('p2-data')) document.getElementById('p2-data').value = dataFormattata;
-                }
+            } else {
+                dataFormattata = cliente.data_nascita || "";
             }
-            chiudiPopupArchivio();
-        };
-    }
 
-    function chiudiPopupArchivio() {
-        document.getElementById('modaleArchivio').style.display = 'none';
-    }
+            if (profiloAttivo === 1) {
+                if (document.getElementById('p1-nome')) document.getElementById('p1-nome').value = cliente.nome || "";
+                if (document.getElementById('p1-cognome')) document.getElementById('p1-cognome').value = cliente.cognome || "";
+                if (document.getElementById('p1-data')) document.getElementById('p1-data').value = dataFormattata;
+            } else {
+                if (document.getElementById('p2-nome')) document.getElementById('p2-nome').value = cliente.nome || "";
+                if (document.getElementById('p2-cognome')) document.getElementById('p2-cognome').value = cliente.cognome || "";
+                if (document.getElementById('p2-data')) document.getElementById('p2-data').value = dataFormattata;
+            }
+        }
+        chiudiPopupArchivio();
+    };
+}
+
+function chiudiPopupArchivio() {
+    document.getElementById('modaleArchivio').style.display = 'none';
+}
 </script>
 
 <!-- STRUTTURA DEL POPUP MODALE COMPATIBILITÀ (IDENTICA A PITAGORA) -->

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerosophia - Esporta Compatibilità</title>
+    <!-- Font elegante per i titoli numerologici -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Libreria per convertire il HTML in immagine PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-dark: #0d0f12;
+            --card-bg: #16191e;
+            --accent-gold: #c5a059;
+            --text-light: #f5f6f8;
+            --text-muted: #a0aab5;
+            --border-gold: rgba(197, 160, 89, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 5px;
+            overflow: hidden; /* Evita lo scroll sulla pagina principale */
+        }
+
+        /* CONTENITORE PRINCIPALE MOBILE-RESPONSIVE COMPATTO */
+        #quadro-esportazione {
+            background-color: var(--bg-dark);
+            width: 100%;
+            max-width: 380px;
+            padding: 15px 12px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            background-image: radial-gradient(circle at 50% 10%, rgba(197, 160, 89, 0.05) 0%, transparent 80%);
+        }
+
+        /* Intestazione */
+        .header-Quadro {
+            text-align: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-gold);
+            padding-bottom: 8px;
+        }
+
+        .header-Quadro h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 2px;
+        }
+
+        .header-Quadro h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        /* Blocco Nomi/Date */
+        .date-partner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0 2px 0;
+        }
+
+        .info-data {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            flex: 1;
+        }
+
+        .info-data .nome-profilo {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .info-data .data-profilo {
+            display: block;
+            color: var(--accent-gold);
+            font-weight: bold;
+            margin-top: 2px;
+            font-size: 10px;
+        }
+
+        .stella-separatore {
+            color: var(--accent-gold);
+            font-size: 12px;
+        }
+
+        /* CARD LIVELLI OTTIMIZZATE IN ALTEZZA */
+        .livello-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px 6px;
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.3fr 0.9fr;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .col-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .livello-titolo {
+            font-family: 'Cinzel', serif;
+            font-size: 8.5px;
+            letter-spacing: 0.1px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .livello-descrizione-breve {
+            font-size: 8.5px;
+            line-height: 1.2;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .col-carte {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .img-carta {
+            width: 48px; 
+            height: 72px;
+            border-radius: 4px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            object-fit: cover;
+        }
+
+        .piu-separatore {
+            color: var(--accent-gold);
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .col-armonia {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .armonia-titolo {
+            font-size: 8px;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .armonia-valore {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 1px;
+        }
+
+        .livello-descrizione-esito {
+            font-size: 8px;
+            line-height: 1.2;
+            color: var(--text-muted);
+            text-align: right;
+        }
+
+        /* CARD FINALE IN ORIZZONTALE */
+        .totale-card {
+            background: linear-gradient(135deg, #1b1e24 0%, #16191e 100%);
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+
+        .totale-layout-orizzontale {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cerchio-percentuale {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            background: rgba(197, 160, 89, 0.05);
+            transition: border-color 0.3s ease, color 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .totale-testi-destra {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: left;
+        }
+
+        .totale-titolo {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+        }
+
+        .descrizione-totale-testo {
+            font-size: 8.5px;
+            line-height: 1.25;
+            color: var(--text-muted);
+        }
+
+        .citazione-finale {
+            font-style: italic;
+            font-size: 8.5px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 4px;
+            line-height: 1.3;
+        }
+
+        /* CONTENITORE PULSANTI EFFETTO MEZZO-E-MEZZO */
+        .btn-azione-container {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .btn-custom {
+            flex: 1;
+            padding: 12px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        /* Pulsante Esporta (Principale) */
+        #btn-esporta {
+            background-color: var(--accent-gold);
+            color: #0d0f12;
+            border: none;
+        }
+
+        #btn-esporta:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Pulsante Home (Secondario) */
+        #btn-home {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+        }
+
+        #btn-home:hover {
+            background-color: rgba(197, 160, 89, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- IL QUADRO GRAFICO -->
+    <div id="quadro-esportazione">
+        
+        <div class="header-Quadro">
+            <h1>Numerosophia</h1>
+            <h2>Compatibilità Numerologica</h2>
+            
+            <div class="date-partner">
+                <div class="info-data">
+                    <div class="nome-profilo" id="lbl-nome-p1">Profilo 1</div>
+                    <span class="data-profilo" id="lbl-data-p1">--/--/----</span>
+                </div>
+                
+                <div class="stella-separatore">✦</div>
+                
+                <div class="info-data">
+                    <div class="nome-profilo" id="lbl-nome-p2">Profilo 2</div>
+                    <span class="data-profilo" id="lbl-data-p2">--/--/----</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. LIVELLO IO -->
+        <div class="livello-card" id="card-io">
+            <div class="col-info">
+                <div class="livello-titolo">Compatibilità dell'Io</div>
+                <div class="livello-descrizione-breve">Come vi presentate nel mondo.</div>
+            </div>
+            <div class="col-carte">
+                <img src="" id="img-io-p1" class="img-carta" alt="Carta P1">
+                <span class="piu-separatore">+</span>
+                <img src="" id="img-io-p2" class="img-carta" alt="Carta P2">
+            </div>
+            <div class="col-armonia">
+                <div class="armonia-titolo">Armonia</div>
+                <div class="armonia-valore" id="lbl-armonia-io">--%</div>
+                <div class="livello-descrizione-esito" id="lbl-desc-io">Caricamento...</div>
+            </div>
+        </div>
+
+        <!-- 2. LIVELLO ANIMA -->
+        <div class="livello-card" id="card-anima">
+            <div class="col-info">
+                <div class="livello-titolo">Compatibilità dell'Anima</div>
+                <div class="livello-descrizione-breve">Il legame emotivo profondo.</div>
+            </div>
+            <div class="col-carte">
+                <img src="" id="img-anima-p1" class="img-carta" alt="Carta P1">
+                <span class="piu-separatore">+</span>
+                <img src="" id="img-anima-p2" class="img-carta" alt="Carta P2">
+            </div>
+            <div class="col-armonia">
+                <div class="armonia-titolo">Armonia</div>
+                <div class="armonia-valore" id="lbl-armonia-anima">--%</div>
+                <div class="livello-descrizione-esito" id="lbl-desc-anima">Caricamento...</div>
+            </div>
+        </div>
+
+        <!-- 3. LIVELLO DESTINO -->
+        <div class="livello-card" id="card-destino">
+            <div class="col-info">
+                <div class="livello-titolo">Compatibilità del Destino</div>
+                <div class="livello-descrizione-breve">La missione comune.</div>
+            </div>
+            <div class="col-carte">
+                <img src="" id="img-destino-p1" class="img-carta" alt="Carta P1">
+                <span class="piu-separatore">+</span>
+                <img src="" id="img-destino-p2" class="img-carta" alt="Carta P2">
+            </div>
+            <div class="col-armonia">
+                <div class="armonia-titolo">Armonia</div>
+                <div class="armonia-valore" id="lbl-armonia-destino">--%</div>
+                <div class="livello-descrizione-esito" id="lbl-desc-destino">Caricamento...</div>
+            </div>
+        </div>
+
+        <!-- RISULTATO COMPLESSIVO ORIZZONTALE -->
+        <div class="totale-card">
+            <div class="totale-layout-orizzontale">
+                <div class="cerchio-percentuale" id="lbl-totale-percentuale">--%</div>
+                
+                <div class="totale-testi-destra">
+                    <div class="totale-titolo">Affinità Complessiva</div>
+                    <div class="descrizione-totale-testo" id="lbl-desc-totale">Analisi generale della sinastria delle anime.</div>
+                    <div class="citazione-finale">"Ogni relazione è un cammino di crescita. I numeri mostrano tendenze."</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- CONTENITORE PULSANTI AFFIANCATI -->
+    <div class="btn-azione-container">
+        <button id="btn-esporta" class="btn-custom" onclick="generaImmagineCondivisione()">Esporta Carta</button>
+        <button id="btn-home" class="btn-custom" onclick="ritornaAllaHome()">Torna alla Home</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            try {
+                const datiRaw = localStorage.getItem('risultatoCompatibilita');
+                if (!datiRaw) {
+                    alert("Nessun dato di compatibilità trovato. Esegui prima il calcolo.");
+                    return;
+                }
+
+                const dati = JSON.parse(datiRaw);
+
+                const percorsoBaseCarte = "carte/"; 
+                const estensioneCarte = ".png";     
+
+                const ottieniNomeFile = (numero) => {
+                    if (numero === undefined || numero === null) return "";
+                    const numStr = numero.toString();
+                    if (numStr.startsWith("-")) return "ombra" + numStr.replace("-", ""); 
+                    return numStr; 
+                };
+
+                const impostaColorePercentuale = (elementoDom, percentuale, eCerchio = false) => {
+                    if (!elementoDom) return;
+                    
+                    let colore = "#c5a059"; 
+                    if (percentuale < 55) {
+                        colore = "#e57373"; 
+                    } else if (percentuale >= 55 && percentuale < 75) {
+                        colore = "#c5a059"; 
+                    } else {
+                        colore = "#81c784"; 
+                    }
+
+                    elementoDom.style.color = colore;
+
+                    if (eCerchio) {
+                        elementoDom.style.borderColor = colore;
+                        elementoDom.style.background = `${colore}0d`; 
+                    }
+                };
+
+                const ottieniCRA = (n1, n2) => {
+                    const coppia = [Math.abs(n1), Math.abs(n2)].sort((a, b) => a - b).join("-");
+                    const risonanze = {
+                        "2-6": 4, "7-11": 4, "9-33": 4, "8-44": 4, "4-22": 4,
+                        "1-8": 2, "3-5": 2, "5-9": 2, "6-33": 2, "11-22": 2, "22-44": 2,
+                        "1-2": -2, "3-4": -2, "5-6": -2, "8-9": -2,
+                        "4-5": -4, "7-8": -4, "1-7": -4, "2-8": -4
+                    };
+                    return risonanze[coppia] !== undefined ? risonanze[coppia] : 0;
+                };
+
+                const ottieniCNM = (n1, n2) => {
+                    const a = Math.abs(n1);
+                    const b = Math.abs(n2);
+                    const maestri = [11, 22, 33, 44];
+                    if (!maestri.includes(a) || !maestri.includes(b)) return 0;
+                    if (a === b) return 4;
+                    const coppia = [a, b].sort((x, y) => x - y).join("-");
+                    const bonusMaestriDiversi = {
+                        "11-22": 2, "22-33": 2, "33-44": 2,
+                        "11-33": 1, "22-44": 1
+                    };
+                    return bonusMaestriDiversi[coppia] !== undefined ? bonusMaestriDiversi[coppia] : 0;
+                };
+
+                const calcolaStelleDaPercentuale = (percentuale) => {
+                    if (percentuale < 55) return "⭐⭐☆☆☆"; 
+                    if (percentuale >= 55 && percentuale < 75) return "⭐⭐⭐⭐☆"; 
+                    return "⭐⭐⭐⭐⭐"; 
+                };
+
+                const calcolaAffinitaLivello = (n1, n2) => {
+                    if (!n1 || !n2) return { percentuale: 0, stelle: "☆☆☆☆☆" };
+                    const a = Math.abs(n1);
+                    const b = Math.abs(n2);
+
+                    let base = 100 - (Math.abs(a - b) * 4);
+                    if (a === b) base = 95; 
+                    
+                    const coppia = [a, b].sort((x, y) => x - y).join("-");
+                    if (coppia === "4-5") base = 45 - (ottieniCRA(a,b) + ottieniCNM(a,b));
+                    if (coppia === "1-7") base = 49 - (ottieniCRA(a,b) + ottieniCNM(a,b));
+                    if (coppia === "2-8") base = 51 - (ottieniCRA(a,b) + ottieniCNM(a,b));
+
+                    const cra = ottieniCRA(n1, n2);
+                    const cnm = ottieniCNM(n1, n2);
+                    
+                    let finale = Math.min(100, Math.max(0, Math.round(base + cra + cnm)));
+                    const stelle = calcolaStelleDaPercentuale(finale);
+                    
+                    return { percentuale: finale, stelle: stelle };
+                };
+
+                const nomeCompletoP1 = (dati.nomeP1 || dati.nomeLui || 'Tu') + 
+                                       (dati.cognomeP1 || dati.cognomeLui ? ' ' + (dati.cognomeP1 || dati.cognomeLui) : '');
+                document.getElementById('lbl-nome-p1').innerText = nomeCompletoP1;
+                document.getElementById('lbl-data-p1').innerText = dati.dataLui || '--/--/----';
+
+                const nomeCompletoP2 = (dati.nomeP2 || dati.nomeLei || 'Altro') + 
+                                       (dati.cognomeP2 || dati.cognomeLei ? ' ' + (dati.cognomeP2 || dati.cognomeLei) : '');
+                document.getElementById('lbl-nome-p2').innerText = nomeCompletoP2;
+                document.getElementById('lbl-data-p2').innerText = dati.dataLei || '--/--/----';
+
+                let sommePercentuali = 0;
+                let conteggioLivelli = 0;
+
+                // Livello IO
+                if(dati.ioLui && dati.ioLei) {
+                    const risIo = calcolaAffinitaLivello(dati.ioLui, dati.ioLei);
+                    const elIo = document.getElementById('lbl-armonia-io');
+                    elIo.innerText = `${risIo.percentuale}%`;
+                    impostaColorePercentuale(elIo, risIo.percentuale); 
+                    
+                    document.getElementById('lbl-desc-io').innerHTML = `Sintonia energetica.<br><b>Potenziale:</b> ${risIo.stelle}`;
+                    document.getElementById('img-io-p1').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.ioLui)}${estensioneCarte}`;
+                    document.getElementById('img-io-p2').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.ioLei)}${estensioneCarte}`;
+                    
+                    sommePercentuali += risIo.percentuale;
+                    conteggioLivelli++;
+                } else {
+                    document.getElementById('card-io').style.display = 'none';
+                }
+
+                // Livello ANIMA
+                if(dati.animaLui && dati.animaLei) {
+                    const risAnima = calcolaAffinitaLivello(dati.animaLui, dati.animaLei);
+                    const elAnima = document.getElementById('lbl-armonia-anima');
+                    elAnima.innerText = `${risAnima.percentuale}%`;
+                    impostaColorePercentuale(elAnima, risAnima.percentuale); 
+                    
+                    document.getElementById('lbl-desc-anima').innerHTML = `Connessione intima.<br><b>Potenziale:</b> ${risAnima.stelle}`;
+                    document.getElementById('img-anima-p1').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.animaLui)}${estensioneCarte}`;
+                    document.getElementById('img-anima-p2').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.animaLei)}${estensioneCarte}`;
+                    
+                    sommePercentuali += risAnima.percentuale;
+                    conteggioLivelli++;
+                } else {
+                    document.getElementById('card-anima').style.display = 'none';
+                }
+
+                // Livello DESTINO
+                if(dati.destinoLui && dati.destinoLei) {
+                    const risDestino = calcolaAffinitaLivello(dati.destinoLui, dati.destinoLei);
+                    const elDestino = document.getElementById('lbl-armonia-destino');
+                    elDestino.innerText = `${risDestino.percentuale}%`;
+                    impostaColorePercentuale(elDestino, risDestino.percentuale); 
+                    
+                    document.getElementById('lbl-desc-destino').innerHTML = `Cammino di vita.<br><b>Potenziale:</b> ${risDestino.stelle}`;
+                    document.getElementById('img-destino-p1').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.destinoLui)}${estensioneCarte}`;
+                    document.getElementById('img-destino-p2').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.destinoLei)}${estensioneCarte}`;
+                    
+                    sommePercentuali += risDestino.percentuale;
+                    conteggioLivelli++;
+                } else {
+                    document.getElementById('card-destino').style.display = 'none';
+                }
+
+                // CALCOLO FINALE COMPLESSIVO
+                if (conteggioLivelli > 0) {
+                    const percentualeTotale = Math.round(sommePercentuali / conteggioLivelli);
+                    const elTotale = document.getElementById('lbl-totale-percentuale');
+                    elTotale.innerText = `${percentualeTotale}%`;
+                    
+                    impostaColorePercentuale(elTotale, percentualeTotale, true); 
+                    
+                    let messaggioEvolutivo = "Analisi della sinastria delle anime.";
+                    if (percentualeTotale < 55) {
+                        messaggioEvolutivo = "Sintonia complessa. Le sfide numeriche indicano un forte legame karmico progettato per farvi evolvere profondamente.";
+                    } else if (percentualeTotale >= 55 && percentualeTotale < 75) {
+                        messaggioEvolutivo = "Unione equilibrata in cui intesa e differenze si alternano costruttivamente, offrendo continua crescita.";
+                    } else {
+                        messaggioEvolutivo = "Risonanza fluida. Siete anime specchio sulla stessa lunghezza d'onda, favorendo una comprensione immediata.";
+                    }
+                    document.getElementById('lbl-desc-totale').innerText = messaggioEvolutivo;
+                }
+
+            } catch (e) {
+                console.error("Errore nel calcolo energetico dei dati:", e);
+            }
+        });
+
+        function ritornaAllaHome() {
+            // Reindirizza alla pagina index principale (puoi cambiare il nome del file se necessario)
+            window.location.href = "index.html";
+        }
+
+        function generaImmagineCondivisione() {
+            const pulsante = document.getElementById('btn-esporta');
+            const quadro = document.getElementById('quadro-esportazione');
+            
+            pulsante.innerText = "In corso...";
+            pulsante.disabled = true;
+
+            const nome1 = document.getElementById('lbl-nome-p1').innerText.replace(/\s+/g, '_');
+            const nome2 = document.getElementById('lbl-nome-p2').innerText.replace(/\s+/g, '_');
+            const nomeFile = `Numerosophia_${nome1}_${nome2}.png`;
+
+            const opzioni = {
+                scale: 2, 
+                useCORS: true, 
+                backgroundColor: "#0d0f12", 
+                logging: false
+            };
+
+            setTimeout(() => {
+                html2canvas(quadro, opzioni).then(canvas => {
+                    canvas.toBlob(function(blob) {
+                        if (!blob) {
+                            alert("Errore durante la generazione dell'immagine.");
+                            ripristinaPulsante();
+                            return;
+                        }
+
+                        if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], nomeFile, { type: "image/png" })] })) {
+                            const file = new File([blob], nomeFile, { type: "image/png" });
+                            navigator.share({
+                                files: [file],
+                                title: 'Compatibilità Numerosophia',
+                                text: 'Mappa della nostra compatibilità numerologica!'
+                            })
+                            .then(() => console.log('Condivisione riuscita'))
+                            .catch((error) => console.log('Errore condivisione:', error))
+                            .finally(() => ripristinaPulsante());
+                        } else {
+                            const url = URL.createObjectURL(blob);
+                            const linkCondivisione = document.createElement('a');
+                            linkCondivione.download = nomeFile;
+                            linkCondivisione.href = url;
+                            document.body.appendChild(linkCondivione);
+                            linkCondivione.click();
+                            document.body.removeChild(linkCondivione);
+                            URL.revokeObjectURL(url);
+                            ripristinaPulsante();
+                        }
+                    }, 'image/png');
+                }).catch(err => {
+                    console.error("Errore html2canvas:", err);
+                    alert("Errore nel salvare l'immagine.");
+                    ripristinaPulsante();
+                });
+            }, 100);
+
+            function ripristinaPulsante() {
+                pulsante.innerText = "Esporta Carta";
+                pulsante.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
