@@ -34,22 +34,20 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            min-height: -webkit-fill-available; /* Ottimizzazione altezza browser mobile */
+            min-height: -webkit-fill-available;
             padding: 20px 10px;
-            overflow-y: auto; /* Permette lo scroll se lo schermo è piccolo */
+            overflow-y: auto;
         }
 
-        /* CONTENITORE DI CENTRATURA PERFETTA */
         .wrapper-applicazione {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             max-width: 380px;
-            margin: auto 0; /* Centra verticalmente alla perfezione sia su PC che su Mobile */
+            margin: auto 0;
         }
 
-        /* CONTENITORE PRINCIPALE MOBILE-RESPONSIVE COMPATTO */
         #quadro-esportazione {
             background-color: var(--bg-dark);
             width: 100%;
@@ -61,7 +59,6 @@
             background-image: radial-gradient(circle at 50% 10%, rgba(197, 160, 89, 0.05) 0%, transparent 80%);
         }
 
-        /* Intestazione */
         .header-Quadro {
             text-align: center;
             margin-bottom: 12px;
@@ -86,7 +83,6 @@
             opacity: 0.9;
         }
 
-        /* Blocco Nomi/Date */
         .date-partner {
             display: flex;
             justify-content: center;
@@ -136,7 +132,6 @@
             justify-content: center;
         }
 
-        /* CARD LIVELLI */
         .livello-card {
             background-color: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -221,7 +216,6 @@
             text-align: right;
         }
 
-        /* CARD FINALE IN ORIZZONTALE */
         .totale-card {
             background: linear-gradient(135deg, #1b1e24 0%, #16191e 100%);
             border: 1px solid var(--border-gold);
@@ -296,7 +290,6 @@
             line-height: 1.3;
         }
 
-        /* CONTENITORE PULSANTI */
         .btn-azione-container {
             margin-top: 10px;
             width: 100%;
@@ -343,10 +336,8 @@
 </head>
 <body>
 
-    <!-- CONTENITORE DI LAYOUT PER LA CENTRATURA AUTOMATICA -->
     <div class="wrapper-applicazione">
 
-        <!-- IL QUADRO GRAFICO -->
         <div id="quadro-esportazione">
             
             <div class="header-Quadro">
@@ -440,7 +431,6 @@
 
         </div>
 
-        <!-- CONTENITORE PULSANTI AFFIANCATI -->
         <div class="btn-azione-container">
             <button id="btn-esporta" class="btn-custom" onclick="generaImmagineCondivisione()">Esporta Carta</button>
             <button id="btn-home" class="btn-custom" onclick="ritornaAllaHome()">Torna alla Home</button>
@@ -514,10 +504,15 @@
                     return bonusMaestriDiversi[coppia] !== undefined ? bonusMaestriDiversi[coppia] : 0;
                 };
 
+                // MODIFICA CORRETTIVA APPLICATA: Configurazione esatta della scala delle stelle richiesta
                 const calcolaStelleDaPercentuale = (percentuale) => {
-                    if (percentuale < 55) return "⭐⭐☆☆☆"; 
-                    if (percentuale >= 55 && percentuale < 75) return "⭐⭐⭐⭐☆"; 
-                    return "⭐⭐⭐⭐⭐"; 
+                    if (percentuale === 0) return "☆☆☆☆☆";                       // 0% -> 0 stelle
+                    if (percentuale >= 1 && percentuale <= 30) return "⭐☆☆☆☆";     // 1-30% -> 1 stella
+                    if (percentuale >= 31 && percentuale <= 55) return "⭐⭐☆☆☆";    // 31-55% -> 2 stelle
+                    if (percentuale >= 56 && percentuale <= 75) return "⭐⭐⭐☆☆";    // 56-75% -> 3 stelle
+                    if (percentuale >= 76 && percentuale <= 90) return "⭐⭐⭐⭐☆";    // 76-90% -> 4 stelle
+                    if (percentuale >= 91 && percentuale <= 100) return "⭐⭐⭐⭐⭐";  // 91-100% -> 5 stelle
+                    return "☆☆☆☆☆"; // Fallback di sicurezza
                 };
 
                 const calcolaAffinitaLivello = (n1, n2) => {
@@ -529,12 +524,13 @@
                     if (a === b) base = 95; 
                     
                     const coppia = [a, b].sort((x, y) => x - y).join("-");
-                    if (coppia === "4-5") base = 45 - (ottieniCRA(a,b) + ottieniCNM(a,b));
-                    if (coppia === "1-7") base = 49 - (ottieniCRA(a,b) + ottieniCNM(a,b));
-                    if (coppia === "2-8") base = 51 - (ottieniCRA(a,b) + ottieniCNM(a,b));
-
+                    
                     const cra = ottieniCRA(n1, n2);
                     const cnm = ottieniCNM(n1, n2);
+
+                    if (coppia === "4-5") base = 45;
+                    if (coppia === "1-7") base = 49;
+                    if (coppia === "2-8") base = 51;
                     
                     let finale = Math.min(100, Math.max(0, Math.round(base + cra + cnm)));
                     const stelle = calcolaStelleDaPercentuale(finale);
@@ -666,7 +662,6 @@
                             return;
                         }
 
-                        // FORZIAMO IL DOWNLOAD DIRETTO (Ignorando il menu di condivisione dello smartphone)
                         const url = URL.createObjectURL(blob);
                         const linkDownload = document.createElement('a');
                         linkDownload.download = nomeFile;
@@ -680,7 +675,7 @@
                     }, 'image/png');
                 }).catch(err => {
                     console.error("Errore html2canvas:", err);
-                    alert("Errore nel salvare l'immagine. Se sei offline (file:///), alcuni browser bloccano il salvataggio.");
+                    alert("Errore nel salvare l'immagine.");
                     ripristinaPulsante();
                 });
             }, 100);
