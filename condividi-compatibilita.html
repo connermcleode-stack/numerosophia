@@ -26,33 +26,33 @@
             padding: 0;
         }
 
-    body {
+        body {
             background-color: var(--bg-dark);
             color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Allinea dall'alto su mobile */
             min-height: 100vh;
-            padding: 15px 10px; /* Spazio interno uniforme sopra, sotto e ai lati */
-            overflow-y: auto; /* Permette lo scorrimento se lo schermo è molto piccolo */
+            min-height: -webkit-fill-available; /* Ottimizzazione altezza browser mobile */
+            padding: 20px 10px;
+            overflow-y: auto; /* Permette lo scroll se lo schermo è piccolo */
         }
 
-        /* Se lo schermo è grande (PC o tablet grandi), centra perfettamente */
-        @media (min-height: 850px) {
-            body {
-                justify-content: center;
-                padding: 5px;
-                overflow: hidden;
-            }
+        /* CONTENITORE DI CENTRATURA PERFETTA */
+        .wrapper-applicazione {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 380px;
+            margin: auto 0; /* Centra verticalmente alla perfezione sia su PC che su Mobile */
         }
 
         /* CONTENITORE PRINCIPALE MOBILE-RESPONSIVE COMPATTO */
         #quadro-esportazione {
             background-color: var(--bg-dark);
             width: 100%;
-            max-width: 380px;
             padding: 15px 12px;
             border: 2px solid var(--accent-gold);
             border-radius: 12px;
@@ -86,11 +86,11 @@
             opacity: 0.9;
         }
 
-        /* Blocco Nomi/Date - Ottimizzato per non sforare */
+        /* Blocco Nomi/Date */
         .date-partner {
             display: flex;
             justify-content: center;
-            align-items: stretch; /* Estende i box alla stessa altezza se uno va su due righe */
+            align-items: stretch;
             gap: 8px;
             margin: 10px 0 2px 0;
         }
@@ -105,17 +105,17 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-width: 0; /* Permette il corretto funzionamento di flex e word-wrap nei figli */
+            min-width: 0;
         }
 
         .info-data .nome-profilo {
             color: var(--text-light);
             font-weight: 600;
-            font-size: 10px; /* Ridotto leggermente per sicurezza */
+            font-size: 10px;
             letter-spacing: 0.3px;
             text-transform: uppercase;
-            white-space: normal; /* Permette al testo di andare a capo */
-            word-wrap: break-word; /* Rompe le parole eccessivamente lunghe */
+            white-space: normal;
+            word-wrap: break-word;
             overflow-wrap: break-word;
             line-height: 1.3;
         }
@@ -136,7 +136,7 @@
             justify-content: center;
         }
 
-        /* CARD LIVELLI OTTIMIZZATE IN ALTEZZA */
+        /* CARD LIVELLI */
         .livello-card {
             background-color: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -236,7 +236,6 @@
             gap: 12px;
         }
 
-        /* Blocco Sinistro: Cerchio + Stelline incolonnate */
         .totale-sinistra {
             display: flex;
             flex-direction: column;
@@ -266,7 +265,6 @@
             white-space: nowrap;
         }
 
-        /* Blocco Destro: Testi descrittivi */
         .totale-testi-destra {
             flex: 1;
             display: flex;
@@ -302,7 +300,6 @@
         .btn-azione-container {
             margin-top: 10px;
             width: 100%;
-            max-width: 380px;
             display: flex;
             gap: 10px;
             justify-content: space-between;
@@ -322,7 +319,6 @@
             text-align: center;
         }
 
-        /* Pulsante Esporta (Principale) */
         #btn-esporta {
             background-color: var(--accent-gold);
             color: #0d0f12;
@@ -334,7 +330,6 @@
             opacity: 0.6;
         }
 
-        /* Pulsante Home (Secondario) */
         #btn-home {
             background-color: transparent;
             color: var(--accent-gold);
@@ -348,106 +343,109 @@
 </head>
 <body>
 
-    <!-- IL QUADRO GRAFICO -->
-    <div id="quadro-esportazione">
-        
-        <div class="header-Quadro">
-            <h1>Numerosophia</h1>
-            <h2>Compatibilità Numerologica</h2>
+    <!-- CONTENITORE DI LAYOUT PER LA CENTRATURA AUTOMATICA -->
+    <div class="wrapper-applicazione">
+
+        <!-- IL QUADRO GRAFICO -->
+        <div id="quadro-esportazione">
             
-            <div class="date-partner">
-                <div class="info-data">
-                    <div class="nome-profilo" id="lbl-nome-p1">Profilo 1</div>
-                    <span class="data-profilo" id="lbl-data-p1">--/--/----</span>
-                </div>
+            <div class="header-Quadro">
+                <h1>Numerosophia</h1>
+                <h2>Compatibilità Numerologica</h2>
                 
-                <div class="stella-separatore">✦</div>
-                
-                <div class="info-data">
-                    <div class="nome-profilo" id="lbl-nome-p2">Profilo 2</div>
-                    <span class="data-profilo" id="lbl-data-p2">--/--/----</span>
+                <div class="date-partner">
+                    <div class="info-data">
+                        <div class="nome-profilo" id="lbl-nome-p1">Profilo 1</div>
+                        <span class="data-profilo" id="lbl-data-p1">--/--/----</span>
+                    </div>
+                    
+                    <div class="stella-separatore">✦</div>
+                    
+                    <div class="info-data">
+                        <div class="nome-profilo" id="lbl-nome-p2">Profilo 2</div>
+                        <span class="data-profilo" id="lbl-data-p2">--/--/----</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 1. LIVELLO IO -->
-        <div class="livello-card" id="card-io">
-            <div class="col-info">
-                <div class="livello-titolo">Compatibilità dell'Io</div>
-                <div class="livello-descrizione-breve">Come vi presentate nel mondo.</div>
-            </div>
-            <div class="col-carte">
-                <img src="" id="img-io-p1" class="img-carta" alt="Carta P1">
-                <span class="piu-separatore">+</span>
-                <img src="" id="img-io-p2" class="img-carta" alt="Carta P2">
-            </div>
-            <div class="col-armonia">
-                <div class="armonia-titolo">Armonia</div>
-                <div class="armonia-valore" id="lbl-armonia-io">--%</div>
-                <div class="livello-descrizione-esito" id="lbl-desc-io">Caricamento...</div>
-            </div>
-        </div>
-
-        <!-- 2. LIVELLO ANIMA -->
-        <div class="livello-card" id="card-anima">
-            <div class="col-info">
-                <div class="livello-titolo">Compatibilità dell'Anima</div>
-                <div class="livello-descrizione-breve">Il legame emotivo profondo.</div>
-            </div>
-            <div class="col-carte">
-                <img src="" id="img-anima-p1" class="img-carta" alt="Carta P1">
-                <span class="piu-separatore">+</span>
-                <img src="" id="img-anima-p2" class="img-carta" alt="Carta P2">
-            </div>
-            <div class="col-armonia">
-                <div class="armonia-titolo">Armonia</div>
-                <div class="armonia-valore" id="lbl-armonia-anima">--%</div>
-                <div class="livello-descrizione-esito" id="lbl-desc-anima">Caricamento...</div>
-            </div>
-        </div>
-
-        <!-- 3. LIVELLO DESTINO -->
-        <div class="livello-card" id="card-destino">
-            <div class="col-info">
-                <div class="livello-titolo">Compatibilità del Destino</div>
-                <div class="livello-descrizione-breve">La missione comune.</div>
-            </div>
-            <div class="col-carte">
-                <img src="" id="img-destino-p1" class="img-carta" alt="Carta P1">
-                <span class="piu-separatore">+</span>
-                <img src="" id="img-destino-p2" class="img-carta" alt="Carta P2">
-            </div>
-            <div class="col-armonia">
-                <div class="armonia-titolo">Armonia</div>
-                <div class="armonia-valore" id="lbl-armonia-destino">--%</div>
-                <div class="livello-descrizione-esito" id="lbl-desc-destino">Caricamento...</div>
-            </div>
-        </div>
-
-        <!-- RISULTATO COMPLESSIVO CON STELLE SOTTO IL CERCHIO -->
-        <div class="totale-card">
-            <div class="totale-layout-orizzontale">
-                <!-- Colonna sinistra con cerchio e stelline -->
-                <div class="totale-sinistra">
-                    <div class="cerchio-percentuale" id="lbl-totale-percentuale">--%</div>
-                    <div class="totale-stelle" id="lbl-totale-stelle">⭐⭐⭐⭐⭐</div>
+            <!-- 1. LIVELLO IO -->
+            <div class="livello-card" id="card-io">
+                <div class="col-info">
+                    <div class="livello-titolo">Compatibilità dell'Io</div>
+                    <div class="livello-descrizione-breve">Come vi presentate nel mondo.</div>
                 </div>
-                
-                <!-- Colonna destra con testi -->
-                <div class="totale-testi-destra">
-                    <div class="totale-titolo">Affinità Complessiva</div>
-                    <div class="descrizione-totale-testo" id="lbl-desc-totale">Analisi generale della sinastria delle anime.</div>
-                    <div class="citazione-finale">"Ogni relazione è un cammino di crescita. I numeri mostrano tendenze."</div>
+                <div class="col-carte">
+                    <img src="" id="img-io-p1" class="img-carta" alt="Carta P1">
+                    <span class="piu-separatore">+</span>
+                    <img src="" id="img-io-p2" class="img-carta" alt="Carta P2">
+                </div>
+                <div class="col-armonia">
+                    <div class="armonia-titolo">Armonia</div>
+                    <div class="armonia-valore" id="lbl-armonia-io">--%</div>
+                    <div class="livello-descrizione-esito" id="lbl-desc-io">Caricamento...</div>
                 </div>
             </div>
+
+            <!-- 2. LIVELLO ANIMA -->
+            <div class="livello-card" id="card-anima">
+                <div class="col-info">
+                    <div class="livello-titolo">Compatibilità dell'Anima</div>
+                    <div class="livello-descrizione-breve">Il legame emotivo profondo.</div>
+                </div>
+                <div class="col-carte">
+                    <img src="" id="img-anima-p1" class="img-carta" alt="Carta P1">
+                    <span class="piu-separatore">+</span>
+                    <img src="" id="img-anima-p2" class="img-carta" alt="Carta P2">
+                </div>
+                <div class="col-armonia">
+                    <div class="armonia-titolo">Armonia</div>
+                    <div class="armonia-valore" id="lbl-armonia-anima">--%</div>
+                    <div class="livello-descrizione-esito" id="lbl-desc-anima">Caricamento...</div>
+                </div>
+            </div>
+
+            <!-- 3. LIVELLO DESTINO -->
+            <div class="livello-card" id="card-destino">
+                <div class="col-info">
+                    <div class="livello-titolo">Compatibilità del Destino</div>
+                    <div class="livello-descrizione-breve">La missione comune.</div>
+                </div>
+                <div class="col-carte">
+                    <img src="" id="img-destino-p1" class="img-carta" alt="Carta P1">
+                    <span class="piu-separatore">+</span>
+                    <img src="" id="img-destino-p2" class="img-carta" alt="Carta P2">
+                </div>
+                <div class="col-armonia">
+                    <div class="armonia-titolo">Armonia</div>
+                    <div class="armonia-valore" id="lbl-armonia-destino">--%</div>
+                    <div class="livello-descrizione-esito" id="lbl-desc-destino">Caricamento...</div>
+                </div>
+            </div>
+
+            <!-- RISULTATO COMPLESSIVO -->
+            <div class="totale-card">
+                <div class="totale-layout-orizzontale">
+                    <div class="totale-sinistra">
+                        <div class="cerchio-percentuale" id="lbl-totale-percentuale">--%</div>
+                        <div class="totale-stelle" id="lbl-totale-stelle">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    
+                    <div class="totale-testi-destra">
+                        <div class="totale-titolo">Affinità Complessiva</div>
+                        <div class="descrizione-totale-testo" id="lbl-desc-totale">Analisi generale della sinastria delle anime.</div>
+                        <div class="citazione-finale">"Ogni relazione è un cammino di crescita. I numeri mostrano tendenze."</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    </div>
+        <!-- CONTENITORE PULSANTI AFFIANCATI -->
+        <div class="btn-azione-container">
+            <button id="btn-esporta" class="btn-custom" onclick="generaImmagineCondivisione()">Esporta Carta</button>
+            <button id="btn-home" class="btn-custom" onclick="ritornaAllaHome()">Torna alla Home</button>
+        </div>
 
-    <!-- CONTENITORE PULSANTI AFFIANCATI -->
-    <div class="btn-azione-container">
-        <button id="btn-esporta" class="btn-custom" onclick="generaImmagineCondivisione()">Esporta Carta</button>
-        <button id="btn-home" class="btn-custom" onclick="ritornaAllaHome()">Torna alla Home</button>
     </div>
 
     <script>
@@ -608,7 +606,7 @@
                     document.getElementById('card-destino').style.display = 'none';
                 }
 
-                // CALCOLO FINALE COMPLESSIVO E AGGIORNAMENTO STELLE GENERALI
+                // CALCOLO FINALE COMPLESSIVO
                 if (conteggioLivelli > 0) {
                     const percentualeTotale = Math.round(sommePercentuali / conteggioLivelli);
                     const elTotale = document.getElementById('lbl-totale-percentuale');
@@ -616,7 +614,6 @@
                     
                     impostaColorePercentuale(elTotale, percentualeTotale, true); 
                     
-                    // Assegnazione dinamica delle stelle complessive (sotto il cerchio)
                     const stelleTotale = calcolaStelleDaPercentuale(percentualeTotale);
                     document.getElementById('lbl-totale-stelle').innerText = stelleTotale;
                     
@@ -651,12 +648,10 @@
             const nome2 = document.getElementById('lbl-nome-p2').innerText.replace(/\s+/g, '_');
             const nomeFile = `Numerosophia_${nome1}_${nome2}.png`;
 
-            // Rileva se stiamo girando in locale da file://
             const isLocalFile = window.location.protocol === 'file:';
 
             const opzioni = {
                 scale: 2, 
-                // Se siamo in locale file://, non proviamo a forzare CORS o potrebbe fallire la lettura del canvas
                 useCORS: !isLocalFile, 
                 backgroundColor: "#0d0f12", 
                 logging: false
@@ -666,38 +661,26 @@
                 html2canvas(quadro, opzioni).then(canvas => {
                     canvas.toBlob(function(blob) {
                         if (!blob) {
-                            alert("Errore durante la generazione dell'immagine (Tainted Canvas).");
+                            alert("Errore durante la generazione dell'immagine.");
                             ripristinaPulsante();
                             return;
                         }
 
-                        // Web Share API (Mobile)
-                        if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], nomeFile, { type: "image/png" })] })) {
-                            const file = new File([blob], nomeFile, { type: "image/png" });
-                            navigator.share({
-                                files: [file],
-                                title: 'Compatibilità Numerosophia',
-                                text: 'Mappa della nostra compatibilità numerologica!'
-                            })
-                            .then(() => console.log('Condivisione riuscita'))
-                            .catch((error) => console.log('Errore condivisione:', error))
-                            .finally(() => ripristinaPulsante());
-                        } else {
-                            // Download Standard (PC/Mobile fallback) - VARIABILI CORRETTE
-                            const url = URL.createObjectURL(blob);
-                            const linkDownload = document.createElement('a');
-                            linkDownload.download = nomeFile;
-                            linkDownload.href = url;
-                            document.body.appendChild(linkDownload);
-                            linkDownload.click();
-                            document.body.removeChild(linkDownload);
-                            URL.revokeObjectURL(url);
-                            ripristinaPulsante();
-                        }
+                        // FORZIAMO IL DOWNLOAD DIRETTO (Ignorando il menu di condivisione dello smartphone)
+                        const url = URL.createObjectURL(blob);
+                        const linkDownload = document.createElement('a');
+                        linkDownload.download = nomeFile;
+                        linkDownload.href = url;
+                        document.body.appendChild(linkDownload);
+                        linkDownload.click();
+                        document.body.removeChild(linkDownload);
+                        URL.revokeObjectURL(url);
+                        ripristinaPulsante();
+
                     }, 'image/png');
                 }).catch(err => {
                     console.error("Errore html2canvas:", err);
-                    alert("Errore nel salvare l'immagine. Nota: se stai testando il file offline (file:///) direttamente da cartella, alcuni browser bloccano il salvataggio per sicurezza. Carica la pagina su un server web locale o hosting per abilitarlo ovunque.");
+                    alert("Errore nel salvare l'immagine. Se sei offline (file:///), alcuni browser bloccano il salvataggio.");
                     ripristinaPulsante();
                 });
             }, 100);
