@@ -77,11 +77,11 @@
             opacity: 0.9;
         }
 
-        /* Blocco Nomi/Date */
+        /* Blocco Nomi/Date - Ottimizzato per non sforare */
         .date-partner {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: stretch; /* Estende i box alla stessa altezza se uno va su due righe */
             gap: 8px;
             margin: 10px 0 2px 0;
         }
@@ -89,34 +89,42 @@
         .info-data {
             text-align: center;
             background: rgba(255, 255, 255, 0.03);
-            padding: 4px 8px;
+            padding: 6px 8px;
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0; /* Permette il corretto funzionamento di flex e word-wrap nei figli */
         }
 
         .info-data .nome-profilo {
             color: var(--text-light);
             font-weight: 600;
-            font-size: 11px;
-            letter-spacing: 0.5px;
+            font-size: 10px; /* Ridotto leggermente per sicurezza */
+            letter-spacing: 0.3px;
             text-transform: uppercase;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal; /* Permette al testo di andare a capo */
+            word-wrap: break-word; /* Rompe le parole eccessivamente lunghe */
+            overflow-wrap: break-word;
+            line-height: 1.3;
         }
 
         .info-data .data-profilo {
             display: block;
             color: var(--accent-gold);
             font-weight: bold;
-            margin-top: 2px;
-            font-size: 10px;
+            margin-top: 4px;
+            font-size: 9.5px;
         }
 
         .stella-separatore {
             color: var(--accent-gold);
             font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* CARD LIVELLI OTTIMIZZATE IN ALTEZZA */
@@ -219,6 +227,15 @@
             gap: 12px;
         }
 
+        /* Blocco Sinistro: Cerchio + Stelline incolonnate */
+        .totale-sinistra {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
         .cerchio-percentuale {
             width: 60px;
             height: 60px;
@@ -231,9 +248,16 @@
             font-weight: bold;
             background: rgba(197, 160, 89, 0.05);
             transition: border-color 0.3s ease, color 0.3s ease;
-            flex-shrink: 0;
         }
 
+        .totale-stelle {
+            font-size: 9px;
+            letter-spacing: 0.5px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Blocco Destro: Testi descrittivi */
         .totale-testi-destra {
             flex: 1;
             display: flex;
@@ -391,11 +415,16 @@
             </div>
         </div>
 
-        <!-- RISULTATO COMPLESSIVO ORIZZONTALE -->
+        <!-- RISULTATO COMPLESSIVO CON STELLE SOTTO IL CERCHIO -->
         <div class="totale-card">
             <div class="totale-layout-orizzontale">
-                <div class="cerchio-percentuale" id="lbl-totale-percentuale">--%</div>
+                <!-- Colonna sinistra con cerchio e stelline -->
+                <div class="totale-sinistra">
+                    <div class="cerchio-percentuale" id="lbl-totale-percentuale">--%</div>
+                    <div class="totale-stelle" id="lbl-totale-stelle">⭐⭐⭐⭐⭐</div>
+                </div>
                 
+                <!-- Colonna destra con testi -->
                 <div class="totale-testi-destra">
                     <div class="totale-titolo">Affinità Complessiva</div>
                     <div class="descrizione-totale-testo" id="lbl-desc-totale">Analisi generale della sinastria delle anime.</div>
@@ -570,13 +599,17 @@
                     document.getElementById('card-destino').style.display = 'none';
                 }
 
-                // CALCOLO FINALE COMPLESSIVO
+                // CALCOLO FINALE COMPLESSIVO E AGGIORNAMENTO STELLE GENERALI
                 if (conteggioLivelli > 0) {
                     const percentualeTotale = Math.round(sommePercentuali / conteggioLivelli);
                     const elTotale = document.getElementById('lbl-totale-percentuale');
                     elTotale.innerText = `${percentualeTotale}%`;
                     
                     impostaColorePercentuale(elTotale, percentualeTotale, true); 
+                    
+                    // Assegnazione dinamica delle stelle complessive (sotto il cerchio)
+                    const stelleTotale = calcolaStelleDaPercentuale(percentualeTotale);
+                    document.getElementById('lbl-totale-stelle').innerText = stelleTotale;
                     
                     let messaggioEvolutivo = "Analisi della sinastria delle anime.";
                     if (percentualeTotale < 55) {
@@ -595,7 +628,6 @@
         });
 
         function ritornaAllaHome() {
-            // Reindirizza alla pagina index principale (puoi cambiare il nome del file se necessario)
             window.location.href = "index.html";
         }
 
@@ -639,7 +671,7 @@
                         } else {
                             const url = URL.createObjectURL(blob);
                             const linkCondivisione = document.createElement('a');
-                            linkCondivione.download = nomeFile;
+                            linkCondivisione.download = nomeFile;
                             linkCondivisione.href = url;
                             document.body.appendChild(linkCondivione);
                             linkCondivione.click();
