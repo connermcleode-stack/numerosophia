@@ -26,17 +26,26 @@
             padding: 0;
         }
 
-        body {
+    body {
             background-color: var(--bg-dark);
             color: var(--text-light);
             font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Allinea dall'alto su mobile */
             min-height: 100vh;
-            padding: 5px;
-            overflow: hidden; /* Evita lo scroll sulla pagina principale */
+            padding: 15px 10px; /* Spazio interno uniforme sopra, sotto e ai lati */
+            overflow-y: auto; /* Permette lo scorrimento se lo schermo è molto piccolo */
+        }
+
+        /* Se lo schermo è grande (PC o tablet grandi), centra perfettamente */
+        @media (min-height: 850px) {
+            body {
+                justify-content: center;
+                padding: 5px;
+                overflow: hidden;
+            }
         }
 
         /* CONTENITORE PRINCIPALE MOBILE-RESPONSIVE COMPATTO */
@@ -289,7 +298,7 @@
             line-height: 1.3;
         }
 
-        /* CONTENITORE PULSANTI EFFETTO MEZZO-E-MEZZO */
+        /* CONTENITORE PULSANTI */
         .btn-azione-container {
             margin-top: 10px;
             width: 100%;
@@ -642,9 +651,13 @@
             const nome2 = document.getElementById('lbl-nome-p2').innerText.replace(/\s+/g, '_');
             const nomeFile = `Numerosophia_${nome1}_${nome2}.png`;
 
+            // Rileva se stiamo girando in locale da file://
+            const isLocalFile = window.location.protocol === 'file:';
+
             const opzioni = {
                 scale: 2, 
-                useCORS: true, 
+                // Se siamo in locale file://, non proviamo a forzare CORS o potrebbe fallire la lettura del canvas
+                useCORS: !isLocalFile, 
                 backgroundColor: "#0d0f12", 
                 logging: false
             };
@@ -653,11 +666,12 @@
                 html2canvas(quadro, opzioni).then(canvas => {
                     canvas.toBlob(function(blob) {
                         if (!blob) {
-                            alert("Errore durante la generazione dell'immagine.");
+                            alert("Errore durante la generazione dell'immagine (Tainted Canvas).");
                             ripristinaPulsante();
                             return;
                         }
 
+                        // Web Share API (Mobile)
                         if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], nomeFile, { type: "image/png" })] })) {
                             const file = new File([blob], nomeFile, { type: "image/png" });
                             navigator.share({
@@ -669,20 +683,21 @@
                             .catch((error) => console.log('Errore condivisione:', error))
                             .finally(() => ripristinaPulsante());
                         } else {
+                            // Download Standard (PC/Mobile fallback) - VARIABILI CORRETTE
                             const url = URL.createObjectURL(blob);
-                            const linkCondivisione = document.createElement('a');
-                            linkCondivisione.download = nomeFile;
-                            linkCondivisione.href = url;
-                            document.body.appendChild(linkCondivione);
-                            linkCondivione.click();
-                            document.body.removeChild(linkCondivione);
+                            const linkDownload = document.createElement('a');
+                            linkDownload.download = nomeFile;
+                            linkDownload.href = url;
+                            document.body.appendChild(linkDownload);
+                            linkDownload.click();
+                            document.body.removeChild(linkDownload);
                             URL.revokeObjectURL(url);
                             ripristinaPulsante();
                         }
                     }, 'image/png');
                 }).catch(err => {
                     console.error("Errore html2canvas:", err);
-                    alert("Errore nel salvare l'immagine.");
+                    alert("Errore nel salvare l'immagine. Nota: se stai testando il file offline (file:///) direttamente da cartella, alcuni browser bloccano il salvataggio per sicurezza. Carica la pagina su un server web locale o hosting per abilitarlo ovunque.");
                     ripristinaPulsante();
                 });
             }, 100);
