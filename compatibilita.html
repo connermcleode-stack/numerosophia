@@ -287,8 +287,61 @@
 
             .ns-level-desc {
                 text-align: left;
+
+/* Correzione per il titolo del livello dentro il box cliccabile */
+        .card-cliccabile h1, 
+        .card-cliccabile h2, 
+        .card-cliccabile h3, 
+        .card-cliccabile h4,
+        #quadro-esportazione .titolo-livello, 
+        [id^="card-"] h1, [id^="card-"] h2, [id^="card-"] h3 { 
+            font-size: 1.1rem !important;      
+            text-align: left !important;        
+            line-height: 1.3 !important;        
+            letter-spacing: 0.5px !important;   
+            font-family: 'Cinzel', serif !important; 
+            margin-bottom: 10px !important;
+        }
+
+        /* Rende anche la descrizione del responso sotto il titolo allineata a sinistra */
+        .card-cliccabile p, 
+        [id^="card-"] p,
+        .ns-level-desc {
+            text-align: left !important; 
+        }
+        /* ======================================================== */
+        /*  FINE DELLE NUOVE REGOLE DI CORREZIONE                   */
+        /* ======================================================== */
+
             }
         }
+
+/* RESET TOTALE ALLINEAMENTO E DIMENSIONI DENTRO I BOX DI RISULTATO */
+div[onclick], 
+.sezione-dinamica div, 
+.ns-level-container div {
+    text-align: left !important;
+}
+
+/* Intercettiamo i titoli corsivi dorati e i responsi */
+div[onclick] h1, div[onclick] h2, div[onclick] h3, div[onclick] h4,
+.sezione-dinamica div h1, .sezione-dinamica div h2, .sezione-dinamica div h3,
+div[onclick] p, .sezione-dinamica div p,
+div[onclick] span, .sezione-dinamica div span,
+div[onclick] em, div[onclick] i {
+    font-size: 1.1rem !important;
+    text-align: left !important;
+    line-height: 1.4 !important;
+    letter-spacing: normal !important;
+    display: block !important; /* Forza ad andare a capo correttamente senza spaziature artificiali */
+}
+
+/* Forza la sinistra anche per il testo "Clicca qui per leggere..." */
+div[onclick] * {
+    text-align: left !important;
+}
+
+
     </style>
 </head>
 <body>
@@ -1607,7 +1660,9 @@ function eseguiCalcoloAffinita() {
     // Inizializziamo le variabili per l'esportazione
     let ioP1 = 0, ioP2 = 0, animaP1 = 0, animaP2 = 0, destinoP1 = 0, destinoP2 = 0;
 
+  // ==========================================
     // 1. CALCOLO LIVELLO IO
+    // ==========================================
     if (haTestoP1 && haTestoP2) {
         ioP1 = calcolaNomeCognome(p1Nome, p1Cognome, 'io');
         ioP2 = calcolaNomeCognome(p2Nome, p2Cognome, 'io');
@@ -1626,17 +1681,32 @@ function eseguiCalcoloAffinita() {
             }
         } catch(e) {}
 
+        // Percorsi immagini per il livello dell'Io
+        const imgIo1 = `./carte/${ioP1}.png`;
+        const imgIo2 = `./carte/${ioP2}.png`;
+
         document.getElementById('res-io-testo').innerHTML = `
             <div class="ns-level-container card-cliccabile" onclick="apriApprofondimentoCompatibilita(this)">
                 <div class="ns-level-title">1. Il Livello dell'Io (L'Individualità)</div>
+                
+                <!-- Miniature carte CENTRATE nell'anteprima -->
+                <div class="carte-mini-container" style="display: flex; gap: 15px; margin: 15px 0; justify-content: center;">
+                    <img src="${imgIo1}" alt="Carta ${ioP1}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                    <img src="${imgIo2}" alt="Carta ${ioP2}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                </div>
+
                 <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
                     Responso (${ioP1} & ${ioP2}): ${titoloIo}
                 </span>
                 <div style="font-size: 13px; color: #7f8c8d; margin-bottom: 5px; font-style: italic;">${sottotitoloIo}</div>
                 <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
                 
-                <!-- Il testo intero rimane nascosto qui dentro -->
+                <!-- Contenuto segreto letto dal popup (carte fluide e sempre affiancate) -->
                 <div class="testo-segreto" style="display: none;">
+                    <div class="carte-popup-container" style="display: flex; gap: 12px; justify-content: center; margin-bottom: 25px; align-items: center;">
+                        <img src="${imgIo1}" alt="Carta ${ioP1}" style="width: 130px; max-width: 44%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                        <img src="${imgIo2}" alt="Carta ${ioP2}" style="width: 130px; max-width: 44%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                    </div>
                     ${testoIo}
                 </div>
             </div>
@@ -1647,7 +1717,9 @@ function eseguiCalcoloAffinita() {
         document.getElementById('res-io-testo').innerHTML = "<i style='color: #888;'>Inserisci il Nome o il Cognome per entrambi i profili per calcolare l'Io.</i>";
     }
 
+    // ==========================================
     // 2. CALCOLO LIVELLO ANIMA
+    // ==========================================
     if (haTestoP1 && haTestoP2) {
         animaP1 = calcolaNomeCognome(p1Nome, p1Cognome, 'anima');
         animaP2 = calcolaNomeCognome(p2Nome, p2Cognome, 'anima');
@@ -1657,16 +1729,31 @@ function eseguiCalcoloAffinita() {
         const testoAnima = recuperaTestoAffinita('anima', animaP1, animaP2);
         const titoloAnima = `${ottieniNomeArchetipo(animaP1)} & ${ottieniNomeArchetipo(animaP2)}`;
         
+        // Percorsi immagini per il livello dell'Anima
+        const imgAnima1 = `./carte/${animaP1}.png`;
+        const imgAnima2 = `./carte/${animaP2}.png`;
+
         document.getElementById('res-anima-testo').innerHTML = `
             <div class="ns-level-container card-cliccabile" onclick="apriApprofondimentoCompatibilita(this)">
                 <div class="ns-level-title">2. Il Livello dell'Anima (La Sintonia Profonda)</div>
+                
+                <!-- Miniature carte CENTRATE nell'anteprima -->
+                <div class="carte-mini-container" style="display: flex; gap: 15px; margin: 15px 0; justify-content: center;">
+                    <img src="${imgAnima1}" alt="Carta ${animaP1}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                    <img src="${imgAnima2}" alt="Carta ${animaP2}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                </div>
+
                 <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
                     Responso (${animaP1} & ${animaP2}): ${titoloAnima}
                 </span>
                 <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
                 
-                <!-- Il testo intero rimane nascosto qui dentro -->
+                <!-- Contenuto segreto letto dal popup (carte fluide e sempre affiancate) -->
                 <div class="testo-segreto" style="display: none;">
+                    <div class="carte-popup-container" style="display: flex; gap: 12px; justify-content: center; margin-bottom: 25px; align-items: center;">
+                        <img src="${imgAnima1}" alt="Carta ${animaP1}" style="width: 130px; max-width: 44%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                        <img src="${imgAnima2}" alt="Carta ${animaP2}" style="width: 130px; max-width: 44%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                    </div>
                     ${testoAnima}
                 </div>
             </div>
@@ -1677,7 +1764,9 @@ function eseguiCalcoloAffinita() {
         document.getElementById('res-anima-testo').innerHTML = "<i style='color: #888;'>Inserisci il Nome o il Cognome per entrambi i profili per calcolare l'Anima.</i>";
     }
 
+    // ==========================================
     // 3. CALCOLO LIVELLO DESTINO
+    // ==========================================
     if (p1Data && p2Data) {
         destinoP1 = calcolaDestino(p1Data);
         destinoP2 = calcolaDestino(p2Data);
@@ -1687,16 +1776,31 @@ function eseguiCalcoloAffinita() {
         const testoDestino = recuperaTestoAffinita('destino', destinoP1, destinoP2);
         const titoloDestino = `${ottieniNomeArchetipo(destinoP1)} & ${ottieniNomeArchetipo(destinoP2)}`;
         
+        // Percorsi immagini per il livello del Destino
+        const imgDestino1 = `./carte/${destinoP1}.png`;
+        const imgDestino2 = `./carte/${destinoP2}.png`;
+
         document.getElementById('res-destino-testo').innerHTML = `
             <div class="ns-level-container card-cliccabile" onclick="apriApprofondimentoCompatibilita(this)">
                 <div class="ns-level-title">3. Il Livello del Destino (Il Progetto Evolutivo)</div>
+                
+                <!-- Miniature carte CENTRATE nell'anteprima -->
+                <div class="carte-mini-container" style="display: flex; gap: 15px; margin: 15px 0; justify-content: center;">
+                    <img src="${imgDestino1}" alt="Carta ${destinoP1}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                    <img src="${imgDestino2}" alt="Carta ${destinoP2}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                </div>
+
                 <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
                     Responso (${destinoP1} & ${destinoP2}): ${titoloDestino}
                 </span>
                 <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
                 
-                <!-- Il testo intero rimane nascosto qui dentro e viene letto solo al click -->
+                <!-- Contenuto segreto letto dal popup (carte fluide e sempre affiancate) -->
                 <div class="testo-segreto" style="display: none;">
+                    <div class="carte-popup-container" style="display: flex; gap: 12px; justify-content: center; margin-bottom: 25px; align-items: center;">
+                        <img src="${imgDestino1}" alt="Carta ${destinoP1}" style="width: 130px; max-width: 44%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                        <img src="${imgDestino2}" alt="Carta ${destinoP2}" style="width: 130px; max-width: 44%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                    </div>
                     ${testoDestino}
                 </div>
             </div>
@@ -1706,7 +1810,6 @@ function eseguiCalcoloAffinita() {
         document.getElementById('res-destino-p2').innerText = "-";
         document.getElementById('res-destino-testo').innerHTML = "<i style='color: #888;'>Inserisci la Data di Nascita di entrambi per calcolare il Destino.</i>";
     }
-
     // ==========================================================================
     // INTEGRAZIONE ESPORTAZIONE: SALVATAGGIO DEI DATI E GENERAZIONE DINAMICA PULSANTE
     // ==========================================================================

@@ -479,64 +479,231 @@
                     }
                 };
 
-                const ottieniCRA = (n1, n2) => {
-                    const coppia = [Math.abs(n1), Math.abs(n2)].sort((a, b) => a - b).join("-");
-                    const risonanze = {
-                        "2-6": 4, "7-11": 4, "9-33": 4, "8-44": 4, "4-22": 4,
-                        "1-8": 2, "3-5": 2, "5-9": 2, "6-33": 2, "11-22": 2, "22-44": 2,
-                        "1-2": -2, "3-4": -2, "5-6": -2, "8-9": -2,
-                        "4-5": -4, "7-8": -4, "1-7": -4, "2-8": -4
-                    };
-                    return risonanze[coppia] !== undefined ? risonanze[coppia] : 0;
-                };
+// 1. CONFIGURAZIONE DEI PROFILI ARCHETIPALI (Valori da 1 a 10 per i 12 parametri)
+const profiliArchetipi = {
+    1: { leadership: 10, cooperazione: 1, creativita: 8, stabilita: 4, liberta: 10, amore: 3, spiritualita: 4, materializzazione: 8, universalita: 2, visione: 10, intuizione: 4, saggezza: 5 },
+    2: { leadership: 2, cooperazione: 10, creativita: 5, stabilita: 7, liberta: 3, amore: 9, spiritualita: 7, materializzazione: 3, universalita: 6, visione: 4, intuizione: 9, saggezza: 7 },
+    3: { leadership: 6, cooperazione: 6, creativita: 10, stabilita: 3, liberta: 8, amore: 7, spiritualita: 5, materializzazione: 5, universalita: 7, visione: 8, intuizione: 7, saggezza: 5 },
+    4: { leadership: 4, cooperazione: 7, creativita: 2, stabilita: 10, liberta: 1, amore: 6, spiritualita: 3, materializzazione: 10, universalita: 2, visione: 5, intuizione: 3, saggezza: 9 },
+    5: { leadership: 7, cooperazione: 4, creativita: 10, stabilita: 2, liberta: 10, amore: 5, spiritualita: 6, materializzazione: 5, universalita: 7, visione: 9, intuizione: 8, saggezza: 5 },
+    6: { leadership: 4, cooperazione: 8, creativita: 7, stabilita: 8, liberta: 4, amore: 10, spiritualita: 6, materializzazione: 6, universalita: 8, visione: 6, intuizione: 6, saggezza: 8 },
+    7: { leadership: 4, cooperazione: 3, creativita: 6, stabilita: 5, liberta: 6, amore: 4, spiritualita: 10, materializzazione: 3, universalita: 8, visione: 9, intuizione: 10, saggezza: 9 },
+    8: { leadership: 9, cooperazione: 4, creativita: 5, stabilita: 8, liberta: 5, amore: 5, spiritualita: 4, materializzazione: 10, universalita: 4, visione: 8, intuizione: 5, saggezza: 7 },
+    9: { leadership: 5, cooperazione: 8, creativita: 8, stabilita: 4, liberta: 7, amore: 9, spiritualita: 9, materializzazione: 4, universalita: 10, visione: 10, intuizione: 8, saggezza: 9 },
+    
+    // Numeri Maestri puri
+    11: { leadership: 8, cooperazione: 9, creativita: 7, stabilita: 4, liberta: 6, amore: 8, spiritualita: 10, materializzazione: 4, universalita: 9, visione: 10, intuizione: 10, saggezza: 8 },
+    22: { leadership: 9, cooperazione: 6, creativita: 6, stabilita: 10, liberta: 5, amore: 7, spiritualita: 7, materializzazione: 10, universalita: 8, visione: 10, intuizione: 8, saggezza: 9 },
+    33: { leadership: 6, cooperazione: 8, creativita: 10, stabilita: 6, liberta: 7, amore: 10, spiritualita: 9, materializzazione: 6, universalita: 10, visione: 9, intuizione: 9, saggezza: 9 },
+    44: { leadership: 10, cooperazione: 5, creativita: 5, stabilita: 10, liberta: 4, amore: 6, spiritualita: 8, materializzazione: 10, universalita: 7, visione: 10, intuizione: 7, saggezza: 10 }
+};
 
-                const ottieniCNM = (n1, n2) => {
-                    const a = Math.abs(n1);
-                    const b = Math.abs(n2);
-                    const maestri = [11, 22, 33, 44];
-                    if (!maestri.includes(a) || !maestri.includes(b)) return 0;
-                    if (a === b) return 4;
-                    const coppia = [a, b].sort((x, y) => x - y).join("-");
-                    const bonusMaestriDiversi = {
-                        "11-22": 2, "22-33": 2, "33-44": 2,
-                        "11-33": 1, "22-44": 1
-                    };
-                    return bonusMaestriDiversi[coppia] !== undefined ? bonusMaestriDiversi[coppia] : 0;
-                };
+// 2. CONFIGURAZIONE DEI PESI DEI PARAMETRI PER OGNI LIVELLO (Somma libera, usiamo la media pesata)
+const pesiParametri = {
+    io: {
+        leadership: 15, cooperazione: 8, creativita: 8, stabilita: 15, liberta: 12,
+        amore: 5, spiritualita: 2, materializzazione: 15, universalita: 3, visione: 10,
+        intuizione: 2, saggezza: 5
+    },
+    anima: {
+        leadership: 3, cooperazione: 12, creativita: 10, stabilita: 8, liberta: 8,
+        amore: 15, spiritualita: 12, materializzazione: 2, universalita: 10, visione: 5,
+        intuizione: 10, saggezza: 5
+    },
+    destino: {
+        leadership: 10, cooperazione: 8, creativita: 8, stabilita: 10, liberta: 8,
+        amore: 8, spiritualita: 8, materializzazione: 10, universalita: 8, visione: 12,
+        intuizione: 5, saggezza: 10
+    }
+};
 
-                // MODIFICA CORRETTIVA APPLICATA: Configurazione esatta della scala delle stelle richiesta
-                const calcolaStelleDaPercentuale = (percentuale) => {
-                    if (percentuale === 0) return "☆☆☆☆☆";                       // 0% -> 0 stelle
-                    if (percentuale >= 1 && percentuale <= 30) return "⭐☆☆☆☆";     // 1-30% -> 1 stella
-                    if (percentuale >= 31 && percentuale <= 55) return "⭐⭐☆☆☆";    // 31-55% -> 2 stelle
-                    if (percentuale >= 56 && percentuale <= 75) return "⭐⭐⭐☆☆";    // 56-75% -> 3 stelle
-                    if (percentuale >= 76 && percentuale <= 90) return "⭐⭐⭐⭐☆";    // 76-90% -> 4 stelle
-                    if (percentuale >= 91 && percentuale <= 100) return "⭐⭐⭐⭐⭐";  // 91-100% -> 5 stelle
-                    return "☆☆☆☆☆"; // Fallback di sicurezza
-                };
+// 3. EREDITÀ DEI NUMERI MAESTRI (Blending 70% Maestro / 30% Base Ridotta)
+const ottieniProfiloBlended = (numero) => {
+    const n = Math.abs(numero);
+    const profiloPuro = profiliArchetipi[n];
+    
+    // Se il numero non è presente nella tabella, restituiamo un profilo neutro di fallback
+    if (!profiloPuro) {
+        return profiliArchetipi[1]; 
+    }
 
-                const calcolaAffinitaLivello = (n1, n2) => {
-                    if (!n1 || !n2) return { percentuale: 0, stelle: "☆☆☆☆☆" };
-                    const a = Math.abs(n1);
-                    const b = Math.abs(n2);
+    // Mappa delle riduzioni per i Numeri Maestri
+    const riduzioniMaestri = { 11: 2, 22: 4, 33: 6, 44: 8 };
 
-                    let base = 100 - (Math.abs(a - b) * 4);
-                    if (a === b) base = 95; 
-                    
-                    const coppia = [a, b].sort((x, y) => x - y).join("-");
-                    
-                    const cra = ottieniCRA(n1, n2);
-                    const cnm = ottieniCNM(n1, n2);
+    // Se non è un Maestro, restituisce il profilo originale al 100%
+    if (!riduzioniMaestri[n]) {
+        return { ...profiloPuro };
+    }
 
-                    if (coppia === "4-5") base = 45;
-                    if (coppia === "1-7") base = 49;
-                    if (coppia === "2-8") base = 51;
-                    
-                    let finale = Math.min(100, Math.max(0, Math.round(base + cra + cnm)));
-                    const stelle = calcolaStelleDaPercentuale(finale);
-                    
-                    return { percentuale: finale, stelle: stelle };
-                };
+    const profiloBaseRidotto = profiliArchetipi[riduzioniMaestri[n]];
+    const profiloBlended = {};
+
+    // Applica la miscelazione 70% Maestro / 30% Ridotto su ciascuna delle 12 chiavi
+    for (const chiave in profiloPuro) {
+        profiloBlended[chiave] = (profiloPuro[chiave] * 0.7) + (profiloBaseRidotto[chiave] * 0.3);
+    }
+
+    return profiloBlended;
+};
+
+// 4. COEFFICIENTE DI RISONANZA ARCHETIPALE (CRA) - Con aggiunta della risonanza 5-33
+const ottieniCRA = (n1, n2) => {
+    const coppia = [Math.abs(n1), Math.abs(n2)].sort((a, b) => a - b).join("-");
+    const risonanze = {
+        "2-6": 4, "7-11": 4, "9-33": 4, "8-44": 4, "4-22": 4,
+        "1-8": 2, "3-5": 2, "5-9": 2, "6-33": 2, "11-22": 2, "22-44": 2, "5-33": 2, // Aggiunto 5-33 per contatto creativo
+        "1-2": -2, "3-4": -2, "5-6": -2, "8-9": -2,
+        "4-5": -4, "7-8": -4, "1-7": -4, "2-8": -4
+    };
+    return risonanze[coppia] !== undefined ? risonanze[coppia] : 0;
+};
+
+// 5. COEFFICIENTE NUMERI MAESTRI (CNM)
+const ottieniCNM = (n1, n2) => {
+    const a = Math.abs(n1);
+    const b = Math.abs(n2);
+    const maestri = [11, 22, 33, 44];
+    if (!maestri.includes(a) || !maestri.includes(b)) return 0;
+    if (a === b) return 4;
+    const coppia = [a, b].sort((x, y) => x - y).join("-");
+    const bonusMaestriDiversi = {
+        "11-22": 2, "22-33": 2, "33-44": 2,
+        "11-33": 1, "22-44": 1
+    };
+    return bonusMaestriDiversi[coppia] !== undefined ? bonusMaestriDiversi[coppia] : 0;
+};
+
+// 6. ASSEGNAZIONE DELLE STELLE PERSONALIZZATA
+const calcolaStelleDaPercentuale = (percentuale) => {
+    if (percentuale === 0) return "☆☆☆☆☆";
+    if (percentuale >= 1 && percentuale <= 30) return "⭐☆☆☆☆";
+    if (percentuale >= 31 && percentuale <= 55) return "⭐⭐☆☆☆";
+    if (percentuale >= 56 && percentuale <= 75) return "⭐⭐⭐☆☆";
+    if (percentuale >= 76 && percentuale <= 90) return "⭐⭐⭐⭐☆";
+    if (percentuale >= 91 && percentuale <= 100) return "⭐⭐⭐⭐⭐";
+    return "☆☆☆☆☆";
+};
+
+// NUOVO: CATEGORIE DI COMPATIBILITÀ E COLORI COORDINATI
+const categoriaCompatibilita = (percentuale) => {
+    if (percentuale >= 90) return { nome: "Armonia Profonda", colore: "#2ec4b6" };
+    if (percentuale >= 82) return { nome: "Grande Sintonia", colore: "#4ade80" };
+    if (percentuale >= 72) return { nome: "Equilibrio Positivo", colore: "#a3e635" };
+    if (percentuale >= 60) return { nome: "Armonia Dinamica", colore: "#facc15" };
+    if (percentuale >= 48) return { nome: "Percorso di Adattamento", colore: "#fb923c" };
+    if (percentuale >= 36) return { nome: "Sfida Costruttiva", colore: "#f87171" };
+
+    return { nome: "Trasformazione Reciproca", colore: "#ef4444" };
+};
+
+// 7. UNICO MOTORE DI CALCOLO UNIFICATO PER COMPATIBILITÀ (Versione Ottimizzata e Sensibile)
+const calcolaCompatibilita = (n1, n2, tipo) => {
+    if (!n1 || !n2) return { percentuale: 0, stelle: "☆☆☆☆☆", categoria: "N/A", colore: "#ffffff", cra: 0, cnm: 0 };
+
+    // Recupera i profili blended (70/30 in caso di numeri maestri)
+    const profiloA = ottieniProfiloBlended(n1);
+    const profiloB = ottieniProfiloBlended(n2);
+
+    // ✅ Controllo di sicurezza per evitare crash futuri
+    if (!profiloA || !profiloB) {
+        return {
+            percentuale: 24,
+            stelle: "⭐☆☆☆☆",
+            categoria: "Trasformazione Reciproca",
+            colore: "#ef4444",
+            cra: 0,
+            cnm: 0
+        };
+    }
+
+    // Seleziona i pesi in base al tipo ("io", "anima", "destino")
+    const pesiSelezionati = pesiParametri[tipo] || pesiParametri["io"];
+
+    // ✅ Definizione della sensibilità personalizzata per ogni parametro archetipale
+    const sensibilitaParametro = {
+        leadership: 8,
+        cooperazione: 7,
+        creativita: 6,
+        stabilita: 9,
+        liberta: 8,
+        amore: 6,
+        spiritualita: 5,
+        materializzazione: 8,
+        universalita: 5,
+        visione: 7,
+        intuizione: 5,
+        saggezza: 6
+    };
+
+    let sommaDifferenzePesate = 0;
+    let sommaPesi = 0;
+
+    // Calcolo della compatibilità basato sulla distanza dei singoli parametri archetipali
+    for (const chiave in pesiSelezionati) {
+        // ✅ Uso dell'operatore nullish coalescing (??) per preservare i valori validi pari a 0
+        const valoreA = profiloA[chiave] ?? 0;
+        const valoreB = profiloB[chiave] ?? 0;
+        const peso = pesiSelezionati[chiave];
+
+        // Differenza assoluta (scala da 0 a 10)
+        const differenza = Math.abs(valoreA - valoreB);
+        
+        // ✅ Trasformazione in compatibilità usando la sensibilità specifica del parametro (evitando valori negativi)
+        const coeffSensibilita = sensibilitaParametro[chiave] !== undefined ? sensibilitaParametro[chiave] : 8;
+        const compatibilitaParametro = Math.max(0, 100 - (differenza * coeffSensibilita));
+
+        sommaDifferenzePesate += compatibilitaParametro * peso;
+        sommaPesi += peso;
+    }
+
+    // Media pesata iniziale
+    let base = sommaDifferenzePesate / sommaPesi;
+
+    // ✅ Bonus personalizzato quando i partner condividono lo stesso archetipo numerico
+    if (Math.abs(n1) === Math.abs(n2)) {
+        const stessoNum = Math.abs(n1);
+        const bonusStessoNumero = {
+            1: 4,
+            2: 5,
+            3: 4,
+            4: 3,
+            5: 2,
+            6: 5,
+            7: 3,
+            8: 3,
+            9: 5,
+            11: 5,
+            22: 4,
+            33: 6,
+            44: 4
+        };
+        // Applica il bonus specifico, altrimenti usa un default di +4 se il numero non è in tabella
+        base += bonusStessoNumero[stessoNum] ?? 4;
+    }
+
+    // Modificatori CRA e CNM
+    const cra = ottieniCRA(n1, n2);
+    const cnm = ottieniCNM(n1, n2);
+
+    // ✅ Riscrittura pulita e leggibile per definire i limiti della percentuale finale
+    let finale = Math.round(base + cra + cnm);
+    finale = Math.max(24, finale);
+    finale = Math.min(96, finale);
+
+    const infoCategoria = categoriaCompatibilita(finale);
+
+    // ✅ Oggetto restituito super-completo
+    return { 
+        percentuale: finale, 
+        stelle: calcolaStelleDaPercentuale(finale),
+        categoria: infoCategoria.nome,
+        colore: infoCategoria.colore,
+        cra: cra,
+        cnm: cnm
+    };
+};
+
+// ... [Codice intermedio dei nomi dei partner invariato] ...
 
                 const nomeCompletoP1 = (dati.nomeP1 || dati.nomeLui || 'Tu') + 
                                        (dati.cognomeP1 || dati.cognomeLui ? ' ' + (dati.cognomeP1 || dati.cognomeLui) : '');
@@ -550,19 +717,24 @@
 
                 let sommePercentuali = 0;
                 let conteggioLivelli = 0;
+		let percIo = 0;
+		let percAnima = 0;
+		let percDestino = 0;
 
                 // Livello IO
                 if(dati.ioLui && dati.ioLei) {
-                    const risIo = calcolaAffinitaLivello(dati.ioLui, dati.ioLei);
+                    const risIo = calcolaCompatibilita(dati.ioLui, dati.ioLei, "io");
                     const elIo = document.getElementById('lbl-armonia-io');
                     elIo.innerText = `${risIo.percentuale}%`;
                     impostaColorePercentuale(elIo, risIo.percentuale); 
                     
-                    document.getElementById('lbl-desc-io').innerHTML = `Sintonia energetica.<br><b>Potenziale:</b> ${risIo.stelle}`;
+                    // ✅ Generazione automatica e dinamica basata sul risultato reale
+                    document.getElementById('lbl-desc-io').innerHTML = `<b>${risIo.categoria}</b><br>Potenziale: ${risIo.stelle}`;
                     document.getElementById('img-io-p1').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.ioLui)}${estensioneCarte}`;
                     document.getElementById('img-io-p2').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.ioLei)}${estensioneCarte}`;
                     
                     sommePercentuali += risIo.percentuale;
+		    percIo = risIo.percentuale;
                     conteggioLivelli++;
                 } else {
                     document.getElementById('card-io').style.display = 'none';
@@ -570,16 +742,18 @@
 
                 // Livello ANIMA
                 if(dati.animaLui && dati.animaLei) {
-                    const risAnima = calcolaAffinitaLivello(dati.animaLui, dati.animaLei);
+                    const risAnima = calcolaCompatibilita(dati.animaLui, dati.animaLei, "anima");
                     const elAnima = document.getElementById('lbl-armonia-anima');
                     elAnima.innerText = `${risAnima.percentuale}%`;
                     impostaColorePercentuale(elAnima, risAnima.percentuale); 
                     
-                    document.getElementById('lbl-desc-anima').innerHTML = `Connessione intima.<br><b>Potenziale:</b> ${risAnima.stelle}`;
+                    // ✅ Generazione automatica e dinamica basata sul risultato reale
+                    document.getElementById('lbl-desc-anima').innerHTML = `<b>${risAnima.categoria}</b><br>Potenziale: ${risAnima.stelle}`;
                     document.getElementById('img-anima-p1').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.animaLui)}${estensioneCarte}`;
                     document.getElementById('img-anima-p2').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.animaLei)}${estensioneCarte}`;
                     
                     sommePercentuali += risAnima.percentuale;
+		    percAnima = risAnima.percentuale;
                     conteggioLivelli++;
                 } else {
                     document.getElementById('card-anima').style.display = 'none';
@@ -587,47 +761,79 @@
 
                 // Livello DESTINO
                 if(dati.destinoLui && dati.destinoLei) {
-                    const risDestino = calcolaAffinitaLivello(dati.destinoLui, dati.destinoLei);
+                    const risDestino = calcolaCompatibilita(dati.destinoLui, dati.destinoLei, "destino");
                     const elDestino = document.getElementById('lbl-armonia-destino');
                     elDestino.innerText = `${risDestino.percentuale}%`;
                     impostaColorePercentuale(elDestino, risDestino.percentuale); 
                     
-                    document.getElementById('lbl-desc-destino').innerHTML = `Cammino di vita.<br><b>Potenziale:</b> ${risDestino.stelle}`;
+                    // ✅ Generazione automatica e dinamica basata sul risultato reale
+                    document.getElementById('lbl-desc-destino').innerHTML = `<b>${risDestino.categoria}</b><br>Potenziale: ${risDestino.stelle}`;
                     document.getElementById('img-destino-p1').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.destinoLui)}${estensioneCarte}`;
                     document.getElementById('img-destino-p2').src = `${percorsoBaseCarte}${ottieniNomeFile(dati.destinoLei)}${estensioneCarte}`;
                     
                     sommePercentuali += risDestino.percentuale;
+		    percDestino = risDestino.percentuale;
                     conteggioLivelli++;
                 } else {
                     document.getElementById('card-destino').style.display = 'none';
                 }
 
-                // CALCOLO FINALE COMPLESSIVO
-                if (conteggioLivelli > 0) {
-                    const percentualeTotale = Math.round(sommePercentuali / conteggioLivelli);
-                    const elTotale = document.getElementById('lbl-totale-percentuale');
-                    elTotale.innerText = `${percentualeTotale}%`;
-                    
-                    impostaColorePercentuale(elTotale, percentualeTotale, true); 
-                    
-                    const stelleTotale = calcolaStelleDaPercentuale(percentualeTotale);
-                    document.getElementById('lbl-totale-stelle').innerText = stelleTotale;
-                    
-                    let messaggioEvolutivo = "Analisi della sinastria delle anime.";
-                    if (percentualeTotale < 55) {
-                        messaggioEvolutivo = "Sintonia complessa. Le sfide numeriche indicano un forte legame karmico progettato per farvi evolvere profondamente.";
-                    } else if (percentualeTotale >= 55 && percentualeTotale < 75) {
-                        messaggioEvolutivo = "Unione equilibrata in cui intesa e differenze si alternano costruttivamente, offrendo continua crescita.";
-                    } else {
-                        messaggioEvolutivo = "Risonanza fluida. Siete anime specchio sulla stessa lunghezza d'onda, favorendo una comprensione immediata.";
-                    }
-                    document.getElementById('lbl-desc-totale').innerText = messaggioEvolutivo;
-                }
+          // CALCOLO FINALE COMPLESSIVO (supporta anche analisi parziali)
+
+let sommaPesata = 0;
+let pesoTotale = 0;
+
+// IO
+if (percIo > 0) {
+    sommaPesata += percIo * 0.25;
+    pesoTotale += 0.25;
+}
+
+// ANIMA
+if (percAnima > 0) {
+    sommaPesata += percAnima * 0.40;
+    pesoTotale += 0.40;
+}
+
+// DESTINO
+if (percDestino > 0) {
+    sommaPesata += percDestino * 0.35;
+    pesoTotale += 0.35;
+}
+
+if (pesoTotale > 0) {
+
+    const percentualeTotale = Math.round(sommaPesata / pesoTotale);
+
+    const elTotale = document.getElementById('lbl-totale-percentuale');
+    elTotale.innerText = `${percentualeTotale}%`;
+
+    impostaColorePercentuale(elTotale, percentualeTotale, true);
+
+    const stelleTotale = calcolaStelleDaPercentuale(percentualeTotale);
+    document.getElementById('lbl-totale-stelle').innerText = stelleTotale;
+
+    let messaggioEvolutivo = "Analisi della sinastria delle anime.";
+
+    if (percentualeTotale < 50) {
+        messaggioEvolutivo = "Sintonia complessa. Le sfide numeriche indicano un forte legame karmico progettato per farvi evolvere profondamente.";
+    }
+    else if (percentualeTotale < 70) {
+        messaggioEvolutivo = "Unione equilibrata in cui intesa e differenze si alternano costruttivamente, offrendo continua crescita.";
+    }
+    else {
+        messaggioEvolutivo = "Risonanza fluida. Siete anime specchio sulla stessa lunghezza d'onda, favorendo una comprensione immediata.";
+    }
+
+    document.getElementById('lbl-desc-totale').innerText = messaggioEvolutivo;
+}
 
             } catch (e) {
                 console.error("Errore nel calcolo energetico dei dati:", e);
             }
         });
+
+// ... [Codici di esportazione e ritorno alla home invariati] ...
 
         function ritornaAllaHome() {
             window.location.href = "index.html";
