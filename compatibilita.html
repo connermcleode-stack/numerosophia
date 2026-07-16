@@ -7,14 +7,27 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
 
-        :root {
-            --bg-color: #1a080e;         /* Splendido Rosa Rubino/Granato estremamente scuro */
-            --panel-bg: rgba(31, 13, 19, 0.94); /* Sfondo dei pannelli coerente e profondo */
-            --inner-bg: #240f16;         /* Sfondo interno per input e badge */
-            --text-color: #e0dbd1;       /* Testo chiaro morbido */
-            --accent-gold: #d4af37;      /* Oro luminoso coordinato */
-            --button-bg: #240f16;
-            --border-color: rgba(212, 175, 55, 0.25); /* Bordi dorati sfumati */
+       :root {
+            /* Sfondo generale: un magenta/prugna estremamente profondo, scuro e vellutato */
+            --bg-color: #2b030f;         
+            
+            /* Sfondo dei pannelli: leggermente più saturo e violaceo per staccare dallo sfondo */
+            --panel-bg: rgba(56, 8, 22, 0.94); 
+            
+            /* Sfondo interno per input e badge: una tonalità scurissima per dare profondità */
+            --inner-bg: #1c020a;         
+            
+            /* Testo chiaro morbido (rimane invariato per ottima leggibilità) */
+            --text-color: #e0dbd1;       
+            
+            /* Oro luminoso coordinato */
+            --accent-gold: #d4af37;      
+            
+            /* Sfondo dei bottoni secondari */
+            --button-bg: #3d0a1b;
+            
+            /* Bordi dorati sfumati */
+            --border-color: rgba(212, 175, 55, 0.25); 
         }
 
         * { box-sizing: border-box; }
@@ -30,6 +43,27 @@
             align-items: center;
             box-sizing: border-box;
         }
+
+	/* Sfondo mistico con texture stellata e BAGLIORE RUBINO ACCESO (stile Carta 8) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                /* 1. Bagliore centrale molto più ampio, saturo e luminoso (colore rubino/magenta acceso) */
+                radial-gradient(circle at 50% 35%, rgba(197, 16, 73, 0.45) 0%, rgba(138, 8, 47, 0.2) 50%, transparent 80%),
+                
+                /* 2. Un secondo gradiente che simula la sfumatura di luce dal basso verso l'alto tipica della carta */
+                linear-gradient(to bottom, rgba(43, 3, 15, 0) 40%, rgba(197, 16, 73, 0.15) 100%),
+                
+                /* 3. Texture stellata */
+                radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 40px 40px,
+                radial-gradient(rgba(255, 255, 255, 0.04) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
+            opacity: 0.9; /* Alzata l'opacità generale per rendere il tutto più vivido */
+            pointer-events: none;
+            z-index: -1;
+        }
+
 
         /* Sfondo mistico con texture stellata e bagliore oro centrale */
         body::before {
@@ -75,29 +109,37 @@
 
         .ns-header-banner {
             border: 1px solid var(--border-color);
-            padding: 30px 20px;
+            padding: 15px 20px;         /* RIDOTTO: da 30px a 15px per stringere il riquadro verticalmente */
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;        /* RIDOTTO: da 30px a 20px per avvicinarlo al modulo sotto */
             background-color: var(--panel-bg);
             border-radius: 16px;
             box-sizing: border-box;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;              /* AGGIUNTO: per garantire il perfetto allineamento flex */
+            flex-direction: column;     /* AGGIUNTO: dispone gli elementi in verticale */
+            align-items: center;        /* AGGIUNTO: centra perfettamente h1 e p su qualsiasi schermo */
+            justify-content: center;    /* AGGIUNTO: centra verticalmente */
         }
 
-        .ns-header-banner h1 {
+	.ns-header-banner h1 {
             margin: 0;
             font-family: 'Cinzel', serif;
             color: var(--accent-gold);
-            font-size: 1.8rem;
+            font-size: 1.6rem;          /* Ottimizzato leggermente per mobile rispetto a 1.8rem */
             letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-align: center;         /* Forza la centratura del testo */
         }
 
         .ns-header-banner p {
             color: #a69f95;
-            font-size: 0.95rem;
-            margin-top: 8px;
+            font-size: 0.9rem;
+            margin-top: 4px;            /* Ridotto lo stacco tra il titolo e il sottotitolo */
             margin-bottom: 0;
+            text-align: center;         /* Forza la centratura del testo */
+            text-transform: uppercase;  /* Rende automatico il maiuscolo di "SU TRE LIVELLI" */
+            letter-spacing: 1px;
         }
 
         .ns-calc-panel {
