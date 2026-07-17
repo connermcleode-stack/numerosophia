@@ -190,9 +190,9 @@ body::before {
             <input type="text" id="cognome" placeholder="Es. Rossi">
         </div>
         <div>
-   	    <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
-    	    <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
-	</div>
+            <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
+            <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
+        </div>
         <div>
             <label for="annoCorrente">Anno per l'Anno Personale:</label>
             <input type="number" id="annoCorrente" value="2026">
@@ -211,18 +211,25 @@ body::before {
             <div class="sezione-titolo">I Numeri Fondamentali (Dall'Anagrafica)</div>
             <div class="grid-cards">
                 <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Anima (Chi sei dentro)</h3>
-                    <div id="numAnima" class="numero-evidenziato"></div>
+                    <!-- Spinto ai lati, impedisce l'andata a capo -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anima (Chi sei dentro)</h3>
+                        <div id="numAnima" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descAnima"></div>
                 </div>
                 <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Persona (Come appari)</h3>
-                    <div id="numPersona" class="numero-evidenziato"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Persona (Come appari)</h3>
+                        <div id="numPersona" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descPersona"></div>
                 </div>
                 <div class="card" style="grid-column: span 2; border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Io (Il Talento Nativo)</h3>
-                    <div id="numEspressione" class="numero-evidenziato"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Io (Il Talento Nativo)</h3>
+                        <div id="numEspressione" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descEspressione"></div>
                 </div>
             </div>
@@ -232,23 +239,31 @@ body::before {
             <div class="sezione-titolo" style="color: #e67e22;">Destino e Carattere (Dalla Data)</div>
             <div class="grid-cards">
                 <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Giorno di Nascita (Attitudine)</h3>
-                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Giorno di Nascita</h3>
+                        <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descGiornoIsolato"></div>
                 </div>
                 <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Destino</h3>
-                    <div id="numCammino" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Destino</h3>
+                        <div id="numCammino" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descCammino"></div>
                 </div>
                 <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Anno Personale (Anno 2026)</h3>
-                    <div id="numAnnoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anno Personale</h3>
+                        <div id="numAnnoPers" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descAnnoPers"></div>
                 </div>
                 <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Giorno Personale (Oggi)</h3>
-                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Giorno Personale</h3>
+                        <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descGiornoPers"></div>
                 </div>
             </div>
@@ -276,27 +291,35 @@ body::before {
             <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Cicli di Realizzazione</div>
             <div class="grid-cards">
                 <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>1° Picco</h3>
-                    <div id="numCiclo1" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo1" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">1° Picco</h3>
+                        <div id="numCiclo1" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
+                    <div id="etaCiclo1" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
                     <div id="descCiclo1"></div>
                 </div>
                 <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>2° Picco</h3>
-                    <div id="numCiclo2" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo2" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">2° Picco</h3>
+                        <div id="numCiclo2" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
+                    <div id="etaCiclo2" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
                     <div id="descCiclo2"></div>
                 </div>
                 <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>3° Picco</h3>
-                    <div id="numCiclo3" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo3" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">3° Picco</h3>
+                        <div id="numCiclo3" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
+                    <div id="etaCiclo3" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
                     <div id="descCiclo3"></div>
                 </div>
                 <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>4° Picco</h3>
-                    <div id="numCiclo4" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo4" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">4° Picco</h3>
+                        <div id="numCiclo4" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
+                    <div id="etaCiclo4" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
                     <div id="descCiclo4"></div>
                 </div>
             </div>
@@ -304,29 +327,35 @@ body::before {
             <div class="sezione-titolo">Le Ombre (Sfide Evolutive)</div>
             <div class="grid-cards">
                 <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Ombra Giovinezza</h3>
-                    <div id="numOmbraGiov" class="numero-evidenziato" style="color: #c0392b;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Giovinezza</h3>
+                        <div id="numOmbraGiov" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descOmbraGiov"></div>
                 </div>
                 <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Ombra Maturità</h3>
-                    <div id="numOmbraMat" class="numero-evidenziato" style="color: #c0392b;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Maturità</h3>
+                        <div id="numOmbraMat" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descOmbraMat"></div>
                 </div>
                 <div class="card" style="grid-column: span 2; border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Ombra Principale</h3>
-                    <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Principale</h3>
+                        <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descOmbraPrinc"></div>
                 </div>
             </div>
         </div>
 
-        <div id="sezioneQuintessenza" style="display:none;">
+      <div id="sezioneQuintessenza" style="display:none;">
             <div class="sezione-titolo" style="color: #8e44ad; border-bottom-color: #e8daef; text-align: center; margin-top: 40px;">IL PUNTO D'ARRIVO</div>
             <div class="grid-cards" style="grid-template-columns: 1fr;">
-                <div class="card" style="border-left-color: #8e44ad; text-align: center; background: #fdfafc; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>La Quintessenza (L'Armonia Finale)</h3>
-                    <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad; font-size: 32px; margin: 10px 0;"></div>
+                <div class="card" style="border-left-color: #8e44ad; text-align: center; cursor: pointer;" onclick="apriApprofondimento(this)">
+                    <h3 style="color: #8e44ad;">La Quintessenza (L'Armonia Finale)</h3>
+                    <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad; font-size: 32px; margin: 10px 0; font-weight: bold;"></div>
                     <div id="descQuintessenza" style="text-align: left; max-width: 600px; margin: 0 auto;"></div>
                 </div>
             </div>
@@ -336,18 +365,24 @@ body::before {
             <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">L'Energia Acquisita (Solo Soprannome)</div>
             <div class="grid-cards">
                 <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Anima del Soprannome</h3>
-                    <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anima del Soprannome</h3>
+                        <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descAnimaSop"></div>
                 </div>
                 <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Persona del Soprannome</h3>
-                    <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Persona del Soprannome</h3>
+                        <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descPersonaSop"></div>
                 </div>
                 <div class="card" style="grid-column: span 2; border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3>Espressione del Soprannome</h3>
-                    <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22;"></div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Espressione del Soprannome</h3>
+                        <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                    </div>
                     <div id="descEspressioneSop"></div>
                 </div>
             </div>
@@ -355,7 +390,6 @@ body::before {
 
     </div>
 </div>
-
 <script>
 const databaseArchetipi = {
     1: { 
@@ -478,21 +512,28 @@ function pulisciTesto(testo) {
 }
 
 function compilaScheda(numero, compatta = false) {
-    // Gestiamo sia numeri puri (es. 13) sia stringhe formattate (es. "13/4")
+    if (!numero) return "";
+
+    // Gestione del numero in caso di formati composti (es. "13/4" o "19/1")
     let numeroPulito = numero.toString().includes('/') ? parseInt(numero.toString().split('/')[0], 10) : parseInt(numero, 10);
     let base = riduciMonocifraStretta(numeroPulito);
     
-    let testoKarmico = databaseKarmici[numeroPulito] ? `<p style="color:#d35400; font-size:12px; margin:3px 0 0 0;"><strong>Nota Karmica:</strong> ${databaseKarmici[numeroPulito]}</p>` : "";
+    // Identificazione dell'archetipo nel database
+    let chiaveFinestra = [11, 22, 33].includes(numeroPulito) ? numeroPulito : base;
+    let datiArchetipo = databaseArchetipi[chiaveFinestra];
     
-    let isMaestro = [11, 22, 33].includes(numeroPulito);
-    let datiArchetipoBase = isMaestro ? databaseArchetipi[numeroPulito] : databaseArchetipi[base];
+    if (!datiArchetipo) return "<i style='color: #888;'>Scheda non disponibile.</i>";
 
-    let nomeVisualizzato = datiArchetipoBase.nome;
-    let luceVisualizzata = datiArchetipoBase.luce;
-    let ombraVisualizzata = datiArchetipoBase.ombra;
-    
-    // Se è un numero Karmico, arricchiamo il titolo e integriamo la descrizione
-    if (!isMaestro && databaseKarmici[numeroPulito]) {
+    // Definiamo il percorso dell'immagine della carta
+    const imgCarta = `./carte/${numeroPulito}.png`;
+
+    let titolo = datiArchetipo.nome;
+    let significatoTesto = datiArchetipo.significato || 'Descrizione non disponibile.';
+    let luceTesto = datiArchetipo.luce || 'Non specificata.';
+    let ombraTesto = datiArchetipo.ombra || 'Non specificata.';
+
+    // Gestione speciale se il numero è Karmico
+    if (databaseKarmici[numeroPulito]) {
         let nomeKarmico = "";
         switch(numeroPulito) {
             case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
@@ -500,15 +541,56 @@ function compilaScheda(numero, compatta = false) {
             case 16: nomeKarmico = "Il Perfezionista / Crollo dell'Ego"; break;
             case 19: nomeKarmico = "Il Condottiero / Rinascita Solitaria"; break;
         }
-        nomeVisualizzato = `${datiArchetipoBase.nome} <span style="color:#d35400; font-size:13px;">(da Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
-        luceVisualizzata = `[Sfida ${numeroPulito}]: ${databaseKarmici[numeroPulito]} <br><strong style="color: #196f3d;">In Luce (Talento del ${base}):</strong> ${datiArchetipoBase.luce}`;
+        titolo += ` <span style="color:#d35400; font-size:12px; display:block; margin-top:2px;">(Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
+        significatoTesto = `<strong style="color:#d35400;">[SFIDA DEL KARMA ${numeroPulito}]:</strong> ${databaseKarmici[numeroPulito]}<br><br><strong>Integrazione con la Base (${base}):</strong><br>${datiArchetipo.significato}`;
     }
-    
+
+    // SE LA FUNZIONE CHIEDE LA VERSIONE COMPATTA (es. per i Grandi Cicli)
     if (compatta) {
-        return `<span class="archetipo-nome" style="font-size:13px;">${nomeVisualizzato.split(' (')[0]}</span><div class="descrizione" style="font-size:12px; line-height:1.3;">${luceVisualizzata.substring(0, 65)}...</div>`;
+        return `
+            <div class="card-cliccabile" onclick="apriApprofondimento(this)" style="padding: 5px; cursor: pointer;">
+                <span class="archetipo-nome" style="font-weight: bold; color: var(--accent-gold);">${datiArchetipo.nome.split(' (')[0]}</span>
+                <div class="descrizione" style="font-size:12px; line-height:1.3; opacity: 0.8;">${luceTesto.substring(0, 80)}...</div>
+                
+                <!-- Contenuto segreto per la modale anche per la versione compatta -->
+                <div class="testo-segreto" style="display: none;">
+                    <div class="carte-popup-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
+                        <img src="${imgCarta}" alt="Carta ${numeroPulito}" onerror="this.style.display='none';" style="width: 140px; max-width: 50%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                    </div>
+                    <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
+                    <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
+                    <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
+                </div>
+            </div>
+        `;
     }
-    
-    return `<span class="archetipo-nome">${nomeVisualizzato}</span><div class="descrizione">${luceVisualizzata}</div><div class="ombra-testo">Ombra: ${ombraVisualizzata}</div>${testoKarmico}`;
+
+    // VERSIONE ESTESA STANDARD (Per Anima, Persona, Destino, ecc.)
+    return `
+        <div class="ns-level-container card-cliccabile" onclick="apriApprofondimento(this)">
+            
+            <!-- Miniature carte CENTRATE nell'anteprima -->
+            <div class="carte-mini-container" style="display: flex; gap: 15px; margin: 15px 0; justify-content: center;">
+                <img src="${imgCarta}" alt="Carta ${numeroPulito}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+            </div>
+
+            <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
+                Archetipo: ${titolo}
+            </span>
+            <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
+            
+            <!-- Contenuto segreto letto dal popup -->
+            <div class="testo-segreto" style="display: none;">
+                <div class="carte-popup-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
+                    <img src="${imgCarta}" alt="Carta ${numeroPulito}" onerror="this.style.display='none';" style="width: 140px; max-width: 50%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                </div>
+                
+                <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
+                <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
+                <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
+            </div>
+        </div>
+    `;
 }
 
 function compilaSchedaOmbra(valoreOmbra) {
@@ -630,13 +712,24 @@ function eseguiCalcoloCompleto() {
             const fineC3 = fineC2 + 9;
 
             // Grandi Cicli
-            document.getElementById('numCicloForm').innerText = format(meseR);
-            document.getElementById('descCicloForm').innerHTML = compilaScheda(meseR, true);
-            document.getElementById('numCicloProd').innerText = format(giornoR);
-            document.getElementById('descCicloProd').innerHTML = compilaScheda(giornoR, true);
-            document.getElementById('numCicloConc').innerText = format(annoR);
-            document.getElementById('descCicloConc').innerHTML = compilaScheda(annoR, true);
+            // Grandi Cicli (Sostituzione corretta con Immagine integrata nella scheda)
+        document.getElementById('numCicloForm').innerText = format(meseR);
+        document.getElementById('descCicloForm').innerHTML = `
+            <img src="carte/${meseR}.png" alt="Carta ${meseR}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+            <div>${compilaScheda(meseR, true)}</div>
+        `;
 
+        document.getElementById('numCicloProd').innerText = format(giornoR);
+        document.getElementById('descCicloProd').innerHTML = `
+            <img src="carte/${giornoR}.png" alt="Carta ${giornoR}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+            <div>${compilaScheda(giornoR, true)}</div>
+        `;
+
+        document.getElementById('numCicloConc').innerText = format(annoR);
+        document.getElementById('descCicloConc').innerHTML = `
+            <img src="carte/${annoR}.png" alt="Carta ${annoR}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+            <div>${compilaScheda(annoR, true)}</div>
+        `;
             document.getElementById('infoEtaGrandiCicli').innerText = `Fasce: Formativo (0 a ${fineC1} anni) | Produttivo (${fineC1+1} a ${fineC2+9} anni) | Conclusivo (da ${fineC2+10} anni)`;
 
             // Pinnacoli
@@ -670,7 +763,7 @@ function eseguiCalcoloCompleto() {
             const mOggiRidotto = riduciNumero(oggi.getMonth() + 1);
             const giornoPersonale = riduciNumero(riduciMonocifraStretta(annoPersonale) + gOggiRidotto + mOggiRidotto, true);
 
-            // Ombre
+// Ombre
             const gStretto = riduciMonocifraStretta(gNum);
             const mStretto = riduciMonocifraStretta(mNum);
             const aStretto = riduciMonocifraStretta(sommaCifreAnno);
@@ -688,12 +781,67 @@ function eseguiCalcoloCompleto() {
             document.getElementById('numGiornoPers').innerText = format(giornoPersonale);
             document.getElementById('descGiornoPers').innerHTML = compilaScheda(giornoPersonale);
 
+            // Funzione interna per mappare l'immagine corretta (0 e 9 usano entrambe 'ombra9.png')
+            function ottieniNomeImmagineOmbra(valoreOmbra) {
+                if (valoreOmbra === 0 || valoreOmbra === 9) {
+                    return 'ombra9';
+                }
+                return 'ombra' + valoreOmbra;
+            }
+
+            // Recupero dei nomi degli archetipi ombra dal database
+            const nomeGiov = databaseOmbreMazzo[ombraGiov] ? databaseOmbreMazzo[ombraGiov].nome : '';
+            const nomeMat = databaseOmbreMazzo[ombraMat] ? databaseOmbreMazzo[ombraMat].nome : '';
+            const nomePrinc = databaseOmbreMazzo[ombraPrinc] ? databaseOmbreMazzo[ombraPrinc].nome : '';
+
+            // Ombre - Struttura uniforme con foto, nome archetipo e avviso di clic
+            const imgGiov = ottieniNomeImmagineOmbra(ombraGiov);
             document.getElementById('numOmbraGiov').innerText = ombraGiov;
-            document.getElementById('descOmbraGiov').innerHTML = compilaSchedaOmbra(ombraGiov);
+            document.getElementById('descOmbraGiov').innerHTML = `
+                <img src="carte/${imgGiov}.png" alt="Ombra ${ombraGiov}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                <div style="text-align: center; margin-top: 10px; font-style: italic; font-weight: bold; color: #c5a059; font-size: 13px;">
+                    Archetipo: ${nomeGiov}
+                </div>
+                <div style="text-align: center; font-size: 11px; color: #888; margin-top: 4px; font-style: italic;">
+                    → Clicca qui per leggere l'analisi completa
+                </div>
+                <div class="testo-segreto" style="display: none;">
+                    <img src="carte/${imgGiov}.png" alt="Ombra ${ombraGiov}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                    ${compilaSchedaOmbra(ombraGiov)}
+                </div>
+            `;
+            
+            const imgMat = ottieniNomeImmagineOmbra(ombraMat);
             document.getElementById('numOmbraMat').innerText = ombraMat;
-            document.getElementById('descOmbraMat').innerHTML = compilaSchedaOmbra(ombraMat);
+            document.getElementById('descOmbraMat').innerHTML = `
+                <img src="carte/${imgMat}.png" alt="Ombra ${ombraMat}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                <div style="text-align: center; margin-top: 10px; font-style: italic; font-weight: bold; color: #c5a059; font-size: 13px;">
+                    Archetipo: ${nomeMat}
+                </div>
+                <div style="text-align: center; font-size: 11px; color: #888; margin-top: 4px; font-style: italic;">
+                    → Clicca qui per leggere l'analisi completa
+                </div>
+                <div class="testo-segreto" style="display: none;">
+                    <img src="carte/${imgMat}.png" alt="Ombra ${ombraMat}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                    ${compilaSchedaOmbra(ombraMat)}
+                </div>
+            `;
+            
+            const imgPrinc = ottieniNomeImmagineOmbra(ombraPrinc);
             document.getElementById('numOmbraPrinc').innerText = ombraPrinc;
-            document.getElementById('descOmbraPrinc').innerHTML = compilaSchedaOmbra(ombraPrinc);
+            document.getElementById('descOmbraPrinc').innerHTML = `
+                <img src="carte/${imgPrinc}.png" alt="Ombra ${ombraPrinc}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                <div style="text-align: center; margin-top: 10px; font-style: italic; font-weight: bold; color: #c5a059; font-size: 13px;">
+                    Archetipo: ${nomePrinc}
+                </div>
+                <div style="text-align: center; font-size: 11px; color: #888; margin-top: 4px; font-style: italic;">
+                    → Clicca qui per leggere l'analisi completa
+                </div>
+                <div class="testo-segreto" style="display: none;">
+                    <img src="carte/${imgPrinc}.png" alt="Ombra ${ombraPrinc}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                    ${compilaSchedaOmbra(ombraPrinc)}
+                </div>
+            `;
 
             document.getElementById('bloccoData').style.display = 'block';
             
@@ -914,54 +1062,43 @@ function controllaParametriURL() {
 }
 
 function apriApprofondimento(elementoCard) {
-    // Leggiamo i dati interni alla card cliccata
-    const titoloSezione = elementoCard.querySelector('h3').innerText;
-    const numeroElemento = elementoCard.querySelector('.numero-evidenziato').innerText;
-    
-    // Gestiamo l'estrazione pulita in caso di formati composti come "13/4" o "19/1"
-    let numeroPulito = numeroElemento.includes('/') ? parseInt(numeroElemento.split('/')[0], 10) : parseInt(numeroElemento, 10);
-    let base = riduciMonocifraStretta(numeroPulito);
-    
-    let isMaestro = [11, 22, 33].includes(numeroPulito);
-    let chiaveFinestra = [11, 22, 33].includes(parseInt(numeroElemento, 10)) ? parseInt(numeroElemento, 10) : base;
-    let datiArchetipo = databaseArchetipi[chiaveFinestra];
-    
-    if (datiArchetipo) {
-        document.getElementById('modaleTitolo').innerText = `${titoloSezione}: ${numeroElemento}`;
-        
-        let sottotitolo = datiArchetipo.nome;
-        let significatoTesto = datiArchetipo.significato || 'Descrizione non disponibile.';
-        let luceTesto = datiArchetipo.luce || 'Non specificata.';
-        let ombraTesto = datiArchetipo.ombra || 'Non specificata.';
-        
-        // Se è un numero Karmico, arricchiamo i testi anche nella modale
-        if (databaseKarmici[numeroPulito]) {
-            let nomeKarmico = "";
-            switch(numeroPulito) {
-                case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
-                case 14: nomeKarmico = "L'Amante / Temperanza"; break;
-                case 16: nomeKarmico = "Il Perfezionista / Crollo dell'Ego"; break;
-                case 19: nomeKarmico = "Il Condottiero / Rinascita Solitaria"; break;
-            }
-            sottotitolo = `${datiArchetipo.nome} <span style="color:#d35400; font-size:14px; block-size:auto;">(Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
-            
-            // Inseriamo la sfida karmica in cima al significato evolutivo
-            significatoTesto = `<strong style="color:#d35400;">[SFIDA DEL KARMA ${numeroPulito}]:</strong> ${databaseKarmici[numeroPulito]}<br><br><strong>Integrazione con la Base (${base}):</strong><br>${datiArchetipo.significato}`;
+    // 1. Cerchiamo di risalire al titolo della sezione per dare contesto alla modale
+    let titoloSezione = "Approfondimento Archetipo";
+    const bloccoGenitore = elementoCard.closest('.blocco-risultato, td, div, tr'); 
+    if (bloccoGenitore) {
+        const h3 = bloccoGenitore.querySelector('h3');
+        if (h3) {
+            titoloSezione = h3.innerText;
+        } else {
+            // Se siamo in una tabella o simile, prova a cercare un elemento di testo forte o una classe
+            const label = bloccoGenitore.querySelector('strong, .label');
+            if (label) titoloSezione = label.innerText;
         }
+    }
+
+    // 2. Recuperiamo il numero visualizzato
+    let numeroEvidenziato = "";
+    if (bloccoGenitore) {
+        const numEl = bloccoGenitore.querySelector('.numero-evidenziato, [id^="num"]');
+        if (numEl) numeroEvidenziato = ` ${numEl.innerText}`;
+    }
+
+    // 3. Estraiamo il contenuto dal div segreto della card cliccata
+    const testoSegretoEl = elementoCard.querySelector('.testo-segreto');
+    
+    if (testoSegretoEl) {
+        // Impostiamo il titolo della modale
+        document.getElementById('modaleTitolo').innerText = `${titoloSezione}${numeroEvidenziato}`;
         
-        document.getElementById('modaleSottotitolo').innerHTML = sottotitolo;
+        // Svuotiamo il sottotitolo standard
+        document.getElementById('modaleSottotitolo').innerHTML = "";
         
-        // Prepariamo il contenuto HTML della modale
-        let testoCompleto = `
-            <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
-            <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
-            <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
-        `;
+        // Copiamo tutto l'HTML (immagine + testi) all'interno della modale
+        document.getElementById('modaleContenuto').innerHTML = testoSegretoEl.innerHTML;
         
-        document.getElementById('modaleContenuto').innerHTML = testoCompleto;
-        
-        // Mostriamo la modale a schermo usando flex
+        // Mostriamo la modale
         document.getElementById('modaleApprofondimento').style.display = 'flex';
+        
     }
 }
 
