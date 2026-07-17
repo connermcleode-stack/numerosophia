@@ -11,40 +11,73 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <style>
-	@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
         * { box-sizing: border-box; }
         body { 
-        font-family: 'Montserrat', sans-serif; 
-        background: #080f1d; /* Nuovo colore: Blu notte profondo ed elegante */ 
-        color: #e0dbd1; 
-        margin: 0; 
-        padding: 20px; 
-        display: flex; 
-        justify-content: center; 
-}
-body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: 
-        /* Incrementata leggermente la luce oro centrale sul blu */
-        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.14) 0%, transparent 65%),
-        radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px) 0 0 / 40px 40px,
-        radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: -1;
-}
+            font-family: 'Montserrat', sans-serif; 
+            background: #080f1d; /* Nuovo colore: Blu notte profondo ed elegante */ 
+            color: #e0dbd1; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                /* Incrementata leggermente la luce oro centrale sul blu */
+                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.14) 0%, transparent 65%),
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px) 0 0 / 40px 40px,
+                radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
+            opacity: 0.7;
+            pointer-events: none;
+            z-index: -1;
+        }
         /* Contenitore principale adattato per sfumare sul blu */
         .container { background: rgba(13, 22, 41, 0.94); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 800px; width: 100%; border: 1px solid rgba(212, 175, 55, 0.25); }
         h1 { text-align: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .subtitle { text-align: center; color: #a69f95; font-size: 14px; margin-bottom: 35px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        /* Griglia del form ottimizzata: 2 colonne flessibili */
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: 1.2fr 0.8fr; 
+            gap: 15px; 
+        }
+        .form-group-half { grid-column: span 1; }
         .form-group-full { grid-column: span 2; }
+
         label { font-weight: 600; color: #c4beb3; display: block; margin-top: 10px; font-size: 14px; }
-        /* Campi di input armonizzati con il blu scuro */
-        input { width: 100%; padding: 12px; margin-top: 6px; border: 1px solid rgba(142, 115, 85, 0.3); border-radius: 8px; font-size: 16px; background-color: #0f192b; color: #f5f2eb; transition: border 0.2s; }
-        input:focus { border-color: #d4af37; outline: none; background-color: #14223a; }
+        
+        /* Input e Textarea armonizzati con il blu scuro */
+        input, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 6px; 
+            border: 1px solid rgba(142, 115, 85, 0.3); 
+            border-radius: 8px; 
+            font-size: 16px; 
+            background-color: #0f192b; 
+            color: #f5f2eb; 
+            transition: border 0.2s, background-color 0.2s; 
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus { 
+            border-color: #d4af37; 
+            outline: none; 
+            background-color: #14223a; 
+        }
+
+        /* Stile specifico per le caselle Nome e Cognome che si allargano */
+        textarea.input-flessibile {
+            height: 45px;
+            min-height: 45px;
+            resize: none; 
+            overflow-y: hidden; 
+            line-height: 1.3;
+        }
         button { width: 100%; background: #8e7355; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; letter-spacing: 0.5px; }
         button:hover { background: #765f45; }
         .btn-secondary { background: #14223a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 15px; }
@@ -60,118 +93,127 @@ body::before {
         .descrizione { font-size: 13.5px; color: #c4beb3; line-height: 1.5; }
         .ombra-testo { font-size: 13px; color: #8a94a6; margin-top: 6px; font-style: italic; }
         .btn-home { background: #14223a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
-    </style> <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
-    <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
-        <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
-        <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
-        <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
-        <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;">
-            </div>
+    </style> 
+    
+    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
+        <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
+            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
+            <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
+            <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
+            <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;"></div>
+        </div>
     </div>
-</div>
-<style>
-@keyframes compariModale {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-} /* <--- Ora l'animazione è chiusa correttamente! */
-
-@media (max-width: 600px) {
-    /* Sblocca la rigidità del body sul telefono */
-    body {
-        display: block !important;
-        padding: 10px !important;
-    }
     
-    /* Forza il contenitore principale a prendere tutta la larghezza disponibile */
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 15px !important;
-        box-sizing: border-box !important;
-    }
-    
-    /* Forzatura assoluta: prende qualsiasi div che gestisce le griglie e lo mette a 1 colonna */
-    .grid-cards, .form-grid, [class*="grid"] {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-        display: grid !important;
-    }
-
-    /* Forza anche i singoli elementi interni (le card) a occupare tutta la larghezza */
-    .card, .grid-cards div {
-        grid-column: span 1 !important;
-        width: 100% !important;
-    }
-
-    /* Sistema i moduli di input a larghezza intera */
-    .form-group-full {
-        grid-column: span 1 !important;
-    }
-
-    /* ==========================================================
-       OTTIMIZZAZIONE POPUP/MODALE SU SMARTPHONE
-       ========================================================== */
-    #modaleApprofondimento {
-        padding: 10px !important; 
-    }
-
-    #modaleApprofondimento > div {
-        width: 96% !important;
-        max-width: 96% !important;
-        padding: 20px 15px 15px 15px !important;
-        max-height: 90vh !important;
-        border-radius: 12px !important;
-    }
-
-    #modaleApprofondimento span[onclick] {
-        top: 8px !important;
-        right: 12px !important;
-        font-size: 32px !important;
-        padding: 5px;
-    }
-
-    #modaleTitolo {
-        font-size: 18px !important;
-        padding-right: 25px;
-    }
-    
-    #modaleSottotitolo {
-        font-size: 14px !important;
-    }
-}
-</style>
-
- <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js')
-        .then(() => console.log('Numerosophia PWA registrata con successo!'))
-        .catch((err) => console.log('Errore Service Worker:', err));
-    }
-
-    // INTERCETTA E SISTEMA LA DATA MENTRE L'UTENTE DIGITA
-    function formattaEValidaData(input) {
-        let v = input.value.replace(/\D/g, '').slice(0, 8);
-        
-        if (v.length >= 2) {
-            let giorno = parseInt(v.slice(0, 2), 10);
-            if (giorno > 31) v = '31' + v.slice(2);
-            if (giorno === 0) v = '01' + v.slice(2);
+    <style>
+        @keyframes compariModale {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
-        
-        if (v.length >= 4) {
-            let mese = parseInt(v.slice(2, 4), 10);
-            if (mese > 12) v = v.slice(0, 2) + '12' + v.slice(4);
-            if (mese === 0) v = v.slice(0, 2) + '01' + v.slice(4);
+
+        @media (max-width: 600px) {
+            /* Sblocca la rigidità del body sul telefono */
+            body {
+                display: block !important;
+                padding: 10px !important;
+            }
+            
+            /* Forza il contenitore principale a prendere tutta la larghezza disponibile */
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 15px !important;
+                box-sizing: border-box !important;
+            }
+            
+            /* Forzatura assoluta: prende qualsiasi div che gestisce le griglie e lo mette a 1 colonna */
+            .grid-cards, [class*="grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+                display: grid !important;
+            }
+
+            /* Forza anche i singoli elementi interni (le card) a occupare tutta la larghezza */
+            .card, .grid-cards div {
+                grid-column: span 1 !important;
+                width: 100% !important;
+            }
+
+            /* Sistema i moduli di input a larghezza intera */
+            .form-group-full {
+                grid-column: span 1 !important;
+            }
+
+            /* ==========================================================
+               OTTIMIZZAZIONE POPUP/MODALE SU SMARTPHONE
+               ========================================================== */
+            #modaleApprofondimento {
+                padding: 10px !important; 
+            }
+
+            #modaleApprofondimento > div {
+                width: 96% !important;
+                max-width: 96% !important;
+                padding: 20px 15px 15px 15px !important;
+                max-height: 90vh !important;
+                border-radius: 12px !important;
+            }
+
+            #modaleApprofondimento span[onclick] {
+                top: 8px !important;
+                right: 12px !important;
+                font-size: 32px !important;
+                padding: 5px;
+            }
+
+            #modaleTitolo {
+                font-size: 18px !important;
+                padding-right: 25px;
+            }
+            
+            #modaleSottotitolo {
+                font-size: 14px !important;
+            }
         }
-        
-        if (v.length >= 5) {
-            input.value = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
-        } else if (v.length >= 3) {
-            input.value = `${v.slice(0, 2)}/${v.slice(2)}`;
-        } else {
-            input.value = v;
+    </style>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => console.log('Numerosophia PWA registrata con successo!'))
+                .catch((err) => console.log('Errore Service Worker:', err));
         }
-    }
+
+        // INTERCETTA E SISTEMA LA DATA MENTRE L'UTENTE DIGITA
+        function formattaEValidaData(input) {
+            let v = input.value.replace(/\D/g, '').slice(0, 8);
+            
+            if (v.length >= 2) {
+                let giorno = parseInt(v.slice(0, 2), 10);
+                if (giorno > 31) v = '31' + v.slice(2);
+                if (giorno === 0) v = '01' + v.slice(2);
+            }
+            
+            if (v.length >= 4) {
+                let mese = parseInt(v.slice(2, 4), 10);
+                if (mese > 12) v = v.slice(0, 2) + '12' + v.slice(4);
+                if (mese === 0) v = v.slice(0, 2) + '01' + v.slice(4);
+            }
+            
+            if (v.length >= 5) {
+                input.value = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+            } else if (v.length >= 3) {
+                input.value = `${v.slice(0, 2)}/${v.slice(2)}`;
+            } else {
+                input.value = v;
+            }
+        }
+
+        function autoEspandi(textarea) {
+            // Resetta l'altezza per calcolare correttamente quella nuova
+            textarea.style.height = '45px';
+            // Imposta la nuova altezza in base al contenuto effettivo inserito
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
     </script>
 </head>
 <body>
@@ -179,31 +221,52 @@ body::before {
 <div class="container">
     <h1>NUMEROSOPHIA</h1>
     <div class="subtitle">Strumento di Calcolo Pitagorico Integrato Completo</div>
-    
-    <div class="form-grid">
-        <div>
-            <label for="nome">Nome (da Carta d'Identità):</label>
-            <input type="text" id="nome" placeholder="Es. Mario">
+
+    <!-- FORM COMPATTO SU DUE RIGHE -->
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+        
+        <!-- RIGA 1: Nome e Cognome affiancati (con Textarea flessibili) -->
+        <div style="display: flex; gap: 12px; width: 100%;">
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Nome:</label>
+                <textarea id="nome" class="input-flessibile" placeholder="Es. Mario" oninput="autoEspandi(this)"></textarea>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Cognome:</label>
+                <textarea id="cognome" class="input-flessibile" placeholder="Es. Rossi" oninput="autoEspandi(this)"></textarea>
+            </div>
         </div>
-        <div>
-            <label for="cognome">Cognome:</label>
-            <input type="text" id="cognome" placeholder="Es. Rossi">
+
+        <!-- RIGA 2: Data di Nascita (più larga) e Anno Personale (più stretto) -->
+        <div style="display: flex; gap: 12px; width: 100%;">
+            <div style="flex: 1.2; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Data di Nascita:</label>
+                <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)" style="text-align: center; height: 45px;">
+            </div>
+            <div style="flex: 0.8; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Anno:</label>
+                <input type="number" id="annoCorrente" placeholder="2026" value="2026" style="text-align: center; height: 45px;">
+            </div>
         </div>
-        <div>
-            <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
-            <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
-        </div>
-        <div>
-            <label for="annoCorrente">Anno per l'Anno Personale:</label>
-            <input type="number" id="annoCorrente" value="2026">
-        </div>
+
     </div>
     
-    <button onclick="eseguiCalcoloCompleto()">GENERA TAVOLA NUMEROLOGICA</button>
-    <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display:none;">COPIA ANALISI NEGLI APPUNTI</button>
-    <button id="btnSalva" type="button" style="background-color: #8e7355; color: white; display: none; margin-top: 15px;" onclick="salvaNelDatabase()">💾 SALVA IN ARCHIVIO</button>
-
-    <a href="index.html" class="btn-home">⬅ Torna alla Scelta</a>
+   <!-- RIGA UNICA OTTIMIZZATA PER TUTTI I PULSANTI -->
+    <div style="display: flex; gap: 6px; justify-content: center; align-items: center; margin: 20px auto 0 auto; width: 100%; max-width: 400px; padding: 0 5px;">
+        
+        <!-- 1. Freccia Torna alla Scelta -->
+        <a href="index.html" class="btn-home" style="margin: 0; padding: 0; font-size: 15px; display: flex; align-items: center; justify-content: center; width: 40px; height: 42px; min-width: 40px; box-sizing: border-box; text-decoration: none;">⬅</a>
+        
+        <!-- 2. Tasto Copia (Appare a sinistra di Calcola) -->
+        <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display: none; margin: 0; padding: 0 12px; font-size: 12px; font-weight: bold; cursor: pointer; letter-spacing: 0.5px; height: 42px; width: fit-content; line-height: 42px; box-sizing: border-box;">COPIA</button>
+        
+        <!-- 3. Tasto Calcola (Centro) -->
+        <button onclick="eseguiCalcoloCompleto()" style="display: block; margin: 0; padding: 0 16px; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; letter-spacing: 0.5px; height: 42px; width: fit-content; min-width: 100px; box-sizing: border-box;">CALCOLA</button>
+        
+        <!-- 4. Tasto Salva (Appare a destra di Calcola - Solo icona) -->
+        <button id="btnSalva" type="button" onclick="salvaNelDatabase()" style="display: none; margin: 0; padding: 0; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; transition: background 0.2s; width: 40px; height: 42px; min-width: 40px; line-height: 42px; box-sizing: border-box;">💾</button>
+        
+    </div>
     
     <div id="risultati" class="risultati">
         
