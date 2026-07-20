@@ -15,7 +15,7 @@
         * { box-sizing: border-box; }
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background: #080f1d; /* Nuovo colore: Blu notte profondo ed elegante */ 
+            background: #080f1d; 
             color: #e0dbd1; 
             margin: 0; 
             padding: 20px; 
@@ -27,7 +27,6 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                /* Incrementata leggermente la luce oro centrale sul blu */
                 radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.14) 0%, transparent 65%),
                 radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px) 0 0 / 40px 40px,
                 radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
@@ -35,11 +34,9 @@
             pointer-events: none;
             z-index: -1;
         }
-        /* Contenitore principale adattato per sfumare sul blu */
         .container { background: rgba(13, 22, 41, 0.94); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 800px; width: 100%; border: 1px solid rgba(212, 175, 55, 0.25); }
         h1 { text-align: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .subtitle { text-align: center; color: #a69f95; font-size: 14px; margin-bottom: 35px; }
-        /* Griglia del form ottimizzata: 2 colonne flessibili */
         .form-grid { 
             display: grid; 
             grid-template-columns: 1.2fr 0.8fr; 
@@ -50,7 +47,6 @@
 
         label { font-weight: 600; color: #c4beb3; display: block; margin-top: 10px; font-size: 14px; }
         
-        /* Input e Textarea armonizzati con il blu scuro */
         input, textarea { 
             width: 100%; 
             padding: 12px; 
@@ -70,7 +66,6 @@
             background-color: #14223a; 
         }
 
-        /* Stile specifico per le caselle Nome e Cognome che si allargano */
         textarea.input-flessibile {
             height: 45px;
             min-height: 45px;
@@ -85,7 +80,6 @@
         .risultati { margin-top: 40px; border-top: 1px solid rgba(142, 115, 85, 0.2); padding-top: 25px; display: none; }
         .sezione-titolo { font-size: 18px; color: #d4af37; font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(142, 115, 85, 0.3); padding-bottom: 6px; margin-top: 35px; margin-bottom: 15px; font-weight: 600; }
         .grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        /* Schede dei risultati armonizzate con il blu scuro */
         .card { background: #0f192b; border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
         .card h3 { margin: 0 0 8px 0; font-size: 14px; color: #c4beb3; text-transform: uppercase; letter-spacing: 0.5px; }
         .numero-evidenziato { font-size: 22px; font-weight: bold; color: #d4af37; margin-bottom: 5px; }
@@ -111,45 +105,31 @@
         }
 
         @media (max-width: 600px) {
-            /* Sblocca la rigidità del body sul telefono */
             body {
                 display: block !important;
                 padding: 10px !important;
             }
-            
-            /* Forza il contenitore principale a prendere tutta la larghezza disponibile */
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
                 padding: 15px !important;
                 box-sizing: border-box !important;
             }
-            
-            /* Forzatura assoluta: prende qualsiasi div che gestisce le griglie e lo mette a 1 colonna */
             .grid-cards, [class*="grid"] {
                 grid-template-columns: 1fr !important;
                 gap: 12px !important;
                 display: grid !important;
             }
-
-            /* Forza anche i singoli elementi interni (le card) a occupare tutta la larghezza */
             .card, .grid-cards div {
                 grid-column: span 1 !important;
                 width: 100% !important;
             }
-
-            /* Sistema i moduli di input a larghezza intera */
             .form-group-full {
                 grid-column: span 1 !important;
             }
-
-            /* ==========================================================
-               OTTIMIZZAZIONE POPUP/MODALE SU SMARTPHONE
-               ========================================================== */
             #modaleApprofondimento {
                 padding: 10px !important; 
             }
-
             #modaleApprofondimento > div {
                 width: 96% !important;
                 max-width: 96% !important;
@@ -157,19 +137,16 @@
                 max-height: 90vh !important;
                 border-radius: 12px !important;
             }
-
             #modaleApprofondimento span[onclick] {
                 top: 8px !important;
                 right: 12px !important;
                 font-size: 32px !important;
                 padding: 5px;
             }
-
             #modaleTitolo {
                 font-size: 18px !important;
                 padding-right: 25px;
             }
-            
             #modaleSottotitolo {
                 font-size: 14px !important;
             }
@@ -177,41 +154,14 @@
     </style>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log('Numerosophia PWA registrata con successo!'))
-                .catch((err) => console.log('Errore Service Worker:', err));
-        }
-
-        // INTERCETTA E SISTEMA LA DATA MENTRE L'UTENTE DIGITA
-        function formattaEValidaData(input) {
-            let v = input.value.replace(/\D/g, '').slice(0, 8);
-            
-            if (v.length >= 2) {
-                let giorno = parseInt(v.slice(0, 2), 10);
-                if (giorno > 31) v = '31' + v.slice(2);
-                if (giorno === 0) v = '01' + v.slice(2);
-            }
-            
-            if (v.length >= 4) {
-                let mese = parseInt(v.slice(2, 4), 10);
-                if (mese > 12) v = v.slice(0, 2) + '12' + v.slice(4);
-                if (mese === 0) v = v.slice(0, 2) + '01' + v.slice(4);
-            }
-            
-            if (v.length >= 5) {
-                input.value = `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
-            } else if (v.length >= 3) {
-                input.value = `${v.slice(0, 2)}/${v.slice(2)}`;
-            } else {
-                input.value = v;
-            }
-        }
+        // if ('serviceWorker' in navigator) {
+        //    navigator.serviceWorker.register('./sw.js')
+        //        .then(() => console.log('Numerosophia PWA registrata con successo!'))
+        //        .catch((err) => console.log('Errore Service Worker:', err));
+        // }
 
         function autoEspandi(textarea) {
-            // Resetta l'altezza per calcolare correttamente quella nuova
             textarea.style.height = '45px';
-            // Imposta la nuova altezza in base al contenuto effettivo inserito
             textarea.style.height = textarea.scrollHeight + 'px';
         }
     </script>
@@ -237,17 +187,17 @@
             </div>
         </div>
 
-        <!-- RIGA 2: Data di Nascita (più larga) e Anno Personale (più stretto) -->
-        <div style="display: flex; gap: 12px; width: 100%;">
-            <div style="flex: 1.2; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Data di Nascita:</label>
-                <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)" style="text-align: center; height: 45px;">
-            </div>
-            <div style="flex: 0.8; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Anno:</label>
-                <input type="number" id="annoCorrente" placeholder="2026" value="2026" style="text-align: center; height: 45px;">
-            </div>
-        </div>
+     <!-- RIGA 2: Data di Nascita (più larga) e Anno Personale (più stretto) -->
+<div style="display: flex; gap: 12px; width: 100%;">
+    <div style="flex: 1.2; display: flex; flex-direction: column;">
+        <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Data di Nascita:</label>
+        <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" style="text-align: center; height: 45px;">
+    </div>
+    <div style="flex: 0.8; display: flex; flex-direction: column;">
+        <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Anno:</label>
+        <input type="number" id="annoCorrente" placeholder="2026" value="2026" style="text-align: center; height: 45px;">
+    </div>
+</div>
 
     </div>
     
@@ -514,668 +464,513 @@ const databaseArchetipi = {
         significato: "Rappresenta un canale di pura illuminazione e intuizione spirituale, chiamato a fare da ponte tra i mondi invisibili e la coscienza terrena per ispirare il prossimo.",
         luce: "Intuizione folgorante, visione ideale, canale spirituale, carisma che ispira gli altri.", 
         ombra: "Tensione nervosa estrema, senso di alienazione, fanatismo." 
-    },
-    22: { 
+    },    22: { 
+
         nome: "Il Creatore (Numero Maestro)", 
+
         significato: "Rappresenta la chiamata superiore a concretizzare sogni e ideali universali su vastissima scala, traducendo la spiritualità in strutture pratiche utili all'umanità.",
+
         luce: "Capacità di tradurre grandi visioni spirituali in progetti concreti e planetari.", 
+
         ombra: "Megalomane o, al contrario, totale blocco per paura delle proprie responsabilità." 
+
     },
+
     33: {
+
         nome: "Il Maestro Spirituale (Numero Maestro)",
+
         significato: "Rappresenta l'altissimo potenziale del servizio guidato dal cuore, volto alla guarigione emotiva collettiva e all'insegnamento dell'amore puro attraverso l'esempio personale.",
+
         luce: "Amore cristico, guida empatica globale, protezione e insegnamento universale.",
+
         ombra: "Carico emotivo insostenibile, interferenza forzata nella vita altrui."
+
     },
+
 };
+
 const databaseOmbreMazzo = {
+
     0: { nome: "L'Angelo caduto (Ombra 9)", sfida: "Sfida universale o assenza totale di vincoli predefiniti. Richiede di confrontarsi con il senso del vuoto evolutivo o la perdita di confini individuali per ritrovare l'Unità spirituale pura." },
+
     1: { nome: "Il Ribelle", sfida: "Tendenza all'ostinazione cieca, all'aggressività reattiva o all'incapacità di accettare guide. La lezione è trasformare l'impulso distruttivo in sana indipendenza." },
+
     2: { nome: "L'Orfano", sfida: "Paura profonda dell'abbandono, dipendenza emotiva e tendenza al vittimismo per ricevere attenzioni. La lezione è scoprire la propria stabilità interiore." },
+
     3: { nome: "Lo Straniero", sfida: "Blocco della comunicazione espressiva, tendenza a isolarsi sentendosi non capiti. La lezione è trovare la propria autentica voce nel mondo." },
+
     4: { nome: "Il Prigioniero", sfida: "Rigidità strutturale estrema, sottomissione a schemi limitanti e rifiuto del cambiamento. La lezione è evadere dalle prigioni mentali." },
+
     5: { nome: "Il Girovago", sfida: "Irrequietezza cronica, fuga dalle responsabilità e dispersione in stimoli superficiali. La lezione è trovare la libertà all'interno." },
+
     6: { nome: "Il Martire", sfida: "Senso di colpa radicato o tendenza a manipolare gli affetti sotto forma di troppa premura. La lezione è amare senza possedere." },
+
     7: { nome: "Il Solitario", sfida: "Chiusura in una torre d'avorio, scetticismo cinico, paura dell'intimità emotiva. La lezione è integrare la mente con l'apertura del cuore." },
+
     8: { nome: "Il Tiranno", sfida: "Eccessiva sete di controllo, materialismo o abuso di potere per mascherare fragilità. La lezione è esercitare una guida giusta." },
+
     9: { nome: "L'Angelo caduto", sfida: "Tendenza al rifiuto della realtà materiale, alienazione o vittimismo idealistico. La lezione è manifestare la compassione universale." }
+
 };
+
+
 
 const databaseKarmici = {
+
     13: "Sfida del cambiamento radicale e della rinascita.",
+
     14: "Sfida della temperanza e della libertà interiore.",
+
     16: "Sfida del crollo dell'Ego.",
+
     19: "Sfida dell'indipendenza equilibrata."
+
 };
 
-const tabellaPitagorica = {
-    'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7, 'H': 8, 'I': 9,
-    'J': 1, 'K': 2, 'L': 3, 'M': 4, 'N': 5, 'O': 6, 'P': 7, 'Q': 8, 'R': 9,
-    'S': 1, 'T': 2, 'U': 3, 'V': 4, 'W': 5, 'X': 6, 'Y': 7, 'Z': 8
-};
 
-function riduciNumero(numero, isDatiAnagrafici = false) {
-    const maestri = [11, 22, 33];
-    const karmici = [13, 14, 16, 19];
-    if (numero <= 9 || maestri.includes(numero) || (isDatiAnagrafici && karmici.includes(numero))) {
-        return numero;
-    }
-    let somma = numero.toString().split('').reduce((acc, cifra) => acc + parseInt(cifra), 0);
-    return riduciNumero(somma, isDatiAnagrafici);
-}
-
-function riduciMonocifraStretta(numero) {
-    if (numero <= 9) return numero;
-    let somma = numero.toString().split('').reduce((acc, cifra) => acc + parseInt(cifra), 0);
-    return riduciMonocifraStretta(somma);
-}
-
-function pulisciTesto(testo) {
-    return testo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase().replace(/[^A-Z]/g, "");
-}
 
 function compilaScheda(numero, compatta = false) {
+
     if (!numero) return "";
 
+
+
     // Gestione del numero in caso di formati composti (es. "13/4" o "19/1")
+
     let numeroPulito = numero.toString().includes('/') ? parseInt(numero.toString().split('/')[0], 10) : parseInt(numero, 10);
+
     let base = riduciMonocifraStretta(numeroPulito);
+
     
+
     // Identificazione dell'archetipo nel database
+
     let chiaveFinestra = [11, 22, 33].includes(numeroPulito) ? numeroPulito : base;
+
     let datiArchetipo = databaseArchetipi[chiaveFinestra];
+
     
+
     if (!datiArchetipo) return "<i style='color: #888;'>Scheda non disponibile.</i>";
 
+
+
     // Definiamo il percorso dell'immagine della carta
+
     const imgCarta = `./carte/${numeroPulito}.png`;
 
+
+
     let titolo = datiArchetipo.nome;
+
     let significatoTesto = datiArchetipo.significato || 'Descrizione non disponibile.';
+
     let luceTesto = datiArchetipo.luce || 'Non specificata.';
+
     let ombraTesto = datiArchetipo.ombra || 'Non specificata.';
 
+
+
     // Gestione speciale se il numero è Karmico
+
     if (databaseKarmici[numeroPulito]) {
+
         let nomeKarmico = "";
+
         switch(numeroPulito) {
+
             case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
+
             case 14: nomeKarmico = "L'Amante / Temperanza"; break;
+
             case 16: nomeKarmico = "Il Perfezionista / Crollo dell'Ego"; break;
+
             case 19: nomeKarmico = "Il Condottiero / Rinascita Solitaria"; break;
+
         }
+
         titolo += ` <span style="color:#d35400; font-size:12px; display:block; margin-top:2px;">(Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
+
         significatoTesto = `<strong style="color:#d35400;">[SFIDA DEL KARMA ${numeroPulito}]:</strong> ${databaseKarmici[numeroPulito]}<br><br><strong>Integrazione con la Base (${base}):</strong><br>${datiArchetipo.significato}`;
+
     }
 
+
+
     // SE LA FUNZIONE CHIEDE LA VERSIONE COMPATTA (es. per i Grandi Cicli)
+
     if (compatta) {
+
         return `
+
             <div class="card-cliccabile" onclick="apriApprofondimento(this)" style="padding: 5px; cursor: pointer;">
+
                 <span class="archetipo-nome" style="font-weight: bold; color: var(--accent-gold);">${datiArchetipo.nome.split(' (')[0]}</span>
+
                 <div class="descrizione" style="font-size:12px; line-height:1.3; opacity: 0.8;">${luceTesto.substring(0, 80)}...</div>
+
                 
+
                 <!-- Contenuto segreto per la modale anche per la versione compatta -->
+
                 <div class="testo-segreto" style="display: none;">
+
                     <div class="carte-popup-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
+
                         <img src="${imgCarta}" alt="Carta ${numeroPulito}" onerror="this.style.display='none';" style="width: 140px; max-width: 50%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+
                     </div>
+
                     <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
+
                     <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
+
                     <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
+
                 </div>
+
             </div>
+
         `;
+
     }
+
+
 
     // VERSIONE ESTESA STANDARD (Per Anima, Persona, Destino, ecc.)
     return `
         <div class="ns-level-container card-cliccabile" onclick="apriApprofondimento(this)">
-            
+
             <!-- Miniature carte CENTRATE nell'anteprima -->
             <div class="carte-mini-container" style="display: flex; gap: 15px; margin: 15px 0; justify-content: center;">
                 <img src="${imgCarta}" alt="Carta ${numeroPulito}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+
             </div>
 
             <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
                 Archetipo: ${titolo}
             </span>
             <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
-            
+
             <!-- Contenuto segreto letto dal popup -->
             <div class="testo-segreto" style="display: none;">
                 <div class="carte-popup-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
                     <img src="${imgCarta}" alt="Carta ${numeroPulito}" onerror="this.style.display='none';" style="width: 140px; max-width: 50%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+
                 </div>
-                
+
                 <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
                 <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
                 <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
+
             </div>
+
         </div>
+
     `;
 }
-
 function compilaSchedaOmbra(valoreOmbra) {
     let datiOmbra = databaseOmbreMazzo[valoreOmbra] || { nome: `Ombra ${valoreOmbra}`, sfida: "Sfida evolutiva." };
     return `<span class="archetipo-nome" style="color: #c0392b;">${datiOmbra.nome}</span><div class="descrizione">${datiOmbra.sfida}</div>`;
+
 }
 
-function calcolaStringaNumerica(testo) {
-    const vocaliset = ['A', 'E', 'I', 'O', 'U'];
-    let sAnima = 0, sPersona = 0, sEspressione = 0;
-    for (let l of testo) {
-        let v = tabellaPitagorica[l] || 0;
-        if (v > 0) {
-            sEspressione += v;
-            if (vocaliset.includes(l)) { sAnima += v; } else { sPersona += v; }
-        }
-    }
-    return {
-        anima: riduciNumero(sAnima, true),
-        persona: riduciNumero(sPersona, true),
-        espressione: riduciNumero(sEspressione, true)
-    };
-}
-
-let testoCopiaGlobale = "";
-
-function eseguiCalcoloCompleto() {
-    const nome = document.getElementById('nome').value.trim();
-    const cognome = document.getElementById('cognome').value.trim();
-    let soprannome = "";
-    const dataRaw = document.getElementById('dataNascita').value.trim();
-// Se l'utente ha scritto qualcosa nella data, controlla che sia completa
-    if (dataRaw && dataRaw.length < 10) {
-        alert("Per favore, inserisci una data di nascita completa (GG/MM/AAAA) oppure svuota il campo.");
-        return;
-    }
-
-    // Se è vuota rimarrà una stringa vuota, altrimenti prenderà il valore inserito
-    let dataNascita = dataRaw ? dataRaw : "";
-    const annoTarget = parseInt(document.getElementById('annoCorrente').value) || 2026;
-    
-    if(!nome && !cognome && !soprannome && !dataNascita) {
-        alert("Inserisci almeno un campo per generare la tavola.");
-        return;
-    }
-
-    function format(num) {
-        if ([11, 22, 33, 13, 14, 16, 19].includes(num)) return `${num}/${riduciMonocifraStretta(num)}`;
-        return num;
-    }
-
-    function estraiNomeArchetipo(num) {
-        let base = riduciMonocifraStretta(num);
-        return (databaseArchetipi[num] || databaseArchetipi[base]).nome;
-    }
-
-    testoCopiaGlobale = "--- QUADRO NUMEROLOGICO PITAGORICO COMPLETO ---\n\n";
-     if(nome || cognome) testoCopiaGlobale += `Analisi per: ${nome} ${cognome}\n`;
-    if(soprannome) testoCopiaGlobale += `Firma Alternativa: ${soprannome}\n`;
-    if(dataNascita) testoCopiaGlobale += `Data di Nascita: ${dataNascita}\n`;
-    testoCopiaGlobale += `----------------------------------------------\n\n`;
-
-// // 1. ANAGRAFICA
-    if (nome || cognome) {
-        const nomePulito = pulisciTesto(nome);
-        const cognomePulito = pulisciTesto(cognome);
-        const datiAnagrafica = calcolaStringaNumerica(nomePulito + cognomePulito);
-
-        espressionePerQuintessenza = datiAnagrafica.espressione;
-
-        document.getElementById('numAnima').innerText = format(datiAnagrafica.anima);
-        document.getElementById('descAnima').innerHTML = compilaScheda(datiAnagrafica.anima);
-        document.getElementById('numPersona').innerText = format(datiAnagrafica.persona);
-        document.getElementById('descPersona').innerHTML = compilaScheda(datiAnagrafica.persona);
-        document.getElementById('numEspressione').innerText = format(datiAnagrafica.espressione);
-        document.getElementById('descEspressione').innerHTML = compilaScheda(datiAnagrafica.espressione);
-
-        document.getElementById('bloccoAnagrafica').style.display = 'block';
-        testoCopiaGlobale += `I NUMERI FONDAMENTALI:\n`;
-        testoCopiaGlobale += `- Anima: ${format(datiAnagrafica.anima)} (${estraiNomeArchetipo(datiAnagrafica.anima)})\n`;
-        testoCopiaGlobale += `- Persona: ${format(datiAnagrafica.persona)} (${estraiNomeArchetipo(datiAnagrafica.persona)})\n`;
-        testoCopiaGlobale += `- Espressione: ${format(datiAnagrafica.espressione)} (${estraiNomeArchetipo(datiAnagrafica.espressione)})\n\n`;
-        haCalcolatoQualcosa = true;
-    } else {
-        // Se il nome non c'è, impostiamo a 0 la variabile per evitare errori nei calcoli successivi
-        espressionePerQuintessenza = 0; 
-        
-        if (document.getElementById('bloccoAnagrafica')) {
-            document.getElementById('bloccoAnagrafica').style.display = 'none';
-        }
-    }
-
-    // 2. DATA DI NASCITA (LOGICA LINEARE GUIDO ROSSETTI AGGIORNATA)
-    if (dataNascita) {
-        const partiData = dataNascita.split('/');
-        if(partiData.length === 3) {
-            const gNum = parseInt(partiData[0]);
-            const mNum = parseInt(partiData[1]);
-            const aNum = parseInt(partiData[2]);
-
-            const giornoR = riduciNumero(gNum, true); 
-            const meseR = riduciNumero(mNum, true);
-            const sommaCifreAnno = aNum.toString().split('').reduce((a, b) => a + parseInt(b), 0);
-            const annoR = riduciNumero(sommaCifreAnno, true);
-            
-            // --- CALCOLO DEL DESTINO IN LINEA RETTA (METODO ROSSETTI) ---
-            const stringaSoloCifre = dataNascita.replace(/\D/g, '');
-            let sommaLineareData = 0;
-            for (let i = 0; i < stringaSoloCifre.length; i++) {
-                sommaLineareData += parseInt(stringaSoloCifre[i], 10);
+document.addEventListener("DOMContentLoaded", function() {
+    const inputData = document.getElementById('dataNascita');
+    if (inputData) {
+        inputData.addEventListener('input', function() {
+            if (typeof window.formattaEValidaData === 'function') {
+                window.formattaEValidaData(this);
             }
-            // Assegna il valore ottenuto alla variabile del Cammino di Vita (Destino) proteggendo i Karmici
-            const cammino = riduciNumero(sommaLineareData, true);
-            const camminoStretto = riduciMonocifraStretta(cammino);
-            camminoPerQuintessenza = cammino;
-
-            const fineC1 = 36 - camminoStretto;
-            const fineC2 = fineC1 + 9;
-            const fineC3 = fineC2 + 9;
-
-            // Grandi Cicli
-            // Grandi Cicli (Sostituzione corretta con Immagine integrata nella scheda)
-        document.getElementById('numCicloForm').innerText = format(meseR);
-        document.getElementById('descCicloForm').innerHTML = `
-            <img src="carte/${meseR}.png" alt="Carta ${meseR}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-            <div>${compilaScheda(meseR, true)}</div>
-        `;
-
-        document.getElementById('numCicloProd').innerText = format(giornoR);
-        document.getElementById('descCicloProd').innerHTML = `
-            <img src="carte/${giornoR}.png" alt="Carta ${giornoR}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-            <div>${compilaScheda(giornoR, true)}</div>
-        `;
-
-        document.getElementById('numCicloConc').innerText = format(annoR);
-        document.getElementById('descCicloConc').innerHTML = `
-            <img src="carte/${annoR}.png" alt="Carta ${annoR}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-            <div>${compilaScheda(annoR, true)}</div>
-        `;
-            document.getElementById('infoEtaGrandiCicli').innerText = `Fasce: Formativo (0 a ${fineC1} anni) | Produttivo (${fineC1+1} a ${fineC2+9} anni) | Conclusivo (da ${fineC2+10} anni)`;
-
-            // Pinnacoli
-            const c1 = riduciNumero(riduciMonocifraStretta(gNum) + riduciMonocifraStretta(mNum), true);
-            const c2 = riduciNumero(riduciMonocifraStretta(gNum) + riduciMonocifraStretta(sommaCifreAnno), true);
-            const c3 = riduciNumero(riduciMonocifraStretta(c1) + riduciMonocifraStretta(c2), true);
-            const c4 = riduciNumero(riduciMonocifraStretta(mNum) + riduciMonocifraStretta(sommaCifreAnno), true);
-
-            document.getElementById('numCiclo1').innerText = format(c1);
-            document.getElementById('etaCiclo1').innerText = `Da 0 a ${fineC1} anni`;
-            document.getElementById('descCiclo1').innerHTML = compilaScheda(c1);
-
-            document.getElementById('numCiclo2').innerText = format(c2);
-            document.getElementById('etaCiclo2').innerText = `Da ${fineC1 + 1} a ${fineC2} anni`;
-            document.getElementById('descCiclo2').innerHTML = compilaScheda(c2);
-
-            document.getElementById('numCiclo3').innerText = format(c3);
-            document.getElementById('etaCiclo3').innerText = `Da ${fineC2 + 1} a ${fineC3} anni`;
-            document.getElementById('descCiclo3').innerHTML = compilaScheda(c3);
-
-            document.getElementById('numCiclo4').innerText = format(c4);
-            document.getElementById('etaCiclo4').innerText = `Da ${fineC3 + 1} anni in poi`;
-            document.getElementById('descCiclo4').innerHTML = compilaScheda(c4);
-
-            // Anno Personale e Giorno Personale
-            const annoTargetRidotto = riduciNumero(annoTarget.toString().split('').reduce((a, b) => a + parseInt(b), 0));
-            const annoPersonale = riduciNumero(riduciMonocifraStretta(gNum) + riduciMonocifraStretta(mNum) + annoTargetRidotto, true);
-            
-            const oggi = new Date();
-            const gOggiRidotto = riduciNumero(oggi.getDate());
-            const mOggiRidotto = riduciNumero(oggi.getMonth() + 1);
-            const giornoPersonale = riduciNumero(riduciMonocifraStretta(annoPersonale) + gOggiRidotto + mOggiRidotto, true);
-
-// Ombre
-            const gStretto = riduciMonocifraStretta(gNum);
-            const mStretto = riduciMonocifraStretta(mNum);
-            const aStretto = riduciMonocifraStretta(sommaCifreAnno);
-            
-            const ombraGiov = Math.abs(gStretto - mStretto);
-            const ombraMat = Math.abs(gStretto - aStretto);
-            const ombraPrinc = Math.abs(ombraGiov - ombraMat);
-
-            document.getElementById('numGiornoIsolato').innerText = format(giornoR);
-            document.getElementById('descGiornoIsolato').innerHTML = compilaScheda(giornoR);
-            document.getElementById('numCammino').innerText = format(cammino);
-            document.getElementById('descCammino').innerHTML = compilaScheda(cammino);
-            document.getElementById('numAnnoPers').innerText = format(annoPersonale);
-            document.getElementById('descAnnoPers').innerHTML = compilaScheda(annoPersonale);
-            document.getElementById('numGiornoPers').innerText = format(giornoPersonale);
-            document.getElementById('descGiornoPers').innerHTML = compilaScheda(giornoPersonale);
-
-            // Funzione interna per mappare l'immagine corretta (0 e 9 usano entrambe 'ombra9.png')
-            function ottieniNomeImmagineOmbra(valoreOmbra) {
-                if (valoreOmbra === 0 || valoreOmbra === 9) {
-                    return 'ombra9';
-                }
-                return 'ombra' + valoreOmbra;
-            }
-
-            // Recupero dei nomi degli archetipi ombra dal database
-            const nomeGiov = databaseOmbreMazzo[ombraGiov] ? databaseOmbreMazzo[ombraGiov].nome : '';
-            const nomeMat = databaseOmbreMazzo[ombraMat] ? databaseOmbreMazzo[ombraMat].nome : '';
-            const nomePrinc = databaseOmbreMazzo[ombraPrinc] ? databaseOmbreMazzo[ombraPrinc].nome : '';
-
-            // Ombre - Struttura uniforme con foto, nome archetipo e avviso di clic
-            const imgGiov = ottieniNomeImmagineOmbra(ombraGiov);
-            document.getElementById('numOmbraGiov').innerText = ombraGiov;
-            document.getElementById('descOmbraGiov').innerHTML = `
-                <img src="carte/${imgGiov}.png" alt="Ombra ${ombraGiov}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-                <div style="text-align: center; margin-top: 10px; font-style: italic; font-weight: bold; color: #c5a059; font-size: 13px;">
-                    Archetipo: ${nomeGiov}
-                </div>
-                <div style="text-align: center; font-size: 11px; color: #888; margin-top: 4px; font-style: italic;">
-                    → Clicca qui per leggere l'analisi completa
-                </div>
-                <div class="testo-segreto" style="display: none;">
-                    <img src="carte/${imgGiov}.png" alt="Ombra ${ombraGiov}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
-                    ${compilaSchedaOmbra(ombraGiov)}
-                </div>
-            `;
-            
-            const imgMat = ottieniNomeImmagineOmbra(ombraMat);
-            document.getElementById('numOmbraMat').innerText = ombraMat;
-            document.getElementById('descOmbraMat').innerHTML = `
-                <img src="carte/${imgMat}.png" alt="Ombra ${ombraMat}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-                <div style="text-align: center; margin-top: 10px; font-style: italic; font-weight: bold; color: #c5a059; font-size: 13px;">
-                    Archetipo: ${nomeMat}
-                </div>
-                <div style="text-align: center; font-size: 11px; color: #888; margin-top: 4px; font-style: italic;">
-                    → Clicca qui per leggere l'analisi completa
-                </div>
-                <div class="testo-segreto" style="display: none;">
-                    <img src="carte/${imgMat}.png" alt="Ombra ${ombraMat}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
-                    ${compilaSchedaOmbra(ombraMat)}
-                </div>
-            `;
-            
-            const imgPrinc = ottieniNomeImmagineOmbra(ombraPrinc);
-            document.getElementById('numOmbraPrinc').innerText = ombraPrinc;
-            document.getElementById('descOmbraPrinc').innerHTML = `
-                <img src="carte/${imgPrinc}.png" alt="Ombra ${ombraPrinc}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-                <div style="text-align: center; margin-top: 10px; font-style: italic; font-weight: bold; color: #c5a059; font-size: 13px;">
-                    Archetipo: ${nomePrinc}
-                </div>
-                <div style="text-align: center; font-size: 11px; color: #888; margin-top: 4px; font-style: italic;">
-                    → Clicca qui per leggere l'analisi completa
-                </div>
-                <div class="testo-segreto" style="display: none;">
-                    <img src="carte/${imgPrinc}.png" alt="Ombra ${ombraPrinc}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
-                    ${compilaSchedaOmbra(ombraPrinc)}
-                </div>
-            `;
-
-            document.getElementById('bloccoData').style.display = 'block';
-            
-            testoCopiaGlobale += `DESTINO E CARATTERE:\n`;
-            testoCopiaGlobale += `- Giorno di Nascita: ${format(giornoR)} (${estraiNomeArchetipo(giornoR)})\n`;
-            testoCopiaGlobale += `- Cammino di Vita: ${format(cammino)} (${estraiNomeArchetipo(cammino)})\n`;
-            testoCopiaGlobale += `- Anno Personale (${annoTarget}): ${format(annoPersonale)}\n`;
-            testoCopiaGlobale += `- Giorno Personale (Oggi): ${format(giornoPersonale)}\n\n`;
-            
-            testoCopiaGlobale += `I 3 GRANDI CICLI EVOLUTIVI:\n`;
-            testoCopiaGlobale += `- Formativo (0-${fineC1} anni): ${format(meseR)}\n`;
-            testoCopiaGlobale += `- Produttivo (${fineC1+1}-${fineC2+9} anni): ${format(giornoR)}\n`;
-            testoCopiaGlobale += `- Conclusivo (da ${fineC2+10} anni): ${format(annoR)}\n\n`;
-
-            testoCopiaGlobale += `I 4 PINNACOLI DI REALIZZAZIONE:\n`;
-            testoCopiaGlobale += `- 1° Pinnacolo (0-${fineC1} anni): ${format(c1)} (${estraiNomeArchetipo(c1)})\n`;
-            testoCopiaGlobale += `- 2° Pinnacolo (${fineC1+1}-${fineC2} anni): ${format(c2)} (${estraiNomeArchetipo(c2)})\n`;
-            testoCopiaGlobale += `- 3° Pinnacolo (${fineC2+1}-${fineC3} anni): ${format(c3)} (${estraiNomeArchetipo(c3)})\n`;
-            testoCopiaGlobale += `- 4° Pinnacolo (da ${fineC3+1} anni): ${format(c4)} (${estraiNomeArchetipo(c4)})\n\n`;
-
-            testoCopiaGlobale += `LE OMBRE EVOLUTIVE:\n`;
-            testoCopiaGlobale += `- Ombra Giovinezza: ${ombraGiov} (${databaseOmbreMazzo[ombraGiov]?.nome || ''})\n`;
-            testoCopiaGlobale += `- Ombra Maturità: ${ombraMat} (${databaseOmbreMazzo[ombraMat]?.nome || ''})\n`;
-            testoCopiaGlobale += `- Ombra Principale: ${ombraPrinc} (${databaseOmbreMazzo[ombraPrinc]?.nome || ''})\n\n`;
-            
-            haCalcolatoQualcosa = true;
-        } else {
-            alert("Usa il formato GG/MM/AAAA.");
-        }
-    } else {
-        document.getElementById('bloccoData').style.display = 'none';
+        });
     }
+});
+</script>
 
- // // 3. QUINTESSENZA
-    if ((nome || cognome) && dataNascita && espressionePerQuintessenza && camminoPerQuintessenza) {
-        const quintessenza = riduciNumero(riduciMonocifraStretta(espressionePerQuintessenza) + riduciMonocifraStretta(camminoPerQuintessenza), true);
-        document.getElementById('numQuintessenza').innerText = format(quintessenza);
-        document.getElementById('descQuintessenza').innerHTML = compilaScheda(quintessenza);
-        document.getElementById('sezioneQuintessenza').style.display = 'block';
+<!-- Collegamento al file esterno dei calcoli -->
+<script src="calcoli.js"></script>
 
-        testoCopiaGlobale += `IL PUNTO D'ARRIVO:\n`;
-        testoCopiaGlobale += `- La Quintessenza: ${format(quintessenza)} (${estraiNomeArchetipo(quintessenza)})\n\n`;
-    } else {
-        document.getElementById('sezioneQuintessenza').style.display = 'none';
-    }
-
-    // 4. SOPRANNOME
-    if (soprannome) {
-        const soprannomePulito = pulisciTesto(soprannome);
-        const datiSoprannome = calcolaStringaNumerica(soprannomePulito);
-
-        document.getElementById('numAnimaSop').innerText = format(datiSoprannome.anima);
-        document.getElementById('descAnimaSop').innerHTML = compilaScheda(datiSoprannome.anima);
-        document.getElementById('numPersonaSop').innerText = format(datiSoprannome.persona);
-        document.getElementById('descPersonaSop').innerHTML = compilaScheda(datiSoprannome.persona);
-        document.getElementById('numEspressioneSop').innerText = format(datiSoprannome.espressione);
-        document.getElementById('descEspressioneSop').innerHTML = compilaScheda(datiSoprannome.espressione);
-
-        document.getElementById('sezioneSoprannome').style.display = 'block';
-        
-        testoCopiaGlobale += `ENERGIA ACQUISITA (SOPRANNOME):\n`;
-        testoCopiaGlobale += `- Anima Soprannome: ${format(datiSoprannome.anima)}\n`;
-        testoCopiaGlobale += `- Persona Soprannome: ${format(datiSoprannome.persona)}\n`;
-        testoCopiaGlobale += `- Espressione Soprannome: ${format(datiSoprannome.espressione)}\n\n`;
-        
-        haCalcolatoQualcosa = true;
-    } else {
-        document.getElementById('sezioneSoprannome').style.display = 'none';
-    }
-
-    if (haCalcolatoQualcosa) {
-        document.getElementById('risultati').style.display = 'block';
-        document.getElementById('btnCopia').style.display = 'block';
-        // MOSTRA IL TASTO SALVA DOPO UN CALCOLO RIUSCITO
-        document.getElementById('btnSalva').style.display = 'block';
-    }
-}
-
-function copiaMappaInAppunti() {
-    if (!testoCopiaGlobale) return;
-    navigator.clipboard.writeText(testoCopiaGlobale).then(() => {
-        alert("Analisi copiata correttamente negli appunti!");
-    }).catch(err => {
-        console.error("Errore durante la copia: ", err);
-        alert("Impossibile copiare automaticamente. Seleziona il testo manualmente.");
-    });
-}
-
-// ==========================================
-// GESTIONE ARCHIVIO LOCALE (INDEXEDDB)
-// ==========================================
-
+<!-- Blocco finale per la gestione dell'archivio locale IndexedDB e Modale -->
+<script>
 const DB_NAME = 'NumerologiaDB';
 const DB_VERSION = 2;
 let db;
 
-// Apertura/Inizializzazione DB
 const request = indexedDB.open(DB_NAME, DB_VERSION);
 
 request.onupgradeneeded = function(event) {
     db = event.target.result;
     if (!db.objectStoreNames.contains('clienti')) {
         db.createObjectStore('clienti', { keyPath: 'id', autoIncrement: true });
+
     }
+
 };
+
+// Gestione della formattazione automatica della data (agganciata a calcoli.js)
+document.addEventListener("DOMContentLoaded", function() {
+    const inputData = document.getElementById('dataNascita');
+    if (inputData) {
+        inputData.addEventListener('input', function() {
+            if (typeof formattaEValidaData === 'function') {
+                formattaEValidaData(this);
+            }
+        });
+    }
+});
 
 request.onsuccess = function(event) {
+
     db = event.target.result;
-    // Se il DB è pronto, controlla se la pagina è stata aperta dall'Archivio con dati nell'URL
+
     controllaParametriURL();
+
 };
+
+
 
 request.onerror = function(event) {
-    console.error("Errore nell'apertura dell'archivio:", event.target.error);
+
+    console.error("Errore critico nell'apertura dell'archivio locale IndexedDB:", event.target.error);
+
 };
 
-// Funzione di Salvataggio Avanzata per Pitagora
+
+
 function salvaNelDatabase() {
+
     const nome = document.getElementById('nome').value.trim();
+
     const cognome = document.getElementById('cognome').value.trim();
+
     const dataNascita = document.getElementById('dataNascita').value.trim();
 
-    // Blocca il salvataggio solo se TUTTI i campi principali sono vuoti
+
+
     if (!nome && !cognome && !dataNascita) {
-        alert("Inserisci almeno un dato (Nome, Cognome o Data di Nascita) per poter effettuare il salvataggio.");
+
+        alert("Inserisci almeno un dato identificativo per poter eseguire il salvataggio.");
+
         return;
+
     }
 
-    // Se l'utente ha provato a scrivere la data, controlla che sia completa (GG/MM/AAAA)
+
+
     if (dataNascita && dataNascita.length < 10) {
-        alert("Per favore, inserisci una data di nascita completa (GG/MM/AAAA) oppure svuota il campo per salvare solo i dati testuali.");
+
+        alert("Per favore, specifica una data di nascita completa (GG/MM/AAAA).");
+
         return;
+
     }
 
-    // Estrazione dei valori calcolati a video dai rispettivi ID della pagina
+
+
     const anima = document.getElementById('numAnima')?.innerText || "";
+
     const persona = document.getElementById('numPersona')?.innerText || "";
-    const io = document.getElementById('numEspressione')?.innerText || ""; // L'Io corrisponde al numero di Espressione anagrafica
+
+    const io = document.getElementById('numEspressione')?.innerText || ""; 
+
     const giornoNascita = document.getElementById('numGiornoIsolato')?.innerText || "";
-    const destino = document.getElementById('numCammino')?.innerText || ""; // Il Destino corrisponde al Cammino di Vita
+
+    const destino = document.getElementById('numCammino')?.innerText || ""; 
+
     const annoPersonale = document.getElementById('numAnnoPers')?.innerText || "";
+
     const giornoPersonale = document.getElementById('numGiornoPers')?.innerText || "";
-
-    // Compattazione dei 3 Grandi Cicli Evolutivi
-    const cForm = document.getElementById('numCicloForm')?.innerText || "";
-    const cProd = document.getElementById('numCicloProd')?.innerText || "";
-    const cConc = document.getElementById('numCicloConc')?.innerText || "";
-    const grandiCicli = `Formativo: ${cForm} | Produttivo: ${cProd} | Conclusivo: ${cConc}`;
-
-    // Compattazione dei 4 Cicli di Realizzazione (Pinnacoli)
-    const p1 = document.getElementById('numCiclo1')?.innerText || "";
-    const p2 = document.getElementById('numCiclo2')?.innerText || "";
-    const p3 = document.getElementById('numCiclo3')?.innerText || "";
-    const p4 = document.getElementById('numCiclo4')?.innerText || "";
-    const cicliRealizzazione = `1°: ${p1} | 2°: ${p2} | 3°: ${p3} | 4°: ${p4}`;
-
-    // Compattazione delle Ombre
-    const oGiov = document.getElementById('numOmbraGiov')?.innerText || "";
-    const oMat = document.getElementById('numOmbraMat')?.innerText || "";
-    const oPrinc = document.getElementById('numOmbraPrinc')?.innerText || "";
-    const ombre = `Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}`;
 
     const quintessenza = document.getElementById('numQuintessenza')?.innerText || "";
 
+
+
+    const cForm = document.getElementById('numCicloForm')?.innerText || "";
+
+    const cProd = document.getElementById('numCicloProd')?.innerText || "";
+
+    const cConc = document.getElementById('numCicloConc')?.innerText || "";
+
+    const grandiCicli = `Formativo: ${cForm} | Produttivo: ${cProd} | Conclusivo: ${cConc}`;
+
+
+
+    const p1 = document.getElementById('numCiclo1')?.innerText || "";
+
+    const p2 = document.getElementById('numCiclo2')?.innerText || "";
+
+    const p3 = document.getElementById('numCiclo3')?.innerText || "";
+
+    const p4 = document.getElementById('numCiclo4')?.innerText || "";
+
+    const cicliRealizzazione = `1°: ${p1} | 2°: ${p2} | 3°: ${p3} | 4°: ${p4}`;
+
+
+
+    const oGiov = document.getElementById('numOmbraGiov')?.innerText || "";
+
+    const oMat = document.getElementById('numOmbraMat')?.innerText || "";
+
+    const oPrinc = document.getElementById('numOmbraPrinc')?.innerText || "";
+
+    const ombre = `Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}`;
+
+
+
     const transaction = db.transaction(['clienti'], 'readwrite');
+
     const store = transaction.objectStore('clienti');
 
-    // Creazione del record completo con tutti i dati estratti
+
+
     const nuovoCliente = {
+
         nome: nome,
+
         cognome: cognome,
+
         data_nascita: dataNascita,
+
         metodo: 'pitagora', 
+
         data_salvataggio: new Date().toISOString(),
-        
-        // Dati Numerologici Pitagorici aggiunti
+
         anima: anima,
+
         persona: persona,
+
         io: io,
+
         giorno_nascita: giornoNascita,
+
         destino: destino,
+
         anno_personale: annoPersonale,
+
         giorno_personale: giornoPersonale,
+
         grandi_cicli: grandiCicli,
+
         cicli_realizzazione: cicliRealizzazione,
+
         ombre: ombre,
+
         quintessenza: quintessenza
+
     };
+
+
 
     const requestAdd = store.add(nuovoCliente);
 
+
+
     requestAdd.onsuccess = function() {
-        alert(`Il quadro numerologico completo di ${nome} ${cognome} è stato salvato correttamente in archivio!`);
+
+        alert(`Il quadro completo di ${nome} ${cognome} è stato correttamente archiviato!`);
+
     };
+
+
 
     requestAdd.onerror = function(event) {
-        console.error("Errore durante il salvataggio:", event.target.error);
-        alert("Impossibile salvare i dati nell'archivio.");
+
+        console.error("Errore durante store.add:", event.target.error);
+
+        alert("Impossibile salvare i dati nell'archivio locale.");
+
     };
+
 }
 
-// Controllo dei parametri ricevuti dall'Archivio
+
+
 function controllaParametriURL() {
+
     const urlParams = new URLSearchParams(window.location.search);
+
     const nomeUrl = urlParams.get('nome');
+
     const cognomeUrl = urlParams.get('cognome');
+
     const dataUrl = urlParams.get('data');
 
-// Si attiva se è presente almeno un dato utile dall'archivio
+
+
     if (nomeUrl || cognomeUrl || dataUrl) {
+
         document.getElementById('nome').value = nomeUrl || "";
+
         document.getElementById('cognome').value = cognomeUrl || "";
+
         document.getElementById('dataNascita').value = dataUrl || "";
 
-        // Esegue il calcolo in automatico
-        eseguiCalcoloCompleto();
+
+
+        if (typeof eseguiCalcoloCompleto === "function") {
+
+            eseguiCalcoloCompleto();
+
+        } else {
+
+            window.addEventListener('load', () => eseguiCalcoloCompleto());
+
+        }
+
     }
+
 }
 
+
+
 function apriApprofondimento(elementoCard) {
-    // 1. Cerchiamo di risalire al titolo della sezione per dare contesto alla modale
     let titoloSezione = "Approfondimento Archetipo";
     const bloccoGenitore = elementoCard.closest('.blocco-risultato, td, div, tr'); 
+    
     if (bloccoGenitore) {
         const h3 = bloccoGenitore.querySelector('h3');
         if (h3) {
             titoloSezione = h3.innerText;
         } else {
-            // Se siamo in una tabella o simile, prova a cercare un elemento di testo forte o una classe
             const label = bloccoGenitore.querySelector('strong, .label');
             if (label) titoloSezione = label.innerText;
         }
     }
 
-    // 2. Recuperiamo il numero visualizzato
     let numeroEvidenziato = "";
     if (bloccoGenitore) {
         const numEl = bloccoGenitore.querySelector('.numero-evidenziato, [id^="num"]');
-        if (numEl) numeroEvidenziato = ` ${numEl.innerText}`;
+        if (numEl) {
+            numeroEvidenziato = ` (${numEl.innerText})`;
+        }
     }
 
-    // 3. Estraiamo il contenuto dal div segreto della card cliccata
     const testoSegretoEl = elementoCard.querySelector('.testo-segreto');
-    
     if (testoSegretoEl) {
-        // Impostiamo il titolo della modale
         document.getElementById('modaleTitolo').innerText = `${titoloSezione}${numeroEvidenziato}`;
-        
-        // Svuotiamo il sottotitolo standard
         document.getElementById('modaleSottotitolo').innerHTML = "";
-        
-        // Copiamo tutto l'HTML (immagine + testi) all'interno della modale
         document.getElementById('modaleContenuto').innerHTML = testoSegretoEl.innerHTML;
-        
-        // Mostriamo la modale
         document.getElementById('modaleApprofondimento').style.display = 'flex';
-        
     }
 }
 
 function chiudiModale() {
+
     document.getElementById('modaleApprofondimento').style.display = 'none';
+
 }
 
-// Chiude la modale anche se l'utente clicca fuori dal riquadro bianco
+
+
 window.onclick = function(event) {
     const modale = document.getElementById('modaleApprofondimento');
     if (event.target == modale) {
         modale.style.display = "none";
     }
-}
+};
+
 </script>
-</FF>
-</html>
+</body>
+</html> 
+

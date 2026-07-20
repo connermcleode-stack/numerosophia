@@ -539,14 +539,9 @@ div[onclick] * {
             © 2026 Numerosophia
         </div>
     </div>
-
+<script src="calcoli.js"></script>
     <script>
-function formattaEValidaData(input) {
-    let v = input.value.replace(/\D/g, ''); // Rimuove tutto ciò che non è un numero
-    if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
-    if (v.length > 5) v = v.substring(0, 5) + '/' + v.substring(5, 9);
-    input.value = v;
-}
+
         // =========================================================================
         // DATABASE TESTI DELLE AFFINITÀ (SINASTRIA) - STRUTTURA COMPLETA
         // Inserire le coppie SEMPRE in ordine crescente (es. "1-3", "5-11", "9-22")
