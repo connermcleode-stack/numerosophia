@@ -79,30 +79,26 @@
             color: #f5f2eb; 
         }
         
-        /* Layout fluido per barra di ricerca e controlli */
         .actions-bar { 
             display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
+            flex-direction: row; 
+            align-items: center;
+            gap: 6px; 
             margin-bottom: 15px; 
             width: 100%; 
         }
-
-        .search-row {
-            display: flex;
-            width: 100%;
-            gap: 8px;
-        }
         
         .search-input { 
-            flex-grow: 1; 
-            padding: 10px 12px; 
+            flex: 1 1 auto; 
+            min-width: 100px;
+            padding: 8px 10px; 
             border: 1px solid rgba(142, 115, 85, 0.3); 
             border-radius: 6px; 
-            font-size: 14px; 
+            font-size: 13px; 
             background-color: #1a1816; 
             color: #f5f2eb; 
             font-family: inherit;
+            height: 38px;
             transition: border-color 0.2s, background-color 0.2s; 
         }
         .search-input:focus { 
@@ -111,22 +107,13 @@
             background-color: #221f1c;
         }
 
-        /* Pulsanti d'azione superiori */
-        .btn-action-container { 
-            display: flex; 
-            gap: 6px; 
-            align-items: center; 
-            width: 100%;
-            justify-content: space-between;
-        }
-        
-        /* Stile pulsanti compattati */
         .btn { 
             display: inline-flex; 
-            padding: 10px 14px; 
+            padding: 0 10px; 
+            height: 38px;
             text-decoration: none; 
             border-radius: 6px; 
-            font-size: 13px; 
+            font-size: 12px; 
             font-weight: bold; 
             cursor: pointer; 
             border: none; 
@@ -137,7 +124,7 @@
             transition: background 0.2s, transform 0.1s; 
             font-family: inherit; 
             color: white;
-            flex: 1; /* Distribuisce equamente lo spazio */
+            flex-shrink: 0;
         }
         .btn:active { transform: scale(0.98); }
         
@@ -147,13 +134,12 @@
         .btn-import { background-color: #1a3a5c; border: 1px solid rgba(21, 101, 192, 0.4); }
         .btn-import:hover { background-color: #254f7d; }
         
-        /* Tasti Iconici Compatti */
         .btn-icon-top { 
             width: 38px; 
             height: 38px; 
             padding: 0; 
             border-radius: 6px; 
-            font-size: 16px; 
+            font-size: 15px; 
             display: inline-flex; 
             align-items: center; 
             justify-content: center; 
@@ -165,7 +151,6 @@
         }
         .btn-select-mode:hover { background-color: #36322e; }
         
-        /* Selezione attiva */
         .btn-select-active { 
             background-color: transparent !important; 
             color: #d4af37 !important; 
@@ -174,11 +159,9 @@
             font-weight: bold; 
         }
         
-        /* Cestino di massa */
         .btn-delete-all { background-color: #5c1d1d; border: 1px solid rgba(198, 40, 40, 0.4); display: none; }
         .btn-delete-all:hover { background-color: #7d2828; }
 
-        /* Contenitore tabella responsiva scura */
         .table-responsive { 
             width: 100%; 
             overflow-x: auto; 
@@ -191,7 +174,6 @@
             background: #1f1d1a;
         }
         
-        /* Scrollbar stilizzate */
         .table-responsive::-webkit-scrollbar { height: 6px; width: 6px; }
         .table-responsive::-webkit-scrollbar-thumb { background-color: #544738; border-radius: 3px; }
         .table-responsive::-webkit-scrollbar-track { background: #151412; }
@@ -213,7 +195,6 @@
         td { font-size: 13px; color: #e8e3d9; }
         tr:hover td { background-color: rgba(142, 115, 85, 0.05); }
         
-        /* Colonna selezione */
         .col-select { display: none; width: 35px; text-align: center; }
         .checkbox-importante { 
             transform: scale(1.1); 
@@ -221,7 +202,6 @@
             accent-color: #d4af37;
         }
 
-        /* Bottone Apri Profilo */
         .btn-open { 
             background: #8e7355; 
             color: white; 
@@ -239,24 +219,20 @@
         }
         .btn-open:hover { background: #765f45; }
         
-        /* Badges Metodi */
         .metodo-badge { padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
         .badge-pitagora { background-color: rgba(46, 125, 50, 0.2); color: #a3cfab; border: 1px solid rgba(46, 125, 50, 0.4); }
         .badge-caldea { background-color: rgba(123, 31, 162, 0.2); color: #e1bee7; border: 1px solid rgba(123, 31, 162, 0.4); }
 
-        /* Media Query specifica per Smartphone */
         @media (max-width: 768px) {
             body { padding: 8px; }
             .container { padding: 15px 10px; border-radius: 8px; }
             .btn-home { align-self: stretch; text-align: center; display: block; margin-bottom: 10px; }
             h1 { font-size: 18px; margin-bottom: 15px; }
             
-            /* Ottimizzazione testi bottoni per non farli tagliare */
-            .btn-export span::after { content: ""; }
-            .btn-import span::after { content: ""; }
-            
-            .btn { padding: 10px 8px; font-size: 12px; }
-            .btn-icon-top { width: 38px; height: 38px; }
+            .actions-bar { gap: 4px; }
+            .search-input { font-size: 12px; padding: 6px 8px; }
+            .btn { padding: 0 6px; font-size: 11px; }
+            .btn-icon-top { width: 34px; height: 34px; font-size: 14px; }
             
             th, td { padding: 8px 6px; }
             td { font-size: 12px; }
@@ -272,19 +248,14 @@
         <h1>📁 Archivio Profili</h1>
         
         <div class="actions-bar">
-            <!-- Riga superiore con Cerca + Selezione + Cestino -->
-            <div class="search-row">
-                <input type="text" id="inputRicerca" onkeyup="filtraClienti()" placeholder="🔍 Cerca per Cognome o Nome..." class="search-input">
-                <button onclick="toggleModalitaSelezione()" id="btnSelezione" class="btn-icon-top btn-select-mode" title="Attiva Selezione Multipla">☑️</button>
-                <button onclick="eliminaSelezionati()" id="btnEliminaMassa" class="btn-icon-top btn-delete-all" title="Elimina Profili Selezionati">🗑️</button>
-            </div>
+            <input type="text" id="inputRicerca" onkeyup="filtraClienti()" placeholder="🔍 Cerca..." class="search-input">
             
-            <!-- Riga inferiore con Esporta ed Importa distribuiti uniformemente -->
-            <div class="btn-action-container">
-                <button onclick="esportaInExcel()" class="btn btn-export">🟢 <span>Esporta</span></button>
-                <input type="file" id="fileImport" accept=".csv, text/csv, text/comma-separated-values, application/csv, application/vnd.ms-excel" style="display: none;" onchange="importaDaExcel(this)">
-                <button onclick="document.getElementById('fileImport').click()" class="btn btn-import">🔵 <span>Importa</span></button>
-            </div>
+            <button onclick="esportaInExcel()" class="btn btn-export" title="Esporta in Excel">🟢 <span>Esporta</span></button>
+            <input type="file" id="fileImport" accept=".csv, text/csv, text/comma-separated-values, application/csv, application/vnd.ms-excel" style="display: none;" onchange="importaDaExcel(this)">
+            <button onclick="document.getElementById('fileImport').click()" class="btn btn-import" title="Importa da Excel">🔵 <span>Importa</span></button>
+            
+            <button onclick="toggleModalitaSelezione()" id="btnSelezione" class="btn-icon-top btn-select-mode" title="Attiva Selezione Multipla">☑️</button>
+            <button onclick="eliminaSelezionati()" id="btnEliminaMassa" class="btn-icon-top btn-delete-all" title="Elimina Profili Selezionati">🗑️</button>
         </div>
 
         <div class="table-responsive">
@@ -359,7 +330,6 @@ function mostraClienti() {
                 elencoClienti.forEach(cliente => {
                     const riga = document.createElement('tr');
                     
-                    // --- LOGICA ORIGINALE REINTEGRATA AL 100% ---
                     const fileDestinazione = (cliente.metodo || "").toLowerCase() === 'caldea' ? 'caldea.html' : 'pitagora.html';
                     
                     const nomeVal = cliente.nome || "";
@@ -376,17 +346,34 @@ function mostraClienti() {
 
                     const displayStile = modalitaSelezioneAttiva ? "table-cell" : "none";
 
-                    // Costruzione della riga con il click diretto sulla cella del nome
-                    riga.innerHTML = `
-                        <td class="col-select" style="display: ${displayStile}; text-align:center;">
-                            <input type="checkbox" value="${cliente.id}" class="checkbox-cliente checkbox-importante">
-                        </td>
-                        <td style="cursor: pointer;" onclick="window.location.href='${urlMappa}'">
-                            <strong>${nomeVisualizzato}</strong>
-                        </td>
-                        <td>${dataVal || "-"}</td>
-                        <td><span class="metodo-badge badge-${metodoVal}">${metodoVal}</span></td>
-                    `;
+                    // 1. Cella Checkbox Selezione
+                    const tdSelect = document.createElement('td');
+                    tdSelect.className = "col-select";
+                    tdSelect.style.display = displayStile;
+                    tdSelect.style.textAlign = "center";
+                    tdSelect.innerHTML = `<input type="checkbox" value="${cliente.id}" class="checkbox-cliente checkbox-importante">`;
+
+                    // 2. Cella Nome con Evento Click sicuro da JS (risolve il bug dell'apostrofo)
+                    const tdNome = document.createElement('td');
+                    tdNome.style.cursor = "pointer";
+                    tdNome.innerHTML = `<strong>${nomeVisualizzato}</strong>`;
+                    tdNome.onclick = function() {
+                        window.location.href = urlMappa;
+                    };
+
+                    // 3. Cella Data Nascita
+                    const tdData = document.createElement('td');
+                    tdData.textContent = dataVal || "-";
+
+                    // 4. Cella Metodo
+                    const tdMetodo = document.createElement('td');
+                    tdMetodo.innerHTML = `<span class="metodo-badge badge-${metodoVal}">${metodoVal}</span>`;
+
+                    // Assemblaggio della riga
+                    riga.appendChild(tdSelect);
+                    riga.appendChild(tdNome);
+                    riga.appendChild(tdData);
+                    riga.appendChild(tdMetodo);
                     
                     corpoTabella.appendChild(riga);
                 });
