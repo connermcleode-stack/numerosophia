@@ -261,15 +261,33 @@ body {
 <div class="container">
 
     <div class="header-logo">
-        <!-- SIMBOLO SACRO -->
-        <svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
-            <circle cx="50" cy="50" r="45" fill="none" stroke="#ffdf70" stroke-width="2.5" />
-            <polygon points="50,23 26,67 74,67" fill="none" stroke="#ffdf70" stroke-width="2.5" stroke-linejoin="round" />
-            <text x="50" y="19" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">7</text>
-            <text x="19" y="72" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">3</text>
-            <text x="81" y="72" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">4</text>
-            <text x="50" y="56" fill="#ffdf70" font-family="'Cinzel', serif" font-size="14" font-weight="bold" text-anchor="middle">5</text>
-        </svg>
+        <!-- Rosetta Caldea Dorata Luminosa -->
+<svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
+    <!-- Cerchio Centrale -->
+    <circle cx="50" cy="50" r="8" fill="none" stroke="#ffdf70" stroke-width="2" />
+    <circle cx="50" cy="50" r="3" fill="#ffdf70" />
+
+    <!-- 8 Petali geometrici (4 Cardinali + 4 Diagonali) -->
+    <!-- Petalo Superiore -->
+    <path d="M 50 42 C 43 32, 43 18, 50 10 C 57 18, 57 32, 50 42 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+    <!-- Petalo Inferiore -->
+    <path d="M 50 58 C 43 68, 43 82, 50 90 C 57 82, 57 68, 50 58 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+    <!-- Petalo Sinistra -->
+    <path d="M 42 50 C 32 43, 18 43, 10 50 C 18 57, 32 57, 42 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+    <!-- Petalo Destra -->
+    <path d="M 58 50 C 68 43, 82 43, 90 50 C 82 57, 68 57, 58 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+
+    <!-- Petali Diagonali (45°, 135°, 225°, 315°) -->
+    <g transform="rotate(45 50 50)">
+        <path d="M 50 42 C 43 32, 43 18, 50 10 C 57 18, 57 32, 50 42 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+        <path d="M 50 58 C 43 68, 43 82, 50 90 C 57 82, 57 68, 50 58 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+        <path d="M 42 50 C 32 43, 18 43, 10 50 C 18 57, 32 57, 42 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+        <path d="M 58 50 C 68 43, 82 43, 90 50 C 82 57, 68 57, 58 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+    </g>
+
+    <!-- Anello di Contorno Esterno -->
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#ffdf70" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.6" />
+</svg>
 
         <h1>NUMEROSOPHIA</h1>
         <div class="subtitle">Strumento di Analisi Caldeo-Planetaria ed Esoterica</div>
