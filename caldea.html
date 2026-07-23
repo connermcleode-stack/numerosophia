@@ -10,9 +10,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+    <!-- Inclusione Font (incluso Cormorant Garamond per consistenza con index) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=400;500;600;700&family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght=300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
-        
         * { 
             box-sizing: border-box; 
         }
@@ -22,11 +25,12 @@
             background: #120a1c; /* Viola ametista scuro e profondo */ 
             color: #e0dbd1; 
             margin: 0; 
-            padding: 20px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-start;
+            padding: 20px 10px; 
+            display: flex !important; 
+            justify-content: center !important; 
+            align-items: center !important; 
             min-height: 100vh;
+            min-height: 100dvh;
         }
 
         body::before {
@@ -52,24 +56,39 @@
             border: 1px solid rgba(212, 175, 55, 0.25); 
         }
 
-        h1 { 
-            text-align: center; 
-            color: #d4af37; 
+        /* STILE H1 IDENTICO A INDEX */
+        h1 {
             font-family: 'Cinzel', serif; 
-            font-size: 26px; 
-            margin-bottom: 5px; 
-            font-weight: 600; 
-            letter-spacing: 1px; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+            font-weight: 400;
+            font-size: 34px;
+            letter-spacing: 6px; 
+            margin: 0;
+            background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9));
+            text-align: center;
+            width: 100%;
         }
 
-        .subtitle { 
-            text-align: center; 
-            color: #a69f95; 
-            font-size: 14px; 
-            margin-bottom: 35px; 
+        /* ADATTAMENTO MOBILE SCHERMI STRETTI */
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 25px;
+                letter-spacing: 3px;
+            }
         }
 
+     	.subtitle { 
+    	font-family: 'Cormorant Garamond', serif;
+   	font-style: italic;
+    	font-size: clamp(0.95rem, 4vw, 1.1rem);
+    	color: #e0dbd1;
+    	line-height: 1.2;
+    	text-align: center; 
+    	max-width: 90%;
+    	margin: 6px auto 35px auto; 
+	}
         label { 
             font-weight: 600; 
             color: #c4beb3; 
@@ -201,49 +220,28 @@
             font-size: 14px; 
         }
 
+        /* MEDIA QUERY PER MOBILE */
         @media (max-width: 600px) {
-      /* 1. REGOLA GENERALE PER IL BODY */
-body { 
-    font-family: 'Montserrat', sans-serif; 
-    background: #120a1c; 
-    color: #e0dbd1; 
-    margin: 0; 
-    padding: 20px 10px; 
-
-    /* Attiva Flexbox e centra sia in orizzontale che in verticale */
-    display: flex !important; 
-    justify-content: center !important; 
-    align-items: center !important; 
-    
-    /* Occupa almeno l'100% dell'altezza dello schermo (usa dvh per Safari/Mobile) */
-    min-height: 100vh;
-    min-height: 100dvh; 
-}
-
-/* 2. MEDIA QUERY MOBILI CORRETTA */
-@media (max-width: 600px) {
-    body {
-        /* Mantiene il flexbox attivo e centra verticalmente */
-        padding: 20px 10px !important;
-    }
-    
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 20px 15px !important;
-        /* Evita che il box sbordi in altezza se la finestra è stretta */
-        margin: auto 0 !important; 
-    }
-    
-    .grid-cards {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-    }
-    
-    .card {
-        grid-column: span 1 !important;
-    }
-}
+            body {
+                padding: 20px 10px !important;
+            }
+            
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 20px 15px !important;
+                margin: auto 0 !important; 
+            }
+            
+            .grid-cards {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+            
+            .card {
+                grid-column: span 1 !important;
+            }
+        }
     </style>
 
     <!-- MODALE APPROFONDIMENTO -->

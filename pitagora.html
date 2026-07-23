@@ -44,8 +44,36 @@
         }
 
         .container { background: #0C316F; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 800px; width: 100%; border: 1px solid rgba(212, 175, 55, 0.25); }
-        h1 { text-align: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        .subtitle { text-align: center; color: #a69f95; font-size: 14px; margin-bottom: 35px; }
+        
+        /* Titolo principale */
+     h1 {
+   	 font-family: 'Cinzel', serif; 
+    	 font-weight: 400;
+    	 font-size: 34px;
+    	 letter-spacing: 6px; 
+    	 margin: 0;
+    	 background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
+    	 -webkit-background-clip: text;
+    	 -webkit-text-fill-color: transparent;
+    	 filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9));
+    	 text-align: center;
+    	 width: 100%;
+}
+        /* Sottotitolo e distanziamento dal form */
+        .subtitle {
+            text-align: center !important;	
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+            width: 100% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-bottom: 35px !important; /* Spazio aggiunto tra sottotitolo e form */
+            display: block !important;
+            font-style: italic;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            color: #a69f95;
+        }
+
         .form-grid { 
             display: grid; 
             grid-template-columns: 1.2fr 0.8fr; 
@@ -113,11 +141,11 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        @media (max-width: 600px) {
-            body {
-                /* Manteniamo flexbox anche su mobile per preservare la centratura */
-                padding: 15px 10px !important;
-            }
+        @media (max-width: 380px) {
+    	h1 {
+        font-size: 25px;
+        letter-spacing: 3px;
+    	}
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
