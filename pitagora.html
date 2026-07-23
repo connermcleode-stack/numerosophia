@@ -13,15 +13,23 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
         * { box-sizing: border-box; }
+        
         body { 
             font-family: 'Montserrat', sans-serif; 
             background: #0C316F; 
             color: #e0dbd1; 
             margin: 0; 
-            padding: 20px; 
+            padding: 20px 10px; 
+            
+            /* CENTRATURA PERFETTA VERTICALE E ORIZZONTALE */
             display: flex; 
+            flex-direction: column;
             justify-content: center; 
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh; /* Ottimizzato per barre di navigazione mobile */
         }
+
         body::before {
             content: '';
             position: fixed;
@@ -34,6 +42,7 @@
             pointer-events: none;
             z-index: -1;
         }
+
         .container { background: #0C316F; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 800px; width: 100%; border: 1px solid rgba(212, 175, 55, 0.25); }
         h1 { text-align: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .subtitle { text-align: center; color: #a69f95; font-size: 14px; margin-bottom: 35px; }
@@ -106,13 +115,13 @@
 
         @media (max-width: 600px) {
             body {
-                display: block !important;
-                padding: 10px !important;
+                /* Manteniamo flexbox anche su mobile per preservare la centratura */
+                padding: 15px 10px !important;
             }
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 15px !important;
+                padding: 20px 15px !important;
                 box-sizing: border-box !important;
             }
             .grid-cards, [class*="grid"] {
@@ -154,12 +163,6 @@
     </style>
 
     <script>
-        // if ('serviceWorker' in navigator) {
-        //    navigator.serviceWorker.register('./sw.js')
-        //        .then(() => console.log('Numerosophia PWA registrata con successo!'))
-        //        .catch((err) => console.log('Errore Service Worker:', err));
-        // }
-
         function autoEspandi(textarea) {
             textarea.style.height = '45px';
             textarea.style.height = textarea.scrollHeight + 'px';
@@ -169,7 +172,7 @@
 <body>
 
 <div class="container">
-        
+  
        <div class="header-logo">
         <!-- La zona superiore è stata completamente ripulita e liberata da ogni figura -->
 
@@ -194,7 +197,6 @@
             <!-- 5 (Perfetto al centro) -->
             <text x="50" y="56" fill="#ffdf70" font-family="'Cinzel', serif" font-size="14" font-weight="bold" text-anchor="middle">5</text>
         </svg>
-
 
 
     <h1>NUMEROSOPHIA</h1>
@@ -496,90 +498,49 @@ const databaseArchetipi = {
     },    22: { 
 
         nome: "Il Creatore (Numero Maestro)", 
-
         significato: "Rappresenta la chiamata superiore a concretizzare sogni e ideali universali su vastissima scala, traducendo la spiritualità in strutture pratiche utili all'umanità.",
-
         luce: "Capacità di tradurre grandi visioni spirituali in progetti concreti e planetari.", 
-
         ombra: "Megalomane o, al contrario, totale blocco per paura delle proprie responsabilità." 
-
     },
-
     33: {
-
         nome: "Il Maestro Spirituale (Numero Maestro)",
-
         significato: "Rappresenta l'altissimo potenziale del servizio guidato dal cuore, volto alla guarigione emotiva collettiva e all'insegnamento dell'amore puro attraverso l'esempio personale.",
-
         luce: "Amore cristico, guida empatica globale, protezione e insegnamento universale.",
-
         ombra: "Carico emotivo insostenibile, interferenza forzata nella vita altrui."
-
     },
-
 };
-
 const databaseOmbreMazzo = {
 
     0: { nome: "L'Angelo caduto (Ombra 9)", sfida: "Sfida universale o assenza totale di vincoli predefiniti. Richiede di confrontarsi con il senso del vuoto evolutivo o la perdita di confini individuali per ritrovare l'Unità spirituale pura." },
-
     1: { nome: "Il Ribelle", sfida: "Tendenza all'ostinazione cieca, all'aggressività reattiva o all'incapacità di accettare guide. La lezione è trasformare l'impulso distruttivo in sana indipendenza." },
-
     2: { nome: "L'Orfano", sfida: "Paura profonda dell'abbandono, dipendenza emotiva e tendenza al vittimismo per ricevere attenzioni. La lezione è scoprire la propria stabilità interiore." },
-
     3: { nome: "Lo Straniero", sfida: "Blocco della comunicazione espressiva, tendenza a isolarsi sentendosi non capiti. La lezione è trovare la propria autentica voce nel mondo." },
-
     4: { nome: "Il Prigioniero", sfida: "Rigidità strutturale estrema, sottomissione a schemi limitanti e rifiuto del cambiamento. La lezione è evadere dalle prigioni mentali." },
-
     5: { nome: "Il Girovago", sfida: "Irrequietezza cronica, fuga dalle responsabilità e dispersione in stimoli superficiali. La lezione è trovare la libertà all'interno." },
-
     6: { nome: "Il Martire", sfida: "Senso di colpa radicato o tendenza a manipolare gli affetti sotto forma di troppa premura. La lezione è amare senza possedere." },
-
     7: { nome: "Il Solitario", sfida: "Chiusura in una torre d'avorio, scetticismo cinico, paura dell'intimità emotiva. La lezione è integrare la mente con l'apertura del cuore." },
-
     8: { nome: "Il Tiranno", sfida: "Eccessiva sete di controllo, materialismo o abuso di potere per mascherare fragilità. La lezione è esercitare una guida giusta." },
-
     9: { nome: "L'Angelo caduto", sfida: "Tendenza al rifiuto della realtà materiale, alienazione o vittimismo idealistico. La lezione è manifestare la compassione universale." }
-
 };
-
-
 
 const databaseKarmici = {
 
     13: "Sfida del cambiamento radicale e della rinascita.",
-
     14: "Sfida della temperanza e della libertà interiore.",
-
     16: "Sfida del crollo dell'Ego.",
-
     19: "Sfida dell'indipendenza equilibrata."
-
 };
 
-
-
 function compilaScheda(numero, compatta = false) {
-
     if (!numero) return "";
-
-
-
     // Gestione del numero in caso di formati composti (es. "13/4" o "19/1")
-
     let numeroPulito = numero.toString().includes('/') ? parseInt(numero.toString().split('/')[0], 10) : parseInt(numero, 10);
-
     let base = riduciMonocifraStretta(numeroPulito);
 
     
-
     // Identificazione dell'archetipo nel database
-
     let chiaveFinestra = [11, 22, 33].includes(numeroPulito) ? numeroPulito : base;
-
     let datiArchetipo = databaseArchetipi[chiaveFinestra];
-
-    
 
     if (!datiArchetipo) return "<i style='color: #888;'>Scheda non disponibile.</i>";
 
@@ -592,11 +553,8 @@ function compilaScheda(numero, compatta = false) {
 
 
     let titolo = datiArchetipo.nome;
-
     let significatoTesto = datiArchetipo.significato || 'Descrizione non disponibile.';
-
     let luceTesto = datiArchetipo.luce || 'Non specificata.';
-
     let ombraTesto = datiArchetipo.ombra || 'Non specificata.';
 
 
@@ -604,19 +562,12 @@ function compilaScheda(numero, compatta = false) {
     // Gestione speciale se il numero è Karmico
 
     if (databaseKarmici[numeroPulito]) {
-
         let nomeKarmico = "";
-
         switch(numeroPulito) {
-
             case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
-
             case 14: nomeKarmico = "L'Amante / Temperanza"; break;
-
             case 16: nomeKarmico = "Il Perfezionista / Crollo dell'Ego"; break;
-
             case 19: nomeKarmico = "Il Condottiero / Rinascita Solitaria"; break;
-
         }
 
         titolo += ` <span style="color:#d35400; font-size:12px; display:block; margin-top:2px;">(Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
@@ -722,6 +673,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <!-- Blocco finale per la gestione dell'archivio locale IndexedDB e Modale -->
 <script>
+
+
+
+
 const DB_NAME = 'NumerologiaDB';
 const DB_VERSION = 2;
 let db;
@@ -732,9 +687,7 @@ request.onupgradeneeded = function(event) {
     db = event.target.result;
     if (!db.objectStoreNames.contains('clienti')) {
         db.createObjectStore('clienti', { keyPath: 'id', autoIncrement: true });
-
     }
-
 };
 
 // Gestione della formattazione automatica della data (agganciata a calcoli.js)
@@ -750,205 +703,120 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 request.onsuccess = function(event) {
-
     db = event.target.result;
-
     controllaParametriURL();
 
 };
-
-
-
 request.onerror = function(event) {
-
     console.error("Errore critico nell'apertura dell'archivio locale IndexedDB:", event.target.error);
-
 };
 
 
-
 function salvaNelDatabase() {
-
     const nome = document.getElementById('nome').value.trim();
-
     const cognome = document.getElementById('cognome').value.trim();
-
     const dataNascita = document.getElementById('dataNascita').value.trim();
 
 
-
     if (!nome && !cognome && !dataNascita) {
-
         alert("Inserisci almeno un dato identificativo per poter eseguire il salvataggio.");
-
         return;
-
     }
 
 
-
     if (dataNascita && dataNascita.length < 10) {
-
         alert("Per favore, specifica una data di nascita completa (GG/MM/AAAA).");
-
         return;
-
     }
 
 
 
     const anima = document.getElementById('numAnima')?.innerText || "";
-
     const persona = document.getElementById('numPersona')?.innerText || "";
-
     const io = document.getElementById('numEspressione')?.innerText || ""; 
-
     const giornoNascita = document.getElementById('numGiornoIsolato')?.innerText || "";
-
     const destino = document.getElementById('numCammino')?.innerText || ""; 
-
     const annoPersonale = document.getElementById('numAnnoPers')?.innerText || "";
-
     const giornoPersonale = document.getElementById('numGiornoPers')?.innerText || "";
-
     const quintessenza = document.getElementById('numQuintessenza')?.innerText || "";
 
-
-
     const cForm = document.getElementById('numCicloForm')?.innerText || "";
-
     const cProd = document.getElementById('numCicloProd')?.innerText || "";
-
     const cConc = document.getElementById('numCicloConc')?.innerText || "";
-
     const grandiCicli = `Formativo: ${cForm} | Produttivo: ${cProd} | Conclusivo: ${cConc}`;
 
 
 
     const p1 = document.getElementById('numCiclo1')?.innerText || "";
-
     const p2 = document.getElementById('numCiclo2')?.innerText || "";
-
     const p3 = document.getElementById('numCiclo3')?.innerText || "";
-
     const p4 = document.getElementById('numCiclo4')?.innerText || "";
-
     const cicliRealizzazione = `1°: ${p1} | 2°: ${p2} | 3°: ${p3} | 4°: ${p4}`;
 
 
 
     const oGiov = document.getElementById('numOmbraGiov')?.innerText || "";
-
     const oMat = document.getElementById('numOmbraMat')?.innerText || "";
-
     const oPrinc = document.getElementById('numOmbraPrinc')?.innerText || "";
-
     const ombre = `Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}`;
 
 
 
     const transaction = db.transaction(['clienti'], 'readwrite');
-
     const store = transaction.objectStore('clienti');
 
-
-
     const nuovoCliente = {
-
         nome: nome,
-
         cognome: cognome,
-
         data_nascita: dataNascita,
-
         metodo: 'pitagora', 
-
         data_salvataggio: new Date().toISOString(),
-
-        anima: anima,
-
+       
+	anima: anima,
         persona: persona,
-
         io: io,
-
         giorno_nascita: giornoNascita,
-
         destino: destino,
-
         anno_personale: annoPersonale,
-
         giorno_personale: giornoPersonale,
-
         grandi_cicli: grandiCicli,
-
         cicli_realizzazione: cicliRealizzazione,
-
         ombre: ombre,
-
         quintessenza: quintessenza
 
     };
 
-
-
     const requestAdd = store.add(nuovoCliente);
-
-
 
     requestAdd.onsuccess = function() {
 
         alert(`Il quadro completo di ${nome} ${cognome} è stato correttamente archiviato!`);
-
     };
-
-
 
     requestAdd.onerror = function(event) {
-
         console.error("Errore durante store.add:", event.target.error);
-
         alert("Impossibile salvare i dati nell'archivio locale.");
-
     };
-
 }
 
 
-
 function controllaParametriURL() {
-
     const urlParams = new URLSearchParams(window.location.search);
-
     const nomeUrl = urlParams.get('nome');
-
     const cognomeUrl = urlParams.get('cognome');
-
     const dataUrl = urlParams.get('data');
 
-
-
     if (nomeUrl || cognomeUrl || dataUrl) {
-
         document.getElementById('nome').value = nomeUrl || "";
-
         document.getElementById('cognome').value = cognomeUrl || "";
-
         document.getElementById('dataNascita').value = dataUrl || "";
 
-
-
         if (typeof eseguiCalcoloCompleto === "function") {
-
             eseguiCalcoloCompleto();
-
         } else {
-
             window.addEventListener('load', () => eseguiCalcoloCompleto());
-
         }
-
     }
-
 }
 
 
