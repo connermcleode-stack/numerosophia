@@ -10,9 +10,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<style>
-	@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
-        * { box-sizing: border-box; }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
+        
+        * { 
+            box-sizing: border-box; 
+        }
+        
         body { 
             font-family: 'Montserrat', sans-serif; 
             background: #120a1c; /* Viola ametista scuro e profondo */ 
@@ -21,7 +25,10 @@
             padding: 20px; 
             display: flex; 
             justify-content: center; 
+            align-items: flex-start;
+            min-height: 100vh;
         }
+
         body::before {
             content: '';
             position: fixed;
@@ -34,6 +41,7 @@
             pointer-events: none;
             z-index: -1;
         }
+
         .container { 
             background: rgba(23, 13, 36, 0.94); 
             padding: 40px; 
@@ -43,69 +51,202 @@
             width: 100%; 
             border: 1px solid rgba(212, 175, 55, 0.25); 
         }
-        h1 { text-align: center; color: #d4af37; font-family: 'Cinzel', serif; font-size: 26px; margin-bottom: 5px; font-weight: 600; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        .subtitle { text-align: center; color: #a69f95; font-size: 14px; margin-bottom: 35px; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .form-group-full { grid-column: span 2; }
-        label { font-weight: 600; color: #c4beb3; display: block; margin-top: 10px; font-size: 14px; }
-        input { 
+
+        h1 { 
+            text-align: center; 
+            color: #d4af37; 
+            font-family: 'Cinzel', serif; 
+            font-size: 26px; 
+            margin-bottom: 5px; 
+            font-weight: 600; 
+            letter-spacing: 1px; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+        }
+
+        .subtitle { 
+            text-align: center; 
+            color: #a69f95; 
+            font-size: 14px; 
+            margin-bottom: 35px; 
+        }
+
+        label { 
+            font-weight: 600; 
+            color: #c4beb3; 
+            display: block; 
+            margin-top: 10px; 
+            font-size: 14px; 
+        }
+
+        /* REGOLE DI RESET UNIFICATE PER INPUT E TEXTAREA */
+        input, textarea, .input-flessibile { 
             width: 100%; 
             padding: 12px; 
             margin-top: 6px; 
             border: 1px solid rgba(142, 115, 85, 0.3); 
             border-radius: 8px; 
             font-size: 16px; 
-            background-color: #1c102b; 
-            color: #f5f2eb; 
-            transition: border 0.2s; 
+            background-color: #1c102b !important; 
+            color: #f5f2eb !important; 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            transition: border 0.2s, background-color 0.2s; 
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+            resize: vertical;
         }
-        input:focus { border-color: #d4af37; outline: none; background-color: #26163a; }
-        button { width: 100%; background: #8e7355; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; letter-spacing: 0.5px; }
-        button:hover { background: #765f45; }
-        .btn-secondary { background: #26163a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 15px; }
-        .btn-secondary:hover { background: #351f50; color: #f5f2eb; }
-        .risultati { margin-top: 40px; border-top: 1px solid rgba(142, 115, 85, 0.2); padding-top: 25px; display: none; }
-        .sezione-titolo { font-size: 18px; color: #d4af37; font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(142, 115, 85, 0.3); padding-bottom: 6px; margin-top: 35px; margin-bottom: 15px; font-weight: 600; }
-        .grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .card { background: #1c102b; border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
-        .card h3 { margin: 0 0 8px 0; font-size: 14px; color: #c4beb3; text-transform: uppercase; letter-spacing: 0.5px; }
-        .numero-evidenziato { font-size: 22px; font-weight: bold; color: #d4af37; margin-bottom: 5px; }
-        .archetipo-nome { font-weight: bold; color: #e8e3d9; font-size: 15px; display: block; margin-bottom: 5px; }
-        .descrizione { font-size: 13.5px; color: #c4beb3; line-height: 1.5; }
-        .ombra-testo { font-size: 13px; color: #a49db0; margin-top: 6px; font-style: italic; }
-        .btn-home { background: #26163a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
-        
-        @keyframes compariModale {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+
+        textarea.input-flessibile {
+            height: 45px;
+            min-height: 45px;
+            line-height: 1.2;
+        }
+
+        input:focus, textarea:focus, .input-flessibile:focus { 
+            border-color: #d4af37 !important; 
+            outline: none; 
+            background-color: #26163a !important; 
+        }
+
+        button { 
+            width: 100%; 
+            background: #8e7355; 
+            color: white; 
+            padding: 14px; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 25px; 
+            transition: background 0.2s; 
+            letter-spacing: 0.5px; 
+        }
+
+        button:hover { 
+            background: #765f45; 
+        }
+
+        .btn-secondary { 
+            background: #26163a; 
+            color: #c4beb3; 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            margin-top: 15px; 
+        }
+
+        .btn-secondary:hover { 
+            background: #351f50; 
+            color: #f5f2eb; 
+        }
+
+        .risultati { 
+            margin-top: 40px; 
+            border-top: 1px solid rgba(142, 115, 85, 0.2); 
+            padding-top: 25px; 
+            display: none; 
+        }
+
+        .sezione-titolo { 
+            font-size: 18px; 
+            color: #d4af37; 
+            font-family: 'Cinzel', serif; 
+            border-bottom: 1px solid rgba(142, 115, 85, 0.3); 
+            padding-bottom: 6px; 
+            margin-top: 35px; 
+            margin-bottom: 15px; 
+            font-weight: 600; 
+        }
+
+        .grid-cards { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+        }
+
+        .card { 
+            background: #1c102b; 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            padding: 18px; 
+            border-radius: 10px; 
+            border-left: 4px solid #8e7355; 
+        }
+
+        .card h3 { 
+            margin: 0 0 8px 0; 
+            font-size: 14px; 
+            color: #c4beb3; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+
+        .numero-evidenziato { 
+            font-size: 22px; 
+            font-weight: bold; 
+            color: #d4af37; 
+            margin-bottom: 5px; 
+        }
+
+        .btn-home { 
+            background: #26163a; 
+            color: #c4beb3; 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            max-width: 200px; 
+            margin: 20px auto 0 auto; 
+            display: block; 
+            text-align: center; 
+            text-decoration: none; 
+            padding: 10px; 
+            border-radius: 8px; 
+            font-size: 14px; 
         }
 
         @media (max-width: 600px) {
-            body {
-                display: block !important;
-                padding: 10px !important;
-            }
-            .container {
-                width: 100% !important;
-                max-width: 100% !important;
-                padding: 15px !important;
-                box-sizing: border-box !important;
-            }
-            .grid-cards, .form-grid, [class*="grid"] {
-                grid-template-columns: 1fr !important;
-                gap: 12px !important;
-                display: grid !important;
-            }
-            .card, .grid-cards div {
-                grid-column: span 1 !important;
-                width: 100% !important;
-            }
-            .form-group-full {
-                grid-column: span 1 !important;
-            }
-        }
+      /* 1. REGOLA GENERALE PER IL BODY */
+body { 
+    font-family: 'Montserrat', sans-serif; 
+    background: #120a1c; 
+    color: #e0dbd1; 
+    margin: 0; 
+    padding: 20px 10px; 
+
+    /* Attiva Flexbox e centra sia in orizzontale che in verticale */
+    display: flex !important; 
+    justify-content: center !important; 
+    align-items: center !important; 
+    
+    /* Occupa almeno l'100% dell'altezza dello schermo (usa dvh per Safari/Mobile) */
+    min-height: 100vh;
+    min-height: 100dvh; 
+}
+
+/* 2. MEDIA QUERY MOBILI CORRETTA */
+@media (max-width: 600px) {
+    body {
+        /* Mantiene il flexbox attivo e centra verticalmente */
+        padding: 20px 10px !important;
+    }
+    
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px 15px !important;
+        /* Evita che il box sbordi in altezza se la finestra è stretta */
+        margin: auto 0 !important; 
+    }
+    
+    .grid-cards {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    
+    .card {
+        grid-column: span 1 !important;
+    }
+}
     </style>
 
+    <!-- MODALE APPROFONDIMENTO -->
     <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center;">
         <div style="background-color: #170d24; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.8); font-family: 'Montserrat', sans-serif;">
             <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 15px; font-size: 28px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
@@ -119,61 +260,61 @@
 
 <div class="container">
 
-   <div class="header-logo">
-        <!-- La zona superiore è stata completamente ripulita e liberata da ogni figura -->
-
-        <!-- Cerchio Dorato Luminoso con Effetto Bagliore -->
+    <div class="header-logo">
+        <!-- SIMBOLO SACRO -->
         <svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
-            <!-- Il Cerchio Dorato Esterno -->
             <circle cx="50" cy="50" r="45" fill="none" stroke="#ffdf70" stroke-width="2.5" />
-            
-            <!-- Il Triangolo Dorato Interno -->
             <polygon points="50,23 26,67 74,67" fill="none" stroke="#ffdf70" stroke-width="2.5" stroke-linejoin="round" />
-            
-            <!-- I Numeri Bilanciati a Metà Spazio -->
-            <!-- 7 (Perfetto, mantenuto) -->
             <text x="50" y="19" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">7</text>
-            
-            <!-- 3 accentrato (x riportato a 19, y alzato leggermente a 72) -->
             <text x="19" y="72" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">3</text>
-            
-            <!-- 4 accentrato (x riportato a 81, y alzato leggermente a 72) -->
             <text x="81" y="72" fill="#ffdf70" font-family="'Cinzel', serif" font-size="12" font-weight="bold" text-anchor="middle">4</text>
-            
-            <!-- 5 (Perfetto al centro) -->
             <text x="50" y="56" fill="#ffdf70" font-family="'Cinzel', serif" font-size="14" font-weight="bold" text-anchor="middle">5</text>
         </svg>
 
-    <h1>NUMEROSOPHIA</h1>
-    <div class="subtitle">Strumento di Analisi Caldeo-Planetaria ed Esoterica</div>
-    
-    <div class="form-grid">
-        <div>
-            <label for="nome">Nome (Più usato o Anagrafico):</label>
-            <input type="text" id="nome" placeholder="Es. Mario">
-        </div>
-        <div>
-            <label for="cognome">Cognome:</label>
-            <input type="text" id="cognome" placeholder="Es. Rossi">
-       </div>
-       <div>
-    	    <label for="dataNascita">Data di Nascita (GG/MM/AAAA):</label>
-    	    <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
-	</div>
-        <div>
-            <label for="annoCorrente">Anno per la Vibrazione Corrente:</label>
-            <input type="number" id="annoCorrente" value="2026">
-        </div>
+        <h1>NUMEROSOPHIA</h1>
+        <div class="subtitle">Strumento di Analisi Caldeo-Planetaria ed Esoterica</div>
     </div>
     
-    <button onclick="eseguiCalcoloCompleto()">GENERA TAVOLA PLANETARIA</button>
-    <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display:none;">COPIA ANALISI NEGLI APPUNTI</button>
-    <button id="btnSalva" type="button" style="background-color: #8e7355; color: white; display: none; margin-top: 15px;" onclick="salvaNelDatabase()">💾 SALVA IN ARCHIVIO</button>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+
+        <!-- RIGA 1: Nome e Cognome -->
+        <div style="display: flex; gap: 12px; width: 100%;">
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Nome:</label>
+                <textarea id="nome" class="input-flessibile" placeholder="Es. Mario" oninput="autoEspandi(this)"></textarea>
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Cognome:</label>
+                <textarea id="cognome" class="input-flessibile" placeholder="Es. Rossi" oninput="autoEspandi(this)"></textarea>
+            </div>
+        </div>
+      
+        <!-- RIGA 2: Data di Nascita e Anno Personale -->
+        <div style="display: flex; gap: 12px; width: 100%;">
+            <div style="flex: 1.2; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Data di Nascita:</label>
+                <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
+            </div>
+            <div style="flex: 0.8; display: flex; flex-direction: column;">
+                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Anno:</label>
+                <input type="number" id="annoCorrente" placeholder="2026" value="2026" style="text-align: center; height: 45px;">
+            </div>
+        </div>
     
-    <a href="index.html" class="btn-home">⬅ Torna alla Scelta</a>
+    </div>
     
+    <!-- PULSANTI -->
+    <div style="display: flex; gap: 6px; justify-content: center; align-items: center; margin: 20px auto 0 auto; width: 100%; max-width: 400px; padding: 0 5px;">
+        <a href="index.html" class="btn-home" style="margin: 0; padding: 0; font-size: 15px; display: flex; align-items: center; justify-content: center; width: 40px; height: 42px; min-width: 40px; box-sizing: border-box; text-decoration: none;">⬅</a>
+        <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display: none; margin: 0; padding: 0 12px; font-size: 12px; font-weight: bold; cursor: pointer; letter-spacing: 0.5px; height: 42px; width: fit-content; line-height: 42px; box-sizing: border-box;">COPIA</button>
+        <button onclick="eseguiCalcoloCompleto()" style="display: block; margin: 0; padding: 0 16px; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; letter-spacing: 0.5px; height: 42px; width: fit-content; min-width: 100px; box-sizing: border-box;">CALCOLA</button>
+        <button id="btnSalva" type="button" onclick="salvaNelDatabase()" style="display: none; margin: 0; padding: 0; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; transition: background 0.2s; width: 40px; height: 42px; min-width: 40px; line-height: 42px; box-sizing: border-box;">💾</button>
+    </div>
+
+    <!-- SEZIONE RISULTATI -->
     <div id="risultati" class="risultati">
         
+        <!-- FORZE VIBRAZIONALI DEL NOME -->
         <div id="bloccoAnagrafica" style="display:none;">
             <div class="sezione-titolo">Le Forze Vibrazionali del Nome (Frequenze Celesti)</div>
             <div class="grid-cards">
@@ -195,6 +336,7 @@
             </div>
         </div>
 
+        <!-- CANALE DEL DESTINO -->
         <div id="bloccoData" style="display:none;">
             <div class="sezione-titolo" style="color: #6c5ce7;">Il Canale del Destino (Le Correnti del Tempo)</div>
             <div class="grid-cards">
@@ -220,75 +362,7 @@
                 </div>
             </div>
 
-            <div class="sezione-titolo" style="color: #e74c3c; border-bottom-color: #fadbd8;">Afflizioni Planetarie (Le Prove Karmiche)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #e74c3c;">
-                    <h3>Sfida Energetica Minore I</h3>
-                    <div id="numOmbraGiov" class="numero-evidenziato" style="color: #e74c3c;"></div>
-                    <div id="descOmbraGiov"></div>
-                </div>
-                <div class="card" style="border-left-color: #e74c3c;">
-                    <h3>Sfida Energetica Minore II</h3>
-                    <div id="numOmbraMat" class="numero-evidenziato" style="color: #e74c3c;"></div>
-                    <div id="descOmbraMat"></div>
-                </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #c0392b;">
-                    <h3>Afflizione Karmica Principale</h3>
-                    <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b;"></div>
-                    <div id="descOmbraPrinc"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
-            <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">Firma Alternativa (Soprannome / Pseudonimo)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #d35400;">
-                    <h3>Anima</h3>
-                    <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400;"></div>
-                    <div id="descAnimaSop"></div>
-                </div>
-                <div class="card" style="border-left-color: #d35400;">
-                    <h3>Persona</h3>
-                    <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400;"></div>
-                    <div id="descPersonaSop"></div>
-                </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #e67e22;">
-                    <h3>Espressione</h3>
-                    <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22;"></div>
-                    <div id="descEspressioneSop"></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-        <div id="bloccoData" style="display:none;">
-            <div class="sezione-titolo">Il Canale del Destino (Le Correnti del Tempo)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #6c5ce7;">
-                    <h3>Numero Psichico (Imprinting Radice)</h3>
-                    <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #6c5ce7;"></div>
-                    <div id="descGiornoIsolato"></div>
-                </div>
-                <div class="card" style="border-left-color: #6c5ce7;">
-                    <h3>Cammino di Vita / Destino</h3>
-                    <div id="numCammino" class="numero-evidenziato" style="color: #6c5ce7;"></div>
-                    <div id="descCammino"></div>
-                </div>
-                <div class="card" style="border-left-color: #6c5ce7;">
-                    <h3>Ciclo Annuale Corrente</h3>
-                    <div id="numAnnoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
-                    <div id="descAnnoPers"></div>
-                </div>
-                <div class="card" style="border-left-color: #6c5ce7;">
-                    <h3>Vibrazione Giornaliera (Oggi)</h3>
-                    <div id="numGiornoPers" class="numero-evidenziato" style="color: #6c5ce7;"></div>
-                    <div id="descGiornoPers"></div>
-                </div>
-            </div>
-
+            <!-- I 3 GRANDI CICLI EVOLUTIVI -->
             <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi</div>
             <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
                 <div class="card" style="border-left-color: #16a085; padding: 12px;">
@@ -309,6 +383,7 @@
             </div>
             <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
 
+            <!-- I 4 PINNACOLI -->
             <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Pinnacoli (Soglie di Realizzazione)</div>
             <div class="grid-cards">
                 <div class="card" style="border-left-color: #2980b9;">
@@ -337,6 +412,7 @@
                 </div>
             </div>
 
+            <!-- AFFLIZIONI PLANETARIE -->
             <div class="sezione-titolo" style="color: #e74c3c; border-bottom-color: #fadbd8;">Afflizioni Planetarie (Le Prove Karmiche)</div>
             <div class="grid-cards">
                 <div class="card" style="border-left-color: #e74c3c;">
@@ -357,6 +433,7 @@
             </div>
         </div>
 
+        <!-- FIRMA ALTERNATIVA (SOPRANNOME) -->
         <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
             <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">Firma Alternativa (Soprannome / Pseudonimo)</div>
             <div class="grid-cards">
