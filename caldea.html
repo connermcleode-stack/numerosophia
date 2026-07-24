@@ -10,10 +10,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Inclusione Font (incluso Cormorant Garamond per consistenza con index) -->
+    <!-- Inclusione Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=400;500;600;700&family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght=300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         * { 
@@ -71,7 +71,6 @@
             width: 100%;
         }
 
-        /* ADATTAMENTO MOBILE SCHERMI STRETTI */
         @media (max-width: 380px) {
             h1 {
                 font-size: 25px;
@@ -79,30 +78,67 @@
             }
         }
 
-     	.subtitle { 
-    	font-family: 'Cormorant Garamond', serif;
-   	font-style: italic;
-    	font-size: clamp(0.95rem, 4vw, 1.1rem);
-    	color: #e0dbd1;
-    	line-height: 1.2;
-    	text-align: center; 
-    	max-width: 90%;
-    	margin: 6px auto 35px auto; 
-	}
-        label { 
-            font-weight: 600; 
-            color: #c4beb3; 
-            display: block; 
-            margin-top: 10px; 
-            font-size: 14px; 
+        .subtitle { 
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(0.95rem, 4vw, 1.1rem);
+            color: #e0dbd1;
+            line-height: 1.2;
+            text-align: center; 
+            max-width: 90%;
+            margin: 6px auto 20px auto; 
         }
 
-        /* REGOLE DI RESET UNIFICATE PER INPUT E TEXTAREA */
+        /* DIVISORE ELEGANTE CON ROMBO CENTRALE */
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60%;
+            margin: 0 auto 30px auto;
+        }
+
+        .gold-divider::before,
+        .gold-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, #f3e5ab);
+        }
+
+        .gold-divider::after {
+            background: linear-gradient(90deg, #f3e5ab, #d4af37, transparent);
+        }
+
+        .gold-divider-diamond {
+            width: 6px;
+            height: 6px;
+            background-color: #f3e5ab;
+            transform: rotate(45deg);
+            margin: 0 10px;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.8);
+            flex-shrink: 0;
+        }
+
+        /* ETICHETTE UGUALE A PITAGORA: CINZEL, MAIUSCOLO, DORATO, LETTER-SPACING */
+        label { 
+            font-family: 'Cinzel', serif;
+            font-weight: 500; 
+            color: #d4af37; 
+            display: block; 
+            margin-top: 10px; 
+            margin-bottom: 4px;
+            font-size: 13px; 
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* INPUT E TEXTAREA CON STILE ED ELEGANT-FONT DI PITAGORA */
         input, textarea, .input-flessibile { 
             width: 100%; 
             padding: 12px; 
-            margin-top: 6px; 
-            border: 1px solid rgba(142, 115, 85, 0.3); 
+            margin-top: 2px; 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
             border-radius: 8px; 
             font-size: 16px; 
             background-color: #1c102b !important; 
@@ -111,15 +147,25 @@
             -moz-appearance: none;
             appearance: none;
             transition: border 0.2s, background-color 0.2s; 
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             box-sizing: border-box;
-            resize: vertical;
+            resize: none !important;
+            overflow: hidden !important;
+            height: 45px;
         }
 
-        textarea.input-flessibile {
-            height: 45px;
-            min-height: 45px;
-            line-height: 1.2;
+        /* PLACEHOLDER IN CORSIVO E FONT SERIF COME PITAGORA */
+        input::placeholder, textarea::placeholder {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(224, 219, 209, 0.4);
+            font-size: 17px;
+        }
+
+        /* Manteniamo Montserrat / numeri puliti per l'anno se inserito */
+        #annoCorrente {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
         }
 
         input:focus, textarea:focus, .input-flessibile:focus { 
@@ -220,7 +266,6 @@
             font-size: 14px; 
         }
 
-        /* MEDIA QUERY PER MOBILE */
         @media (max-width: 600px) {
             body {
                 padding: 20px 10px !important;
@@ -260,59 +305,55 @@
 
     <div class="header-logo">
         <!-- Rosetta Caldea Dorata Luminosa -->
-<svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
-    <!-- Cerchio Centrale -->
-    <circle cx="50" cy="50" r="8" fill="none" stroke="#ffdf70" stroke-width="2" />
-    <circle cx="50" cy="50" r="3" fill="#ffdf70" />
+        <svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
+            <circle cx="50" cy="50" r="8" fill="none" stroke="#ffdf70" stroke-width="2" />
+            <circle cx="50" cy="50" r="3" fill="#ffdf70" />
 
-    <!-- 8 Petali geometrici (4 Cardinali + 4 Diagonali) -->
-    <!-- Petalo Superiore -->
-    <path d="M 50 42 C 43 32, 43 18, 50 10 C 57 18, 57 32, 50 42 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
-    <!-- Petalo Inferiore -->
-    <path d="M 50 58 C 43 68, 43 82, 50 90 C 57 82, 57 68, 50 58 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
-    <!-- Petalo Sinistra -->
-    <path d="M 42 50 C 32 43, 18 43, 10 50 C 18 57, 32 57, 42 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
-    <!-- Petalo Destra -->
-    <path d="M 58 50 C 68 43, 82 43, 90 50 C 82 57, 68 57, 58 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M 50 42 C 43 32, 43 18, 50 10 C 57 18, 57 32, 50 42 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M 50 58 C 43 68, 43 82, 50 90 C 57 82, 57 68, 50 58 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M 42 50 C 32 43, 18 43, 10 50 C 18 57, 32 57, 42 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M 58 50 C 68 43, 82 43, 90 50 C 82 57, 68 57, 58 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
 
-    <!-- Petali Diagonali (45°, 135°, 225°, 315°) -->
-    <g transform="rotate(45 50 50)">
-        <path d="M 50 42 C 43 32, 43 18, 50 10 C 57 18, 57 32, 50 42 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
-        <path d="M 50 58 C 43 68, 43 82, 50 90 C 57 82, 57 68, 50 58 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
-        <path d="M 42 50 C 32 43, 18 43, 10 50 C 18 57, 32 57, 42 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
-        <path d="M 58 50 C 68 43, 82 43, 90 50 C 82 57, 68 57, 58 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
-    </g>
+            <g transform="rotate(45 50 50)">
+                <path d="M 50 42 C 43 32, 43 18, 50 10 C 57 18, 57 32, 50 42 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+                <path d="M 50 58 C 43 68, 43 82, 50 90 C 57 82, 57 68, 50 58 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+                <path d="M 42 50 C 32 43, 18 43, 10 50 C 18 57, 32 57, 42 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+                <path d="M 58 50 C 68 43, 82 43, 90 50 C 82 57, 68 57, 58 50 Z" fill="none" stroke="#ffdf70" stroke-width="1.8" stroke-linejoin="round" />
+            </g>
 
-    <!-- Anello di Contorno Esterno -->
-    <circle cx="50" cy="50" r="46" fill="none" stroke="#ffdf70" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.6" />
-</svg>
+            <circle cx="50" cy="50" r="46" fill="none" stroke="#ffdf70" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.6" />
+        </svg>
 
         <h1>NUMEROSOPHIA</h1>
         <div class="subtitle">Strumento di Analisi Caldeo-Planetaria ed Esoterica</div>
+        
+        <div class="gold-divider">
+            <div class="gold-divider-diamond"></div>
+        </div>
     </div>
     
     <div style="display: flex; flex-direction: column; gap: 10px;">
 
-        <!-- RIGA 1: Nome e Cognome -->
+        <!-- RIGA 1: Nome e Cognome (Input di testo puliti come in Pitagora) -->
         <div style="display: flex; gap: 12px; width: 100%;">
             <div style="flex: 1; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Nome:</label>
-                <textarea id="nome" class="input-flessibile" placeholder="Es. Mario" oninput="autoEspandi(this)"></textarea>
+                <label>NOME:</label>
+                <input type="text" id="nome" class="input-flessibile" placeholder="Es. Mario">
             </div>
             <div style="flex: 1; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Cognome:</label>
-                <textarea id="cognome" class="input-flessibile" placeholder="Es. Rossi" oninput="autoEspandi(this)"></textarea>
+                <label>COGNOME:</label>
+                <input type="text" id="cognome" class="input-flessibile" placeholder="Es. Rossi">
             </div>
         </div>
       
-        <!-- RIGA 2: Data di Nascita e Anno Personale -->
+        <!-- RIGA 2: Data di Nascita e Anno -->
         <div style="display: flex; gap: 12px; width: 100%;">
             <div style="flex: 1.2; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Data di Nascita:</label>
+                <label>DATA DI NASCITA:</label>
                 <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" oninput="formattaEValidaData(this)">
             </div>
             <div style="flex: 0.8; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Anno:</label>
+                <label>ANNO:</label>
                 <input type="number" id="annoCorrente" placeholder="2026" value="2026" style="text-align: center; height: 45px;">
             </div>
         </div>
@@ -320,12 +361,21 @@
     </div>
     
     <!-- PULSANTI -->
-    <div style="display: flex; gap: 6px; justify-content: center; align-items: center; margin: 20px auto 0 auto; width: 100%; max-width: 400px; padding: 0 5px;">
-        <a href="index.html" class="btn-home" style="margin: 0; padding: 0; font-size: 15px; display: flex; align-items: center; justify-content: center; width: 40px; height: 42px; min-width: 40px; box-sizing: border-box; text-decoration: none;">⬅</a>
-        <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display: none; margin: 0; padding: 0 12px; font-size: 12px; font-weight: bold; cursor: pointer; letter-spacing: 0.5px; height: 42px; width: fit-content; line-height: 42px; box-sizing: border-box;">COPIA</button>
-        <button onclick="eseguiCalcoloCompleto()" style="display: block; margin: 0; padding: 0 16px; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; letter-spacing: 0.5px; height: 42px; width: fit-content; min-width: 100px; box-sizing: border-box;">CALCOLA</button>
-        <button id="btnSalva" type="button" onclick="salvaNelDatabase()" style="display: none; margin: 0; padding: 0; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; transition: background 0.2s; width: 40px; height: 42px; min-width: 40px; line-height: 42px; box-sizing: border-box;">💾</button>
-    </div>
+     <div style="display: flex; gap: 6px; justify-content: center; align-items: center; margin: 20px auto 0 auto; width: 100%; max-width: 400px; padding: 0 5px;">
+            
+            <!-- 1. Freccia Torna alla Scelta -->
+            <a href="index.html" class="btn-home" style="margin: 0; padding: 0; font-size: 15px; display: flex; align-items: center; justify-content: center; width: 40px; height: 42px; min-width: 40px; box-sizing: border-box; text-decoration: none;">⬅</a>
+            
+            <!-- 2. Tasto Copia (Appare a sinistra di Calcola) -->
+            <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display: none; margin: 0; padding: 0 12px; font-size: 12px; font-weight: bold; cursor: pointer; letter-spacing: 0.5px; height: 42px; width: fit-content; line-height: 42px; box-sizing: border-box;">COPIA</button>
+            
+            <!-- 3. Tasto Calcola (Centro) -->
+            <button onclick="eseguiCalcoloCompleto()" style="display: block; margin: 0; padding: 0 16px; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; letter-spacing: 0.5px; height: 42px; width: fit-content; min-width: 100px; box-sizing: border-box;">CALCOLA</button>
+            
+            <!-- 4. Tasto Salva (Appare a destra di Calcola - Solo icona) -->
+            <button id="btnSalva" type="button" onclick="salvaNelDatabase()" style="display: none; margin: 0; padding: 0; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; transition: background 0.2s; width: 40px; height: 42px; min-width: 40px; line-height: 42px; box-sizing: border-box;">💾</button>
+            
+        </div>
 
     <!-- SEZIONE RISULTATI -->
     <div id="risultati" class="risultati">

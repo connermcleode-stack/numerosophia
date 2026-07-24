@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght=500;600;700&family=Montserrat:wght=300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital@1&display=swap');
         * { box-sizing: border-box; }
         
         body { 
@@ -46,27 +46,28 @@
         .container { background: #0C316F; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); max-width: 800px; width: 100%; border: 1px solid rgba(212, 175, 55, 0.25); }
         
         /* Titolo principale */
-     h1 {
-   	 font-family: 'Cinzel', serif; 
-    	 font-weight: 400;
-    	 font-size: 34px;
-    	 letter-spacing: 6px; 
-    	 margin: 0;
-    	 background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
-    	 -webkit-background-clip: text;
-    	 -webkit-text-fill-color: transparent;
-    	 filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9));
-    	 text-align: center;
-    	 width: 100%;
-}
+        h1 {
+            font-family: 'Cinzel', serif; 
+            font-weight: 400;
+            font-size: 34px;
+            letter-spacing: 6px; 
+            margin: 0;
+            background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9));
+            text-align: center;
+            width: 100%;
+        }
+        
         /* Sottotitolo e distanziamento dal form */
         .subtitle {
-            text-align: center !important;	
+            text-align: center !important;  
             font-family: 'Cormorant Garamond', 'Playfair Display', serif;
             width: 100% !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            margin-bottom: 35px !important; /* Spazio aggiunto tra sottotitolo e form */
+            margin-bottom: 20px !important;
             display: block !important;
             font-style: italic;
             font-size: 16px;
@@ -74,33 +75,83 @@
             color: #a69f95;
         }
 
-        .form-grid { 
-            display: grid; 
-            grid-template-columns: 1.2fr 0.8fr; 
-            gap: 15px; 
+        /* Divisore Elegante con Rombo Centrale */
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60%;
+            margin: 0 auto 25px auto;
         }
-        .form-group-half { grid-column: span 1; }
-        .form-group-full { grid-column: span 2; }
 
-        label { font-weight: 600; color: #c4beb3; display: block; margin-top: 10px; font-size: 14px; }
-        
-        input, textarea { 
+        .gold-divider::before,
+        .gold-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, #f3e5ab);
+        }
+
+        .gold-divider::after {
+            background: linear-gradient(90deg, #f3e5ab, #d4af37, transparent);
+        }
+
+        .gold-divider-diamond {
+            width: 6px;
+            height: 6px;
+            background-color: #f3e5ab;
+            transform: rotate(45deg);
+            margin: 0 10px;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.8);
+            flex-shrink: 0;
+        }
+
+        /* ETICHETTE (LABEL) IN STILE CINZEL/DORATO */
+        label { 
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #c5a059; 
+            display: block; 
+            margin-top: 4px; 
+            margin-bottom: 4px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* QUADRANTI E CAMPI DI INPUT ELEGANTI */
+        input, textarea, .input-flessibile { 
             width: 100%; 
-            padding: 12px; 
-            margin-top: 6px; 
-            border: 1px solid rgba(142, 115, 85, 0.3); 
-            border-radius: 8px; 
-            font-size: 16px; 
-            background-color: #0f192b; 
-            color: #f5f2eb; 
-            transition: border 0.2s, background-color 0.2s; 
+            padding: 12px 14px; 
+            border: 1px solid rgba(212, 175, 55, 0.25); 
+            border-radius: 10px; 
+            font-size: 15px; 
             font-family: 'Montserrat', sans-serif;
+            background-color: rgba(10, 20, 40, 0.6) !important; 
+            color: #f5f2eb !important; 
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            transition: all 0.3s ease; 
             box-sizing: border-box;
         }
-        input:focus, textarea:focus { 
-            border-color: #d4af37; 
+
+        /* PLACEHOLDER DISCRETO ED ELEGANTE */
+        input::placeholder, textarea::placeholder {
+            color: rgba(224, 219, 209, 0.35);
+            font-style: italic;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+        }
+
+        /* STATO FOCUS CON GLOW DORATO */
+        input:focus, textarea:focus, .input-flessibile:focus { 
+            border-color: #d4af37 !important; 
             outline: none; 
-            background-color: #14223a; 
+            background-color: rgba(15, 28, 55, 0.85) !important; 
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3), inset 0 1px 3px rgba(0,0,0,0.5);
         }
 
         textarea.input-flessibile {
@@ -110,6 +161,7 @@
             overflow-y: hidden; 
             line-height: 1.3;
         }
+
         button { width: 100%; background: #8e7355; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; letter-spacing: 0.5px; }
         button:hover { background: #765f45; }
         .btn-secondary { background: #14223a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 15px; }
@@ -142,10 +194,10 @@
         }
 
         @media (max-width: 380px) {
-    	h1 {
-        font-size: 25px;
-        letter-spacing: 3px;
-    	}
+            h1 {
+                font-size: 25px;
+                letter-spacing: 3px;
+            }
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
@@ -160,9 +212,6 @@
             .card, .grid-cards div {
                 grid-column: span 1 !important;
                 width: 100% !important;
-            }
-            .form-group-full {
-                grid-column: span 1 !important;
             }
             #modaleApprofondimento {
                 padding: 10px !important; 
@@ -201,264 +250,265 @@
 
 <div class="container">
   
-       <div class="header-logo">
-        <!-- La zona superiore è stata completamente ripulita e liberata da ogni figura -->
+    <div class="header-logo">
+        <!-- Tetraktys Dorata Luminosa con Effetto Bagliore -->
+        <svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
+            <!-- Fila 1 (1 punto) -->
+            <circle cx="50" cy="18" r="4.5" fill="#ffdf70" />
 
-   <!-- Tetraktys Dorata Luminosa con Effetto Bagliore -->
-<svg viewBox="0 0 100 100" class="main-sacred-symbol" style="width: 95px; height: 95px; display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
-    <!-- Fila 1 (1 punto) -->
-    <circle cx="50" cy="18" r="4.5" fill="#ffdf70" />
+            <!-- Fila 2 (2 punti) -->
+            <circle cx="38" cy="38" r="4.5" fill="#ffdf70" />
+            <circle cx="62" cy="38" r="4.5" fill="#ffdf70" />
 
-    <!-- Fila 2 (2 punti) -->
-    <circle cx="38" cy="38" r="4.5" fill="#ffdf70" />
-    <circle cx="62" cy="38" r="4.5" fill="#ffdf70" />
+            <!-- Fila 3 (3 punti) -->
+            <circle cx="26" cy="58" r="4.5" fill="#ffdf70" />
+            <circle cx="50" cy="58" r="4.5" fill="#ffdf70" />
+            <circle cx="74" cy="58" r="4.5" fill="#ffdf70" />
 
-    <!-- Fila 3 (3 punti) -->
-    <circle cx="26" cy="58" r="4.5" fill="#ffdf70" />
-    <circle cx="50" cy="58" r="4.5" fill="#ffdf70" />
-    <circle cx="74" cy="58" r="4.5" fill="#ffdf70" />
+            <!-- Fila 4 (4 punti) -->
+            <circle cx="14" cy="78" r="4.5" fill="#ffdf70" />
+            <circle cx="38" cy="78" r="4.5" fill="#ffdf70" />
+            <circle cx="62" cy="78" r="4.5" fill="#ffdf70" />
+            <circle cx="86" cy="78" r="4.5" fill="#ffdf70" />
+        </svg>
 
-    <!-- Fila 4 (4 punti) -->
-    <circle cx="14" cy="78" r="4.5" fill="#ffdf70" />
-    <circle cx="38" cy="78" r="4.5" fill="#ffdf70" />
-    <circle cx="62" cy="78" r="4.5" fill="#ffdf70" />
-    <circle cx="86" cy="78" r="4.5" fill="#ffdf70" />
-</svg>
+        <h1>NUMEROSOPHIA</h1>
+        <div class="subtitle">Strumento di Calcolo Pitagorico Integrato Completo</div>
 
-
-    <h1>NUMEROSOPHIA</h1>
-
-    <div class="subtitle">Strumento di Calcolo Pitagorico Integrato Completo</div>
-
-    <!-- FORM COMPATTO SU DUE RIGHE -->
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-        
-        <!-- RIGA 1: Nome e Cognome affiancati (con Textarea flessibili) -->
-        <div style="display: flex; gap: 12px; width: 100%;">
-            <div style="flex: 1; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Nome:</label>
-                <textarea id="nome" class="input-flessibile" placeholder="Es. Mario" oninput="autoEspandi(this)"></textarea>
-            </div>
-            <div style="flex: 1; display: flex; flex-direction: column;">
-                <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Cognome:</label>
-                <textarea id="cognome" class="input-flessibile" placeholder="Es. Rossi" oninput="autoEspandi(this)"></textarea>
-            </div>
+        <!-- LINEA DORATA CON ROMBO CENTRALE -->
+        <div class="gold-divider">
+            <div class="gold-divider-diamond"></div>
         </div>
 
-     <!-- RIGA 2: Data di Nascita (più larga) e Anno Personale (più stretto) -->
-<div style="display: flex; gap: 12px; width: 100%;">
-    <div style="flex: 1.2; display: flex; flex-direction: column;">
-        <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Data di Nascita:</label>
-        <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" style="text-align: center; height: 45px;">
-    </div>
-    <div style="flex: 0.8; display: flex; flex-direction: column;">
-        <label style="font-size: 13px; color: #f1c40f; font-weight: bold;">Anno:</label>
-        <input type="number" id="annoCorrente" placeholder="2026" value="2026" style="text-align: center; height: 45px;">
-    </div>
-</div>
-
-    </div>
-    
-   <!-- RIGA UNICA OTTIMIZZATA PER TUTTI I PULSANTI -->
-    <div style="display: flex; gap: 6px; justify-content: center; align-items: center; margin: 20px auto 0 auto; width: 100%; max-width: 400px; padding: 0 5px;">
-        
-        <!-- 1. Freccia Torna alla Scelta -->
-        <a href="index.html" class="btn-home" style="margin: 0; padding: 0; font-size: 15px; display: flex; align-items: center; justify-content: center; width: 40px; height: 42px; min-width: 40px; box-sizing: border-box; text-decoration: none;">⬅</a>
-        
-        <!-- 2. Tasto Copia (Appare a sinistra di Calcola) -->
-        <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display: none; margin: 0; padding: 0 12px; font-size: 12px; font-weight: bold; cursor: pointer; letter-spacing: 0.5px; height: 42px; width: fit-content; line-height: 42px; box-sizing: border-box;">COPIA</button>
-        
-        <!-- 3. Tasto Calcola (Centro) -->
-        <button onclick="eseguiCalcoloCompleto()" style="display: block; margin: 0; padding: 0 16px; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; letter-spacing: 0.5px; height: 42px; width: fit-content; min-width: 100px; box-sizing: border-box;">CALCOLA</button>
-        
-        <!-- 4. Tasto Salva (Appare a destra di Calcola - Solo icona) -->
-        <button id="btnSalva" type="button" onclick="salvaNelDatabase()" style="display: none; margin: 0; padding: 0; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; transition: background 0.2s; width: 40px; height: 42px; min-width: 40px; line-height: 42px; box-sizing: border-box;">💾</button>
-        
-    </div>
-    
-    <div id="risultati" class="risultati">
-        
-        <div id="bloccoAnagrafica" style="display:none;">
-            <div class="sezione-titolo">I Numeri Fondamentali (Dall'Anagrafica)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <!-- Spinto ai lati, impedisce l'andata a capo -->
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anima (Chi sei dentro)</h3>
-                        <div id="numAnima" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descAnima"></div>
+        <!-- FORM COMPATTO SU DUE RIGHE -->
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            
+            <!-- RIGA 1: Nome e Cognome affiancati -->
+            <div style="display: flex; gap: 12px; width: 100%;">
+                <div style="flex: 1; display: flex; flex-direction: column;">
+                    <label for="nome">Nome:</label>
+                    <textarea id="nome" class="input-flessibile" placeholder="Es. Mario" oninput="autoEspandi(this)"></textarea>
                 </div>
-                <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Persona (Come appari)</h3>
-                        <div id="numPersona" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descPersona"></div>
-                </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Io (Il Talento Nativo)</h3>
-                        <div id="numEspressione" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descEspressione"></div>
+                <div style="flex: 1; display: flex; flex-direction: column;">
+                    <label for="cognome">Cognome:</label>
+                    <textarea id="cognome" class="input-flessibile" placeholder="Es. Rossi" oninput="autoEspandi(this)"></textarea>
                 </div>
             </div>
+
+            <!-- RIGA 2: Data di Nascita e Anno Personale -->
+            <div style="display: flex; gap: 12px; width: 100%;">
+                <div style="flex: 1.2; display: flex; flex-direction: column;">
+                    <label for="dataNascita">Data di Nascita:</label>
+                    <input type="text" id="dataNascita" inputmode="numeric" placeholder="Es. 15/04/1983" maxlength="10" style="text-align: center; height: 45px;">
+                </div>
+                <div style="flex: 0.8; display: flex; flex-direction: column;">
+                    <label for="annoCorrente">Anno:</label>
+                    <input type="number" id="annoCorrente" placeholder="2026" value="2026" style="text-align: center; height: 45px;">
+                </div>
+            </div>
+
         </div>
-
-        <div id="bloccoData" style="display:none;">
-            <div class="sezione-titolo" style="color: #e67e22;">Destino e Carattere (Dalla Data)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Giorno di Nascita</h3>
-                        <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descGiornoIsolato"></div>
-                </div>
-                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Destino</h3>
-                        <div id="numCammino" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descCammino"></div>
-                </div>
-                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anno Personale</h3>
-                        <div id="numAnnoPers" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descAnnoPers"></div>
-                </div>
-                <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Giorno Personale</h3>
-                        <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descGiornoPers"></div>
-                </div>
-            </div>
-
-            <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi (Il Clima di Vita)</div>
-            <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3 style="font-size:12px;">Ciclo Formativo<br>(Mese)</h3>
-                    <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloForm" style="font-size:12px;"></div>
-                </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3 style="font-size:12px;">Ciclo Produttivo<br>(Giorno)</h3>
-                    <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloProd" style="font-size:12px;"></div>
-                </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3 style="font-size:12px;">Ciclo Conclusivo<br>(Anno)</h3>
-                    <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloConc" style="font-size:12px;"></div>
-                </div>
-            </div>
-            <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
-
-            <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Cicli di Realizzazione</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">1° Picco</h3>
-                        <div id="numCiclo1" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="etaCiclo1" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
-                    <div id="descCiclo1"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">2° Picco</h3>
-                        <div id="numCiclo2" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="etaCiclo2" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
-                    <div id="descCiclo2"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">3° Picco</h3>
-                        <div id="numCiclo3" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="etaCiclo3" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
-                    <div id="descCiclo3"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">4° Picco</h3>
-                        <div id="numCiclo4" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="etaCiclo4" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
-                    <div id="descCiclo4"></div>
-                </div>
-            </div>
-
-            <div class="sezione-titolo">Le Ombre (Sfide Evolutive)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Giovinezza</h3>
-                        <div id="numOmbraGiov" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descOmbraGiov"></div>
-                </div>
-                <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Maturità</h3>
-                        <div id="numOmbraMat" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descOmbraMat"></div>
-                </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Principale</h3>
-                        <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                    </div>
-                    <div id="descOmbraPrinc"></div>
-                </div>
-            </div>
+        
+        <!-- RIGA UNICA OTTIMIZZATA PER TUTTI I PULSANTI -->
+        <div style="display: flex; gap: 6px; justify-content: center; align-items: center; margin: 20px auto 0 auto; width: 100%; max-width: 400px; padding: 0 5px;">
+            
+            <!-- 1. Freccia Torna alla Scelta -->
+            <a href="index.html" class="btn-home" style="margin: 0; padding: 0; font-size: 15px; display: flex; align-items: center; justify-content: center; width: 40px; height: 42px; min-width: 40px; box-sizing: border-box; text-decoration: none;">⬅</a>
+            
+            <!-- 2. Tasto Copia (Appare a sinistra di Calcola) -->
+            <button id="btnCopia" class="btn-secondary" onclick="copiaMappaInAppunti()" style="display: none; margin: 0; padding: 0 12px; font-size: 12px; font-weight: bold; cursor: pointer; letter-spacing: 0.5px; height: 42px; width: fit-content; line-height: 42px; box-sizing: border-box;">COPIA</button>
+            
+            <!-- 3. Tasto Calcola (Centro) -->
+            <button onclick="eseguiCalcoloCompleto()" style="display: block; margin: 0; padding: 0 16px; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; letter-spacing: 0.5px; height: 42px; width: fit-content; min-width: 100px; box-sizing: border-box;">CALCOLA</button>
+            
+            <!-- 4. Tasto Salva (Appare a destra di Calcola - Solo icona) -->
+            <button id="btnSalva" type="button" onclick="salvaNelDatabase()" style="display: none; margin: 0; padding: 0; background: #8e7355; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; transition: background 0.2s; width: 40px; height: 42px; min-width: 40px; line-height: 42px; box-sizing: border-box;">💾</button>
+            
         </div>
-
-      <div id="sezioneQuintessenza" style="display:none;">
-            <div class="sezione-titolo" style="color: #8e44ad; border-bottom-color: #e8daef; text-align: center; margin-top: 40px;">IL PUNTO D'ARRIVO</div>
-            <div class="grid-cards" style="grid-template-columns: 1fr;">
-                <div class="card" style="border-left-color: #8e44ad; text-align: center; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <h3 style="color: #8e44ad;">La Quintessenza (L'Armonia Finale)</h3>
-                    <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad; font-size: 32px; margin: 10px 0; font-weight: bold;"></div>
-                    <div id="descQuintessenza" style="text-align: left; max-width: 600px; margin: 0 auto;"></div>
+        
+        <div id="risultati" class="risultati">
+            
+            <div id="bloccoAnagrafica" style="display:none;">
+                <div class="sezione-titolo">I Numeri Fondamentali (Dall'Anagrafica)</div>
+                <div class="grid-cards">
+                    <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anima (Chi sei dentro)</h3>
+                            <div id="numAnima" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descAnima"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Persona (Come appari)</h3>
+                            <div id="numPersona" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descPersona"></div>
+                    </div>
+                    <div class="card" style="grid-column: span 2; border-left-color: #8e7355; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Io (Il Talento Nativo)</h3>
+                            <div id="numEspressione" class="numero-evidenziato" style="color: #8e7355; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descEspressione"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
-            <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">L'Energia Acquisita (Solo Soprannome)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anima del Soprannome</h3>
-                        <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+            <div id="bloccoData" style="display:none;">
+                <div class="sezione-titolo" style="color: #e67e22;">Destino e Carattere (Dalla Data)</div>
+                <div class="grid-cards">
+                    <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Giorno di Nascita</h3>
+                            <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descGiornoIsolato"></div>
                     </div>
-                    <div id="descAnimaSop"></div>
+                    <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Destino</h3>
+                            <div id="numCammino" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descCammino"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anno Personale</h3>
+                            <div id="numAnnoPers" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descAnnoPers"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Giorno Personale</h3>
+                            <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descGiornoPers"></div>
+                    </div>
                 </div>
-                <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Persona del Soprannome</h3>
-                        <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+
+                <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi (Il Clima di Vita)</div>
+                <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <h3 style="font-size:12px;">Ciclo Formativo<br>(Mese)</h3>
+                        <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
+                        <div id="descCicloForm" style="font-size:12px;"></div>
                     </div>
-                    <div id="descPersonaSop"></div>
+                    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <h3 style="font-size:12px;">Ciclo Produttivo<br>(Giorno)</h3>
+                        <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
+                        <div id="descCicloProd" style="font-size:12px;"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <h3 style="font-size:12px;">Ciclo Conclusivo<br>(Anno)</h3>
+                        <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
+                        <div id="descCicloConc" style="font-size:12px;"></div>
+                    </div>
                 </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                        <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Espressione del Soprannome</h3>
-                        <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
+
+                <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Cicli di Realizzazione</div>
+                <div class="grid-cards">
+                    <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">1° Picco</h3>
+                            <div id="numCiclo1" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="etaCiclo1" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
+                        <div id="descCiclo1"></div>
                     </div>
-                    <div id="descEspressioneSop"></div>
+                    <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">2° Picco</h3>
+                            <div id="numCiclo2" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="etaCiclo2" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
+                        <div id="descCiclo2"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">3° Picco</h3>
+                            <div id="numCiclo3" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="etaCiclo3" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
+                        <div id="descCiclo3"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #2980b9; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 2px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">4° Picco</h3>
+                            <div id="numCiclo4" class="numero-evidenziato" style="color: #2980b9; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="etaCiclo4" style="font-weight: bold; font-size: 12px; color: #7f8c8d; margin-bottom: 6px;"></div>
+                        <div id="descCiclo4"></div>
+                    </div>
+                </div>
+
+                <div class="sezione-titolo">Le Ombre (Sfide Evolutive)</div>
+                <div class="grid-cards">
+                    <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Giovinezza</h3>
+                            <div id="numOmbraGiov" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descOmbraGiov"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Maturità</h3>
+                            <div id="numOmbraMat" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descOmbraMat"></div>
+                    </div>
+                    <div class="card" style="grid-column: span 2; border-left-color: #c0392b; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Ombra Principale</h3>
+                            <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descOmbraPrinc"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
+            <div id="sezioneQuintessenza" style="display:none;">
+                <div class="sezione-titolo" style="color: #8e44ad; border-bottom-color: #e8daef; text-align: center; margin-top: 40px;">IL PUNTO D'ARRIVO</div>
+                <div class="grid-cards" style="grid-template-columns: 1fr;">
+                    <div class="card" style="border-left-color: #8e44ad; text-align: center; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <h3 style="color: #8e44ad;">La Quintessenza (L'Armonia Finale)</h3>
+                        <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad; font-size: 32px; margin: 10px 0; font-weight: bold;"></div>
+                        <div id="descQuintessenza" style="text-align: left; max-width: 600px; margin: 0 auto;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
+                <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">L'Energia Acquisita (Solo Soprannome)</div>
+                <div class="grid-cards">
+                    <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anima del Soprannome</h3>
+                            <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descAnimaSop"></div>
+                    </div>
+                    <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Persona del Soprannome</h3>
+                            <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descPersonaSop"></div>
+                    </div>
+                    <div class="card" style="grid-column: span 2; border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Espressione del Soprannome</h3>
+                            <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        </div>
+                        <div id="descEspressioneSop"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 <script>
