@@ -10,15 +10,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Inclusione Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <style>
-        * { 
-            box-sizing: border-box; 
-        }
+   <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital@1&display=swap');
+        * { box-sizing: border-box; }
         
         body { 
             font-family: 'Montserrat', sans-serif; 
@@ -26,7 +20,10 @@
             color: #e0dbd1; 
             margin: 0; 
             padding: 20px 10px; 
-            display: flex !important; 
+           
+
+	    display: flex !important; 
+	    flex-direction: column;
             justify-content: center !important; 
             align-items: center !important; 
             min-height: 100vh;
@@ -41,7 +38,7 @@
                 radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.13) 0%, transparent 65%),
                 radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 40px 40px,
                 radial-gradient(rgba(255, 255, 255, 0.04) 1.5px, transparent 1.5px) 20px 20px / 60px 60px;
-            opacity: 0.75;
+            opacity: 0.7;
             pointer-events: none;
             z-index: -1;
         }
@@ -71,22 +68,19 @@
             width: 100%;
         }
 
-        @media (max-width: 380px) {
-            h1 {
-                font-size: 25px;
-                letter-spacing: 3px;
-            }
-        }
 
         .subtitle { 
+	    text-align: center !important;  
             font-family: 'Cormorant Garamond', serif;
+            width: 100% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-bottom: 20px !important;
+            display: block !important;
             font-style: italic;
-            font-size: clamp(0.95rem, 4vw, 1.1rem);
-            color: #e0dbd1;
-            line-height: 1.2;
-            text-align: center; 
-            max-width: 90%;
-            margin: 6px auto 20px auto; 
+            font-size: 16px;
+            letter-spacing: 0.5px;
+	    color: #e0dbd1;
         }
 
         /* DIVISORE ELEGANTE CON ROMBO CENTRALE */
@@ -123,6 +117,7 @@
         /* ETICHETTE UGUALE A PITAGORA: CINZEL, MAIUSCOLO, DORATO, LETTER-SPACING */
         label { 
             font-family: 'Cinzel', serif;
+	    font-size: 11px;
             font-weight: 500; 
             color: #d4af37; 
             display: block; 
@@ -134,44 +129,45 @@
         }
 
         /* INPUT E TEXTAREA CON STILE ED ELEGANT-FONT DI PITAGORA */
-        input, textarea, .input-flessibile { 
+         input, textarea, .input-flessibile { 
             width: 100%; 
-            padding: 12px; 
-            margin-top: 2px; 
-            border: 1px solid rgba(212, 175, 55, 0.3); 
-            border-radius: 8px; 
-            font-size: 16px; 
-            background-color: #1c102b !important; 
+            padding: 12px 14px; 
+            border: 1px solid rgba(212, 175, 55, 0.25); 
+            border-radius: 10px; 
+            font-size: 15px; 
+            font-family: 'Montserrat', sans-serif;
+            background-color: rgba(10, 20, 40, 0.6) !important; 
             color: #f5f2eb !important; 
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            transition: border 0.2s, background-color 0.2s; 
-            font-family: 'Cormorant Garamond', serif;
+            transition: all 0.3s ease; 
             box-sizing: border-box;
-            resize: none !important;
-            overflow: hidden !important;
-            height: 45px;
         }
 
         /* PLACEHOLDER IN CORSIVO E FONT SERIF COME PITAGORA */
         input::placeholder, textarea::placeholder {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
             color: rgba(224, 219, 209, 0.4);
-            font-size: 17px;
+            font-style: italic;
+ 	    font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
         }
 
-        /* Manteniamo Montserrat / numeri puliti per l'anno se inserito */
-        #annoCorrente {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-        }
-
+       /* STATO FOCUS CON GLOW DORATO */
         input:focus, textarea:focus, .input-flessibile:focus { 
             border-color: #d4af37 !important; 
             outline: none; 
             background-color: #26163a !important; 
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3), inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        textarea.input-flessibile {
+            height: 45px;
+            min-height: 45px;
+            resize: none; 
+            overflow-y: hidden; 
+            line-height: 1.3;
         }
 
         button { 
@@ -252,6 +248,10 @@
             margin-bottom: 5px; 
         }
 
+	.archetipo-nome { font-weight: bold; color: #e8e3d9; font-size: 15px; display: block; margin-bottom: 5px; }
+        .descrizione { font-size: 13.5px; color: #c4beb3; line-height: 1.5; }
+        .ombra-testo { font-size: 13px; color: #8a94a6; margin-top: 6px; font-style: italic; }
+
         .btn-home { 
             background: #26163a; 
             color: #c4beb3; 
@@ -266,38 +266,76 @@
             font-size: 14px; 
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 20px 10px !important;
+ </style> 
+    
+    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
+        <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
+            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
+            <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
+            <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
+            <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;"></div>
+        </div>
+    </div>
+    
+    <style>
+        @keyframes compariModale {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 25px;
+                letter-spacing: 3px;
             }
-            
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
                 padding: 20px 15px !important;
-                margin: auto 0 !important; 
+                box-sizing: border-box !important;
             }
-            
-            .grid-cards {
+            .grid-cards, [class*="grid"] {
                 grid-template-columns: 1fr !important;
                 gap: 12px !important;
+                display: grid !important;
             }
-            
-            .card {
+            .card, .grid-cards div {
                 grid-column: span 1 !important;
+                width: 100% !important;
+            }
+            #modaleApprofondimento {
+                padding: 10px !important; 
+            }
+            #modaleApprofondimento > div {
+                width: 96% !important;
+                max-width: 96% !important;
+                padding: 20px 15px 15px 15px !important;
+                max-height: 90vh !important;
+                border-radius: 12px !important;
+            }
+            #modaleApprofondimento span[onclick] {
+                top: 8px !important;
+                right: 12px !important;
+                font-size: 32px !important;
+                padding: 5px;
+            }
+            #modaleTitolo {
+                font-size: 18px !important;
+                padding-right: 25px;
+            }
+            #modaleSottotitolo {
+                font-size: 14px !important;
             }
         }
     </style>
 
-    <!-- MODALE APPROFONDIMENTO -->
-    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); justify-content: center; align-items: center;">
-        <div style="background-color: #170d24; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 550px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.8); font-family: 'Montserrat', sans-serif;">
-            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 15px; font-size: 28px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
-            <h2 id="modaleTitolo" style="margin-top: 0; color: #d4af37; font-family: 'Cinzel', serif; font-size: 22px;"></h2>
-            <h3 id="modaleSottotitolo" style="margin-top: 5px; color: #a69f95; font-size: 16px; font-weight: normal; border-bottom: 1px solid rgba(212, 175, 55, 0.2); padding-bottom: 10px; font-style: italic;"></h3>
-            <div id="modaleContenuto" style="margin-top: 15px; font-size: 14px; line-height: 1.5; color: #e8e3d9;"></div>
-        </div>
-    </div>
+
+    <script>
+        function autoEspandi(textarea) {
+            textarea.style.height = '45px';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+    </script>
 </head>
 <body>
 
@@ -337,14 +375,14 @@
         <!-- RIGA 1: Nome e Cognome (Input di testo puliti come in Pitagora) -->
         <div style="display: flex; gap: 12px; width: 100%;">
             <div style="flex: 1; display: flex; flex-direction: column;">
-                <label>NOME:</label>
-                <input type="text" id="nome" class="input-flessibile" placeholder="Es. Mario">
+                 <label for="nome">Nome:</label>
+                    <textarea id="nome" class="input-flessibile" placeholder="Es. Mario" oninput="autoEspandi(this)"></textarea>
+                </div>
+           <div style="flex: 1; display: flex; flex-direction: column;">
+                    <label for="cognome">Cognome:</label>
+                    <textarea id="cognome" class="input-flessibile" placeholder="Es. Rossi" oninput="autoEspandi(this)"></textarea>
+                </div>
             </div>
-            <div style="flex: 1; display: flex; flex-direction: column;">
-                <label>COGNOME:</label>
-                <input type="text" id="cognome" class="input-flessibile" placeholder="Es. Rossi">
-            </div>
-        </div>
       
         <!-- RIGA 2: Data di Nascita e Anno -->
         <div style="display: flex; gap: 12px; width: 100%;">
