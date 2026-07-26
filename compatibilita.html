@@ -144,7 +144,8 @@
             color: #a69f95;
             margin-top: 0;
             margin-bottom: 20px;
-            text-align: center;
+            text-align: center !important;
+            display: block !important;
             line-height: 1.4;
         }
 
@@ -361,27 +362,21 @@
             }
         }
 
-        /* RESET TOTALE ALLINEAMENTO E DIMENSIONI DENTRO I BOX DI RISULTATO */
-        div[onclick], 
-        .sezione-dinamica div, 
-        .ns-level-container div {
+        /* RESET ALLINEAMENTO E DIMENSIONI SOLO DENTRO LA SEZIONE DEI RISULTATI */
+        #risultati-sinastria div[onclick], 
+        #risultati-sinastria .ns-level-container div {
             text-align: left;
         }
 
-        div[onclick] h1, div[onclick] h2, div[onclick] h3, div[onclick] h4,
-        .sezione-dinamica div h1, .sezione-dinamica div h2, .sezione-dinamica div h3,
-        div[onclick] p, .sezione-dinamica div p,
-        div[onclick] span, .sezione-dinamica div span,
-        div[onclick] em, div[onclick] i {
+        #risultati-sinastria div[onclick] h1, #risultati-sinastria div[onclick] h2, 
+        #risultati-sinastria div[onclick] h3, #risultati-sinastria div[onclick] h4,
+        #risultati-sinastria div[onclick] p, #risultati-sinastria div[onclick] span,
+        #risultati-sinastria div[onclick] em, #risultati-sinastria div[onclick] i {
             font-size: 1.1rem !important;
             text-align: left !important;
             line-height: 1.4 !important;
             letter-spacing: normal !important;
             display: block !important;
-        }
-
-        div[onclick] * {
-            text-align: left !important;
         }
     </style>
 </head>
@@ -397,8 +392,8 @@
 
         <!-- Pannello Input Dati -->
         <div class="ns-calc-panel">
-            <p class="panel-subtitle">
-                Inserisci i dati oppure rivhiama un profilo dall'archivio.
+            <p class="panel-subtitle" style="text-align: center !important; display: block !important;"> 
+                Inserisci i dati oppure richiama un profilo dall'archivio.
             </p>
             
             <div class="flex-container-profili">
