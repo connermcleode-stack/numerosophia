@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Numerosophia - Analisi Caldeo-Planetaria</title>
     
     <link rel="manifest" href="manifest.json">
@@ -12,7 +12,15 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital@1&display=swap');
-        * { box-sizing: border-box; }
+        
+        * { 
+            box-sizing: border-box; 
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden; /* Previene lo scorrimento orizzontale imprevisto */
+        }
         
         body { 
             font-family: 'Montserrat', sans-serif; 
@@ -20,6 +28,7 @@
             color: #e0dbd1; 
             margin: 0; 
             padding: 20px 10px; 
+            
             /* Gestione Safe Area per dispositivi iOS con notch/gesture bar */
             padding-top: max(20px, env(safe-area-inset-top));
             padding-bottom: max(20px, env(safe-area-inset-bottom));
@@ -49,7 +58,7 @@
 
         .container { 
             background: rgba(23, 13, 36, 0.94); 
-            padding: clamp(20px, 4vw, 40px); 
+            padding: 30px 20px; 
             border-radius: 16px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
             max-width: 800px; 
@@ -57,19 +66,20 @@
             border: 1px solid rgba(212, 175, 55, 0.25); 
         }
 
-        /* STILE H1 IDENTICO A INDEX */
+        /* STILE H1 ADATTIVO */
         h1 {
             font-family: 'Cinzel', serif; 
             font-weight: 400;
-            font-size: clamp(24px, 5vw, 34px);
-            letter-spacing: clamp(2px, 1vw, 6px); 
-            margin: 0;
+            font-size: 28px;
+            letter-spacing: 4px; 
+            margin: 0 0 10px 0;
             background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.9));
             text-align: center;
             width: 100%;
+            word-wrap: break-word;
         }
 
         .subtitle { 
@@ -81,7 +91,7 @@
             margin-bottom: 20px !important;
             display: block !important;
             font-style: italic;
-            font-size: clamp(14px, 2.5vw, 16px);
+            font-size: 16px;
             letter-spacing: 0.5px;
             color: #e0dbd1;
         }
@@ -117,21 +127,20 @@
             flex-shrink: 0;
         }
 
-        /* ETICHETTE UGUALE A PITAGORA: CINZEL, MAIUSCOLO, DORATO, LETTER-SPACING */
+        /* ETICHETTE: CINZEL, MAIUSCOLO, DORATO */
         label { 
             font-family: 'Cinzel', serif;
-            font-size: 11px;
             font-weight: 500; 
             color: #d4af37; 
             display: block; 
             margin-top: 10px; 
             margin-bottom: 4px;
-            font-size: 13px; 
+            font-size: 12px; 
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        /* INPUT E TEXTAREA CON STILE ED ELEGANT-FONT DI PITAGORA */
+        /* INPUT E TEXTAREA CON STILE ED ELEGANT-FONT */
         input, textarea, .input-flessibile { 
             width: 100%; 
             padding: 12px 14px; 
@@ -149,7 +158,7 @@
             box-sizing: border-box;
         }
 
-        /* PLACEHOLDER IN CORSIVO E FONT SERIF COME PITAGORA */
+        /* PLACEHOLDER IN CORSIVO E FONT SERIF */
         input::placeholder, textarea::placeholder {
             color: rgba(224, 219, 209, 0.4);
             font-style: italic;
@@ -224,7 +233,7 @@
 
         .grid-cards { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            grid-template-columns: repeat(2, 1fr); 
             gap: 15px; 
         }
 
@@ -275,26 +284,39 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        /* MEDIA QUERIES RESPONSIVE */
+        /* --- MEDIA QUERY PER DISPOSITIVI MOBILI (Fino a 768px) --- */
+        @media (max-width: 768px) {
+            body { 
+                padding: 10px 5px; 
+            }
 
-        /* Smartphone e schermi molto piccoli */
-        @media (max-width: 600px) {
-            body { padding: 10px 6px; }
+            h1 {
+                font-size: 22px;
+                letter-spacing: 2px;
+            }
+
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 20px 12px !important;
+                padding: 20px 15px !important;
             }
-            .grid-cards {
+
+            /* Forziamo la griglia a colonna singola per tutti gli smartphone */
+            .grid-cards, [class*="grid"] {
                 grid-template-columns: 1fr !important;
                 gap: 12px !important;
             }
-            .card {
+
+            .card, .grid-cards div {
                 width: 100% !important;
+                grid-column: span 1 !important;
             }
+
+            /* Modale per Mobile */
             #modaleApprofondimento {
                 padding: 10px !important; 
             }
+
             #modaleApprofondimento > div {
                 width: 96% !important;
                 max-width: 96% !important;
@@ -302,26 +324,22 @@
                 max-height: 90vh !important;
                 border-radius: 12px !important;
             }
+
             #modaleApprofondimento span[onclick] {
                 top: 8px !important;
                 right: 12px !important;
                 font-size: 32px !important;
                 padding: 5px;
             }
+
             #modaleTitolo {
                 font-size: 18px !important;
                 padding-right: 25px;
             }
+
             #modaleSottotitolo {
                 font-size: 14px !important;
             }
-        }
-
-        /* Tablet (Android / iPad) */
-        @media (min-width: 601px) and (max-width: 1024px) {
-            .container { padding: 30px 25px; }
-            .grid-cards { grid-template-columns: 1fr 1fr; gap: 15px; }
-            button { padding: 16px; font-size: 17px; }
         }
     </style> 
     
@@ -338,6 +356,10 @@
         function autoEspandi(textarea) {
             textarea.style.height = '45px';
             textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        function chiudiModale() {
+            document.getElementById('modaleApprofondimento').style.display = 'none';
         }
     </script>
 </head>
