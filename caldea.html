@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Numerosophia - Analisi Caldeo-Planetaria</title>
     
     <link rel="manifest" href="manifest.json">
@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-   <style>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital@1&display=swap');
         * { box-sizing: border-box; }
         
@@ -20,10 +20,14 @@
             color: #e0dbd1; 
             margin: 0; 
             padding: 20px 10px; 
-           
+            /* Gestione Safe Area per dispositivi iOS con notch/gesture bar */
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding-left: max(10px, env(safe-area-inset-left));
+            padding-right: max(10px, env(safe-area-inset-right));
 
-	    display: flex !important; 
-	    flex-direction: column;
+            display: flex !important; 
+            flex-direction: column;
             justify-content: center !important; 
             align-items: center !important; 
             min-height: 100vh;
@@ -45,7 +49,7 @@
 
         .container { 
             background: rgba(23, 13, 36, 0.94); 
-            padding: 40px; 
+            padding: clamp(20px, 4vw, 40px); 
             border-radius: 16px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
             max-width: 800px; 
@@ -57,8 +61,8 @@
         h1 {
             font-family: 'Cinzel', serif; 
             font-weight: 400;
-            font-size: 34px;
-            letter-spacing: 6px; 
+            font-size: clamp(24px, 5vw, 34px);
+            letter-spacing: clamp(2px, 1vw, 6px); 
             margin: 0;
             background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
             -webkit-background-clip: text;
@@ -68,9 +72,8 @@
             width: 100%;
         }
 
-
         .subtitle { 
-	    text-align: center !important;  
+            text-align: center !important;  
             font-family: 'Cormorant Garamond', serif;
             width: 100% !important;
             margin-left: auto !important;
@@ -78,9 +81,9 @@
             margin-bottom: 20px !important;
             display: block !important;
             font-style: italic;
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 16px);
             letter-spacing: 0.5px;
-	    color: #e0dbd1;
+            color: #e0dbd1;
         }
 
         /* DIVISORE ELEGANTE CON ROMBO CENTRALE */
@@ -117,7 +120,7 @@
         /* ETICHETTE UGUALE A PITAGORA: CINZEL, MAIUSCOLO, DORATO, LETTER-SPACING */
         label { 
             font-family: 'Cinzel', serif;
-	    font-size: 11px;
+            font-size: 11px;
             font-weight: 500; 
             color: #d4af37; 
             display: block; 
@@ -129,7 +132,7 @@
         }
 
         /* INPUT E TEXTAREA CON STILE ED ELEGANT-FONT DI PITAGORA */
-         input, textarea, .input-flessibile { 
+        input, textarea, .input-flessibile { 
             width: 100%; 
             padding: 12px 14px; 
             border: 1px solid rgba(212, 175, 55, 0.25); 
@@ -150,11 +153,11 @@
         input::placeholder, textarea::placeholder {
             color: rgba(224, 219, 209, 0.4);
             font-style: italic;
- 	    font-family: 'Cormorant Garamond', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 16px;
         }
 
-       /* STATO FOCUS CON GLOW DORATO */
+        /* STATO FOCUS CON GLOW DORATO */
         input:focus, textarea:focus, .input-flessibile:focus { 
             border-color: #d4af37 !important; 
             outline: none; 
@@ -221,7 +224,7 @@
 
         .grid-cards { 
             display: grid; 
-            grid-template-columns: 1fr 1fr; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
             gap: 15px; 
         }
 
@@ -248,7 +251,7 @@
             margin-bottom: 5px; 
         }
 
-	.archetipo-nome { font-weight: bold; color: #e8e3d9; font-size: 15px; display: block; margin-bottom: 5px; }
+        .archetipo-nome { font-weight: bold; color: #e8e3d9; font-size: 15px; display: block; margin-bottom: 5px; }
         .descrizione { font-size: 13.5px; color: #c4beb3; line-height: 1.5; }
         .ombra-testo { font-size: 13px; color: #8a94a6; margin-top: 6px; font-style: italic; }
 
@@ -266,41 +269,27 @@
             font-size: 14px; 
         }
 
- </style> 
-    
-    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
-        <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
-            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
-            <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
-            <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
-            <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;"></div>
-        </div>
-    </div>
-    
-    <style>
+        /* MODALE ANIMATION */
         @keyframes compariModale {
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
-        @media (max-width: 380px) {
-            h1 {
-                font-size: 25px;
-                letter-spacing: 3px;
-            }
+        /* MEDIA QUERIES RESPONSIVE */
+
+        /* Smartphone e schermi molto piccoli */
+        @media (max-width: 600px) {
+            body { padding: 10px 6px; }
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 20px 15px !important;
-                box-sizing: border-box !important;
+                padding: 20px 12px !important;
             }
-            .grid-cards, [class*="grid"] {
+            .grid-cards {
                 grid-template-columns: 1fr !important;
                 gap: 12px !important;
-                display: grid !important;
             }
-            .card, .grid-cards div {
-                grid-column: span 1 !important;
+            .card {
                 width: 100% !important;
             }
             #modaleApprofondimento {
@@ -327,8 +316,23 @@
                 font-size: 14px !important;
             }
         }
-    </style>
 
+        /* Tablet (Android / iPad) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .container { padding: 30px 25px; }
+            .grid-cards { grid-template-columns: 1fr 1fr; gap: 15px; }
+            button { padding: 16px; font-size: 17px; }
+        }
+    </style> 
+    
+    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
+        <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
+            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
+            <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
+            <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
+            <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;"></div>
+        </div>
+    </div>
 
     <script>
         function autoEspandi(textarea) {
@@ -338,7 +342,6 @@
     </script>
 </head>
 <body>
-
 <div class="container">
 
     <div class="header-logo">

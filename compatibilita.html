@@ -2,26 +2,32 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Numerosophia - Affinità Numerosofica</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2b030f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
         :root {
             /* Sfondo generale: magenta/prugna profondo e scuro */
-            --bg-color: #2b030f;         
+            --bg-color: #2b030f;          
             
             /* Sfondo dei pannelli */
             --panel-bg: rgba(56, 8, 22, 0.94); 
             
             /* Sfondo interno per input e badge */
-            --inner-bg: #1c020a;         
+            --inner-bg: #1c020a;          
             
             /* Testo chiaro morbido */
-            --text-color: #e0dbd1;       
+            --text-color: #e0dbd1;        
             
             /* Oro luminoso coordinato */
-            --accent-gold: #d4af37;      
+            --accent-gold: #d4af37;       
             
             /* Sfondo dei bottoni secondari */
             --button-bg: #3d0a1b;
@@ -38,9 +44,17 @@
             color: var(--text-color);
             margin: 0;
             padding: 40px 20px;
+            /* Gestione Safe Area per dispositivi iOS con notch/gesture bar */
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding-left: max(10px, env(safe-area-inset-left));
+            padding-right: max(10px, env(safe-area-inset-right));
+
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
             box-sizing: border-box;
         }
 
@@ -92,7 +106,7 @@
 
         .ns-header-banner {
             border: 1px solid var(--border-color);
-            padding: 20px 20px;
+            padding: clamp(15px, 3vw, 25px);
             text-align: center;
             margin-bottom: 20px;
             background-color: var(--panel-bg);
@@ -109,7 +123,7 @@
             margin: 0;
             font-family: 'Cinzel', serif;
             color: var(--accent-gold);
-            font-size: 1.6rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             letter-spacing: 1.5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
             text-align: center;
@@ -119,7 +133,7 @@
             color: #a69f95;
             font-family: 'Cinzel', serif;
             font-style: italic;
-            font-size: 0.85rem;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
             margin-top: 6px;
             margin-bottom: 0;
             text-align: center;
@@ -130,7 +144,7 @@
         .ns-calc-panel {
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
-            padding: 25px;
+            padding: clamp(18px, 4vw, 30px);
             margin-bottom: 30px;
             border-radius: 16px;
             box-sizing: border-box;
@@ -180,7 +194,7 @@
             text-align: center;
         }
 
-        /* Disposizione in due colonne affiancate come nel file Pitagora */
+        /* Disposizione in due colonne affiancate */
         .form-row {
             display: flex;
             gap: 12px;
@@ -216,6 +230,9 @@
             font-size: 0.9rem;
             box-sizing: border-box;
             transition: border-color 0.2s, background-color 0.2s;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
 
         .input-field::placeholder {
@@ -327,9 +344,11 @@
             letter-spacing: 1px;
         }
 
+        /* MEDIA QUERIES RESPONSIVE */
+
         @media (max-width: 600px) {
             body {
-                padding: 20px 10px;
+                padding: 15px 8px;
             }
 
             .ns-calc-panel {

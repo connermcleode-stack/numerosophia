@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Numerosophia - Analisi Professionale Integrata</title>
     
     <link rel="manifest" href="manifest.json">
@@ -12,7 +12,10 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital@1&display=swap');
-        * { box-sizing: border-box; }
+        
+        * { 
+            box-sizing: border-box; 
+        }
         
         body { 
             font-family: 'Montserrat', sans-serif; 
@@ -21,13 +24,13 @@
             margin: 0; 
             padding: 20px 10px; 
             
-            /* CENTRATURA PERFETTA VERTICALE E ORIZZONTALE */
+            /* Centratura verticale e orizzontale reattiva */
             display: flex; 
             flex-direction: column;
             justify-content: center; 
             align-items: center;
             min-height: 100vh;
-            min-height: 100dvh; /* Ottimizzato per barre di navigazione mobile */
+            min-height: 100dvh; /* Ottimizzato per barre dinamiche mobile iOS/Android */
         }
 
         body::before {
@@ -44,7 +47,7 @@
         }
 
         .container { 
-	    background: #0C316F; 
+            background: #0C316F; 
             padding: 40px; 
             border-radius: 16px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
@@ -68,7 +71,7 @@
             width: 100%;
         }
         
-        /* Sottotitolo e distanziamento dal form */
+        /* Sottotitolo */
         .subtitle {
             text-align: center !important;  
             font-family: 'Cormorant Garamond', 'Playfair Display', serif;
@@ -83,7 +86,7 @@
             color: #a69f95;
         }
 
-        /* Divisore Elegante con Rombo Centrale */
+        /* Divisore Elegante */
         .gold-divider {
             display: flex;
             align-items: center;
@@ -114,7 +117,7 @@
             flex-shrink: 0;
         }
 
-        /* ETICHETTE (LABEL) IN STILE CINZEL/DORATO */
+        /* Etichette (Label) */
         label { 
             font-family: 'Cinzel', serif;
             font-size: 11px;
@@ -128,13 +131,13 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* QUADRANTI E CAMPI DI INPUT ELEGANTI */
+        /* Input e quadranti */
         input, textarea, .input-flessibile { 
             width: 100%; 
             padding: 12px 14px; 
             border: 1px solid rgba(212, 175, 55, 0.25); 
             border-radius: 10px; 
-            font-size: 15px; 
+            font-size: 16px; /* 16px previene lo zoom automatico durante la digitazione su iOS Safari */
             font-family: 'Montserrat', sans-serif;
             background-color: rgba(10, 20, 40, 0.6) !important; 
             color: #f5f2eb !important; 
@@ -146,7 +149,7 @@
             box-sizing: border-box;
         }
 
-        /* PLACEHOLDER DISCRETO ED ELEGANTE */
+        /* Placeholder */
         input::placeholder, textarea::placeholder {
             color: rgba(224, 219, 209, 0.35);
             font-style: italic;
@@ -154,7 +157,7 @@
             font-size: 16px;
         }
 
-        /* STATO FOCUS CON GLOW DORATO */
+        /* Focus state */
         input:focus, textarea:focus, .input-flessibile:focus { 
             border-color: #d4af37 !important; 
             outline: none; 
@@ -170,10 +173,25 @@
             line-height: 1.3;
         }
 
-        button { width: 100%; background: #8e7355; color: white; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background 0.2s; letter-spacing: 0.5px; }
+        button { 
+            width: 100%; 
+            background: #8e7355; 
+            color: white; 
+            padding: 14px; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 25px; 
+            transition: background 0.2s; 
+            letter-spacing: 0.5px; 
+        }
         button:hover { background: #765f45; }
+
         .btn-secondary { background: #14223a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); margin-top: 15px; }
         .btn-secondary:hover { background: #1c2f4f; color: #f5f2eb; }
+
         .risultati { margin-top: 40px; border-top: 1px solid rgba(142, 115, 85, 0.2); padding-top: 25px; display: none; }
         .sezione-titolo { font-size: 18px; color: #d4af37; font-family: 'Cinzel', serif; border-bottom: 1px solid rgba(142, 115, 85, 0.3); padding-bottom: 6px; margin-top: 35px; margin-bottom: 15px; font-weight: 600; }
         .grid-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -184,33 +202,41 @@
         .descrizione { font-size: 13.5px; color: #c4beb3; line-height: 1.5; }
         .ombra-testo { font-size: 13px; color: #8a94a6; margin-top: 6px; font-style: italic; }
         .btn-home { background: #14223a; color: #c4beb3; border: 1px solid rgba(212, 175, 55, 0.2); max-width: 200px; margin: 20px auto 0 auto; display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 8px; font-size: 14px; }
-    </style> 
-    
-    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
-        <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
-            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
-            <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
-            <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
-            <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;"></div>
-        </div>
-    </div>
-    
-    <style>
+
+        /* Animazione Modale */
         @keyframes compariModale {
-            from { transform: scale(0.8); opacity: 0; }
+            from { transform: scale(0.85); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
-        @media (max-width: 380px) {
+        /* MEDIA QUERIES ADATTIVE PER SMARTPHONE E TABLET (Android & iOS) */
+        
+        /* Tablet & Dispositivi Medi (601px - 850px) */
+        @media (max-width: 850px) {
+            .container {
+                padding: 30px 20px;
+                max-width: 95vw;
+            }
+        }
+
+        /* Smartphone (fino a 600px) */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px 8px;
+            }
             h1 {
-                font-size: 25px;
+                font-size: 26px;
                 letter-spacing: 3px;
             }
             .container {
                 width: 100% !important;
                 max-width: 100% !important;
-                padding: 20px 15px !important;
-                box-sizing: border-box !important;
+                padding: 20px 14px !important;
+                border-radius: 12px;
+            }
+            .gold-divider {
+                width: 80%;
+                margin-bottom: 18px;
             }
             .grid-cards, [class*="grid"] {
                 grid-template-columns: 1fr !important;
@@ -225,16 +251,17 @@
                 padding: 10px !important; 
             }
             #modaleApprofondimento > div {
-                width: 96% !important;
-                max-width: 96% !important;
+                width: 95% !important;
+                max-width: 95% !important;
                 padding: 20px 15px 15px 15px !important;
-                max-height: 90vh !important;
+                max-height: 85vh !important;
+                max-height: 85dvh !important;
                 border-radius: 12px !important;
             }
             #modaleApprofondimento span[onclick] {
                 top: 8px !important;
                 right: 12px !important;
-                font-size: 32px !important;
+                font-size: 30px !important;
                 padding: 5px;
             }
             #modaleTitolo {
@@ -242,15 +269,20 @@
                 padding-right: 25px;
             }
             #modaleSottotitolo {
-                font-size: 14px !important;
+                font-size: 13px !important;
             }
         }
-    </style>
+    </style> 
 
     <script>
         function autoEspandi(textarea) {
             textarea.style.height = '45px';
             textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        function chiudiModale() {
+            const modale = document.getElementById('modaleApprofondimento');
+            if (modale) modale.style.display = 'none';
         }
     </script>
 </head>
