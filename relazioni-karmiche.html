@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <!-- Adattamento per Smartphone e Tablet (iOS & Android) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Relazioni Karmiche - Numerosophia</title>
+
+  <!-- Importazione Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* VARIABLES & THEME BASE */
+    :root {
+      /* Sfondo Verde Smeraldo Scuro e Profondo */
+      --bg-color: #081c15; 
+      --card-bg: rgba(21, 50, 40, 0.45);
+      --card-border: rgba(212, 175, 55, 0.25);
+      --accent-gold: #d4af37;
+      --accent-gold-light: #f3e5ab;
+      --text-main: #f0f4f1;
+      --text-muted: #95b3a6;
+      --font-title: 'Cinzel', serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: env(safe-area-inset-top, 20px);
+      padding-bottom: env(safe-area-inset-bottom, 20px);
+      padding-left: max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+      position: relative;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding-bottom: 40px;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    p.subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* CARDS & INPUT SECTIONS */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .card-title {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      color: var(--accent-gold-light);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title.center {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .person-section {
+      margin-bottom: 20px;
+    }
+
+    .person-section:last-of-type {
+      margin-bottom: 12px;
+    }
+
+    /* Griglia al 50% per riga */
+    .row-double {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    input[type="text"], .btn-archivio-trigger {
+      width: 100%;
+      padding: 10px 6px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.3s;
+      text-align: center;
+    }
+
+    .btn-archivio-trigger {
+      color: var(--accent-gold-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      height: 38px;
+    }
+
+    .btn-archivio-trigger:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    input:focus {
+      border-color: var(--accent-gold);
+    }
+
+    /* CONTENITORE PULSANTI AFFIANCATI */
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    /* Pulsante Home Affiancato */
+    .btn-home {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .btn-home:hover {
+      border-color: var(--accent-gold);
+      transform: scale(1.05);
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    .btn-home:active {
+      transform: scale(0.95);
+    }
+
+    .btn-home svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--accent-gold);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .btn-submit {
+      width: auto;
+      min-width: 130px;
+      height: 42px;
+      padding: 0 24px;
+      border: none;
+      border-radius: 21px;
+      background: linear-gradient(135deg, #d4af37, #aa820a);
+      color: #0f0f14;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      transition: transform 0.2s, opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+      opacity: 0.9;
+    }
+
+    /* MODALE ARCHIVIO */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #fcfbf7;
+      color: #1a1a1a;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 440px;
+      max-height: 80vh;
+      padding: 24px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-header h3 {
+      font-family: var(--font-title);
+      color: #aa820a;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    .modal-header p {
+      font-size: 0.75rem;
+      color: #666;
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .modal-list {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+    }
+
+    .modal-item {
+      background: #f4f2ec;
+      border: 1px solid #e0dacb;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #2b2b2b;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .modal-item:hover {
+      background: #eae5d8;
+      border-color: #c5a037;
+    }
+
+    .modal-item span.date-info {
+      font-weight: 400;
+      font-style: italic;
+      color: #666;
+      font-size: 0.8rem;
+    }
+
+    /* BADGES E CLASSI PER I RISULTATI */
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .badge-karmic {
+      background: rgba(220, 53, 69, 0.2);
+      color: #ff6b6b;
+      border: 1px solid rgba(220, 53, 69, 0.4);
+    }
+
+    .badge-spiritual {
+      background: rgba(212, 175, 55, 0.2);
+      color: #f3e5ab;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .badge-soft {
+      background: rgba(40, 167, 69, 0.2);
+      color: #75b798;
+      border: 1px solid rgba(40, 167, 69, 0.4);
+    }
+
+    /* RESULT AREA */
+    #risultati-container {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <header>
+      <h1>Relazioni Karmiche</h1>
+      <p class="subtitle">Analisi profonda dei legami di coppia e delle memorie d'anima</p>
+    </header>
+
+    <!-- FORM INSERIMENTO DATI -->
+    <div class="card">
+      
+      <!-- Primo Profilo -->
+      <div class="person-section">
+        <div class="card-title center">Primo Profilo</div>
+        <div class="row-double">
+          <div class="input-field">
+            <label for="nomeA">Nome</label>
+            <input type="text" id="nomeA" placeholder="Es. Mario">
+          </div>
+          <div class="input-field">
+            <label for="cognomeA">Cognome</label>
+            <input type="text" id="cognomeA" placeholder="Es. Rossi">
+          </div>
+        </div>
+        <div class="row-double">
+          <div class="input-field">
+            <label for="dataA">Data di Nascita</label>
+            <input type="text" id="dataA" placeholder="GG/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formattaEValidaData(this)">
+          </div>
+          <div class="input-field">
+            <label>Archivio</label>
+            <div class="btn-archivio-trigger" onclick="apriModaleArchivio('A')">-- SELEZIONA --</div>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 20px 0;">
+
+      <!-- Secondo Profilo -->
+      <div class="person-section">
+        <div class="card-title center">Secondo Profilo</div>
+        <div class="row-double">
+          <div class="input-field">
+            <label for="nomeB">Nome</label>
+            <input type="text" id="nomeB" placeholder="Es. Elena">
+          </div>
+          <div class="input-field">
+            <label for="cognomeB">Cognome</label>
+            <input type="text" id="cognomeB" placeholder="Es. Bianchi">
+          </div>
+        </div>
+        <div class="row-double">
+          <div class="input-field">
+            <label for="dataB">Data di Nascita</label>
+            <input type="text" id="dataB" placeholder="GG/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formattaEValidaData(this)">
+          </div>
+          <div class="input-field">
+            <label>Archivio</label>
+            <div class="btn-archivio-trigger" onclick="apriModaleArchivio('B')">-- SELEZIONA --</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pulsanti Home e Calcola Affiancati e Centrati -->
+      <div class="btn-container">
+        <a href="index.html" class="btn-home" title="Torna alla Home">
+          <svg viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <button class="btn-submit" onclick="gestisciCalcoloRelazione()">Calcola</button>
+      </div>
+
+    </div>
+
+   <!-- AREA RISULTATI -->
+    <div id="risultati-container">
+      
+      <!-- Card Impronta Principale -->
+      <div class="card" style="text-align: center;">
+        <div class="card-title center">Impronta del Legame</div>
+        <h2 id="numeroSintesi" style="font-size: 2.8rem; color: var(--accent-gold); font-family: var(--font-title); margin: 6px 0;">--</h2>
+        <div id="badgeContenitore"></div>
+        <p id="descrizioneSintesi" style="margin-top: 14px; font-size: 0.9rem; color: var(--text-main); line-height: 1.5;"></p>
+      </div>
+
+      <!-- Card Espansione 1: Numeri Karmici Personali Attivi (Metodo 1) -->
+      <div class="card" id="boxKarmiciSingoli" style="display: none;">
+        <div class="card-title">⚡ Karma / Energie Personali Attive</div>
+        <ul id="listaKarmiciSingoli" style="font-size: 0.85rem; color: var(--text-main); padding-left: 18px; line-height: 1.5;"></ul>
+      </div>
+
+      <!-- Card Espansione 2: Ciclo della Relazione -->
+      <div class="card">
+        <div class="card-title center">Ciclo della Relazione </div>
+        <div style="text-align: center; margin: 10px 0;">
+          <span id="numeroCiclo" style="font-size: 1.8rem; color: var(--accent-gold-light); font-family: var(--font-title); font-weight: bold;">--</span>
+        </div>
+        <p id="descrizioneCiclo" style="font-size: 0.88rem; color: var(--text-main); text-align: center; line-height: 1.4;"></p>
+      </div>
+
+    </div>
+
+  <!-- MODALE ARCHIVIO -->
+  <div class="modal-overlay" id="modalArchivio">
+    <div class="modal-content">
+      <button class="modal-close" onclick="chiudiModaleArchivio()">✕</button>
+      <div class="modal-header">
+        <h3>SELEZIONA DA ARCHIVIO</h3>
+        <p>Clicca su un profilo per richiamare l'anagrafica</p>
+      </div>
+      <div class="modal-list" id="listaProfiliArchivio">
+        <!-- I profili verranno inseriti qui -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Inclusione della logica di calcolo centralizzata -->
+  <script src="calcoli.js"></script>
+
+  <script>
+    let personaTargetSelezionata = 'A';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof inizializzaRegoleData === "function") {
+        inizializzaRegoleData(['dataA', 'dataB']);
+      }
+    });
+
+    function apriModaleArchivio(target) {
+      personaTargetSelezionata = target;
+      caricaProfiliDaDB();
+      document.getElementById('modalArchivio').classList.add('active');
+    }
+
+    function chiudiModaleArchivio() {
+      document.getElementById('modalArchivio').classList.remove('active');
+    }
+
+    function caricaProfiliDaDB() {
+      const listaContenitore = document.getElementById('listaProfiliArchivio');
+      listaContenitore.innerHTML = "<p style='text-align:center; color:#888; padding:15px;'>Caricamento archivio...</p>";
+
+      procediConnessione('NumerologiaDB', (successo) => {
+        if (!successo) {
+          procediConnessione('NumerosophiaDB', (successo2) => {
+            if (!successo2) {
+              listaContenitore.innerHTML = "<p style='text-align:center; color:#888; padding:15px;'>Nessun profilo trovato in archivio.</p>";
+            }
+          });
+        }
+      });
+    }
+
+    function procediConnessione(dbName, callback) {
+      const listaContenitore = document.getElementById('listaProfiliArchivio');
+      let req = indexedDB.open(dbName);
+
+      req.onsuccess = function(e) {
+        let db = e.target.result;
+        
+        let storeTarget = null;
+        if (db.objectStoreNames.contains('clienti')) storeTarget = 'clienti';
+        else if (db.objectStoreNames.contains('profili')) storeTarget = 'profili';
+
+        if (!storeTarget) {
+          db.close();
+          callback(false);
+          return;
+        }
+
+        try {
+          let tx = db.transaction(storeTarget, 'readonly');
+          let store = tx.objectStore(storeTarget);
+          let getAllReq = store.getAll();
+
+          getAllReq.onsuccess = function() {
+            let profili = getAllReq.result || [];
+            if (profili.length > 0) {
+              renderizzaListaProfili(profili, listaContenitore);
+              callback(true);
+            } else {
+              callback(false);
+            }
+          };
+
+          getAllReq.onerror = function() {
+            callback(false);
+          };
+        } catch(err) {
+          callback(false);
+        }
+      };
+
+      req.onerror = function() {
+        callback(false);
+      };
+    }
+
+    function renderizzaListaProfili(profili, contenitore) {
+      if (!profili || profili.length === 0) {
+        contenitore.innerHTML = "<p style='text-align:center; color:#888; padding:15px;'>Nessun profilo trovato in archivio.</p>";
+        return;
+      }
+
+      profili.sort((a, b) => (a.nome || '').localeCompare(b.nome || ''));
+
+      let html = '';
+      profili.forEach(p => {
+        let dataMostrata = p.data_nascita || p.data || '';
+        let jsonStr = JSON.stringify(p).replace(/'/g, "&apos;");
+        html += `
+          <div class="modal-item" onclick='selezionaProfiloModale(${jsonStr})'>
+            <span>👤 ${p.nome || ''} ${p.cognome || ''}</span>
+            <span class="date-info">${dataMostrata}</span>
+          </div>
+        `;
+      });
+      contenitore.innerHTML = html;
+    }
+
+    function selezionaProfiloModale(profilo) {
+      if (profilo) {
+        let rawData = profilo.data_nascita || profilo.data || '';
+        let dataFormattata = rawData;
+
+        // Se la data nell'archivio è in formato ISO (YYYY-MM-DD), la converte in GG/MM/AAAA
+        if (rawData.includes('-') && rawData.split('-')[0].length === 4) {
+          const parti = rawData.split('-');
+          dataFormattata = `${parti[2].padStart(2, '0')}/${parti[1].padStart(2, '0')}/${parti[0]}`;
+        }
+
+        document.getElementById('nome' + personaTargetSelezionata).value = profilo.nome || '';
+        document.getElementById('cognome' + personaTargetSelezionata).value = profilo.cognome || '';
+        
+        let elData = document.getElementById('data' + personaTargetSelezionata);
+        elData.value = dataFormattata;
+        if (typeof formattaEValidaData === "function") {
+          formattaEValidaData(elData);
+        }
+      }
+      chiudiModaleArchivio();
+    }
+
+    function gestisciCalcoloRelazione() {
+      if (typeof validaECalcolaRelazioneKarmica === "function") {
+        validaECalcolaRelazioneKarmica();
+      }
+    }
+  </script>
+</body>
+</html>

@@ -80,30 +80,6 @@
             box-sizing: border-box;
         }
 
-        .btn-back {
-            background-color: var(--button-bg);
-            border: 1px solid var(--border-color);
-            color: #c4beb3;
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-bottom: 25px;
-        }
-
-        .btn-back:hover {
-            background-color: #3d1a25;
-            color: #f5f2eb;
-            border-color: var(--accent-gold);
-        }
-
         .ns-header-banner {
             border: 1px solid var(--border-color);
             padding: clamp(15px, 3vw, 25px);
@@ -254,30 +230,76 @@
             font-style: normal;
         }
 
-        .btn-calc {
+        /* Contenitore per affiancare il tasto indietro e il tasto calcola (Dimensioni ridotte proporzionate) */
+        .actions-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px auto 0 auto;
+            max-width: 280px; /* Limita la larghezza totale del gruppo per renderlo compatto come in pitagora */
             width: 100%;
-            padding: 14px;
+        }
+
+        /* Tasto con freccia (Torna alla Home) */
+        .btn-back-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background-color: var(--button-bg);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: var(--accent-gold);
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+
+        .btn-back-icon:hover {
+            background-color: #3d1a25;
+            border-color: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.25);
+        }
+
+        .btn-back-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--accent-gold);
+        }
+
+        /* Pulsante principale Calcola */
+        .btn-calc {
+            flex: 1;
+            height: 42px;
+            padding: 0 16px;
             background-color: #8e7355;
             color: white;
             border: 1px solid rgba(212, 175, 55, 0.4);
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-top: 10px;
             box-sizing: border-box;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-calc:hover {
             background-color: #a08363;
             border-color: var(--accent-gold);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.25);
         }
 
         .ns-level-container {
@@ -402,7 +424,6 @@
 <body>
 
     <div class="sezione-dinamica">
-        <a href="index.html" class="btn-back">← Torna alla Home</a>
 
         <div class="ns-header-banner">
             <h2>Affinità Numerosophica</h2>
@@ -481,9 +502,19 @@
 
             </div>
             
-            <button onclick="eseguiCalcoloAffinita()" class="btn-calc">
-                GENERA AFFINITA'
-            </button>
+            <!-- Azioni: Tasto Freccia Home + Tasto CALCOLA (Dimensioni e proporzioni stile Pitagora) -->
+            <div class="actions-container">
+                <a href="index.html" class="btn-back-icon" title="Torna alla Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </a>
+                
+                <button onclick="eseguiCalcoloAffinita()" class="btn-calc">
+                    CALCOLA
+                </button>
+            </div>
         </div>
 
         <!-- AREA DEI RISULTATI CON DESCRIZIONE DELLA COMPATIBILITÀ -->
@@ -809,103 +840,103 @@
 		🎯 Cosa fare per aumentare la compatibilità: Coltivate l'arte dell'empatia e della condivisione profonda. Il 6 deve offrire stabilità emotiva senza pretendere risposte logiche dall'11, e l'11 deve gratificare l'impegno affettivo del 6.
 		⚠️ Cosa evitare: Attenzione alle spugne emotive: entrambi assorbono le tensioni esterne. Il 6 deve evitare il ricatto ansioso e l'11 deve evitare sbalzi d'umore improvvisi o il totale isolamento mentale.`,
 		"6-22": `Il Dovere Sociale e la Responsabilità
-		Descrizione della Compatibilità: Una combinazione solida e costruttiva orientata alla famiglia, alla comunità e al benessere materiale. Il 6 offre la dedizione, il senso del dovere e il calore umano necessari a sostenere le grandi ambizioni del 22. Il 22, a sua volta, garantisce che gli ideali di sicurezza e protezione del 6 poggino su fondamenta economiche e strutturali indistruttibili.
+		Descrizione della Compatibilità: Una combinazione solida e costruttiva orientata alla famiglia, alla comunità e al benessere materiale. Il 6 (L'Angelo Custode) offre la dedizione, il senso del dovere e il calore umano necessari a sostenere le grandi ambizioni del Numero Maetrso 22 (Il Creatore). Il 22, a sua volta, garantisce che gli ideali di sicurezza e protezione del 6 poggino su fondamenta economiche e strutturali indistruttibili.
 		🎯 Cosa fare per aumentare la compatibilità: Collaborate nella gestione della casa o di un'attività condivisa. Celebrate l'affidabilità reciproca e usate la dolcezza del 6 per smussare lo stress da lavoro del 22.
 		⚠️ Cosa evitare: Il 6 deve evitare di lamentarsi per le frequenti assenze mentali o fisiche del 22 impegnato nei suoi progetti. Il 22 non deve diventare rigido, freddo o eccessivamente focalizzato sul lato materiale a discapito dei sentimenti.`,
 		"6-33": `L'Amore Universale e l'Amore Familiare
-		Descrizione della Compatibilità: Una combinazione di pura amplificazione spirituale e di risonanza armonica assoluta. Quando il 6 incontra il Numero Maestro 33 (Il Maestro), l'energia della cura, dell'amore incondizionato e della guarigione emotiva raggiunge vette celestiali. Condividete lo stesso identico desiderio di portare armonia e sollievo. Il 6 offre la struttura e la responsabilità locale, mentre il 33 agisce come un faro di amore cristico e universale. Insieme siete in grado di creare un rifugio energetico straordinario per voi stessi e per chiunque entri in contatto con la vostra coppia.
+		Descrizione della Compatibilità: Una combinazione di pura amplificazione spirituale e di risonanza armonica assoluta. Quando il 6 (L'Angelo Custode) incontra il Numero Maestro 33 (Il Maestro), l'energia della cura, dell'amore incondizionato e della guarigione emotiva raggiunge vette celestiali. Condividete lo stesso identico desiderio di portare armonia e sollievo. Il 6 offre la struttura e la responsabilità locale, mentre il 33 agisce come un faro di amore cristico e universale. Insieme siete in grado di creare un rifugio energetico straordinario per voi stessi e per chiunque entri in contatto con la vostra coppia.
 		🎯 Cosa fare per aumentare la compatibilità: Mettete la vostra immensa energia d'amore al servizio di uno scopo elevato, di un insegnamento o di una pratica di benessere. Sostenetevi a vicenda nei momenti di stanchezza, ricordando di nutrire anche voi stessi e non solo gli altri.
 		⚠️ Cosa evitare: Evitate assolutamente di scivolare nella trappola del martirio o del sacrificio estremo. Non permettete all'ansia da perfezione del 6 o al carico universale del 33 di prosciugare la gioia, l'intimità e la leggerezza della vostra vita di coppia.`,
 
 		// --- COMBINAZIONI CON IL 7 ---
 		"7-7": `L'Isolamento Sacro o la Profonda Comprensione
-		Descrizione della Compatibilità: Un'unione mistica, silenziosa e profondamente intellettuale o spirituale. Quando due 7 si incontrano, la relazione si trasforma in un eremo sacro condiviso. C'è un rispetto totale e assoluto per il reciproco bisogno di silenzio, studio, solitudine e indipendenza mentale. Vi capite senza bisogno di parlare. Il rischio titanico di questa coppia è il totale distacco dalla realtà materiale ed emotiva: se entrambi vi ritirate nelle vostre rispettive torri d'avorio mentali, la relazione rischia di diventare fredda, platonica o priva di quel calore umano necessario a mantenere vivo il legame.
+		Descrizione della Compatibilità: Un'unione mistica, silenziosa e profondamente intellettuale o spirituale. Quando due 7 (Il Saggio) si incontrano, la relazione si trasforma in un eremo sacro condiviso. C'è un rispetto totale e assoluto per il reciproco bisogno di silenzio, studio, solitudine e indipendenza mentale. Vi capite senza bisogno di parlare. Il rischio titanico di questa coppia è il totale distacco dalla realtà materiale ed emotiva: se entrambi vi ritirate nelle vostre rispettive torri d'avorio mentali, la relazione rischia di diventare fredda, platonica o priva di quel calore umano necessario a mantenere vivo il legame.
 		🎯 Cosa fare per aumentare la compatibilità: Sforzatevi consapevolmente di verbalizzare i vostri sentimenti e di inserire il contatto fisico, la tenerezza e il gioco nella vostra quotidianità. Trovate moments di condivisione pratica o uscite nel mondo per non isolarvi completamente dalla realtà sociale.
 		⚠️ Cosa evitare: Evitate l'uso del silenzio come muro punitivo durante le incomprensioni e la tendenza ad analizzare freddamente le emozioni dell'altro. Non permettete all'orgoglio intellettuale o al distacco di spegnere la scintilla del cuore.`,
 		"7-8": `La Mente Analitica al Servizio del Potere
-		Descrizione della Compatibilità: Una combinazione di enorme spessore strategico e realizzativo, che unisce il potere della mente e dello spirito (7) al potere della materia e dell'autorità (8, Il Sovrano). Il Saggio funge da consigliere profondo, stratega silenzioso e bussola etica per il Sovrano, aiutandolo a vedere oltre le apparenze e a non farsi accecare dall'ambizione. L'8 offre al 7 una protezione straordinaria, risorse materiali e la forza per dare una forma concreta e visibile alle sue intuizioni filosofiche. Se c'è rispetto, è una coppia invincibile.
+		Descrizione della Compatibilità: Una combinazione di enorme spessore strategico e realizzativo, che unisce il potere della mente e dello spirito del 7 (Il Saggio) al potere della materia e dell'autorità dell'8 (Il Sovrano). Il 7 funge da consigliere profondo, stratega silenzioso e bussola etica per l'8, aiutandolo a vedere oltre le apparenze e a non farsi accecare dall'ambizione. L'8 offre al 7 una protezione straordinaria, risorse materiali e la forza per dare una forma concreta e visibile alle sue intuizioni filosofiche. Se c'è rispetto, è una coppia invincibile.
 		🎯 Cosa fare per aumentare la compatibilità: Riconoscete l'immensa utilità del rispettivo ruolo: il Sovrano deve mettersi in ascolto delle analisi profonde del 7, e il Saggio deve rispettare la capacità decisionale e il coraggio pratico dell'8. Trovate un linguaggio comune che unisca spirito e materia.
-		⚠️ Cosa evitare: L'8 deve evitare di trattare il 7 con arroganza o di considerare i suoi tempi di riflessione come pigrizia. Il Saggio deve evitare di giudicare i bisogni materiali o l'ambizione dell'8 come "bassa" o superficiale, evitando di chiudersi in un silenzio sdegnoso.`,
+		⚠️ Cosa evitare: L'8 deve evitare di trattare il 7 con arroganza o di considerare i suoi tempi di riflessione come pigrizia. Il 7 deve evitare di giudicare i bisogni materiali o l'ambizione dell'8 come "bassa" o superficiale, evitando di chiudersi in un silenzio sdegnoso.`,
 		"7-9": `La Ricerca della Verità Spirituale
-		Descrizione della Compatibilità: Un cammino di altissima evoluzione spirituale, filosofica e mistica. L'incontro tra il Saggio (7, focalizzato sulla ricerca della verità interiore e l'auto-analisi) e il Liberatore (9, focalizzato sull'amore universale, l'altruismo e il distacco evolutivo) crea una coppia di pensatori profondi e anime antiche. Condividete il disprezzo per la superficialità e la ricerca di un senso più alto dell'esistenza. La sfida sta nel calare questa immensa energia spirituale nella quotidianità pratica, nelle scadenze e nei dettagli materiali della vita terrena.
+		Descrizione della Compatibilità: Un cammino di altissima evoluzione spirituale, filosofica e mistica. L'incontro tra il 7 (Il Saggio), focalizzato sulla ricerca della verità interiore e l'auto-analisi e il 9 (Il Liberatore), focalizzato sull'amore universale, l'altruismo e il distacco evolutivo, crea una coppia di pensatori profondi e anime antiche. Condividete il disprezzo per la superficialità e la ricerca di un senso più alto dell'esistenza. La sfida sta nel calare questa immensa energia spirituale nella quotidianità pratica, nelle scadenze e nei dettagli materiali della vita terrena.
 		🎯 Cosa fare per aumentare la compatibilità: Dedicatevi insieme alla meditazione, allo studio dei simboli, alla numerologia o a percorsi di crescita interiore. Sforzatevi però di stabilire una routine pratica e ordinata per la gestione della casa e delle finanze, per non trovarvi persi tra le nuvole.
 		⚠️ Cosa evitare: Evitate di far diventare la relazione un dibattito filosofico continuo privo di passione e calore umano. Il 7 deve evitare di mostrarsi freddo o cinico di fronte agli slanci idealisti del 9, e il 9 deve evitare di predicare o di giudicare i momenti di chiusura del 7.`,
 		"7-11": `La Connessione Verticale e l'Analisi
-		Descrizione della Compatibilità: Una delle combinazioni più mistiche, intellettuali ed esoteriche che si possano avere. Entrambi i numeri operano su frequenze elevate e sottili: il 7 porta l'analisi profonda, lo studio e il silenzio meditativo; l'11 porta l'illuminazione spirituale e l'intuizione fulminea. È un'unione mentale e animica straordinaria, in cui si parla la stessa lingua oltre le apparenze.
+		Descrizione della Compatibilità: Una delle combinazioni più mistiche, intellettuali ed esoteriche che si possano avere. Entrambi i numeri operano su frequenze elevate e sottili: il 7 (Il Saggio) porta l'analisi profonda, lo studio e il silenzio meditativo; il NUmero Maestro 11 (Il Genio) porta l'illuminazione spirituale e l'intuizione fulminea. È un'unione mentale e animica straordinaria, in cui si parla la stessa lingua oltre le apparenze.
 		🎯 Cosa fare per aumentare la compatibilità: Condividete percorsi di ricerca interiore, letture o discipline spirituali. Rispettate i reciproci spazi di solitudine: sono vitali per entrambi per ricaricare l'energia.
 		⚠️ Cosa evitare: Il rischio principale è il distacco dalla realtà materiale. Evitate di chiudervi in una torre d'avorio intellettuale, dimenticando le necessità pratiche, fisiche e radicate della vita quotidiana.`,
 		"7-22": `La Realizzazione e lo Studio Profondo
-		Descrizione della Compatibilità: Unione eccellente tra lo stratega (7) e l'esecutore supremo (22). Il 7 analizza, studia i dettagli, scopre le verità nascoste e pianifica nell'ombra. Il 22 prende quella saggezza e la traduce in progetti colossali nel mondo tangibile. C'è grande rispetto reciproco per le rispettive capacità mentali e di focalizzazione.
+		Descrizione della Compatibilità: Unione eccellente tra lo stratega il 7 (Il Saggio) e l'esecutore supremo il Numero Maestro 22 (Il Creatore). Il 7 analizza, studia i dettagli, scopre le verità nascoste e pianifica nell'ombra. Il 22 prende quella saggezza e la traduce in progetti colossali nel mondo tangibile. C'è grande rispetto reciproco per le rispettive capacità mentali e di focalizzazione.
 		🎯 Cosa fare per aumentare la compatibilità: Lasciate che il 7 sia la mente dietro le quinte e il 22 il braccio operativo visibile. Trovate momenti di silenzio condiviso per allentare la pressione dei rispettivi compiti.
 		⚠️ Cosa evitare: Il 7 deve evitare di giudicare il 22 come troppo materialista o mondano. Il 22 non deve spazientirsi di fronte alla tendenza del 7 a isolarsi o a rimuginare a lungo prima di esprimersi.`,
 		"7-33": `Il Tempio Interiore
-		Descrizione della Compatibilità: Una sinergia profondamente spirituale ed esoterica che unisce la mente analitica, lo studio e il silenzio del 7 con il cuore aperto, la devozione e la cura del 33. È l'incontro tra la saggezza della mente e la saggezza dell'anima. Il 7 aiuta il 33 a strutturare le proprie intuizioni e a non disperdere le energie emotive, mentre il 33 scioglie le freddezze e le difese intellettuali del Saggio attraverso l'amore puro.
+		Descrizione della Compatibilità: Una sinergia profondamente spirituale ed esoterica che unisce la mente analitica, lo studio e il silenzio del 7 (Il Saggio) con il cuore aperto, la devozione e la cura del Numero Maestro 33 (Il Maestro). È l'incontro tra la saggezza della mente e la saggezza dell'anima. Il 7 aiuta il 33 a strutturare le proprie intuizioni e a non disperdere le energie emotive, mentre il 33 scioglie le freddezze e le difese intellettuali del 7 attraverso l'amore puro.
 		🎯 Cosa fare per aumentare la compatibilità: Condividete percorsi di ricerca interiore, meditazione o discipline olistiche. Rispettate il bisogno di isolamento e studio del 7, alternandolo con i momenti di calore e condivisione profonda richiesti dal 33.
 		⚠️ Cosa evitare: Il 7 deve evitare di ritirarsi in una torre d'avorio usando il distacco mentale come difesa. Il 33 deve evitare di forzare il 7 a manifestare le proprie emozioni con la sua stessa intensità drammatica, rispettando i suoi tempi di apertura.`,
 
 		// --- COMBINAZIONI CON IL 8 ---
 		"8-8": `La Massima Efficienza o lo Scontro di Potere
-		Descrizione della Compatibilità: Un incontro ad altissimo voltaggio magnetico, ambizione e potenza realizzativa. Quando due 8 si uniscono, si crea una partnership formidabile capace di muovere le montagne e costruire imperi economici o professionali. C'è un rispetto totale per la forza, la determinazione e l'indipendenza dell'altro. Tuttavia, essendo due energie Yang dominanti, il rischio di una lotta di potere interna o di uno scontro frontale di ego è altissimo. Se non imparano a cooperare, la relazione si trasforma in una guerra spietata per il controllo.
+		Descrizione della Compatibilità: Un incontro ad altissimo voltaggio magnetico, ambizione e potenza realizzativa. Quando due 8 (Il Sovrano) si uniscono, si crea una partnership formidabile capace di muovere le montagne e costruire imperi economici o professionali. C'è un rispetto totale per la forza, la determinazione e l'indipendenza dell'altro. Tuttavia, essendo due energie Yang dominanti, il rischio di una lotta di potere interna o di uno scontro frontale di ego è altissimo. Se non imparano a cooperare, la relazione si trasforma in una guerra spietata per il controllo.
 		🎯 Cosa fare per aumentare la compatibilità: Dividete in modo geometrico i territori di leadership, sia nella vita pratica che negli eventuali progetti comuni, in modo che nessuno calpesti i piedi all'altro. Imparate l'arte del compromesso e deponete le armi dell'orgoglio quando entrate tra le mura di casa.
 		⚠️ Cosa evitare: Evitate assolutamente la competizione interna, i tentativi di dominare o controllare il partner e l'ostinazione distruttiva durante i litigi. Non permettete al lavoro o all'ambizione materiale di cancellare la tenerezza e la vulnerabilità affettiva.`,
 		"8-9": `Il Potere Terreno che serve l'Ideale
-		Descrizione della Compatibilità: Una combinazione affascinante e fortemente evolutiva che mette a confronto il re della materia (8) con l'anima del distacco e dell'amore universale (9, Il Liberatore). È l'unione tra il potere terreno e la saggezza spirituale. L'8 offre al 9 la struttura, la forza e le risorse concrete per manifestare i suoi grandi ideali umanitari nel mondo reale. Il Liberatore offre all'8 una visione più elevata e disinteressata della vita, ricordandogli che il vero potere sta nel servizio e nell'evoluzione dell'anima. Se integrati, creano miracoli.
+		Descrizione della Compatibilità: Una combinazione affascinante e fortemente evolutiva che mette a confronto il re della materia l'8 (Il Sovrano) con l'anima del distacco e dell'amore universale del 9 (Il Liberatore). È l'unione tra il potere terreno e la saggezza spirituale. L'8 offre al 9 la struttura, la forza e le risorse concrete per manifestare i suoi grandi ideali umanitari nel mondo reale. Il 9 offre all'8 una visione più elevata e disinteressata della vita, ricordandogli che il vero potere sta nel servizio e nell'evoluzione dell'anima. Se integrati, creano miracoli.
 		🎯 Cosa fare per aumentare la compatibilità: Trovate una causa elevata o un progetto in cui la forza realizzativa dell'8 possa dare corpo alle visioni ideali del 9. Rispettate le vostre differenti nature: l'8 valorizzi l'altruismo del partner e il 9 riconosca l'utilità e la protezione che la forza dell'8 garantisce alla coppia.
 		⚠️ Cosa evitare: L'8 deve evitare di essere autoritario, materialista o di considerare l'idealismo del 9 come un'ingenuità da sfruttare. Il 9 deve assolutamente evitare di giudicare l'8 come "avido" o egocentrico, evitando di salire in cattedra con lezioni moralistiche.`,
 		"8-11": `La Strategia dello Spirito
-		Descrizione della Compatibilità: L'incontro tra il potere esecutivo e materiale (8) e l'ispirazione visionaria (11). L'Otto possiede la forza, il senso degli affari e l'autorità per prendere le intuizioni dell'Undici e trasformarle in un impero o in progetti di grande impatto. L'Undici, dal canto suo, ricorda all'Otto che il vero potere deve essere guidato da un'etica e da un'ispirazione superiori.
+		Descrizione della Compatibilità: L'incontro tra il potere esecutivo e materiale dell'8 (Il Sovrano) e l'ispirazione visionaria del Numero Maestro 11 (Il Genio). L'Otto possiede la forza, il senso degli affari e l'autorità per prendere le intuizioni dell'11 e trasformarle in un impero o in progetti di grande impatto. L'11, dal canto suo, ricorda all'Otto che il vero potere deve essere guidato da un'etica e da un'ispirazione superiori.
 		🎯 Cosa fare per aumentare la compatibilità: Sostenetevi a vicenda bilanciando terra (8) e cielo (11). L'8 deve agire con delicatezza verso la sensibilità dell'11, e l'11 deve ammirare la determinazione realizzativa dell'8.
 		⚠️ Cosa evitare: Evitate lo scontro tra la rigidità strutturata dell'8 e l'imprevedibilità emotiva dell'11. L'8 non deve usare la forza o il controllo, e l'11 non deve giudicare l'8 come avidità o puro ego.`,
 		"8-22": `Il Controllo Assoluto e la Maestria Strategica
-		Descrizione della Compatibilità: Una combinazione di puro potere, autorità e maestria realizzativa. Quando queste due frequenze Yang si uniscono, l'ambizione e il senso del successo dell'8 si fondono con la capacità del 22 di manifestare progetti di utilità pubblica o aziendale su scala globale. È la coppia del "grande destino materiale", capace di muovere montagne di risorse.
+		Descrizione della Compatibilità: Una combinazione di puro potere, autorità e maestria realizzativa. Quando queste due frequenze Yang si uniscono, l'ambizione e il senso del successo dell'8 (Il Sovrano) si fondono con la capacità del Numero Maestro 22 (Il Creatore) di manifestare progetti di utilità pubblica o aziendale su scala globale. È la coppia del "grande destino materiale", capace di muovere montagne di risorse.
 		🎯 Cosa fare per aumentare la compatibilità: Stabilite confini chiarissimi sulle rispettive sfere di influenza per evitare sovrapposizioni. Canalizzate l'enorme energia comune verso scopi benefici esterni alla coppia.
 		⚠️ Cosa evitare: Le lotte di potere qui possono essere distruttive. Evitate l'inflessibilità, l'orgoglio smisurato e la tendenza a voler controllare le decisioni del partner. La cooperazione paritaria è l'unica via.`,
 		"8-33": `La Guida che equilibra la Forza
-		Descrizione della Compatibilità: Una combinazione di grandissima potenza che unisce la forza esecutiva, il senso del successo e il potere materiale dell'8 con la guida spirituale, l'amore universale e il nutrimento del 33. L'Otto mette a disposizione le risorse pratiche e la capacità gestionale per proteggere e dare concretezza alle opere di bene del 33, il quale a sua volta ricorda all'8 che la vera leadership consiste nel servire il prossimo con il cuore.
+		Descrizione della Compatibilità: Una combinazione di grandissima potenza che unisce la forza esecutiva, il senso del successo e il potere materiale dell'8 (Il Sovrano) con la guida spirituale, l'amore universale e il nutrimento del Numero Maestro 33 (Il Creatore). L'Otto mette a disposizione le risorse pratiche e la capacità gestionale per proteggere e dare concretezza alle opere di bene del 33, il quale a sua volta ricorda all'8 che la vera leadership consiste nel servire il prossimo con il cuore.
 		🎯 Cosa fare per aumentare la compatibilità: Collaborate a progetti o attività che abbiano un forte impatto etico e sociale. L'8 deve agire come scudo protettivo per il 33 nel mondo materiale, e il 33 deve gratificare la lealtà e lo sforzo realizzativo dell'8.
 		⚠️ Cosa evitare: Evitate le lotte di potere tra l'inflessibilità direttiva dell'8 e l'ostinazione emotiva del 33. L'8 deve evitare di trattare il partner con freddezza o controllo economico, e il 33 non deve giudicare l'ambizione dell'8 come puro materialismo.`,
 
 		// --- COMBINAZIONI CON IL 9 ---
 		"9-9": `La Consapevolezza Universale o il Distacco Totale
-		Descrizione della Compatibilità: L'incontro tra due anime antiche, colme di saggezza, idealismo e visione universale. Quando due 9 si uniscono, la relazione trascende i confini ordinari della coppia per trasformarsi in un cammino di evoluzione spirituale e servizio verso l'umanità. C'è un'intesa telepatica, un'empatia profonda e un totale rifiuto delle gabbie mentali o dei piccoli egoismi quotidiani. La sfida titanica di questa unione è il radicamento nella materia: se entrambi vivete nell'assoluto, nel distacco e nelle grandi visioni filosofiche, gestire le scadenze, l'economia e la stabilità terrena della coppia può diventare un problema cronico.
+		Descrizione della Compatibilità: L'incontro tra due anime antiche, colme di saggezza, idealismo e visione universale. Quando due 9 (Il Liberatore) si uniscono, la relazione trascende i confini ordinari della coppia per trasformarsi in un cammino di evoluzione spirituale e servizio verso l'umanità. C'è un'intesa telepatica, un'empatia profonda e un totale rifiuto delle gabbie mentali o dei piccoli egoismi quotidiani. La sfida titanica di questa unione è il radicamento nella materia: se entrambi vivete nell'assoluto, nel distacco e nelle grandi visioni filosofiche, gestire le scadenze, l'economia e la stabilità terrena della coppia può diventare un problema cronico.
 		🎯 Cosa fare per aumentare la compatibilità: Stabilite consapevolmente dei punti di ancoraggio alla realtà quotidiana. Celebrate la bellezza del vostro legame spirituale, ma sforzatevi, a turno, di gestire con precisione e pragmatismo i dettagli materiali della vita insieme, creando un nido che sia anche solido.
 		⚠️ Cosa evitare: Evitate la tendenza a disperdere le vostre energie nel tentativo di salvare il mondo esterno, dimenticandovi di curare la vicinanza emotiva, la stabilità economica e la presenza reale all'interno della coppia.`,
 		"9-11": `La Visione Futura e l'Amore Universale
-		Descrizione della Compatibilità: Un'affinità ideale e spirituale elevatissima. Il 9 (Il Liberatore) porta l'amore universale, l'altruismo e la saggezza del compimento; l'11 porta il canale intuitivo e l'ispirazione. Insieme vibrano su una frequenza di profonda compassione e dedizione verso il prossimo, agendo spesso come fari di consapevolezza per chi li circonda. Relazione emotivamente ricca e priva di egoismi.
+		Descrizione della Compatibilità: Un'affinità ideale e spirituale elevatissima. Il 9 (Il Liberatore) porta l'amore universale, l'altruismo e la saggezza del compimento; il Numero Maestro 11 (Il Genio) porta il canale intuitivo e l'ispirazione. Insieme vibrano su una frequenza di profonda compassione e dedizione verso il prossimo, agendo spesso come fari di consapevolezza per chi li circonda. Relazione emotivamente ricca e priva di egoismi.
 		🎯 Cosa fare per aumentare la compatibilità: Dedicatevi a cause umanitarie, artistiche o di guarigione spirituale. Condividete liberamente le vostre intuizioni senza paura del giudizio reciproco.
 		⚠️ Cosa evitare: La forte stimolazione emotiva può portare a momenti di esaurimento energetico. Evitate di caricarvi dei dolori del mondo, dimenticando di nutrire il vostro spazio intimo e privato.`,
 		"9-22": `Costruire l'Ideale per il Mondo
-		Descrizione della Compatibilità: Il connubio perfetto tra il grande sogno ideale (9) e la capacità di realizzarlo concretamente (22). Il 9 offre la visione filantropica, l'ispirazione artistica e l'amore per l'umanità; il 22 mette a disposizione i mezzi pratici, l'organizzazione e la maestria per tradurre quegli ideali in scuole, fondazioni o strutture tangibili.
+		Descrizione della Compatibilità: Il connubio perfetto tra il grande sogno ideale del 9 (Il Liberatore) e la capacità di realizzarlo concretamente del Numero Maestro 22 (Il Creatore). Il 9 offre la visione filantropica, l'ispirazione artistica e l'amore per l'umanità; il 22 mette a disposizione i mezzi pratici, l'organizzazione e la maestria per tradurre quegli ideali in scuole, fondazioni o strutture tangibili.
 		🎯 Cosa fare per aumentare la compatibilità: Permettete al 9 di espandere i confini mentali del 22 e al 22 di dare stabilità e concretezza ai voli d'aquila del 9.
 		⚠️ Cosa evitare: Il 9 deve evitare di perdersi in un idealismo astratto e inconcludente che irriterebbe il 22. Il 22 non deve raffreddare l'entusiasmo del 9 con un eccessivo pragmatismo o cinismo finanziario.`,
 		"9-33": `Il Sacrificio e la Devozione Totale
-		Descrizione della Compatibilità: L'incontro supremo tra l'amore universale disinteressato (9) e l'amore cristico di guarigione emotiva (33). Entrambe le frequenze operano sui livelli più alti della compatibilità, quasi prive di egoismo personale. Vibrano all'unisono in una dedizione totale verso la compassione, l'insegnamento spirituale e l'aiuto umanitario. La sintonia animica è immediata, profonda e guidata da un ideale comune elevatissimo.
+		Descrizione della Compatibilità: L'incontro supremo tra l'amore universale disinteressato del 9 (Il Liberatore) e l'amore cristico di guarigione emotiva del NUmero Maestro 33 (Il Maestro). Entrambe le frequenze operano sui livelli più alti della compatibilità, quasi prive di egoismo personale. Vibrano all'unisono in una dedizione totale verso la compassione, l'insegnamento spirituale e l'aiuto umanitario. La sintonia animica è immediata, profonda e guidata da un ideale comune elevatissimo.
 		🎯 Cosa fare per aumentare la compatibilità: Dedicatevi insieme all'arte, alla guarigione o a cause filantropiche. Ricordatevi però di ritagliare uno spazio intimo, inteso solo per voi due, per radicarvi e nutrire la vostra unione privata.
 		⚠️ Cosa evitare: Il rischio principale è il totale esaurimento energetico o il distacco dalle necessità della vita pratica. Evitate di caricarvi sulle spalle i dolori dell'intera comunità, dimenticando di pagare le bollette o di prendervi cura del vostro corpo e della stabilità materiale della coppia.`,
 		
 		// --- COMBINAZIONI CON IL 11 22 33 ---
 		"11-11": `Il Cortocircuito o l'Illuminazione Condivisa
-		Descrizione della Compatibilità: Un'esplosione di pura energia elettrica, intuizione telepatica e altissimo potenziale spirituale. Quando due Numeri Maestri 11 si incontrano, la risonanza energetica è quasi travolgente. Vi leggete nella mente, percepite le minime variazioni dell'aura altrui e vi spronate a vicenda verso vette di risveglio interiore straordinarie. La sfida è legata all'immenso voltaggio: se questa energia nervosa e ideale non viene canalizzata verso l'esterno, la coppia rischia di cortocircuitare, generando ansia, tensioni estreme e instabilità emotiva.
+		Descrizione della Compatibilità: Un'esplosione di pura energia elettrica, intuizione telepatica e altissimo potenziale spirituale. Quando due Numeri Maestri 11 (Il Genio) si incontrano, la risonanza energetica è quasi travolgente. Vi leggete nella mente, percepite le minime variazioni dell'aura altrui e vi spronate a vicenda verso vette di risveglio interiore straordinarie. La sfida è legata all'immenso voltaggio: se questa energia nervosa e ideale non viene canalizzata verso l'esterno, la coppia rischia di cortocircuitare, generando ansia, tensioni estreme e instabilità emotiva.
 		🎯 Cosa fare per aumentare la compatibilità: Trovate un canale creativo, terapeutico o spirituale comune in cui far fluire questo immenso carico energetico. Dedicatevi al radicamento corporeo (sport, natura, alimentazione pulita) per scaricare a terra le tensioni del sistema nervoso.
 		⚠️ Cosa evitare: Evitate assolutamente di amplificare le rispettive ansie o di scivolare in discussioni dogmatiche in cui ognuno si sente l'unico detentore della verità intuitiva. Non permettete alla tensione del momento di logorare l'armonia.`,
 		"11-22": `La Visione dell'11 che prende Forma nel 22
-		Descrizione della Compatibilità: L'unione suprema tra la visione profetica e la manifestazione tangibile. L'11 porta l'intuizione pura, i lampi di genio e la connessione con le frequenze più sottili dell'universo. Il 22 raccoglie questo flusso magnetico di idee e, grazie alla sua immensa maestria pratica, lo trasforma in strutture, opere e progetti stabili su scala collettiva. Insieme sono capaci di dare una forma fisica e indistruttibile alle intuizioni spirituali più elevate.
+		Descrizione della Compatibilità: L'unione suprema tra la visione profetica e la manifestazione tangibile. Il Numero Maestro 11 (Il Genio) porta l'intuizione pura, i lampi di genio e la connessione con le frequenze più sottili dell'universo. Il Numero Maestro 22 (Il Creatore) raccoglie questo flusso magnetico di idee e, grazie alla sua immensa maestria pratica, lo trasforma in strutture, opere e progetti stabili su scala collettiva. Insieme sono capaci di dare una forma fisica e indistruttibile alle intuizioni spirituali più elevate.
 		🎯 Cosa fare per aumentare la compatibilità: Permettete all'11 di ispirare la direzione etica e ideale, lasciando che il 22 organizzi la strategia e l'architettura concreta del progetto comune. Celebrate l'unione perfetta di cielo e terra.
 		⚠️ Cosa evitare: L'11 deve evitare di perdersi in astrattismi volatili o sbalzi d'umore che destabilizzano il pragmatismo del 22. Il 22 non deve raffreddare l'entusiasmo visionario dell'11 con un'eccessiva rigidità logica o focalizzazione puramente materiale.`,
 		"11-33": `La Rivelazione che accende la Compassione
-		Descrizione della Compatibilità: Una combinazione ad altissima tensione ideale e vibrazionale. L'11 funge da canale di intuizione pura e illuminazione spirituale, mentre il 33 canalizza quell'energia sottile trasformandola in amore incondizionato, guarigione ed espressione emotiva. Insieme creano una coppia dotata di un magnetismo e di una sensibilità fuori dal comune, capaci di ispirare profondamente chiunque entri in contatto con la loro frequenza.
+		Descrizione della Compatibilità: Una combinazione ad altissima tensione ideale e vibrazionale. il Numero Maestro 11 (Il Genio) funge da canale di intuizione pura e illuminazione spirituale, mentre il Numero Maestro 33 (Il Maestro) canalizza quell'energia sottile trasformandola in amore incondizionato, guarigione ed espressione emotiva. Insieme creano una coppia dotata di un magnetismo e di una sensibilità fuori dal comune, capaci di ispirare profondamente chiunque entri in contatto con la loro frequenza.
 		🎯 Cosa fare per aumentare la compatibilità: Trovate canali creativi o spirituali per dare sfogo all'immensa energia che circola nella coppia. Sostenetevi nei momenti di sovraccarico nervoso o emotivo a cui entrambi sientrano soggetti.
 		⚠️ Cosa evitare: Attenzione a non fluttuare troppo alti sopra la realtà. L'11 deve evitare sbalzi d'umore o l'isolamento mentale improvviso, e il 33 deve evitare di scivolare nell'ansia da salvatore del mondo o nel sacrificio estremo.`,
 		"22-22": `La Costruzione Eterna o la Fortezza di Ghiaccio
-		Descrizione della Compatibilità: Una combinazione monumentale di pura potenza realizzativa, rigore e maestria strutturale su scala planetaria. Quando due Numeri Maestri 22 uniscono le forze, l'obiettivo non è mai la semplice stabilità domestica, ma la creazione di progetti, opere o sistemi di immenso impatto evolutivo per la collettività. Condividete una visione globale, un'etica del lavoro indistruttibile e un senso del dovere assoluto. La sfida sta nel non dimenticarsi di essere esseri umani: il rischio è che la coppia si trasformi in una macchina organizzativa perenne, dimenticando il cuore, la fragilità e il riposo.
+		Descrizione della Compatibilità: Una combinazione monumentale di pura potenza realizzativa, rigore e maestria strutturale su scala planetaria. Quando due Numeri Maestri 22 (Il Creatore) uniscono le forze, l'obiettivo non è mai la semplice stabilità domestica, ma la creazione di progetti, opere o sistemi di immenso impatto evolutivo per la collettività. Condividete una visione globale, un'etica del lavoro indistruttibile e un senso del dovere assoluto. La sfida sta nel non dimenticarsi di essere esseri umani: il rischio è che la coppia si trasformi in una macchina organizzativa perenne, dimenticando il cuore, la fragilità e il riposo.
 		🎯 Cosa fare per aumentare la compatibilità: Stabilite dei confini sacri intorno alla vostra intimità. Imponetevi dei momenti di totale distacco dai vostri immensi doveri professionali o spirituali per dedicarvi alla pura tenerezza, al relax, al contatto con la natura e alla cura del vostro amore privato.
 		⚠️ Cosa evitare: Evitate che la rigidità, l'ossessione per il controllo totale e la pianificazione geometrica cancellino la spontaneità, il gioco e il dialogo emotivo sottile. Non trasformate la vostra unione in un cantiere d'affari a tempo pieno.`,
 		"22-33": `La Struttura che protegge il Fuoco
-		Descrizione della Compatibilità: Il vertice della compatibilità realizzativa e spirituale. L'incontro tra il 22, che possiede la maestria pratica e la visione globale per edificare grandi strutture nel sociale, e il 33, che porta la massima frequenza di amore universale e guarigione. Insieme sono capaci di compiere opere monumentali: il 22 costruisce il contenitore materiale (scuole, fondazioni, centri) e il 33 ne infonde l'anima e il nutrimento profondo.
+		Descrizione della Compatibilità: Il vertice della compatibilità realizzativa e spirituale. L'incontro tra il Numero Maestro 22 (Il Creatore), che possiede la maestria pratica e la visione globale per edificare grandi strutture nel sociale, e il Numero Maestro 33 (Il Maestro), che porta la massima frequenza di amore universale e guarigione. Insieme sono capaci di compiere opere monumentali: il 22 costruisce il contenitore materiale (scuole, fondazioni, centri) e il 33 ne infonde l'anima e il nutrimento profondo.
 		🎯 Cosa fare per aumentare la compatibilità: Definite chiaramente i ruoli lasciando al 22 la gestione strategica e al 33 la cura delle relazioni e della direzione etica. Celebrate la grandezza reciproca senza gelosie.
 		⚠️ Cosa evitare: Evitate che lo stress derivante dai grandi impegni collettivi inaridisca l'intimità di coppia. Il 22 deve evitare la rigidità focalizzata solo sui risultati materiali, e il 33 non deve colpevolizzare il partner se spende troppe energie nel lavoro concreto.`,
 		"33-33": `La Fusione d'Amore o la Trappola del Martirio
-		Descrizione della Compatibilità: Il vertice assoluto dell'amore incondizionato, della compassione e del servizio spirituale. L'incontro tra due Numeri Maestri 33 crea un canale di pura guarigione emotiva e di nutrimento d'anima che irradia luce non solo all'interno del legame, ma verso chiunque si avvicini alla coppia. C'è una devozione reciproca totale, un'empatia mistica e il desiderio condiviso di sollevare le sofferenze del mondo. La sfida risiede nell'immensità del carico emotivo: la tendenza a dimenticarsi di se stessi per salvare l'altro o il mondo può portare al burnout energetico.
+		Descrizione della Compatibilità: Il vertice assoluto dell'amore incondizionato, della compassione e del servizio spirituale. L'incontro tra due Numeri Maestri 33 (Il Maestro) crea un canale di pura guarigione emotiva e di nutrimento d'anima che irradia luce non solo all'interno del legame, ma verso chiunque si avvicini alla coppia. C'è una devozione reciproca totale, un'empatia mistica e il desiderio condiviso di sollevare le sofferenze del mondo. La sfida risiede nell'immensità del carico emotivo: la tendenza a dimenticarsi di se stessi per salvare l'altro o il mondo può portare al burnout energetico.
 		🎯 Cosa fare per aumentare la compatibilità: Ricordatevi che per poter nutrire il mondo dovete prima mantenere colmo il vostro calice personale. Proteggete i vostri spazi energetici, concedetevi momenti di sana leggerezza e ironia (attingendo alla vibrazione base del 3) e supportatevi a vicenda con amorevole dolcezza.
 		⚠️ Cosa evitare: Evitate assolutamente di scivolare nella dinamica degli archetipi del Salvatore e del Martire. Non prendetevi carico dei dolori o dei problemi altrui al punto da prosciugare l'allegria, l'intimità e la stabilità quotidiana della vostra bellissima unione.`
 	},
