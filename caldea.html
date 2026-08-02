@@ -491,56 +491,6 @@
                 </div>
             </div>
 
-            <!-- I 3 GRANDI CICLI EVOLUTIVI -->
-            <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi</div>
-            <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
-                    <h3 style="font-size:12px;">Primo Ciclo<br>(Iniziazione)</h3>
-                    <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloForm" style="font-size:12px;"></div>
-                </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
-                    <h3 style="font-size:12px;">Secondo Ciclo<br>(Manifestazione)</h3>
-                    <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloProd" style="font-size:12px;"></div>
-                </div>
-                <div class="card" style="border-left-color: #16a085; padding: 12px;">
-                    <h3 style="font-size:12px;">Terzo Ciclo<br>(Trascendenza)</h3>
-                    <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                    <div id="descCicloConc" style="font-size:12px;"></div>
-                </div>
-            </div>
-            <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
-
-            <!-- I 4 PINNACOLI -->
-            <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Pinnacoli (Soglie di Realizzazione)</div>
-            <div class="grid-cards">
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>1° Culmine Planetario</h3>
-                    <div id="numCiclo1" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo1" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo1"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>2° Culmine Planetario</h3>
-                    <div id="numCiclo2" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo2" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo2"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>3° Culmine Planetario</h3>
-                    <div id="numCiclo3" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo3" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo3"></div>
-                </div>
-                <div class="card" style="border-left-color: #2980b9;">
-                    <h3>4° Culmine Planetario</h3>
-                    <div id="numCiclo4" class="numero-evidenziato" style="color: #2980b9;"></div>
-                    <div id="etaCiclo4" style="font-weight: bold; font-size:12px; color:#7f8c8d; margin-bottom:6px;"></div>
-                    <div id="descCiclo4"></div>
-                </div>
-            </div>
-
             <!-- AFFLIZIONI PLANETARIE -->
             <div class="sezione-titolo" style="color: #e74c3c; border-bottom-color: #fadbd8;">Afflizioni Planetarie (Le Prove Karmiche)</div>
             <div class="grid-cards">
@@ -622,18 +572,18 @@ const databaseArchetipi = {
     },
     2: { 
         nome: "La Luna ☽ (Magnetismo, Ricettività, Flusso Inconscio)", 
-        luce: "Forza attrattiva e riflessiva. Intuizione profonda, immaginazione fertile, capacità di accogliere le correnti invisibili e mediare entre gli opposti.", 
+        luce: "Forza attrattiva e riflessiva. Intuizione profonda, immaginazione fertile, capacità di accogliere le correnti invisibili e mediare tra gli opposti.", 
         ombra: "Ipersensibilità instabile, dipendenza dalle maree emotive altrui, passività o paura del vuoto.",
 	Sblocco: "Trova il tuo centro emotivo all'interno, non nelle relazioni. La Luna Nera si supera integrando l'archetipo dell'osservatore: quando senti l'onda emotiva o la paura dell'abbandono, non proiettarla all'esterno, ma accoglila in solitudine. Impara a nutrire te stesso emotivamente e a stabilire confini sani per non dipendere dal riflesso altrui."
     },
     3: { 
         nome: "Giove ♃ (Espansione, Legge Cosmica, Abbondanza)", 
-        luce: "La vibrazione della crescita materiale e spirituale. Ottimismo superiore, saggezza filosofica, expressione creativa e connessione con la buona sorte.", 
+        luce: "La vibrazione della crescita materiale e spirituale. Ottimismo superiore, saggezza filosofica, espressione creativa e connessione con la buona sorte.", 
         ombra: "Eccesso, presunzione intellettuale, dispersione dei propri talenti in piaceri effimeri o fanatismo.",
 	Sblocco: "Pratica la focalizzazione intenzionale. Scegli un solo progetto o talento alla volta e portalo a compimento prima di passare al successivo. Impara a dire di no alle distrazioni e trasforma la superbia in generosità d'animo, mettendo la tua conoscenza e la tua gioia al servizio degli altri senza pretendere applausi o riconoscimenti."
     },
     4: { 
-        nome: "Urano / Rahu ☊ (L'Ombra Occulta, Rivoluzione, Rottura degli Schemi)", 
+        nome: "Rahu ☊ (Nodo Nord) / corrispondenza moderna: Urano (L'Ombra Occulta, Rivoluzione, Rottura degli Schemi)", 
         luce: "Tradizionalmente legato all'elettricità e alle inversioni repentine del destino. Genialità fuori dal tempo, percezione delle verità nascoste, originalità radicale.", 
         ombra: "Irrequietezza distruttiva, isolamento, attrazione per il caos o sfortuna improvvisa dovuta a rigidità.",
 	Sblocco: "Pratica l'arte del lasciare andare e della flessibilità. Quando le cose non vanno come pianificato, non irrigidirti nel controllo, ma chiediti quale nuova prospettiva si sta aprendo. Trova una via di mezzo tra il bisogno di stabilità e l'impulso alla ribellione distruttiva, canalizzando l'energia in attività manuali, strutturate o creative."
@@ -651,14 +601,14 @@ const databaseArchetipi = {
 	Sblocco: "Accetta l'imperfezione, sia in te stesso che negli altri. Smetti di cercare l'armonia assoluta a costo di subire o di pretendere che gli altri cambino per compiacerti. Il rimedio sta nel coltivare un amore incondizionato che parte dall'auto-accettazione, guarendo il bisogno di approvazione estetica o relazionale."
     },
     7: { 
-        nome: "Nettuno / Ketu ☋ (Il Misticismo, Distacco Iniziatore, Il Segreto)", 
+        nome: "Ketu ☋ (Nodo Sud) / corrispondenza moderna: Nettuno (Il Misticismo, Distacco Iniziatore, Il Segreto)", 
         luce: "La vibrazione del tempio interiore. Rinuncia alle illusioni materiali (Maya), chiaroveggenza, spiritualità monastica e comprensione dei misteri del sonno e del sogno.", 
         ombra: "Illusione totale, tendenza alla fuga dalla realtà, segreti distruttivi o senso di alienazione dal mondo.",
 	Sblocco: "Sviluppa un sano discernimento spirituale e pratico. Non usare la spiritualità o l'isolamento come scusa per fuggire dalle responsabilità materiali. Trova dei canali di espressione concreti (come l'arte, la musica o la scrittura) per dare forma alle tue intuizioni, mantenendo i piedi ben piantati a terra." 
     },
     8: { 
         nome: "Saturno ♄ (Il Signore del Tempo, Karma, Rigore Inizatico)", 
-        luce: "La vibrazione più intensa nel sistema caldeo. Rappresenta il destino inevitabile, la purificazione attraverso la prova, la maestria strutturale e la giustizia infallibile.", 
+        luce: "La vibrazione più intensa nel sistema caldeo. Rappresenta la legge karmica, la purificazione attraverso la prova, la maestria strutturale e la giustizia infallibile.", 
         ombra: "Malinconia profonda, ostacoli apparentemente insormontabili, durezza di cuore o restrizioni materiali severe.",
 	Sblocco: "Trasforma il senso di colpa in responsabilità consapevole e la rigidità in saggezza compassionevole. Alleggerisci il carico emotivo accettando che non tutto dipende dal tuo sforzo. Impara a perdonare i tuoi fallimenti e celebra i piccoli traguardi, vedendo il tempo non come un nemico o una limitazione, ma come un maestro di maestria interiore."
     },
@@ -667,10 +617,311 @@ const databaseArchetipi = {
         luce: "Il numero sacro che i Caldei tenevano isolato. Rappresenta la forza che distrugge il vecchio per far nascere il nuovo. Coraggio spirituale, energia guerriera pura, determinazione.", 
         ombra: "Rabbia distruttiva, violenza verbale o fisica, conflitti continui con l'esterno per proiezioni interne.",
 	Sblocco: "Canalizza l'immensa energia vitale in modo costruttivo e non distruttivo. Prima di reagire a una provocazione, fermati e respira per disinnescare l'impulso bellicoso. Usa l'attività fisica, lo sport o il lavoro focalizzato come valvole di sfogo sane per la rabbia, trasformando l'aggressività in coraggio focalizzato e protezione."
-    }
+    },
+10: {
+    nome: "La Ruota del Destino ☸ (Nuovo Ciclo, Inizio, Potenziale)",
+    luce: "Il numero 10 rappresenta il ritorno dell'energia al punto zero da cui nasce una nuova manifestazione. È la Ruota che gira, il completamento di un ciclo e l'apertura di una nuova porta evolutiva. Unisce la forza creatrice dell'1 con il mistero del vuoto fecondo dello 0. Porta capacità di rinnovamento, indipendenza e possibilità inattese.",
+    ombra: "Attaccamento al passato, paura di ricominciare o ricerca continua di nuovi inizi senza integrare le lezioni precedenti. La persona può sentirsi vittima dei cambiamenti del destino invece di riconoscersi come parte attiva della propria trasformazione.",
+    Sblocco: "Accogli il movimento della vita senza cercare di controllare ogni passaggio. Ogni fine contiene un nuovo principio. La Ruota non chiede di ricominciare da capo, ma di portare la saggezza acquisita verso una nuova fase di crescita."
+},
+
+11: {
+    nome: "Le Due Colonne ✨ (Intuizione, Visione, Porta Spirituale)",
+    luce: "Il numero 11 è considerato una vibrazione sottile legata all'intuizione, alla percezione delle realtà invisibili e alla capacità di collegare il mondo materiale con quello spirituale. Rappresenta una porta tra due dimensioni, dove la sensibilità diventa strumento di conoscenza superiore.",
+    ombra: "Eccessiva sensibilità, dispersione energetica, idealizzazione della realtà o difficoltà nel tradurre le intuizioni in azioni concrete. La mente può essere attraversata da molte visioni senza trovare una direzione stabile.",
+    Sblocco: "Unisci cielo e terra. L'intuizione diventa realmente potente quando viene accompagnata dalla disciplina e dall'azione concreta. Non limitarti a percepire: dai forma alle tue visioni attraverso scelte consapevoli."
+},
+
+12: {
+    nome: "Il Sacrificio del Cercatore 🔺 (Esperienza, Apprendimento, Servizio)",
+    luce: "Il numero 12 rappresenta un ciclo di apprendimento attraverso l'esperienza. È il simbolo del discepolo che osserva il mondo da una nuova prospettiva e trasforma le prove in saggezza. Porta capacità di comprensione, pazienza e disponibilità verso gli altri.",
+    ombra: "Sensazione di essere bloccati, sacrificarsi eccessivamente per gli altri o assumere il ruolo della vittima. Il desiderio di aiutare può trasformarsi in perdita dei propri confini personali.",
+    Sblocco: "Trasforma il sacrificio inconsapevole in scelta consapevole. Aiutare gli altri non significa dimenticare se stessi. Impara a donare mantenendo equilibrio, perché il vero servizio nasce dalla pienezza e non dall'esaurimento."
+},
+
+13: {
+    nome: "La Fenice Nera 🔥 (Morte e Rinascita, Trasformazione)",
+    luce: "Il numero 13 rappresenta la dissoluzione del vecchio e la nascita di una nuova forma. È l'archetipo della trasformazione profonda, della capacità di attraversare le crisi e rinascere con maggiore consapevolezza. Porta forza interiore, resilienza e capacità di rigenerazione.",
+    ombra: "Resistenza al cambiamento, paura della perdita o tendenza a rimanere legati a situazioni ormai concluse. L'energia del 13 può manifestarsi come distruzione inconsapevole quando non viene accettato il naturale processo di trasformazione.",
+    Sblocco: "Lascia morire ciò che ha concluso il proprio ciclo. La trasformazione non è una punizione, ma un passaggio di evoluzione. Accogli il cambiamento come un alleato e permetti alla tua essenza più autentica di emergere."
+},
+
+14: {
+    nome: "Il Ponte dei Venti 🌬️ (Movimento, Libertà, Apprendimento)",
+    luce: "Il numero 14 unisce il movimento del cambiamento con la ricerca dell'equilibrio. Rappresenta libertà, adattabilità, comunicazione e capacità di attraversare diverse esperienze accumulando conoscenza. È il viaggio dell'anima attraverso molte possibilità.",
+    ombra: "Instabilità, ricerca continua di stimoli, difficoltà a mantenere impegni o uso della libertà come fuga dalle responsabilità. L'eccessivo movimento può impedire il radicamento.",
+    Sblocco: "Trova il centro dentro il movimento. La vera libertà non nasce dall'assenza di limiti, ma dalla capacità di scegliere consapevolmente la propria direzione. Trasforma la curiosità in saggezza."
+},
+
+15: {
+    nome: "Il Calice del Desiderio 🍷 (Magnetismo, Creatività, Attrazione)",
+    luce: "Il numero 15 rappresenta il potere creativo dell'attrazione, la capacità di manifestare attraverso fascino, intuizione e desiderio. Unisce energia spirituale e forza materiale, favorendo arte, carisma e capacità relazionali.",
+    ombra: "Attaccamento ai piaceri, manipolazione attraverso il fascino, dipendenze emotive o ricerca della gratificazione immediata. Il desiderio può diventare una forza che domina invece di essere guidata.",
+    Sblocco: "Trasforma il desiderio in creatività consapevole. Usa il tuo magnetismo per costruire e non per controllare. Quando il piacere è unito alla responsabilità diventa una forza di guarigione e manifestazione."
+},
+
+16: {
+    nome: "La Torre del Fulmine ⚡ (Caduta dell'Illusione, Risveglio)",
+    luce: "Il numero 16 rappresenta una potente trasformazione della coscienza. È il crollo delle strutture false affinché emerga una verità più autentica. Porta risveglio, umiltà e capacità di ricostruire su basi più solide.",
+    ombra: "Orgoglio eccessivo, attaccamento all'immagine personale o eventi improvvisi che costringono ad affrontare ciò che era stato ignorato. La caduta può essere vissuta come distruzione invece che come liberazione.",
+    Sblocco: "Accetta ciò che cade senza identificarlo come una sconfitta. Alcune strutture devono dissolversi perché una versione più autentica di te possa emergere. La vera forza nasce dall'umiltà e dalla capacità di ricostruire."
+},
+
+17: {
+    nome: "La Stella Guida ⭐ (Protezione, Speranza, Successo Spirituale)",
+    luce: "Il numero 17 è considerato una vibrazione favorevole legata alla speranza, alla protezione e al successo ottenuto attraverso integrità e saggezza. Rappresenta una luce che appare dopo le prove e indica il riconoscimento del proprio percorso.",
+    ombra: "Ricerca di approvazione, idealizzazione del successo o attesa passiva che il destino risolva le difficoltà. La luce della Stella deve essere alimentata attraverso azioni concrete.",
+    Sblocco: "Coltiva la fiducia senza abbandonare l'impegno personale. La protezione arriva quando allinei pensiero, parola e azione. Sii tu stesso un punto di luce per il cammino che percorri."
+},
+
+18: {
+    nome: "L'Eclissi delle Acque 🌑 (Illusione, Prove Emotive, Conflitto)",
+    luce: "Il numero 18 rappresenta il confronto con le profondità dell'inconscio. Porta capacità di comprendere le emozioni nascoste, trasformare le paure e sviluppare compassione attraverso esperienze intense.",
+    ombra: "Confusione emotiva, inganni, paure inconsce o coinvolgimento in conflitti che nascono da percezioni distorte. L'immaginazione può trasformarsi in illusione quando manca discernimento.",
+    Sblocco: "Illumina ciò che rimane nascosto. Non fuggire dalle emozioni profonde, ma osservale con consapevolezza. La chiarezza nasce quando smetti di combattere le tue ombre e impari ad ascoltarle."
+},
+
+19: {
+    nome: "Il Sole Incoronato ☀️ (Successo, Vittoria, Illuminazione)",
+    luce: "Il numero 19 rappresenta la vittoria della luce dopo il superamento delle prove. È associato al successo, all'indipendenza, alla realizzazione personale e alla capacità di manifestare il proprio potenziale con chiarezza.",
+    ombra: "Orgoglio, desiderio di riconoscimento eccessivo o identificazione con il proprio successo. La luce personale può diventare isolamento quando dimentica il valore degli altri.",
+    Sblocco: "Ricorda che la vera vittoria non consiste nel brillare più degli altri, ma nell'illuminare il cammino insieme a loro. Usa il tuo successo come strumento di crescita e condivisione."
+},
+
+20: {
+    nome: "Il Risveglio della Fenice 🌙 (Chiamata Interiore, Attesa, Rinascita)",
+    luce: "Il numero 20 rappresenta un momento di risveglio e di ascolto profondo. È l'archetipo dell'anima che riceve una chiamata interiore e comprende che un nuovo ciclo sta per iniziare. Porta sensibilità, capacità intuitive e possibilità di trasformazione attraverso la consapevolezza.",
+    ombra: "Attesa passiva, paura di agire o tendenza a rimandare il proprio percorso aspettando un segnale esterno. L'intuizione può rimanere inespressa se manca il coraggio di trasformarla in scelta.",
+    Sblocco: "Ascolta la voce interiore, ma non aspettare che tutto sia perfetto per iniziare. Il risveglio autentico avviene quando la consapevolezza incontra l'azione. Trasforma la chiamata dell'anima in un passo concreto nel mondo."
+},
+
+21: {
+    nome: "La Corona della Vittoria 👑 (Successo, Espansione, Realizzazione)",
+    luce: "Il numero 21 rappresenta il completamento armonico di un percorso e la capacità di raccogliere i frutti delle proprie esperienze. Unisce creatività, espansione e riconoscimento. È una vibrazione legata alla realizzazione attraverso equilibrio e maturità.",
+    ombra: "Ricerca del successo esteriore, bisogno di dimostrare il proprio valore o difficoltà ad accettare la conclusione di un ciclo. Il desiderio di raggiungere una meta può far dimenticare il viaggio.",
+    Sblocco: "Celebra i risultati senza trasformarli nella tua identità. La vera realizzazione nasce quando il successo esterno riflette una crescita interiore. Usa ciò che hai conquistato per creare nuovo valore."
+},
+
+22: {
+    nome: "Il Maestro Costruttore 🏛️ (Visione, Manifestazione, Grande Opera)",
+    luce: "Il numero 22 rappresenta la capacità di trasformare una grande visione in una realtà concreta. È l'archetipo del costruttore spirituale, colui che unisce intuizione e disciplina per creare qualcosa destinato a durare nel tempo.",
+    ombra: "Peso delle responsabilità, paura di non essere all'altezza della propria missione o dispersione di grandi idee mai realizzate. L'enorme potenziale del 22 può trasformarsi in immobilità se manca fiducia.",
+    Sblocco: "Non cercare la perfezione prima di iniziare. La grande opera nasce attraverso piccoli passi costanti. Unisci ispirazione e disciplina, ricordando che anche la montagna più alta viene scalata un passo alla volta."
+},
+
+23: {
+    nome: "Il Leone Celeste 🦁 (Protezione, Fortuna, Intelligenza Creativa)",
+    luce: "Il numero 23 è considerato una delle vibrazioni più fortunate della tradizione caldea. Rappresenta protezione, capacità di adattamento, intelligenza e sostegno invisibile nei momenti importanti. Porta talento comunicativo e capacità di trovare soluzioni anche nelle situazioni difficili.",
+    ombra: "Eccessiva fiducia nella fortuna, superficialità o tendenza a credere che il talento naturale sia sufficiente senza impegno. La protezione può essere sprecata se non viene accompagnata dalla responsabilità.",
+    Sblocco: "Riconosci i tuoi doni, ma coltivali con disciplina. La fortuna apre porte, ma sei tu a dover attraversarle. Usa la tua intelligenza per creare opportunità anche per gli altri."
+},
+
+24: {
+    nome: "Il Tempio della Benedizione 🕊️ (Armonia, Aiuto, Prosperità)",
+    luce: "Il numero 24 unisce il principio dell'amore e dell'armonia con la costruzione di una realtà stabile. È associato alla protezione nelle relazioni, alla capacità di creare equilibrio e al sostegno ricevuto attraverso collaborazioni sincere.",
+    ombra: "Dipendenza dall'approvazione, ricerca eccessiva di sicurezza attraverso gli altri o tendenza a sacrificare i propri bisogni per mantenere la pace. L'armonia esteriore può nascondere squilibri interiori.",
+    Sblocco: "Costruisci relazioni fondate sulla reciprocità. L'amore autentico non nasce dal bisogno di essere salvati, ma dalla scelta libera di condividere il proprio cammino."
+},
+
+25: {
+    nome: "Il Viandante delle Stelle 🌌 (Ricerca, Saggezza, Esperienza)",
+    luce: "Il numero 25 rappresenta la conoscenza ottenuta attraverso l'esperienza personale. È il numero del ricercatore, colui che osserva, apprende e sviluppa saggezza attraverso il viaggio della vita.",
+    ombra: "Isolamento eccessivo, dubbio continuo o ricerca infinita di risposte senza applicare ciò che è stato compreso. La mente può diventare una prigione di domande.",
+    Sblocco: "Trasforma la conoscenza in saggezza vissuta. Non limitarti a cercare la verità: permetti alla verità di trasformare il tuo modo di vivere."
+},
+
+26: {
+    nome: "La Prova del Potere 🜂 (Responsabilità, Materia, Scelte)",
+    luce: "Il numero 26 rappresenta il rapporto tra potere personale, responsabilità e mondo materiale. Insegna a utilizzare risorse, capacità e influenza con equilibrio e consapevolezza.",
+    ombra: "Conflitti legati al denaro, alle responsabilità o alle aspettative degli altri. Può indicare il peso di decisioni prese senza considerare pienamente le conseguenze.",
+    Sblocco: "Impara a vedere il potere come servizio e non come controllo. Ogni risorsa ricevuta porta con sé una responsabilità: usala per costruire e non per alimentare paure o attaccamenti."
+},
+
+27: {
+    nome: "Lo Scettro dello Spirito ✨ (Saggezza, Compassione, Autorità Interiore)",
+    luce: "Il numero 27 rappresenta una vibrazione di grande profondità spirituale. Unisce intuizione, comprensione e capacità di guidare attraverso l'esempio. È il simbolo della conoscenza che nasce dall'esperienza trasformata in saggezza.",
+    ombra: "Martirio, senso di superiorità spirituale o tendenza a portare il peso degli altri dimenticando se stessi. La saggezza può diventare isolamento se manca apertura del cuore.",
+    Sblocco: "Guida senza imporre e dona senza svuotarti. La vera autorità nasce dalla presenza, non dal bisogno di essere riconosciuti come saggi."
+},
+
+28: {
+    nome: "La Luna dei Due Sentieri 🌘 (Scelta, Alleanze, Trasformazione)",
+    luce: "Il numero 28 rappresenta il rapporto tra individuo e collettività. Porta capacità di collaborazione, intuizione strategica e possibilità di grandi cambiamenti attraverso alleanze e scelte consapevoli.",
+    ombra: "Tradimenti, illusioni nelle collaborazioni o perdita della propria direzione per seguire aspettative esterne. Può indicare difficoltà nel distinguere il proprio cammino da quello degli altri.",
+    Sblocco: "Scegli le tue alleanze con consapevolezza. La collaborazione più potente nasce quando due persone complete condividono un percorso senza perdere la propria identità."
+},
+
+29: {
+    nome: "La Maschera delle Acque Profonde 🌊 (Sensibilità, Prove Emotive, Verità Nascosta)",
+    luce: "Il numero 29 rappresenta un viaggio attraverso le profondità emotive. Porta sensibilità, intuizione e capacità di comprendere ciò che non viene espresso attraverso le parole. È una vibrazione che invita alla maturazione del cuore.",
+    ombra: "Delusioni emotive, idealizzazione degli altri, paura del rifiuto o difficoltà a distinguere intuizione e timore. Le emozioni intense possono creare visioni distorte della realtà.",
+    Sblocco: "Impara ad ascoltare il cuore mantenendo la chiarezza della mente. La sensibilità è un dono quando viene accompagnata dal discernimento. Non chiudere il cuore per paura delle ferite: trasformale in saggezza."
+},
+
+30: {
+    nome: "Il Giardino della Parola 🌿 (Creatività, Espressione, Conoscenza)",
+    luce: "Il numero 30 rappresenta il potere creativo dell'espressione. È la vibrazione della parola, dell'immaginazione e della capacità di dare forma alle idee attraverso comunicazione, arte e insegnamento. Unisce la profondità del 3 con il mistero dello zero, amplificando il potenziale creativo.",
+    ombra: "Idee numerose ma difficoltà nel concretizzarle, dispersione mentale o uso della parola senza consapevolezza. L'immaginazione può diventare fuga dalla realtà quando manca una direzione concreta.",
+    Sblocco: "Trasforma l'ispirazione in manifestazione. Ogni intuizione ha bisogno di una forma per poter essere condivisa. Usa la parola come strumento di costruzione e non soltanto come espressione del pensiero."
+},
+
+31: {
+    nome: "Il Monaco della Montagna 🏔️ (Indipendenza, Ricerca, Saggezza Interiore)",
+    luce: "Il numero 31 rappresenta l'individuo che costruisce il proprio cammino attraverso esperienza, osservazione e autonomia. È la vibrazione del ricercatore che cerca una verità personale e sviluppa una forza interiore indipendente.",
+    ombra: "Isolamento, difficoltà a chiedere aiuto o eccessivo attaccamento alle proprie convinzioni. L'indipendenza può trasformarsi in chiusura quando diventa rifiuto del confronto.",
+    Sblocco: "Coltiva la tua unicità senza separarti dagli altri. La vera saggezza non nasce dal rifiuto del mondo, ma dalla capacità di attraversarlo mantenendo il proprio centro."
+},
+
+32: {
+    nome: "La Voce dell'Alchimista 🗝️ (Comunicazione, Magnetismo, Influenza)",
+    luce: "Il numero 32 rappresenta il potere della parola consapevole. È associato alla comunicazione, alla capacità di convincere, insegnare e creare connessioni attraverso l'intelligenza e il fascino personale.",
+    ombra: "Uso manipolativo della comunicazione, promesse non mantenute o tendenza a cercare consenso attraverso le parole invece che attraverso azioni concrete. Il talento comunicativo può diventare una maschera.",
+    Sblocco: "Fai in modo che la tua parola sia allineata al tuo cuore. La voce diventa uno strumento di trasformazione quando porta verità, chiarezza e intenzione positiva."
+},
+
+33: {
+    nome: "Il Maestro del Cuore 💎 (Compassione, Servizio, Saggezza)",
+    luce: "Il numero 33 rappresenta una vibrazione di insegnamento, guarigione e servizio verso gli altri. È associato alla capacità di trasmettere conoscenza attraverso amore, comprensione e presenza. Porta il potenziale del maestro che ispira senza imporre.",
+    ombra: "Carico eccessivo di responsabilità, desiderio di salvare tutti o sacrificio personale continuo. La persona può dimenticare i propri bisogni nel tentativo di aiutare gli altri.",
+    Sblocco: "Ricorda che anche chi illumina ha bisogno di nutrire la propria luce. Servire non significa consumarsi, ma condividere ciò che nasce da un equilibrio interiore."
+},
+
+34: {
+    nome: "La Saggezza del Costruttore 🏛️ (Conoscenza, Metodo, Realizzazione)",
+    luce: "Il numero 34 unisce conoscenza e capacità pratica. Rappresenta la costruzione attraverso disciplina, apprendimento e organizzazione. Porta il talento di trasformare idee complesse in risultati concreti.",
+    ombra: "Eccessivo razionalismo, rigidità mentale o bisogno di controllare ogni dettaglio. La ricerca della perfezione può rallentare la manifestazione.",
+    Sblocco: "Unisci mente e intuizione. La struttura è importante, ma deve rimanere al servizio della creatività. Permetti al progetto di evolvere senza cercare di dominarne ogni aspetto."
+},
+
+35: {
+    nome: "Il Viaggio del Mercante di Stelle ⭐ (Esperienza, Movimento, Opportunità)",
+    luce: "Il numero 35 rappresenta il movimento intelligente attraverso la vita. Porta capacità di adattamento, esperienza acquisita attraverso incontri e situazioni diverse, e abilità nel cogliere opportunità quando si presentano.",
+    ombra: "Irrequietezza, ricerca continua di nuove esperienze senza radicamento o difficoltà a portare a termine ciò che è iniziato. Il desiderio di libertà può creare dispersione.",
+    Sblocco: "Muoviti nel mondo senza perdere il tuo centro. Ogni esperienza è un insegnamento quando viene integrata. Trasforma la curiosità in saggezza e il movimento in evoluzione."
+},
+
+36: {
+    nome: "La Tavola dell'Armonia ⚖️ (Equilibrio, Creatività, Cooperazione)",
+    luce: "Il numero 36 rappresenta l'unione tra creatività e responsabilità. È una vibrazione legata alla capacità di creare armonia, collaborare e portare bellezza attraverso il proprio contributo personale.",
+    ombra: "Bisogno di piacere agli altri, difficoltà nel gestire conflitti o tendenza a ricercare equilibrio esterno dimenticando quello interiore.",
+    Sblocco: "L'armonia autentica nasce dall'integrazione, non dall'assenza di contrasti. Impara a esprimere la tua verità mantenendo rispetto e apertura verso gli altri."
+},
+
+37: {
+    nome: "La Corona della Saggezza 👑 (Successo, Protezione, Conoscenza)",
+    luce: "Il numero 37 rappresenta una combinazione favorevole di intuizione, intelligenza e capacità di realizzazione. È associato al successo ottenuto attraverso comprensione, talento e uso consapevole delle proprie capacità.",
+    ombra: "Orgoglio intellettuale, sentirsi superiori agli altri o affidarsi troppo alle proprie capacità senza continuare ad apprendere. La conoscenza può diventare separazione.",
+    Sblocco: "La vera saggezza rimane sempre aperta alla crescita. Usa ciò che sai per creare ponti, non distanze. Il sapere diventa luce quando viene condiviso."
+},
+
+38: {
+    nome: "Il Tesoro Nascosto 🜃 (Materia, Risorse, Trasformazione)",
+    luce: "Il numero 38 rappresenta il rapporto con le risorse materiali e interiori. Porta capacità organizzativa, intuito negli affari e possibilità di trasformare esperienze difficili in valore.",
+    ombra: "Attaccamento alla sicurezza materiale, paura della perdita o concentrazione eccessiva sul risultato esterno. Il valore personale può essere confuso con ciò che si possiede.",
+    Sblocco: "Riconosci che la vera ricchezza nasce dall'integrazione tra materia e spirito. Usa le risorse con saggezza, ricordando che ciò che possiedi deve sostenere il tuo percorso, non definirlo."
+},
+
+39: {
+    nome: "Il Canto dell'Anima 🎶 (Creatività, Compassione, Espansione)",
+    luce: "Il numero 39 rappresenta la maturazione dell'espressione creativa attraverso esperienza e sensibilità. Porta capacità artistiche, comprensione emotiva e desiderio di contribuire attraverso ciò che si crea.",
+    ombra: "Idealismo eccessivo, difficoltà a gestire la realtà pratica o tendenza a donare troppo senza equilibrio. La sensibilità può diventare vulnerabilità se manca radicamento.",
+    Sblocco: "Dai una forma concreta alla tua ispirazione. L'anima comunica attraverso opere, gesti e scelte quotidiane. Quando creatività e responsabilità si incontrano, il talento diventa servizio."
+},
+
+40: {
+    nome: "La Porta del Silenzio 🚪 (Potenziale, Preparazione, Mistero)",
+    luce: "Il numero 40 rappresenta una fase di raccoglimento e preparazione. È il simbolo dello spazio vuoto prima della manifestazione, dove l'anima integra le esperienze passate e prepara un nuovo ciclo. Porta pazienza, profondità e capacità di osservazione.",
+    ombra: "Sensazione di blocco, isolamento eccessivo o percezione di essere fermi mentre la vita procede. Il silenzio può diventare chiusura invece che ascolto interiore.",
+    Sblocco: "Non confondere la pausa con l'assenza di movimento. Alcune trasformazioni avvengono nel silenzio. Usa questo periodo per consolidare la tua visione e preparare con consapevolezza il prossimo passo."
+},
+
+41: {
+    nome: "Il Fuoco del Nuovo Sole ☀️ (Inizio, Individualità, Creazione)",
+    luce: "Il numero 41 rappresenta una nuova nascita attraverso esperienza e consapevolezza. Unisce il principio dell'individualità con la capacità di costruire una nuova realtà. È la vibrazione del pioniere che apre un sentiero personale.",
+    ombra: "Eccessivo individualismo, impazienza o bisogno di dimostrare il proprio valore attraverso il successo esterno. La forza creatrice può trasformarsi in lotta contro gli altri.",
+    Sblocco: "Segui il tuo percorso senza trasformarlo in una battaglia. La vera individualità non nasce dal separarsi, ma dall'esprimere pienamente ciò che sei."
+},
+
+42: {
+    nome: "Il Giardino delle Relazioni 🌺 (Collaborazione, Armonia, Crescita)",
+    luce: "Il numero 42 rappresenta la costruzione attraverso collaborazione, equilibrio e apertura verso gli altri. Porta capacità di creare connessioni, sostenere progetti comuni e sviluppare armonia nelle relazioni.",
+    ombra: "Dipendenza dalle collaborazioni, difficoltà a procedere autonomamente o tendenza a cercare continuamente conferme esterne. L'armonia può diventare una maschera per evitare il confronto.",
+    Sblocco: "Crea insieme agli altri senza perdere la tua identità. La collaborazione più potente nasce dall'incontro di persone complete, non dal bisogno reciproco di compensarsi."
+},
+
+43: {
+    nome: "La Spada della Verità ⚔️ (Trasformazione, Discernimento, Coraggio)",
+    luce: "Il numero 43 rappresenta la capacità di affrontare ciò che deve essere trasformato. Porta discernimento, coraggio e forza nell'eliminare ciò che non è più autentico. È un'energia di pulizia e rinnovamento.",
+    ombra: "Conflitti, rigidità nelle proprie convinzioni o tendenza a distruggere senza costruire. La ricerca della verità può diventare giudizio verso gli altri.",
+    Sblocco: "Usa la chiarezza come strumento di guarigione e non come arma. La verità più potente non ferisce: libera. Trasforma la forza del giudizio nella forza del discernimento."
+},
+
+44: {
+    nome: "Il Pilastro della Terra 🏛️ (Stabilità, Grande Costruzione, Potere)",
+    luce: "Il numero 44 rappresenta una grande energia di costruzione e manifestazione concreta. È associato alla capacità di creare strutture solide, organizzare grandi progetti e trasformare una visione in realtà tangibile.",
+    ombra: "Eccessivo controllo, peso delle responsabilità, materialismo o paura di perdere ciò che è stato costruito. La struttura può diventare una prigione se manca flessibilità.",
+    Sblocco: "Costruisci senza irrigidirti. La vera stabilità non nasce dal controllo assoluto, ma dalla capacità di adattare le fondamenta al cambiamento della vita."
+},
+
+45: {
+    nome: "Il Messaggero della Saggezza 🕊️ (Comunicazione, Esperienza, Insegnamento)",
+    luce: "Il numero 45 rappresenta la trasmissione della conoscenza attraverso esperienza e maturità. Porta capacità comunicative, intuizione pratica e talento nel condividere ciò che è stato appreso.",
+    ombra: "Parlare molto senza trasformare la conoscenza in saggezza vissuta, oppure usare l'esperienza passata come giustificazione per non cambiare.",
+    Sblocco: "Lascia che ciò che hai imparato diventi un dono per il mondo. La vera conoscenza non si accumula: si trasforma in presenza, esempio e servizio."
+},
+
+46: {
+    nome: "Il Regno dell'Equilibrio 👑 (Potere Organizzato, Responsabilità, Armonia)",
+    luce: "Il numero 46 rappresenta la capacità di unire ambizione e armonia. Porta talento organizzativo, senso pratico e capacità di creare stabilità attraverso scelte mature e responsabili.",
+    ombra: "Eccessiva preoccupazione per sicurezza e risultati, controllo delle situazioni o difficoltà a delegare. Il bisogno di ordine può limitare la spontaneità.",
+    Sblocco: "Guida senza pesare sugli altri. Il vero potere nasce dalla capacità di creare equilibrio, non dal controllo. Impara a fidarti del flusso oltre che della pianificazione."
+},
+
+47: {
+    nome: "Il Custode della Conoscenza 📜 (Ricerca, Intuizione, Profondità)",
+    luce: "Il numero 47 rappresenta il ricercatore che unisce esperienza pratica e comprensione profonda. Porta capacità di analisi, intuizione e desiderio di scoprire significati nascosti.",
+    ombra: "Eccessiva introspezione, isolamento o ricerca continua di risposte senza applicare ciò che viene compreso. La conoscenza può diventare distanza dalla vita.",
+    Sblocco: "Porta la saggezza nel quotidiano. La conoscenza diventa trasformativa quando entra nelle azioni, nelle relazioni e nelle scelte concrete."
+},
+
+48: {
+    nome: "La Bilancia del Destino ⚖️ (Giustizia, Karma, Responsabilità)",
+    luce: "Il numero 48 rappresenta il rapporto tra causa ed effetto, equilibrio e maturazione attraverso le esperienze della vita. Porta capacità di comprendere le conseguenze delle proprie azioni e costruire con maggiore consapevolezza.",
+    ombra: "Sentirsi vittima delle circostanze, portare pesi del passato o giudicare troppo severamente se stessi e gli altri. Il senso di responsabilità può trasformarsi in colpa.",
+    Sblocco: "Trasforma il giudizio in comprensione. Il karma non è una condanna, ma un insegnamento. Ogni scelta consapevole crea un nuovo equilibrio."
+},
+
+49: {
+    nome: "Il Compimento della Saggezza 🌟 (Conclusione, Maturità, Integrazione)",
+    luce: "Il numero 49 rappresenta la conclusione di un grande ciclo di apprendimento. Porta capacità di integrare esperienza, conoscenza e trasformazione interiore. È l'archetipo della maturità raggiunta attraverso il percorso vissuto.",
+    ombra: "Attaccamento al passato, difficoltà a lasciare andare un'identità precedente o sensazione di aver già compreso tutto. La maturità può trasformarsi in immobilità.",
+    Sblocco: "Onora il cammino percorso, ma continua a rinnovarti. La vera saggezza non chiude il viaggio: apre una nuova porta verso una comprensione più ampia."
+},
+
+50: {
+    nome: "Il Vento della Libertà 🌬️ (Cambiamento, Movimento, Rinnovamento)",
+    luce: "Il numero 50 rappresenta la forza del cambiamento consapevole. Unisce il movimento del 5 con il potenziale dello zero, creando una vibrazione legata alla liberazione da vecchi schemi e alla capacità di aprirsi a nuove esperienze. È l'archetipo del viaggiatore che attraversa la vita con curiosità e adattabilità.",
+    ombra: "Instabilità, fuga dalle responsabilità o ricerca continua di stimoli esterni senza una vera trasformazione interiore. Il desiderio di libertà può diventare incapacità di mettere radici.",
+    Sblocco: "Ricorda che la libertà autentica nasce dalla padronanza di sé. Cambiare direzione non significa fuggire, ma scegliere consapevolmente il proprio percorso. Muoviti nel mondo mantenendo saldo il tuo centro."
+},
+
+51: {
+    nome: "Il Guerriero della Luce ⚔️ (Coraggio, Iniziativa, Vittoria Interiore)",
+    luce: "Il numero 51 rappresenta la forza dell'individuo che agisce con coraggio e determinazione. Unisce il principio creativo dell'1 con l'esperienza maturata del 5, indicando capacità di affrontare le sfide e trasformare gli ostacoli in occasioni di crescita.",
+    ombra: "Impulsività, bisogno di affermarsi continuamente o tendenza ad affrontare ogni situazione come una battaglia. L'energia del guerriero può diventare conflitto se manca consapevolezza.",
+    Sblocco: "Trasforma la lotta esterna in forza interiore. Il vero guerriero non combatte per dimostrare il proprio valore, ma agisce con chiarezza quando è necessario. Usa il coraggio per proteggere ciò che ami e costruire ciò in cui credi."
+},
+
+52: {
+    nome: "Il Maestro delle Acque Profonde 🌊 (Intuizione, Trasformazione, Saggezza Emotiva)",
+    luce: "Il numero 52 rappresenta la maturazione attraverso esperienza, sensibilità e comprensione delle profondità interiori. Unisce il movimento del 5 con la ricettività del 2, creando una vibrazione legata all'intuizione, alla diplomazia e alla capacità di comprendere i cicli emotivi della vita.",
+    ombra: "Eccessiva sensibilità, paura del cambiamento o difficoltà nel separare le proprie emozioni da quelle degli altri. L'empatia può diventare un peso quando manca un centro interiore stabile.",
+    Sblocco: "Impara a fluire senza perdere la tua identità. La sensibilità è una forza quando viene accompagnata da confini sani e consapevolezza. Trasforma le emozioni in saggezza e il cambiamento in crescita."
+}
+
 };
 
-// DATABASE AFFLIZIONI PLANETARIE (OMBRE CALDEE)
+// DATABASE AFFLIZIONI PLANETARIE (Attriti Planetari)
 const databaseOmbreMazzo = {
     0: { 
         nome: "L'Abisso Neutro (Prova del Vuoto)", 
@@ -694,7 +945,7 @@ const databaseOmbreMazzo = {
     },
     4: { 
         nome: "L'Urto di Urano (Resistenza al Caos)", 
-        sfida: "Rigidità strutturale che attira crolli improvvisi ed eveneti destabilizzanti. La lezione richiede di abbracciare l'imprevedibile ed evadere dalle gabbie mentali.",
+        sfida: "Rigidità strutturale che attira crolli improvvisi ed eventi destabilizzanti. La lezione richiede di abbracciare l'imprevedibile ed evadere dalle gabbie mentali.",
         sblocco: "Pratica l'arte del lasciare andare e della flessibilità. Quando le cose non vanno come pianificato, non irrigidirti nel controllo, ma chiediti quale nuova prospettiva si sta aprendo. Trova una via di mezzo tra il bisogno di stabilità e l'impulso alla ribellione distruttiva, canalizzando l'energia in attività manuali, strutturate o creative." 
     },
     5: { 
@@ -710,7 +961,7 @@ const databaseOmbreMazzo = {
     7: { 
         nome: "La Nebbia di Nettuno (Illusione / Fuga)", 
         sfida: "Tendenza a perdersi in illusioni utopiche, fanatismi o rifugi mentali (e dipendenze) per sfuggire alla densità e alla durezza della realtà materiale.",
-        sblocco: "Sviluppa un sano discernment spirituale e pratico. Non usare la spiritualità o l'isolamento come scusa per fuggire dalle responsabilità materiali. Trova dei canali di espressione concreti (como l'arte, la musica o la scrittura) per dare forma alle tue intuizioni, mantenendo i piedi ben piantati a terra." 
+        sblocco: "Sviluppa un sano discernmento spirituale e pratico. Non usare la spiritualità o l'isolamento come scusa per fuggire dalle responsabilità materiali. Trova dei canali di espressione concreti (come l'arte, la musica o la scrittura) per dare forma alle tue intuizioni, mantenendo i piedi ben piantati a terra." 
     },
     8: { 
         nome: "La Morsa di Saturno (Blocco Karmico / Rigore)", 
