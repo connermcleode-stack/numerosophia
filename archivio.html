@@ -257,6 +257,15 @@
             .btn-icon-top { width: 40px; height: 40px; }
         }
     </style>
+ <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registrato con successo!', reg))
+                    .catch(err => console.error('Errore nella registrazione del Service Worker:', err));
+            });
+        }
+    </script>
 </head>
 <body>
     <a href="index.html" class="btn-home">← Torna alla Home</a>

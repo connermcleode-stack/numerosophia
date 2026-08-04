@@ -1,24 +1,56 @@
-const CACHE_NAME = 'numerosophia-v1';
-const ASSETS = [
+const CACHE_NAME = 'numerosophia-cache-v2';
+
+// Elenco esatto di TUTTI i file e cartelle del tuo progetto
+const FILES_TO_CACHE = [
   './',
   './index.html',
-  './manifest.json'
+  './caldea.html',
+  './pitagora.html',
+  './archivio.html',
+  './compatibilita.html',
+  './condividi-compatibilita.html',
+  './relazioni-karmiche.html',
+  './style.css',
+  './app.js',
+  './calcoli.js',
+  './db.js',
+  './manifest.json',
+  './icona-numerosophia.png'
 ];
 
-// Installazione e salvataggio dei file in cache
-self.addEventListener('install', (e) => {
-  e.waitUntil(
+// 1. Installazione e salvataggio in Cache
+self.addEventListener('install', (event) => {
+  event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
+      console.log('Salvataggio risorse in cache per offline...');
+      return cache.addAll(FILES_TO_CACHE);
     })
   );
+  self.skipWaiting();
 });
 
-// Gestione delle richieste offline
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
+// 2. Attivazione e pulizia vecchie cache
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(
+        keyList.map((key) => {
+          if (key !== CACHE_NAME) {
+            console.log('Rimoziomne vecchia cache:', key);
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
+
+// 3. Intercettazione richieste: serve prima dalla cache, poi da rete
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
     })
   );
 });
