@@ -560,197 +560,902 @@
 </div>
 <script>
 const databaseArchetipi = {
-    1: { 
-        nome: "Il Guerriero (Leader/Pioniere)", 
-        significato: "Rappresenta l'impulso iniziale, la capacità di aprire nuove strade e di affermare la propria individualità superando la paura del giudizio.",
-        luce: "Iniziativa, indipendenza, coraggio, forte spinta all'azione autonoma.", 
-        ombra: "Egoismo, intolleranza, aggressività, paura di fallire." 
-    },
-    2: { 
-        nome: "Il Fanciullo (Collaboratore/Mediatore)", 
-        significato: "Rappresenta la ricerca di armonia attraverso la relazione, lo sviluppo della sensibilità ricettiva e la maestria della cooperazione senza annullarsi.",
-        luce: "Sensibilità, diplomazia, capacità di ascolto e cooperazione, armonia.", 
-        ombra: "Dipendenza affettiva, ipersensibilità, indecisione cronica." 
-    },
-    3: { 
-        nome: "Il Giullare (Comunicatore/Creatore)", 
-        significato: "Rappresenta la gioia di vivere espressa attraverso la creatività, l'entusiasmo e la condivisione delle proprie intuizioni con il mondo.",
-        luce: "Espressione creativa, entusiasmo, socialità, ottimismo, comunicazione eloquente.", 
-        ombra: "Dispersione energetica, superficialità, tendenza a drammatizzare." 
-    },
-   4: { 
-        nome: "Il Costruttore (Metodico/Pratico)", 
-        significato: "Rappresenta la capacità di dare forma tangibile alle idee, creando basi stabili e sicure nel mondo materiale attraverso la pazienza, la disciplina e il lavoro costante.",
-        luce: "Organizzazione, stabilità, senso del dovere, lealtà, pragmatismo incrollabile.", 
-        ombra: "Rigidità mentale, eccessivo attaccamento al controllo, paura del cambiamento." 
-    },
-    5: { 
-        nome: "Il Cercatore (Esploratore/Libero)", 
-        significato: "Rappresenta il viaggio dell'anima verso l'esperienza diretta, la spinta al cambiamento e la capacità di vivere la libertà interiore come strumento di evoluzione.",
-        luce: "Amore per la libertà, adattabilità, curiosità intellettuale, spirito d'avventura.", 
-        ombra: "Irrequietezza, instabilità, fuga dalle responsabilità, eccessi." 
-    },
-    6: { 
-        nome: "L'Angelo Custode (Disponibilità/Insegnante)", 
-        significato: "Rappresenta l'archetipo dell'amore incondizionato, dell'assunzione di responsabilità verso la comunità e della ricerca del bello e del sacro nelle relazioni umane.",
-        luce: "Senso di responsabilità, cura degli altri, amore per l'armonia familiare e la bellezza.", 
-        ombra: "Senso di colpa, iper-protezione soffocante, svalutazione di sé." 
-    },
-    7: { 
-        nome: "Il Saggio (Ricercatore/Spirituale)", 
-        significato: "Rappresenta il cammino dell'introspezione e della comprensione profonda, volto a unire l'analisi della mente logica con il mistero della verità spirituale.",
-        luce: "Profondità d'analisi, intuito, spiritualità, amore per lo studio e la verità profonda.", 
-        ombra: "Isolamento emotivo, cinismo, eccesso di intellettualizzazione, sfiducia." 
-    },
-    8: { 
-        nome: "Il Sovrano (Leader Organizzativo/Manager)", 
-        significato: "Rappresenta la padronanza delle leggi materiali e spirituali, l'equilibrio tra dare e ricevere e la capacità di manifestare l'abbondanza per il bene comune.",
-        luce: "Autorevolezza, capacità di gestire il potere, ambizione costruttiva, senso di giustizia.", 
-        ombra: "Abuso di potere, materialismo sfrenato, intolleranza verso la debolezza." 
-    },
-    9: { 
-        nome: "Il Liberatore (Saggio Universale/Filantropo)", 
-        significato: "Rappresenta la chiusura del ciclo, la totale trasmutazione dell'ego attraverso la compassione universale, il servizio disinteressato e l'arte di lasciare andare.",
-        luce: "Amore universale, compassione, capacità di lasciare andare, idealismo evoluto.", 
-        ombra: "Incapacità di porre limiti, tendenza al martirio, delusioni idealistiche." 
-    },
-   11: { 
-        nome: "Il Genio (Numero Maestro)", 
-        significato: "Rappresenta un canale di pura illuminazione e intuizione spirituale, chiamato a fare da ponte tra i mondi invisibili e la coscienza terrena per ispirare il prossimo.",
-        luce: "Intuizione folgorante, visione ideale, canale spirituale, carisma che ispira gli altri.", 
-        ombra: "Tensione nervosa estrema, senso di alienazione, fanatismo." 
-    },    
-   22: { 
+ 1: {
+    nome: "Il Guerriero (Leader e Pioniere)",
 
-        nome: "Il Creatore (Numero Maestro)", 
-        significato: "Rappresenta la chiamata superiore a concretizzare sogni e ideali universali su vastissima scala, traducendo la spiritualità in strutture pratiche utili all'umanità.",
-        luce: "Capacità di tradurre grandi visioni spirituali in progetti concreti e planetari.", 
-        ombra: "Megalomane o, al contrario, totale blocco per paura delle proprie responsabilità." 
-    },
-    33: {
-        nome: "Il Maestro (Numero Maestro)",
-        significato: "Rappresenta l'altissimo potenziale del servizio guidato dal cuore, volto alla guarigione emotiva collettiva e all'insegnamento dell'amore puro attraverso l'esempio personale.",
-        luce: "Amore cristico, guida empatica globale, protezione e insegnamento universale.",
-        ombra: "Carico emotivo insostenibile, interferenza forzata nella vita altrui."
-    },
+    significato: "Il Guerriero rappresenta la forza del primo passo, l'energia che apre nuovi percorsi e trasforma le intenzioni in azione. È l'archetipo dell'individualità, della volontà e del coraggio di affermare la propria identità senza rinunciare ai propri valori. Ama la libertà, affronta le sfide con determinazione e sente il bisogno di costruire il proprio destino attraverso l'impegno, l'iniziativa e la capacità di guidare con l'esempio.",
+
+    luce: "Leadership naturale, indipendenza, iniziativa, coraggio, determinazione, forza di volontà, spirito pionieristico, capacità strategica, perseveranza, originalità, fiducia in sé, autonomia, integrità, entusiasmo e desiderio di migliorare continuamente ciò che lo circonda.",
+
+    ombra: "Quando la sua energia perde equilibrio può manifestarsi come egocentrismo, orgoglio, autoritarismo o eccessiva competitività. La paura del fallimento può trasformarsi in rigidità, impulsività oppure nel bisogno di dimostrare continuamente il proprio valore. Fatica ad accettare aiuto, rischia di isolarsi emotivamente e può confondere la vera forza con il controllo sugli altri.",
+
+    chiave: "Il vero Guerriero non conquista il mondo imponendo la propria forza, ma imparando a guidare con coraggio, rispetto e consapevolezza. Il suo potere cresce quando trasforma il desiderio di vincere nella capacità di ispirare e proteggere chi lo circonda.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Guerriero Egoico",
+            descrizione: "Combatte per affermare se stesso, conquistare il proprio spazio e dimostrare il proprio valore. Il successo personale diventa la misura della propria identità e l'ego guida gran parte delle sue scelte."
+        },
+        {
+            livello: "🥈 2° Livello • Guerriero Idealista",
+            descrizione: "La sua forza viene messa al servizio di un ideale più grande. Difende la giustizia, la libertà e ciò in cui crede, diventando un punto di riferimento capace di motivare e guidare gli altri."
+        },
+        {
+            livello: "🥇 3° Livello • Guerriero Consapevole",
+            descrizione: "Comprende che la battaglia più importante è quella contro i propri limiti interiori. Agisce con fermezza ma senza aggressività, unendo coraggio, umiltà e compassione. La sua leadership nasce dall'esempio e non dal bisogno di dominare."
+        }
+    ],
+
+    consiglio: "Definisci con chiarezza un obiettivo che senti davvero tuo e procedi con costanza, senza avere fretta di dimostrare qualcosa agli altri. Impara a chiedere aiuto quando serve e ricorda che la vera forza non consiste nel vincere ogni battaglia, ma nel rimanere fedele ai propri valori anche nelle difficoltà.",
+
+    mantra: "Ogni grande cammino inizia dal coraggio di compiere il primo passo."
+},
+   2: {
+    nome: "Il Fanciullo (Empatico e Mediatore)",
+
+    significato: "Il Fanciullo rappresenta la sensibilità, l'accoglienza e il bisogno di creare armonia nelle relazioni. È l'archetipo dell'empatia, della cooperazione e dell'intelligenza emotiva. Percepisce con naturalezza gli stati d'animo delle persone e possiede il dono di costruire ponti dove gli altri vedono divisioni. La sua missione è imparare ad amare senza perdere sé stesso, trasformando la dolcezza in una forza capace di unire, ascoltare e comprendere.",
+
+    luce: "Empatia, sensibilità, diplomazia, gentilezza, pazienza, intuizione, disponibilità, spirito collaborativo, capacità di mediazione, fedeltà, creatività artistica, delicatezza, ascolto profondo e naturale predisposizione a creare armonia nelle relazioni.",
+
+    ombra: "Quando perde equilibrio può diventare eccessivamente dipendente dall'approvazione degli altri, sacrificando i propri bisogni pur di evitare conflitti. La paura del rifiuto può renderlo timido, insicuro e incapace di esprimere ciò che prova realmente. Tende ad assorbire le emozioni altrui, reprimere rabbia e risentimento e idealizzare persone o situazioni, rischiando profonde delusioni quando la realtà non corrisponde alle proprie aspettative.",
+
+    chiave: "Il vero Fanciullo non smette di amare, ma impara a farlo senza dimenticare il proprio valore. La sua evoluzione nasce quando comprende che dire 'no' con rispetto è un gesto d'amore tanto quanto dire 'sì'. L'equilibrio tra sensibilità e forza interiore trasforma la vulnerabilità nella sua più grande ricchezza.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • La Ricerca dell'Innocenza",
+            descrizione: "Ricerca protezione, appartenenza e sicurezza emotiva. Tende ad affidare il proprio benessere agli altri, desiderando un ambiente dove sentirsi accolto e amato senza condizioni."
+        },
+        {
+            livello: "🥈 2° Livello • Il Confronto con l'Ombra",
+            descrizione: "Le delusioni e le esperienze di vita lo portano ad affrontare le proprie paure, imparando che l'amore autentico non nasce dalla dipendenza ma dalla consapevolezza. Inizia così un percorso di maturazione emotiva."
+        },
+        {
+            livello: "🥇 3° Livello • Il Ritorno all'Equilibrio",
+            descrizione: "Ritrova la spontaneità e la fiducia del bambino, unite però alla saggezza dell'adulto. Ama con autenticità, sa proteggere il proprio spazio personale e costruisce relazioni fondate sul rispetto reciproco, senza rinunciare alla propria sensibilità."
+        }
+    ],
+
+    consiglio: "Ascolta il tuo cuore, ma non mettere mai da parte la tua voce. Coltiva relazioni che ti permettano di essere autentico e ricorda che il desiderio di aiutare gli altri non deve mai trasformarsi nel dimenticare te stesso. Ogni volta che esprimi con sincerità ciò che provi, rafforzi la tua autostima e il tuo equilibrio interiore.",
+
+    mantra: "La vera armonia nasce quando il cuore accoglie gli altri senza smettere di ascoltare sé stesso."
+},
+3: {
+    nome: "Il Giullare (Artista e Comunicatore)",
+
+    significato: "Il Giullare rappresenta la gioia di vivere, la creatività e il potere della comunicazione. È l'archetipo dell'espressione spontanea, capace di trasformare idee, emozioni ed esperienze in parole, immagini, musica o arte. Ama esplorare la vita con curiosità e leggerezza, portando entusiasmo ovunque vada. La sua missione è ispirare gli altri attraverso il sorriso, l'immaginazione e la capacità di vedere nuove possibilità anche nelle situazioni più difficili.",
+
+    luce: "Creatività, entusiasmo, comunicazione, simpatia, carisma, spirito artistico, fantasia, versatilità, spontaneità, senso dell'umorismo, capacità di adattamento, fascino, ottimismo, talento espressivo e naturale predisposizione a coinvolgere e motivare le persone.",
+
+    ombra: "Quando perde equilibrio può disperdere le proprie energie in troppi progetti senza portarli a termine. Il desiderio di essere apprezzato può trasformarsi in superficialità, vanità o bisogno costante di attenzione. Tende a evitare le responsabilità più impegnative, può ricorrere all'ironia per nascondere le proprie fragilità e rischia di confondere la libertà con la mancanza di disciplina.",
+
+    chiave: "Il vero Giullare non usa la creatività per attirare l'attenzione, ma per illuminare il cammino degli altri. Quando unisce fantasia, autenticità e responsabilità, le sue parole diventano fonte di ispirazione e la sua allegria si trasforma in una forza capace di guarire i cuori.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • La Gioia della Superficialità",
+            descrizione: "Vive il presente con entusiasmo, ricerca il divertimento e desidera sperimentare continuamente nuove emozioni. La leggerezza domina le sue scelte, ma può mancare profondità e continuità."
+        },
+        {
+            livello: "🥈 2° Livello • Il Risveglio della Creatività",
+            descrizione: "Scopre che il proprio talento può diventare uno strumento di crescita personale e di espressione autentica. Impara a canalizzare la propria energia creativa verso obiettivi concreti, dando forma alle proprie intuizioni."
+        },
+        {
+            livello: "🥇 3° Livello • Il Messaggero Illuminato",
+            descrizione: "Comprende che la comunicazione è un dono da mettere al servizio degli altri. Attraverso la parola, l'arte e la creatività diventa fonte di ispirazione, diffondendo conoscenza, speranza e consapevolezza con semplicità e autenticità."
+        }
+    ],
+
+    consiglio: "Esprimi liberamente la tua creatività, ma coltiva anche costanza e disciplina. Ogni talento ha bisogno di essere nutrito con pazienza per poter dare i suoi frutti. Impara a concludere ciò che inizi e scoprirai che la tua fantasia può trasformarsi in opere capaci di lasciare un segno duraturo.",
+
+    mantra: "La creatività è il linguaggio con cui l'anima trasforma la vita in meraviglia."
+},
+4: {
+    nome: "Il Costruttore (Organizzato e concreto)",
+
+    significato: "Il Costruttore rappresenta la stabilità, la disciplina e la capacità di trasformare le idee in risultati concreti. È l'archetipo della solidità, del lavoro costante e della responsabilità. Costruisce con pazienza, metodo e perseveranza, creando fondamenta destinate a durare nel tempo. La sua missione è dare forma al caos attraverso l'ordine, dimostrando che ogni grande realizzazione nasce da piccoli passi compiuti con dedizione e coerenza.",
+
+    luce: "Affidabilità, disciplina, organizzazione, perseveranza, senso pratico, responsabilità, precisione, pazienza, concretezza, stabilità, capacità di pianificazione, onestà, determinazione, spirito di sacrificio e talento nel costruire progetti solidi e duraturi.",
+
+    ombra: "Quando perde equilibrio può diventare rigido, eccessivamente prudente o resistente ai cambiamenti. Il bisogno di sicurezza può trasformarsi in paura dell'ignoto, ostinazione e attaccamento alle abitudini. Tende a controllare ogni dettaglio, sacrificando spontaneità ed emozioni, fino a vivere il dovere come un peso e il lavoro come l'unica misura del proprio valore.",
+
+    chiave: "Il vero Costruttore comprende che la solidità non nasce dal controllo assoluto, ma dalla capacità di adattarsi senza perdere i propri valori. Le fondamenta più forti sono quelle che sanno sostenere il cambiamento senza spezzarsi.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Il Cammino del Costruttore",
+            descrizione: "È concentrato principalmente sulla sicurezza materiale e sulla costruzione di una base stabile. Cerca ordine, risultati concreti e protezione attraverso il lavoro e la disciplina."
+        },
+        {
+            livello: "🥈 2° Livello • Le Tre Dimensioni del Costruttore",
+            descrizione: "Comprende che il successo non riguarda solo gli aspetti materiali, ma anche quelli familiari, sociali e interiori. Impara a unire impegno, equilibrio e responsabilità, diventando un punto di riferimento affidabile per gli altri."
+        },
+        {
+            livello: "🥇 3° Livello • Dalla Terra alla Giustizia",
+            descrizione: "Trasforma la propria forza costruttiva in uno strumento di servizio. Le sue capacità vengono messe al servizio della collettività, contribuendo a creare ordine, prosperità e benessere con integrità, equità e senso del dovere."
+        }
+    ],
+
+    consiglio: "Continua a costruire con pazienza, ma concediti anche il diritto di cambiare strada quando la vita lo richiede. La disciplina è una grande forza, purché lasci spazio alla flessibilità. Ricorda che il riposo, la creatività e le emozioni non rallentano il tuo cammino: lo rendono più completo e duraturo.",
+
+    mantra: "Le fondamenta più solide sono quelle costruite con pazienza, equilibrio e fiducia."
+},
+5: {
+    nome: "Il Cercatore (Esploratore e Spirito Libero)",
+
+    significato: "Il Cercatore rappresenta il desiderio di esplorare, sperimentare e vivere pienamente ogni sfumatura dell'esistenza. È l'archetipo della libertà, del cambiamento e della scoperta. Curioso, dinamico e aperto alle novità, affronta la vita come un viaggio ricco di esperienze, lasciandosi guidare dall'istinto e dalla voglia di conoscere persone, luoghi e idee sempre nuove. La sua missione è comprendere che la vera libertà non consiste nel fuggire dai limiti, ma nello scegliere con consapevolezza la propria direzione.",
+
+    luce: "Curiosità, entusiasmo, versatilità, spirito d'avventura, adattabilità, carisma, comunicazione, sensualità, apertura mentale, coraggio, vitalità, capacità di reinventarsi, entusiasmo per la vita e naturale predisposizione a ispirare gli altri attraverso il cambiamento.",
+
+    ombra: "Quando perde equilibrio può diventare impulsivo, dispersivo e incapace di mantenere gli impegni. La continua ricerca di emozioni nuove rischia di trasformarsi in irrequietezza, instabilità o dipendenza dal piacere. Può faticare ad assumersi responsabilità durature, passando rapidamente da un progetto all'altro senza completarli e confondendo la libertà con la fuga da ogni vincolo.",
+
+    chiave: "Il vero Cercatore scopre che la libertà più grande non è fare tutto ciò che desidera, ma scegliere consapevolmente ciò che dà significato al proprio cammino. Quando impara a unire entusiasmo e disciplina, ogni esperienza diventa una tappa della propria evoluzione.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Esplorazione Sensoriale",
+            descrizione: "Scopre il mondo attraverso i sensi, il movimento e le esperienze. È guidato dalla curiosità e dal desiderio di vivere ogni emozione con intensità, cercando continuamente nuove avventure."
+        },
+        {
+            livello: "🥈 2° Livello • Ambizione e Limiti",
+            descrizione: "Inizia a canalizzare la propria energia verso obiettivi concreti. Comprende che ogni conquista richiede impegno e che la vera crescita nasce dall'equilibrio tra desiderio, responsabilità e autocontrollo."
+        },
+        {
+            livello: "🥇 3° Livello • Viaggio Interiore",
+            descrizione: "Realizza che il viaggio più importante non è quello nel mondo esterno, ma quello dentro sé stesso. Trasforma la continua ricerca di esperienze nella ricerca della propria verità, trovando nella consapevolezza la più autentica forma di libertà."
+        }
+    ],
+
+    consiglio: "Segui la tua curiosità, ma non lasciare che sia l'impulsività a decidere il tuo cammino. Ogni nuova esperienza può arricchirti, purché sia accompagnata da presenza, responsabilità e capacità di portare a termine ciò che inizi. La tua libertà cresce quando impari a scegliere, non quando cerchi di vivere tutto.",
+
+    mantra: "La vera libertà non consiste nel cambiare continuamente strada, ma nel camminare con consapevolezza verso ciò che dà significato alla propria vita."
+},
+6: {
+    nome: "L'Angelo Custode (Protettivo e Mediatore)",
+
+    significato: "L'Angelo Custode manifesta la necessità di mediare continuamente tra le esigenze concrete della vita e le aspirazioni dello spirito. Guidato dall'amore, dalla responsabilità e dal valore della famiglia, desidera influire positivamente sul proprio ambiente, diffondendo armonia, bellezza e accoglienza. Ha una forte vocazione all'insegnamento, alla cura e alla difesa di chi soffre o è nel bisogno, manifestando un profondo senso estetico e il desiderio innato di far emergere il potenziale e i talenti altrui.",
+
+    luce: "Responsabilità, dedizione, empatia, generosità, vocazione pedagogica, senso estetico e artistico, armonia, protezione, spirito di servizio, affidabilità, capacità di ascolto e di mediazione.",
+
+    ombra: "Tendenza al sacrificio e all'annullamento di sé, incapacità di dire di no, senso di colpa, controllo e possessività nelle relazioni. Rischia di creare dinamiche di dipendenza emotiva, assumendo atteggiamenti soffocanti, presuntuosi o iperprotettivi che impediscono agli altri di crescere autonomamente.",
+
+    chiave: "Imparare a bilanciare il dare e il ricevere stabilendo confini sani. L'Angelo Custode realizza la sua missione quando integra la forza del Guerriero interiore, capendo che proteggere sé stessi e sapersi dire di 'sì' è il primo passo per aiutare davvero gli altri.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • La Crescita Personale",
+            descrizione: "Persona onesta, affidabile e sempre pronta ad offrire aiuto, che vive tuttavia con la sensazione interiore di non essere adeguatamente capita o ricambiata per i propri sacrifici."
+        },
+        {
+            livello: "🥈 2° Livello • Scelte e Confini",
+            descrizione: "Impara a definire confini sani e ad operare scelte consapevoli, iniziando a prendersi cura di sé e integrando la fermezza necessaria per proteggere il proprio spazio vitale."
+        },
+        {
+            livello: "🥇 3° Livello • Il Risveglio del Guerriero Interiore",
+            descrizione: "Raggiunge un perfetto equilibrio tra il dare e il ricevere. Sostiene il prossimo attraverso un amore maturo e consapevole, capace sia di nutrire che di dire no quando necessario."
+        }
+    ],
+
+    consiglio: "Dedica agli altri il tuo tempo e la tua cura, ma ricorda di non prosciugare le tue energie. Impara a definire confini chiari e a coltivare il tuo spazio interiore: un aiuto offerto da un centro solido e appagato è immensamente più potente e duraturo.",
+
+    mantra: "Prendendomi cura di me stesso con rispetto e fermezza, posso offrire agli altri un amore autentico, libero e rigenerante."
+},
+7: {
+    nome: "Il Saggio (Filosofo e Mistico)",
+
+    significato: "Il Saggio rappresenta l'archetipo dell'intellettuale e del ricercatore di verità, spinto da una profonda esigenza di conoscenza e misticismo. Perfetto equilibrio tra scienza e metafisica, analizza la realtà con rigore, intuizione e sensibilità, cercando risposte ai grandi misteri dell'esistenza. Riservato, selettivo ed elegante, necessita di momenti di solitudine e contemplazione per ricaricare la propria energia ed elevare la propria consapevolezza al di sopra del caos quotidiano.",
+
+    luce: "Profondità d'analisi, intuizione acuta, perfezionismo, saggezza, elevazione spirituale e intellettuale, riservatezza, competenza tecnica, inclinazione alla meditazione e alla ricerca.",
+
+    ombra: "Isolamento nella 'torre d'avorio', ipercriticismo, freddezza emotiva, scetticismo, cinismo, presunzione intellettuale, intransigenza ed ecessiva rigidità o distacco dalla vita pratica.",
+
+    chiave: "Superare il distacco affettivo e la pretesa di un'unica verità assoluta. Il vero Saggio scopre che la conoscenza teorica è incompleta senza l'umiltà e la partecipazione emotiva al mondo.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Il Cercatore Spirituale",
+            descrizione: "Incarna un misticismo o un intellettualismo teorico, profondo ma ancora immaturo, legato alla presunzione di poter comprendere il mondo escludendo la dimensione dell'amore e del contatto umano."
+        },
+        {
+            livello: "🥈 2° Livello • Dalla Torre d'Avorio all'Accettazione",
+            descrizione: "Abbandona la rigida fortezza delle proprie certezze; attraverso l'umiltà impara a rispettare la varietà delle esperienze altrui e a riconoscere il valore di molteplici cammini di crescita."
+        },
+        {
+            livello: "🥇 3° Livello • L'Integrazione dell'Unità",
+            descrizione: "Raggiunge la vera illuminazione, comprendendo che la Verità trascende i singoli concetti razionali. Sviluppa una visione equanime, capace di scorgere il Sacro in ogni essere e manifestazione."
+        }
+    ],
+
+    consiglio: "Coltiva momenti di silenzio e meditazione per riequilibrare la tua energia emotiva e mentale. Fai attenzione a non rifugiarti nell'isolamento o nel giudizio: permetti al tuo cuore di partecipare alle scoperte della tua mente.",
+
+    mantra: "La mia ricerca della verità mi apre all'umiltà, connettendo la luce della mia mente con la saggezza del cuore."
+},
+8: {
+    nome: "Il Sovrano (Realizzatore e Stratega)",
+
+    significato: "Il Sovrano è l'archetipo dell'ambizione, dell'efficienza e della maestria nel mondo materiale. Dotato di un'eccezionale forza psicofisica e di un pragmatismo lucido, sa trasformare le idee in risultati concreti e tangibili. Come tramite tra il mondo dei principi e quello delle forme, assume spontaneamente ruoli di guida e responsabilità per portare ordine, abbondanza ed equilibrio nel proprio 'regno', amministrando le risorse con grande capacità strategica.",
+
+    luce: "Leadership, capacità organizzativa, determinazione, spiccato senso degli affari, pragmatismo, autorevolezza, tenacia, senso di giustizia, visione strategica, capacità di concretizzare e gestire l'energia del denaro.",
+
+    ombra: "Abuso di potere, controllo eccessivo, insensibilità, cinismo, materialismo sfrenato e valutazione delle persone esclusivamente in base a status o ricchezza. Rischia di diventare rigido, calcolatore e intollerante, sopprimendo le emozioni e l'ascolto del cuore.",
+
+    chiave: "Comprendere che il vero potere risiede nel servizio e nella responsabilizzazione altrui. Il Sovrano si realizza pienamente quando integra la compassione, usando la propria forza materiale e organizzativa per il benessere collettivo.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Ambizione e Successo Personale",
+            descrizione: "Focalizzato sul far fruttare le proprie risorse ed esprimere indipendenza; lavora duramente con elevati standard di qualità per conquistare prestigio, autonomia e stabilità materiale."
+        },
+        {
+            livello: "🥈 2° Livello • Responsabilità e Impegno Collettivo",
+            descrizione: "Sposta il focus dall'interesse individuale a quello comunitario, mettendo le proprie doti organizzative e di leadership al servizio di progetti e attività socialmente utili."
+        },
+        {
+            livello: "🥇 3° Livello • Servizio Spirituale e Visione Planetaria",
+            descrizione: "Comprende che spirito e materia sono un'unica energia e che il vero potere è servizio. Eleva la sua vibrazione (fino al numero maestro 44/Sciamano) lavorando per la prosperità e il risanamento del pianeta."
+        }
+    ],
+
+    consiglio: "Usa la tua energia straordinaria per costruire progetti solidi, ma fai attenzione a non soffocare la tua parte emotiva. Non misurare il tuo valore o quello altrui solo in base al successo materiale: lascia che la compassione e il cuore guidino le tue scelte.",
+
+    mantra: "Il mio vero potere nasce dall'armonia tra mente e cuore, e lo metto al servizio dell'abbondanza e del bene comune."
+},
+9: {
+    nome: "Il Liberatore (Ispiratore e Umanitario)",
+
+    significato: "Il Liberatore è l'archetipo della saggezza universale, del carisma e della compassione incondizionata. Come un 'inviato dello spirito', canalizza l'energia cosmica attraverso la creatività, l'arte e la parola per risvegliare le coscienze e liberarle dalle illusioni del materiale. Guidato da un profondo senso di fratellanza, attira naturalmente le persone in cerca di guida e sollievo, facendosi tramite di un amore puro che trascende i confini dell'ego e del singolo nucleo familiare.",
+
+    luce: "Amore incondizionato, carisma, spiccata sensibilità artistica e filosofica, compassione, altruismo, capacità di ispirare e perdonare, visione olistica, generosità e inclinazione umanitaria.",
+
+    ombra: "Iper-emotività, drammatizzazione, cinismo profondo di fronte alle ingiustizie, dispersività e incoerenza. Rischia di crollare nello sconforto, diventare manipolativo o spietato, oppure soffrire di dipendenza dall'approvazione del pubblico e rifiuto della realtà pratica.",
+
+    chiave: "Trascendere l'attaccamento e l'egocentrismo attraverso il potere del perdono. Il Liberatore si realizza lasciando andare i rancori del passato e donando i propri talenti al mondo senza pretendere nulla in cambio.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Evasione e Negazione di Sé",
+            descrizione: "Inconsapevole del proprio carisma e dei talenti spirituali o artistici, evita di confrontarsi con la sofferenza e disperde energie in un'esistenza superficiale o qualunquista."
+        },
+        {
+            livello: "🥈 2° Livello • Risveglio e Connessione con l'Altro",
+            descrizione: "Prende coscienza di sé e sente l'urgenza di aiutare il prossimo. Inizia ad aprire il cuore all'amore empatizzando con gli altri, ma oscilla ancora tra il desiderio di servire e il cinismo."
+        },
+        {
+            livello: "🥇 3° Livello • Amore Incondizionato e Armonia Creativa",
+            descrizione: "Abbraccia l'amore incondizionato e il perdono assoluto. Usa la sua arte, saggezza e carisma come strumenti per guarire, ispirare e riportare armonia nella collettività."
+        }
+    ],
+
+    consiglio: "Libera te stesso dai condizionamenti e dai rancori del passato prima di provare a guidare gli altri. Pratica il perdono consapevole e metti i tuoi talenti al servizio della comunità, mantenendo salda la fiducia anche nei momenti di sconforto.",
+
+    mantra: "Perdonando il passato e lasciando andare le resistenze dell'ego, divento canale di amore incondizionato, armonia e vera libertà per me e per il mondo."
+},
+11: {
+    nome: "Il Genio (Ispiratore e Visionario)",
+
+    significato: "L'11 è il primo dei numeri Maestri e rappresenta un tramite tra il piano umano e la mente cosmica. Poetico, intuitivo e proiettato verso il futuro, è l'archetipo del visionario e dell'artista-guaritore che porta risveglio, ispirazione e rivelazione al mondo. Spesso segnato fin dall'infanzia da un senso di diversità o da una profonda ferita emotiva, ha la capacità di trasmutare le proprie sofferenze in saggezza e creatività, agendo come catalizzatore per l'evoluzione collettiva.",
+
+    luce: "Intuizione straordinaria, genialità, ispirazione, visionarietà, carisma, doti artistiche e medianiche, sensibilità per il sacro e l'esoterismo, grande dialettica, capacità di rigenerarsi e ispirare.",
+
+    ombra: "Sbalzi d'umore estremi, tensione nervosa, instabilità, senso di isolamento, vittimismo o complesso dell'alieno incompreso. Può scivolare nella paranoia, nella presunzione spirituale, nell'utopia irrealizzabile o nella sensazione di essere rifiutato dalla società.",
+
+    chiave: "Trasformare le proprie ferite in uno strumento di comprensione ed empatia. Il Genio si compie quando accetta la propria diversità senza isolarsi, integrando la fermezza del Guerriero per difendere i propri sogni e manifestarli concretamente nella realtà.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Scoperta di Sé e Distanza dal Mondo",
+            descrizione: "Sperimenta un forte senso di diversità ed estraniamento a seguito di ferite personali; si rifugia nell'arte o nella spiritualità per isolarsi ed elaborare il proprio mondo interiore."
+        },
+        {
+            livello: "🥈 2° Livello • Trasformazione Interiore e Risveglio",
+            descrizione: "Comprende le leggi cosmiche e impara a guarire sé stesso attraverso il perdono, sintonizzandosi con la mente universale e trasformando l'ambiente circostante a partire dal proprio cambiamento."
+        },
+        {
+            livello: "🥇 3° Livello • Manifestazione Creativa e Influenza Divina",
+            descrizione: "Diventa canale puro per le frequenze superiori, agendo come faro di consapevolezza per la collettività. Usa la creatività per ispirare e guidare le anime nell'evoluzione."
+        }
+    ],
+
+    consiglio: "Non nascondere la tua unicità per compiacere la normalità altrui. Radica le tue intuizioni nella vita pratica, abbi cura del tuo sistema nervoso e usa la tua luce per risvegliare la speranza e la visione nel mondo.",
+
+    mantra: "Accetto e celebro la mia unicità: sono un canale di luce e trasformo le mie esperienze in ispirazione per il pianeta."
+},
+22: {
+    nome: "Il Creatore (Architetto Celeste e Mastro Costruttore)",
+
+    significato: "Il 22 è il secondo numero Maestro, evoluzione spirituale del 4 e sintesi della sensibilità del doppio 2. È l'archetipo dell'Architetto Celeste: unisce l'ispirazione e la visione intuitiva a una straordinaria capacità di pragmatismo e concretizzazione. Dotato di un'energia elettrizzante e quasi illimitata, il Creatore ha la missione di canalizzare il pensiero creativo per realizzare opere ambiziose, grandi infrastrutture, progetti sociali o soluzioni d'avanguardia a beneficio dell'intera collettività.",
+
+    luce: "Energia carismatica e catalizzatrice, straordinario senso pratico, visione sistemica, eclettismo, determinazione, capacità di concretizzare i sogni, autodisciplina, maestria costruttiva e potenziale di trasformazione sociale.",
+
+    ombra: "Dispotismo, rigidità emotiva, tendenza all'opportunismo e alla distruttività. Se l'energia ristagna o viene usata per scopi meramente egoistici, rischia di sfociare in abuso di potere, aridità interiore, rabbia esplosiva e sconvolgimenti psiche-emotivi intensi.",
+
+    chiave: "Comprendere il principio cosmico secondo cui 'l'energia segue il pensiero' e dirigerla verso scopi costruttivi. Il Creatore si compie quando scioglie la propria corazza di distacco emotivo e mette la propria forza realizzatrice al servizio del bene comune.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Ambizione e Creazione Individuale",
+            descrizione: "Mossa da un forte individualismo e dall'ambizione, la persona focalizza la propria maestria realizzativa soprattutto sul successo personale, sul potere e sul guadagno materiale."
+        },
+        {
+            livello: "🥈 2° Livello • Risveglio del Potere Creativo",
+            descrizione: "Prende coscienza del potere della mente e delle leggi dell'universo; impara a dirigere il pensiero con intenzione per concretizzare i propri sogni e integrarsi in un disegno più ampio."
+        },
+        {
+            livello: "🥇 3° Livello • Unione con lo Spirito e Creazione Consapevole",
+            descrizione: "Riconosce la Sorgente dentro di sé e si fa strumento dell'Architetto Celeste. Crea consapevolmente migliorando e trasformando la realtà materiale a beneficio del pianeta."
+        }
+    ],
+
+    consiglio: "Non soffocare la tua immensa carica interiore e non nascondere la tua sensibilità dietro una maschera di freddezza. Incanala la tua energia in progetti concreti e di grande respiro, ricordando di bilanciare il dovere lavorativo con la cura delle relazioni e del cuore.",
+
+    mantra: "Allineo la mia mente e la mia forza alla Sorgente universale per dare forma concreta a progetti che portano prosperità e armonia nel mondo."
+},
+33: {
+    nome: "Il Maestro (Guida Spirituale e Amore Cristico)",
+
+    significato: "Il 33 è il terzo numero Maestro (sintesi del 3 e del 6, nota anche come 'vibrazione di Cristo') e rappresenta l'archetipo dell'amore incondizionato e della guida spirituale. Profondamente compassionevole e guidato da una vera e propria missione di servizio, il Maestro partecipa direttamente alla sofferenza del mondo con totale dedizione. Agisce come specchio e testimone di verità, ispirando gli altri a realizzare il proprio potenziale attraverso l'esempio, la coerenza e un'incrollabile fede nello spirito.",
+
+    luce: "Amore incondizionato, compassione profonda, dedizione assoluta, carisma spirituale, saggezza pedagogica, coerenza, capacità di ascolto, empatia e inclinazione ad alleviare la sofferenza altrui.",
+
+    ombra: "Sindrome del salvatore, tendenza al martirio, masochismo, presunzione e dogmatismo spirituale ('stalinismo dello spirito'). Rischia di oscillare tra il completo annullamento di sé e l'arroganza di ritenersi un'autorità infallibile superior al prossimo.",
+
+    chiave: "Integrazione dell'umiltà e dell'amore consapevole senza cadere nel masochismo. Il Maestro compie la sua missione quando capisce che non deve caricarsi del dolore altrui, ma condurre ogni individuo alla soglia della propria mente e della propria coscienza.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Dedizione Familiare e Fede Tradizionale",
+            descrizione: "Sperimenta la vibrazione base dell'Angelo Custode: è dedito con spirito di sacrificio alla famiglia e ai cari, vivendo una religiosità o spiritualità ancora condizionata dai dogmi della tradizione."
+        },
+        {
+            livello: "🥈 2° Livello • Prove di Fede e Abbandono al Divino",
+            descrizione: "Attraversa prove profonde che lo spingono a rilasciare il controllo razionale. Supera le paure e compie il 'salto nella fede', affidandosi completamente alla guida della propria coscienza superiore."
+        },
+        {
+            livello: "🥇 3° Livello • Comunione Spirituale e Miracoli di Amore",
+            descrizione: "Sperimenta la totale unione con il Divino e riconosce la sacralità in ogni essere umano. Agisce come canale di compassione pura e guarigione, rendendo possibili trasformazioni straordinarie."
+        }
+    ],
+
+    consiglio: "Coltiva l'umiltà e impara a donare senza annullare te stesso o compiacere il ruolo del martire. Sii coerente con la tua filosofia attraverso l'esempio quotidiano e ricorda che la vera guida risveglia il maestro che già dimora nel cuore degli altri.",
+
+    mantra: "Sintonizzando il cuore sulla frequenza dell'amore incondizionato, sono uno specchio di luce e saggezza che guida attraverso l'esempio."
+},
+44: {
+    nome: "Lo Sciamano (Guaritore e Custode della Terra)",
+
+    significato: "Il 44 è il numero Maestro superiore, evoluzione del 4 e dell'8, e rappresenta l'archetipo dello Sciamano: il guaritore olistico e il custode della Terra. Fortemente radicato nella realtà fisica e dotato di un'inesauribile riserva di energia vitale, unisce la forza pragmatica del corpo alla profonda saggezza della psiche. Avendo appreso a guarire le proprie ferite interiori attraverso dolorose traversate dell'inconscio, ha la missione di ripristinare l'equilibrio mente-corpo e difendere l'integrità del pianeta, degli ecosistemi e dei più deboli.",
+
+    luce: "Straordinaria forza psicofisica, buon senso, capacità di guarigione olistica, forte connessione con la Natura e la Madre Terra, integrità, spirito ambientalista, disciplina, concretezza, percezione della sincronicità.",
+
+    ombra: "Tendenze autodistruttive da repressione energetica, rabbia e risentimento verso la corruzione e il degrado ambientale, estrema diffidenza, chiusura emotiva inaccessibile, rigidità o crollo sotto il peso del proprio disagio interiore non elaborato.",
+
+    chiave: "Trasformare la rabbia per le ferite del pianeta e di sé in cooperazione e azione concreta di guarigione. Lo Sciamano si compie quando apre il proprio 'spacio sacro', trascende la dualità e mette i suoi poteri al servizio del risanamento e dell'armonia collettiva.",
+
+    evoluzione: [
+        {
+            livello: "🥉 1° Livello • Frattura Interiore e Inconsapevolezza",
+            descrizione: "Sente un profondo disagio ed estraniamento ma evita il confronto interiore; l'intensa energia repressa può causare somaticità, contrazione emotiva o tendenze autodistruttive."
+        },
+        {
+            livello: "🥈 2° Livello • La Chiamata e il Viaggio Iniziativo",
+            descrizione: "Accoglie la 'chiamata degli spiriti', affrontando un doloroso viaggio nei recessi dell'inconscio. Attraverso la purificazione e la comprensione delle proprie ferite, accede al percorso dell'iniziato."
+        },
+        {
+            livello: "🥇 3° Livello • Trascesa, Potere e Guarigione",
+            descrizione: "Raggiunge uno stato di consapevolezza elevato in cui percepisce sé stesso e il mondo come un'unica energia. Attraverso le discipline olistiche e la difesa della Terra, porta vera guarigione e integrità."
+        }
+    ],
+
+    consiglio: "Non trattenere la tua enorme carica vitale né chiuderti dietro barriere di totale diffidenza. Vivi a contatto con la natura per rigenerarti, trasforma il risentimento in impegno ecologico o sociale e ascolta i messaggi del corpo e della sincronicità per riportare equilibrio nella tua vita e in quella altrui.",
+
+    mantra: "Sintonizzandomi con i ritmi della Terra e riconnettendo mente, corpo e spirito, sono un canale di integrità, guarigione e rispetto per ogni forma di vita."
+},
 };
 const databaseOmbreMazzo = {
 
-    0: { nome: "L'Angelo caduto (Ombra 9)", sfida: "Sfida universale o assenza totale di vincoli predefiniti. Richiede di confrontarsi con il senso del vuoto evolutivo o la perdita di confini individuali per ritrovare l'Unità spirituale pura." },
-    1: { nome: "Il Ribelle", sfida: "Tendenza all'ostinazione cieca, all'aggressività reattiva o all'incapacità di accettare guide. La lezione è trasformare l'impulso distruttivo in sana indipendenza." },
-    2: { nome: "L'Orfano", sfida: "Paura profonda dell'abbandono, dipendenza emotiva e tendenza al vittimismo per ricevere attenzioni. La lezione è scoprire la propria stabilità interiore." },
-    3: { nome: "Lo Straniero", sfida: "Blocco della comunicazione espressiva, tendenza a isolarsi sentendosi non capiti. La lezione è trovare la propria autentica voce nel mondo." },
-    4: { nome: "Il Prigioniero", sfida: "Rigidità strutturale estrema, sottomissione a schemi limitanti e rifiuto del cambiamento. La lezione è evadere dalle prigioni mentali." },
-    5: { nome: "Il Girovago", sfida: "Irrequietezza cronica, fuga dalle responsabilità e dispersione in stimoli superficiali. La lezione è trovare la libertà all'interno." },
-    6: { nome: "Il Martire", sfida: "Senso di colpa radicato o tendenza a manipolare gli affetti sotto forma di troppa premura. La lezione è amare senza possedere." },
-    7: { nome: "Il Solitario", sfida: "Chiusura in una torre d'avorio, scetticismo cinico, paura dell'intimità emotiva. La lezione è integrare la mente con l'apertura del cuore." },
-    8: { nome: "Il Tiranno", sfida: "Eccessiva sete di controllo, materialismo o abuso di potere per mascherare fragilità. La lezione è esercitare una guida giusta." },
-    9: { nome: "L'Angelo caduto", sfida: "Tendenza al rifiuto della realtà materiale, alienazione o vittimismo idealistico. La lezione è manifestare la compassione universale." }
+    0: {
+    nome: "L'Angelo Caduto (L'Ombra del Liberatore)",
+
+    sfida_principale: "Superare la rimozione dei contenuti inconsci, il peso della nostalgia, l'assorbimento osmotico delle sofferenze altrui e l'oblio di sé. La ferita dell'Angelo Caduto ha radici in un profondo senso di scollegamento dalla propria origine 'celeste' o spirituale e nel terrore di affrontare l'angoscia interiore, che lo spinge a rimuovere il dolore per non esserne sopraffatto.",
+
+    manifestazione_inconscia: "Mostra una 'persona' poco strutturata, agendo come una spugna emotiva ('mi fa male il mondo') e oscillando tra un'eccessiva disponibilità annullante e una freddezza glaciale difensiva. Tende a fare finta di nulla, mascherando la sofferenza con un'estroversione superficiale o con il ruolo di salvatore per non guardare nel proprio inconscio. Rischia di rimanere incastrato in situazioni logoranti o incatenato al passato (sindrome di Orfeo).",
+
+    risorsa_nascosta: "Incredibile ispirazione, fede incrollabile, compassione universale, saggezza profonda da 'anima antica', talento artistico e capacità di portare guarigione e liberazione a sé e agli altri.",
+
+    strategia_integrazione: "Cessare la rimozione e affrontare i problemi senza attendere che il corpo somatizzi o che gli eventi crollino. Discesa consapevole nel proprio inconscio per recuperare la propria anima (Euridice), fissare confini emotivi sani, lasciare andare il passato senza voltarsi indietro ed esprimere liberamente la propria sensibilità e creatività.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Rimozione e Annullamento",
+            descrizione: "Rimuove il dolore interiore proiettandosi del tutto all'esterno o facendosi carico delle sofferenze del mondo. Nasconde le proprie emozioni dietro una maschera di serenità o si rifugia in una distaccata insensibilità."
+        },
+        {
+            fase: "2. Presa di Coscienza e Crisi",
+            descrizione: "Sperimenta l'esaurimento o il logoramento psicofisico derivante da situazioni tossiche mai affrontate. Riconosce che l'eccessiva disponibilità verso gli altri è una fuga dal proprio 'inferno' interiore e dalla propria guarigione."
+        },
+        {
+            fase: "3. Integrazione del Liberatore",
+            descrizione: "Scende al centro di sé stesso e recupera i propri talenti. Riscatta la propria anima antica, impara a dire la verità sui propri bisogni, lascia andare il passato e diventa guida luminosa e libera."
+        }
+    ],
+
+    consiglio: "Smettila di fare finta che vada tutto bene per paura del conflitto o del dolore: affrontare ciò che fa male è il primo passo per liberarti. Non annullarti per gli altri prima di aver salvato te stesso, lascia andare la nostalgia del passato e permetti alla tua vera luce e creatività di splendere.",
+
+    mantra_trasformazione: "Afronto il mio mondo interiore con coraggio e verità. Ricordo la mia natura luminosa, mi libero dal passato e dono armonia a me stesso e al mondo."
+},
+   1: {
+    nome: "Il Ribelle (L'Ombra del Guerriero)",
+
+    sfida_principale: "Riconoscere il proprio valore e la propria unicità senza oscillare tra l'iper-reattività e la sensazione di impotenza. La ferita del Ribelle deriva spesso da un rapporto problematico, assente, idealizzato o interrotto precocemente con la figura paterna (simbolo di autostima, volontà e affermazione sociale), che lascia un senso inconscio di sfiducia, risentimento o inadeguatezza.",
+
+    manifestazione_inconscia: "Oscillazione tra egocentrismo ed estrema insicurezza: può cercare la leadership a tutti i costi per attirare l'attenzione o ritirarsi per paura del fallimento. Tende al boicottaggio passivo-aggressivo (confonde le richieste con imposizioni e usa sotterfugi per rimandare), all'impulsività insofferente e al rifiuto della vulnerabilità. Piuttosto che accettare l'errore o mostrarsi 'fragile', preferisce non giocare o abbandonare l'obiettivo.",
+
+    risorsa_nascosta: "Coraggio autentico, capacità di andare controcorrente, originalità di pensiero, forza d'iniziativa e leadership sana, capaci di emergere una volta integrati i propri limiti ed errori come tappe di apprendimento.",
+
+    strategia_integrazione: "Riconciliare la memoria e la percezione della figura paterna per pacificare il maschile interiore. Smettere di dipendere dall'approvazione immediata altrui e imparare ad accogliere le proprie fragilità e sconfitte senza considerarle debolezze.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Reazione e Difesa",
+            descrizione: "Subisce la ferita di svalutazione o la mancanza del padre. Reagisce con impulsività, rabbia inespressa, isolamento o con un'atteggiamento di sfida e autosufficienza ostentata."
+        },
+        {
+            fase: "2. Presa di Coscienza",
+            descrizione: "Riconosce l'origine del proprio risentimento e la paura di fallire. Ammette di scambiare la vulnerabilità per debolezza e smette di usare la ribellione sterile o il ritardo come difesa."
+        },
+        {
+            fase: "3. Integrazione del Guerriero",
+            descrizione: "Riconosce il proprio valore a prescindere dal giudizio esterno. Esprime idee non convenzionali con calma, corre rischi calcolati e trasforma l'impulso ribelle in vera forza creatrice."
+        }
+    ],
+
+    consiglio: "Non temere di mostrare i tuoi lati fragili o le tue imperfezioni: non diminuiscono il tuo valore. Abbi il coraggio di dire ciò che provi, impara ad accettare le sconfitte come lezioni e non scambiare un invito o una regola per una minaccia alla tua libertà.",
+
+    mantra_trasformazione: "Riconosco e celebro la mia unicità. Accetto i miei errori con umiltà e trasformo la ribellione in coraggiosa affermazione di me stesso."
+},
+2: {
+    nome: "L'Orfano (L'Ombra del Fanciullo)",
+
+    sfida_principale: "Superare la paura dell'abbandono, della solitudine e la dipendenza affettiva. La ferita dell'Orfano risiede in un rapporto vissuto come sbilanciato con la figura materna (troppo assente o, al contrario, soffocante e iperprotettiva), che lascia nell'adulto un senso di smarrimento, insicurezza e il costante bisogno di trovare rifugio e nutrimento all'esterno.",
+
+    manifestazione_inconscia: "Tendenza a instaurare relazioni simbiotiche e di dipendenza, confondendo l'amore con il bisogno di protezione. Quando si sente minacciato o ferito, oscilla tra l'ipersensibilità pretesa (pretendere attenzioni prioritarie) e la reazione opposta di cinismo, malizia e freddezza difensiva. Può annullarsi per compiacere l'altro per timore di dire 'no', accumulando un risentimento che poi esplode in malumore o rivendicazione.",
+
+    risorsa_nascosta: "Profonda sensibilità, dolcezza autentica, empatia, intuizione e capacità di stabilire connessioni intime e armoniose, fruibili appieno una volta sviluppata l'autonomia emotiva.",
+
+    strategia_integrazione: "Sviluppare la propria indipendenza affettiva impara a stare bene da soli anche all'interno della coppia. Imparare a porre confini sani, gestire le fluttuazioni emotive senza rifugiarsi nel cinismo e riequilibrare il dare e l'avere nelle relazioni.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Dipendenza e Chiusura",
+            descrizione: "Sperimenta la paura del vuoto e dell'abbandono. Cerca relazioni simbiotiche come rifugio oppure si protegge dalle delusioni alzando una corazza di distacco, freddezza e indifferenza."
+        },
+        {
+            fase: "2. Presa di Coscienza",
+            descrizione: "Riconosce la tendenza a idealizzare gli altri e a delegare la propria sicurezza. Comprende che l'eccessiva disponibilità nasce dal timore del rifiuto e impara a individuare i propri bisogni reali."
+        },
+        {
+            fase: "3. Integrazione del Fanciullo",
+            descrizione: "Riconquista la spontaneità e la fiducia affettiva mantenendo salda la propria autonomia. Sa esprimere il proprio disappunto, dice 'no' quando necessario e ama in modo maturo e paritario."
+        }
+    ],
+
+    consiglio: "Impara a custodire il tuo spazio interiore senza pretendere che gli altri colmino i tuoi vuoti. Coltiva la tua spontaneità, esprimi chiaramente i tuoi 'no' e non confondere la capacità di amare con il bisogno di essere accudito o protetto.",
+
+    mantra_trasformazione: "Sono al sicuro e completo in me stesso. Accetto la mia sensibilità e dono amore con spontaneità, indipendenza e rispetto dei miei confini."
+},
+3: {
+    nome: "Lo Straniero (L'Ombra del Giullare)",
+
+    sfida_principale: "Superare la crisi d'identità, il senso di vuoto e il timore del rifiuto che portano a mascherare il proprio Io profondo. La ferita dello Straniero nasce da una difficoltà di riconoscimento infantile (eccessiva attenzione centralizzante o grave mancanza di cure e visibilità), che impedisce di percepire il proprio reale valore e spinge a cercare affannosamente un posto nel mondo.",
+
+    manifestazione_inconscia: "Comportamento 'camaleontico': indossa maschere e interpreta ruoli diversi pur di compiacere gli altri ed essere accettato, annullando i propri bisogni autentici. Tende alla dispersione energetica, all'iperattività e all'inizio di troppi progetti inconclusi come fuga dal silenzio e dal vuoto interiore. Oscilla tra la ricerca esibizionista dell'attenzione e la spinta all'invisibilità sociale o alla fredda superficialità difensiva.",
+
+    risorsa_nascosta: "Straordinaria creatività, eclettismo, talento comunicativo, gioia espressiva, sociabilità genuina e capacità di portare leggerezza ed empatia autentica, fruibili appieno quando smette di recitare un ruolo.",
+
+    strategia_integrazione: "Radicarsi nel proprio centro e accettare l'impopolarità pur di rimanere fedeli a sé stessi. Praticare il silenzio, ridurre la dispersione di impegni, comunicare le proprie emozioni senza paura di non piacere e coltivare l'autostima indipendente dalle gratificazioni esterne.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Fuga e Mascheramento",
+            descrizione: "Sperimenta il vuoto d'identità e la paura dell'abbandono. Si adegua alle aspettative altrui trasformandosi in un 'camaleonte' socialmente impeccabile o disperdendo la propria attenzione in mille impegni di superficie."
+        },
+        {
+            fase: "2. Presa di Coscienza",
+            descrizione: "Riconosce di usare la superficialità, l'immagine o l'iperattività come difese per non guardarsi dentro. Ammette la fame di approvazione e decide di fare spazio all'ascolto interiore e alla stasi."
+        },
+        {
+            fase: "3. Integrazione del Giullare",
+            descrizione: "Abbandona le maschere e si mostra per ciò che è realmente. Esprime liberamente il proprio talento e la propria creatività senza dipendere dagli applausi, connettendosi alle proprie radici."
+        }
+    ],
+
+    consiglio: "Smetti di essere come gli altri ti vogliono: non puoi piacere a tutti e va bene così. Ritagliati momenti di silenzio per entrare in contatto con il tuo centro, impara a dire chiaramente cosa provi e canalizza la tua creatività portando a termine un progetto alla volta.",
+
+    mantra_trasformazione: "Tolgo la maschera ed esprimo la mia vera essenza. Sono degno di amore e rispetto semplicemente per quello che sono."
+},
+5: {
+    nome: "Il Girovago (L'Ombra del Cercatore)",
+
+    sfida_principale: "Superare la paura di essere intrappolato nelle responsabilità, la sindrome da 'Puer Aeternus' (eterno adolescente) e l'ansia di evasione. La ferita del Girovago risiede in un complesso irrisolto con le figure genitoriali (specialmente la figura materna/Terra), che spinge a vivere i legami concreti, la routine o la maturità come trappole soffocanti da cui fuggire costantemente.",
+
+    manifestazione_inconscia: "Oscillazione estrema tra anarchia sregolata e rigida auto-repressione: passa da abusi sensoriali (alcol, cibo, sesso, impulsività) a periodi di ascesi e ritiri forzati. Nelle relazioni tende al 'dongiovannismo' o al timore del legame/maternità, lasciando i partner non appena si svelano reali. Quando cade (la 'caduta di Icaro'), può ribaltarsi nell'opposto: si rifugia in una routine grigia, diventando un cinico stacanovista e scambiandosi continuamente di ruolo con l'Ombra del Prigioniero.",
+
+    risorsa_nascosta: "Incontenibile entusiasmo, curiosità intellettuale, spirito di ricerca, dinamismo, fascino travolgente e capacità di rinnovamento, esprimibili in modo costruttivo una volta appreso il valore delle radici.",
+
+    strategia_integrazione: "Sviluppare la costanza e la forza di volontà completando gli impegni presi. Imparare che porsi dei confini sani non significa perdere la libertà, ma permettere ai propri sogni di mettere radici e dare frutti nella realtà.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Fuga e Inquietudine",
+            descrizione: "Temendo ogni forma di vincolo o responsabilità, vive di sregolatezza, cambi repentini di strada e fughe irrazionali, rifiutando di mettere radici nella materia."
+        },
+        {
+            fase: "2. Caduta e Compressione",
+            descrizione: "Schiacciato dalla paura della propria instabilità o dalle conseguenze delle sue azioni, crolla nell'eccesso opposto: si impone regole rigide, isolandosi o conformandosi a una routine grigia e amara."
+        },
+        {
+            fase: "3. Integrazione del Cercatore",
+            descrizione: "Comprende che la vera libertà richiede un centro saldo. Sviluppa disciplina interiore, canalizza l'entusiasmo in progetti concreti e viaggia nel mondo e nella conoscenza senza fuggire da sé stesso."
+        }
+    ],
+
+    consiglio: "Non scambiare la costanza per una prigione: metti radici per permettere ai tuoi progetti di fiorire. Moderata l'impulsività prima di troncare un legame o un lavoro, e ricorda che per volare alto serve un punto di partenza solido.",
+
+    mantra_trasformazione: "Sono un essere libero e radicato. Accetto le responsabilità del presente come terreno fertile per la mia crescita e la mia esplorazione."
+},
+6: {
+    nome: "Il Martire (L'Ombra dell'Angelo Custode)",
+
+    sfida_principale: "Superare il senso di colpa, la sindrome del salvatore e il bisogno nevrotico di sacrificarsi per gli altri. La ferita del Martire deriva da una carenza di nutrimento affettivo autentico durante l'infanzia (spesso sostituito solo da attenzioni materiali o da iperprotezione), che genera un profondo vuoto interiore e il terrore di non essere degno di amore se non attraverso l'annullamento di sé.",
+
+    manifestazione_inconscia: "Tendenza a sobbarcarsi i problemi altrui senza che venga richiesto, creando relazioni di dipendenza simbiotica con persone bisognose o immature. Oscilla tra un coinvolgimento emotivo soffocante e un totale ritiro difensivo quando si sente svalutato. Sotto la maschera della generosità e della superiorità morale nasconde il rifiuto di accudire il proprio bambino interiore, accumulando rancore e finendo per recitare il ruolo della vittima incompresa o tradita.",
+
+    risorsa_nascosta: "Amore incondizionato, generosità pura, spiccato senso di responsabilità, empatia, cura e capacità di creare un ambiente caldo e armonioso, fruibili appieno quando il dare si equilibra con la capacità di ricevere.",
+
+    strategia_integrazione: "Definire confini sani integrando la fermezza del Guerriero. Imparare a prendersi cura delle proprie esigenze affettive prima di quelle altrui, permettere agli altri di essere autosufficienti e lasciarsi amare senza sensi di colpa.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Sacrificio e Co-dipendenza",
+            descrizione: "Sperimenta un vuoto affettivo e un radicato senso di colpa. Cerca di meritare l'amore annullandosi per gli altri e attraendo persone bisognose da 'salvare', ignoro che sta proiettando all'esterno le proprie carenze."
+        },
+        {
+            fase: "2. Presa di Coscienza e Vittimismo",
+            descrizione: "Prende atto dell'esaurimento energetico e del risentimento accumulate per non essere ricambiato. Riconosce che il proprio 'altruismo' è in realtà un bisogno di controllo e una fuga dalle proprie ferite interiori."
+        },
+        {
+            fase: "3. Integrazione dell'Angelo Custode",
+            descrizione: "Impara ad amare sé stesso e a nutrire il proprio bambino interiore. Offre supporto solo quando richiesto e nel rispetto dei confini, creando relazioni di scambio paritario, libero e consapevole."
+        }
+    ],
+
+    consiglio: "Ricorda che 'sì' ha valore solo se sai dire anche 'no'. Smetti di fare il salvatore e lascia che gli altri imparino a camminare con le proprie gambe; accudisci il tuo bambino interiore e impara ad accogliere le attenzioni e l'amore che gli altri ti offrono.",
+
+    mantra_trasformazione: "Sono degno di amore semplicemente per ciò che sono. Onoro i miei confini, mi prendo cura di me stesso e dono con equilibrio e gioia."
+},
+7: {
+    nome: "Il Solitario (L'Ombra del Saggio)",
+
+    sfida_principale: "Superare l'isolamento difensivo, l'eccessivo iper-razionalismo e la trappola del perfezionismo deludente. La ferita del Solitario nasce da un vissuto infantile di incomprensione, diversità o isolamento, in cui la propria precoce curiosità non è stata sostenuta, spingendo l'individuo a proteggersi dalla brutalità e dalle incoerenze del mondo rifugiandosi nella 'torre d'avorio' della mente.",
+
+    manifestazione_inconscia: "Prende le distanze dalla vita e dalle emozioni filtrando ogni cosa attraverso un freddo giudizio o un cinismo provocatorio. Misura la realtà su modelli ideali irraggiungibili, passando da un'ingenua fiducia all'amarezza o allo scetticismo assoluto. Tende al dogmatismo, all'autoritarismo intellettuale e al bisogno di controllo, sopprimendo l'intuito o, al contrario, convertendosi improvvisamente e fanaticamente a credenze mistiche per compensare il vuoto razionale.",
+
+    risorsa_nascosta: "Profonda saggezza, intuizione elevata, nobiltà d'animo, capacità di penetrare i misteri dell'esistenza e connessione con il Sé spirituale, fruibili appieno quando la mente si integra e si ammorbidisce con l'apertura del cuore.",
+
+    strategia_integrazione: "Sospendere il giudizio e accettare l'imperfezione della vita quotidiana. Unire l'intelletto alla compassione, coltivare la gratitudine per il presente, aprirsi alle emozioni e bilanciare la solennità spirituale con l'ironia e la leggerezza.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Ritiro e Torrefazione Razionale",
+            descrizione: "Si sente ferito dalla banalità e dalle incoerenze del mondo; si isola nella mente, facendosi scudo di un cinismo distaccato, del perfezionismo e dell'iper-critica."
+        },
+        {
+            fase: "2. Presa di Coscienza e Disincanto",
+            descrizione: "Riconosce che la propria distanza è una difesa dettata dalla paura di soffrire. Comprende che il controllo razionale e l'intransigenza non colmano il senso di solitudine interiore."
+        },
+        {
+            fase: "3. Integrazione del Saggio",
+            descrizione: "Apre il cuore alla compassione e all'imperfezione. Unisce la mente razionale all'intuito profondo, vivendo la propria conoscenza con umiltà, ironia e connessione con il cosmo."
+        }
+    ],
+
+    consiglio: "Esci dalla tua 'torre d'avorio' e fai scendere la conoscenza dalla testa al cuore. Accetta che la realtà terrena è imperfetta e mutabile: astieniti dal giudizio, coltiva la gratitudine per ciò che c'è qui e ora e permettiti di vivere le emozioni senza doverle analizzare.",
+
+    mantra_trasformazione: "Apro il mio cuore alla vita e mi fido del flusso dell'esistenza. Accetto l'imperfezione in me e negli altri con amore, umiltà e gratitudine."
+},
+8: {
+    nome: "Il Tiranno (L'Ombra del Sovrano)",
+
+    sfida_principale: "Superare il bisogno ossessivo di controllo, la brama di supremazia e la paura di mostrare vulnerabilità. La ferita del Tiranno ha origine in un'infanzia segnata da precoci responsabilità materiali o dalla necessità di cavarsela da soli, che ha indotto l'individuo a diffidare della vita, disconnettersi dalla propria sensibilità e considerare il mondo secondo la 'legge della giungla'.",
+
+    manifestazione_inconscia: "Dominio esasperato della mente e fredda razionalità, dove ogni traccia di emotività viene repressa perché associata a debolezza. Per compenso a una carente autostima profonda e al terrore dell'umiliazione (il timore di trasformarsi nel 'buffone di corte'), si aggrappa al potere, all'autoritarismo e agli status symbol (lussi, immagine sociale, partner prestigiosi). Tende al sovraccarico lavorativo e a vedere le relazioni in termini di vincitori e perdenti, trasformando il proprio mondo in una 'terra desolata'.",
+
+    risorsa_nascosta: "Naturale autorevolezza, doti di leadership, spiccato senso di efficienza, capacità gestionale, visione pragmatica e generosità di visione, attivabili appieno quando il potere si fonde con la saggezza del cuore e l'empatia.",
+
+    strategia_integrazione: "Lasciare andare il controllo rigidamente esercitato e recuperare l'energia femminile (ricettività, dolcezza, vulnerabilità). Sostituire la logica di scarsità e competizione con la fiducia nell'abbondanza universale, bilanciando il dovere con il relax e accogliendo l'amore come autentico strumento di potere.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Controllo e Corazza",
+            descrizione: "Si protegge dalla vulnerabilità e dal rischio di derisione rigettando le emozioni, esercitando un autoritarismo inflessibile e inseguendo con frenesia status symbol e posizioni di comando."
+        },
+        {
+            fase: "2. Presa di Coscienza e Desolazione",
+            descrizione: "Sperimenta l'esaurimento sotto il peso delle responsabilità e l'isolamento affettivo. Riconosce che la smania di supremazia nasce dalla sfiducia e dalla paura di non valere per ciò che è realmente."
+        },
+        {
+            fase: "3. Integrazione del Sovrano",
+            descrizione: "Integra la propria sensibilità e impara a fidarsi del flusso dell'esistenza. Svolge il ruolo di guida autorevole, equa e generosa, governando la propria vita con l'intelligenza del cuore."
+        }
+    ],
+
+    consiglio: "Non scambiare la vulnerabilità per debolezza: il vero potere risiede nel cuore, non nel controllo. Fai un respiro profondo, impara a delegare e a rilassarti, ricordando che non devi dimostrare nulla né competere per meritare rispetto e amore.",
+
+    mantra_trasformazione: "Lascio andare il bisogno di dominare e mi fido del flusso della vita. Goverzo la mia realtà con amore, umiltà e autentica autorevolezza."
+},
+    9: {
+    nome: "L'Angelo Caduto (L'Ombra del Liberatore)",
+
+    sfida_principale: "Superare la rimozione dei contenuti inconsci, il peso della nostalgia, l'assorbimento osmotico delle sofferenze altrui e l'oblio di sé. La ferita dell'Angelo Caduto ha radici in un profondo senso di scollegamento dalla propria origine 'celeste' o spirituale e nel terrore di affrontare l'angoscia interiore, che lo spinge a rimuovere il dolore per non esserne sopraffatto.",
+
+    manifestazione_inconscia: "Mostra una 'persona' poco strutturata, agendo come una spugna emotiva ('mi fa male il mondo') e oscillando tra un'eccessiva disponibilità annullante e una freddezza glaciale difensiva. Tende a fare finta di nulla, mascherando la sofferenza con un'estroversione superficiale o con il ruolo di salvatore per non guardare nel proprio inconscio. Rischia di rimanere incastrato in situazioni logoranti o incatenato al passato (sindrome di Orfeo).",
+
+    risorsa_nascosta: "Incredibile ispirazione, fede incrollabile, compassione universale, saggezza profonda da 'anima antica', talento artistico e capacità di portare guarigione e liberazione a sé e agli altri.",
+
+    strategia_integrazione: "Cessare la rimozione e affrontare i problemi senza attendere che il corpo somatizzi o che gli eventi crollino. Discesa consapevole nel proprio inconscio per recuperare la propria anima (Euridice), fissare confini emotivi sani, lasciare andare il passato senza voltarsi indietro ed esprimere liberamente la propria sensibilità e creatività.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Rimozione e Annullamento",
+            descrizione: "Rimuove il dolore interiore proiettandosi del tutto all'esterno o facendosi carico delle sofferenze del mondo. Nasconde le proprie emozioni dietro una maschera di serenità o si rifugia in una distaccata insensibilità."
+        },
+        {
+            fase: "2. Presa di Coscienza e Crisi",
+            descrizione: "Sperimenta l'esaurimento o il logoramento psicofisico derivante da situazioni tossiche mai affrontate. Riconosce che l'eccessiva disponibilità verso gli altri è una fuga dal proprio 'inferno' interiore e dalla propria guarigione."
+        },
+        {
+            fase: "3. Integrazione del Liberatore",
+            descrizione: "Scende al centro di sé stesso e recupera i propri talenti. Riscatta la propria anima antica, impara a dire la verità sui propri bisogni, lascia andare il passato e diventa guida luminosa e libera."
+        }
+    ],
+
+    consiglio: "Smettila di fare finta che vada tutto bene per paura del conflitto o del dolore: affrontare ciò che fa male è il primo passo per liberarti. Non annullarti per gli altri prima di aver salvato te stesso, lascia andare la nostalgia del passato e permetti alla tua vera luce e creatività di splendere.",
+
+    mantra_trasformazione: "Afronto il mio mondo interiore con coraggio e verità. Ricordo la mia natura luminosa, mi libero dal passato e dono armonia a me stesso e al mondo."
+},
 };
 
 const databaseKarmici = {
 
-    13: "Sfida del cambiamento radicale e della rinascita.",
-    14: "Sfida della temperanza e della libertà interiore.",
-    16: "Sfida del crollo dell'Ego.",
-    19: "Sfida dell'indipendenza equilibrata."
+    13: {
+    nome: "L'Alchimista (Prova Karmica 13/4)",
+    significato: "L'Alchimista rappresenta la chiave di liberazione dai vincoli della materia, della stabilità e dell'inerzia (tipiche del Costruttore 4). Affronta la prova suprema dell'esistenza: comprendere che la materia è un'illusione transitoria e che l'uomo non è il proprio corpo fisico, ma uno spirito immortale. Insegna ad accettare l'ineluttabilità del cambiamento e della metamorfosi.",
+    origine_memoria: "Memorie di resistenza al cambiamento, attaccamento rigido al passato, alle forme logore o alle strutture materiali per paura dell'ignoto. Tendenza passata a rifiutare le crisi evolutive e ad evitare il confronto con la propria ombra, incolpando il destino esterno per le proprie sofferenze.",
+    manifestazione_ombra: "Rigidità mentale, paura della perdita e del crollo delle proprie certezze. Tendenza a rimanere incastrati in situazioni o relazioni ormai 'morte' per timore del vuoto. Rifiuto delle proprie zone d'ombra con conseguente proiezione all'esterno dei problemi non risolti (vittimismo), generando cicli ripetitivi di sofferenza e stagnazione.",
+    chiave_integrazione: "Sviluppare l'onestà interiore e riconoscere il mondo esterno come uno specchio dell'inconscio. Abbandonare la resistenza all'impermanenza, accogliere la 'morte' di ciò che non serve più come un atto di purificazione alchemica e accedere al Sé immortale tramite il contatto con la propria Ombra.",
+    consiglio: "Smettila di aggrapparti a ciò che è logoro per paura dell'ignoto. Guarda dentro di te quando la realtà ti turba: ciò che rifiuti all'esterno è solo la tua ombra che chiede di essere integrata. Accogli ogni crisi come un'opportunità di rinascita.",
+    mantra: "Accetto la metamorfosi e lascio andare il passato. Riconosco la mia natura spirituale e immortale oltre ogni illusione della forma."
+},
+ 14: {
+    nome: "L'Amante (Prova del Cercatore)",
+    significato: "Il numero 14 rappresenta la prova legata al mondo dei sensi, al desiderio e al principio del piacere. L'anima affronta l'illusione di cercare la pienezza e l'Assoluto attraverso stimoli esterni o la dipendenza dalle forme, scoprendo che la vera liberazione nasce dall'elevare la consapevolezza oltre la dualità e dall'armonizzare spirito e materia.",
+    origine_memoria: "Memorie legate all'uso sbilanciato del piacere o, al contrario, a inibizioni e reprimende culturali e religiose della sessualità. Vi è il ricordo inconscio di una costante fame d'immortalità tradotta in frenesia sensoriale o scissione tra sesso e amore.",
+    manifestazione_ombra: "Iper-stimolazione e ricerca incessante di emozioni forti per mascherare un senso di vuoto interiore; lussuria intesa come 'indigestione sensoriale'; tendenza alla dipendenza emotiva o sessuale, frenesia, paura di non avere abbastanza tempo e incapacità di godere del momento presente.",
+    chiave_integrazione: "Uso equilibrato e consapevole del piacere (principio epicureo); integrazione di eros e spirito senza colpa né repressione; uso della discriminazione per non perdersi nella corrente delle pulsioni sensoriali e riconoscere nella persona amata l'emanazione del divino.",
+    consiglio: "Procedi con calma facendo una cosa alla volta e vivi ogni attimo con totalità. Compila una lista delle tue vere priorità per focalizzare i desideri autentici ed evita l'eccesso di stimoli che stordisce l'ascolto interiore. Pratica la gratitudine serale per le piccole emozioni ricevute.",
+    mantra: "Sento la pienezza dello spirito in ogni percezione e vivo il piacere in perfetto equilibrio con la mia anima."
+},
+16: {
+    nome: "Il Perfezionista (Prova del Saggio)",
+    significato: "Il numero 16 rappresenta la prova del mentale, della volontà di potenza e della ricerca dell'assoluto slegata dal cuore. L'anima affronta la tentazione di elevarsi intellettualmente o spiritualmente con orgoglio e presunzione, creando strutture rigide o perseguitando una perfezione nevrotica. La sfida è crollare dall'arroganza dell'Io per riscoprire l'umiltà, integrando la mente con il cuore e radicandosi nella materia.",
+    origine_memoria: "Memorie di identificazione con il potere della mente, dogmatismo, integralismo o rifiuto del limite e della fragilità umana. Vi è il ricordo inconscio di una 'caduta dall'alto' (il crollo della torre/funambolo) dovuta all'aver cercato la perfezione ideale negando la vita reale e l'ombra.",
+    manifestazione_ombra: "Iper-stimolazione cerebrale, perfezionismo ossessivo, oscillazione tra delirio di onnipotenza e senso di impotenza; bisogno imperioso di avere ragione, giudizio, rifiuto delle proprie fragilità (proiettate all'esterno) e distacco dalle radici fisiche ed emotive.",
+    chiave_integrazione: "Sintonizzazione della mente con la frequenza del cuore e della compassione; lezione dell'umiltà e della modestia (accettazione dei propri limiti e della propria ombra); equilibrio tra polo spirituale e polo terreno/corporeo senza assolutismi.",
+    consiglio: "Non rimandare la felicità a quando sarai 'perfetto' e abbandona il bisogno di avere sempre ragione. Ascolta le emozioni altrui, cerca le affinità anziché le differenze e sii tenero con il tuo bambino interiore. Radicati passeggiando nella natura, curando il corpo e praticando l'umiltà.",
+    mantra: "Apro la mia mente alla saggezza del cuore e trovo la perfezione nell'umile bellezza dell'imperfezione."
+},
+19: {
+    nome: "Il Condottiero (Prova del Guerriero)",
+    significato: "Il numero 19 rappresenta la prova del superamento dell'ego e dell'ambizione personale per porsi al servizio della volontà divina e dell'umanità. L'anima affronta il paradosso dell'azione e della scissione tra mente e cuore, apprendendo l'arte del 'non fare': agire con determinazione e intenzione ma senza attaccamento ai risultati, affidando ogni esito al Sé supremo.",
+    origine_memoria: "Memorie legate all'uso dell'azione guidata unicamente dal potere dell'Io, dal controllo o dall'ansia da prestazione; ricordi di battaglie personali condotte in solitudine che hanno generato scissione tra volontà personale e legge d'amore, portando a sofferenza o sterile lotta.",
+    manifestazione_ombra: "Resistenza ad arrendersi alla volontà superiore, motivazioni egotiche mascherate da falso altruismo o santità; ansia da prestazione, paura del fallimento e tendenza a crollare nella frustrazione quando le aspettative personali non si realizzano.",
+    chiave_integrazione: "Allineamento tra la volontà individuale e quella cosmica ('Sia fatta la Tua volontà'); sviluppo del distacco spirituale in cui ci si considera strumenti della legge universale; equanimità di fronte alla vittoria e alla sconfitta e azione mossa dalla gioia e dal cuore.",
+    consiglio: "Verifica se le tue azioni nascono dall'ambizione dell'ego o dal cuore. Prima di decidere, medita per allinearti allo spirito e affidati con fiducia quando non vedi la via. Agisci con intenzione ferma senza vincolarti al risultato e lascia che la gioia e l'amore universale guidino ogni tuo passo.",
+    mantra: "Abbandono le pretese dell'ego, sono uno strumento del divino e agisco con gioia al servizio del tutto."
+},
 };
 
 function compilaScheda(numero, compatta = false) {
     if (!numero) return "";
-    // Gestione del numero in caso di formati composti (es. "13/4" o "19/1")
     let numeroPulito = numero.toString().includes('/') ? parseInt(numero.toString().split('/')[0], 10) : parseInt(numero, 10);
     let base = riduciMonocifraStretta(numeroPulito);
 
-    
-    // Identificazione dell'archetipo nel database
-    let chiaveFinestra = [11, 22, 33].includes(numeroPulito) ? numeroPulito : base;
+    let chiaveFinestra = [11, 22, 33, 44].includes(numeroPulito) ? numeroPulito : base;
     let datiArchetipo = databaseArchetipi[chiaveFinestra];
 
     if (!datiArchetipo) return "<i style='color: #888;'>Scheda non disponibile.</i>";
 
-
-
-    // Definiamo il percorso dell'immagine della carta
-
     const imgCarta = `./carte/${numeroPulito}.png`;
-
-
 
     let titolo = datiArchetipo.nome;
     let significatoTesto = datiArchetipo.significato || 'Descrizione non disponibile.';
     let luceTesto = datiArchetipo.luce || 'Non specificata.';
     let ombraTesto = datiArchetipo.ombra || 'Non specificata.';
 
+    // Helper per generare il blocco visuale di un archetipo mantenendo la tua struttura grafica
+    function generaHTMLArchetipo(dati, etichettaTitolo, numeroRiferimento) {
+        if (!dati) return "";
 
-
-    // Gestione speciale se il numero è Karmico
-
-    if (databaseKarmici[numeroPulito]) {
-        let nomeKarmico = "";
-        switch(numeroPulito) {
-            case 13: nomeKarmico = "L'Alchimista / Morte Iniziatica"; break;
-            case 14: nomeKarmico = "L'Amante / Temperanza"; break;
-            case 16: nomeKarmico = "Il Perfezionista / Crollo dell'Ego"; break;
-            case 19: nomeKarmico = "Il Condottiero / Rinascita Solitaria"; break;
+        let evoluzionevHTML = '';
+        if (dati.evoluzione && Array.isArray(dati.evoluzione)) {
+            evoluzionevHTML = dati.evoluzione.map(item => `
+                <div style="margin-bottom: 8px; padding: 8px 10px; background: rgba(255, 255, 255, 0.05); border-left: 3px solid #3498db; border-radius: 4px; text-align: left;">
+                    <strong style="color: #ecf0f1; display: block; margin-bottom: 3px; font-size: 13px;">${item.livello}</strong>
+                    <span style="font-size: 12px; color: #bdc3c7; line-height: 1.3; display: block;">${item.descrizione}</span>
+                </div>
+            `).join('');
         }
 
-        titolo += ` <span style="color:#d35400; font-size:12px; display:block; margin-top:2px;">(Prova Karmica ${numeroPulito}: ${nomeKarmico})</span>`;
-
-        significatoTesto = `<strong style="color:#d35400;">[SFIDA DEL KARMA ${numeroPulito}]:</strong> ${databaseKarmici[numeroPulito]}<br><br><strong>Integrazione con la Base (${base}):</strong><br>${datiArchetipo.significato}`;
-
-    }
-
-
-
-    // SE LA FUNZIONE CHIEDE LA VERSIONE COMPATTA (es. per i Grandi Cicli)
-
-    if (compatta) {
-
         return `
+            <div style="margin-top: 20px; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 15px;">
+                <h3 style="color: var(--accent-gold); text-align: center; margin-bottom: 15px; font-size: 15px; text-transform: uppercase;">
+                    ${etichettaTitolo}: ${dati.nome} (${numeroRiferimento})
+                </h3>
 
-            <div class="card-cliccabile" onclick="apriApprofondimento(this)" style="padding: 5px; cursor: pointer;">
-
-                <span class="archetipo-nome" style="font-weight: bold; color: var(--accent-gold);">${datiArchetipo.nome.split(' (')[0]}</span>
-
-                <div class="descrizione" style="font-size:12px; line-height:1.3; opacity: 0.8;">${luceTesto.substring(0, 80)}...</div>
-
-                
-
-                <!-- Contenuto segreto per la modale anche per la versione compatta -->
-
-                <div class="testo-segreto" style="display: none;">
-
-                    <div class="carte-popup-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
-
-                        <img src="${imgCarta}" alt="Carta ${numeroPulito}" onerror="this.style.display='none';" style="width: 140px; max-width: 50%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
-
-                    </div>
-
-                    <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
-
-                    <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
-
-                    <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
-
+                <!-- 1. ✨ SIGNIFICATO -->
+                <div style="background-color: #1a252f; border-left: 4px solid #34495e; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                    <strong style="color: #ecf0f1; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">✨ Significato</strong>
+                    <div style="color: #d5dbdb; font-size: 13px; line-height: 1.4;">${dati.significato || 'Descrizione non disponibile.'}</div>
                 </div>
 
+                <!-- 2. ☀️ ESPRESSIONE IN LUCE -->
+                <div style="background-color: #1e372a; border-left: 4px solid #27ae60; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                    <strong style="color: #2ecc71; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">☀️ Espressione in Luce</strong>
+                    <div style="color: #d4efdf; font-size: 13px; line-height: 1.4;">${dati.luce || 'Non specificata.'}</div>
+                </div>
+
+                <!-- 3. 🌑 ESPRESSIONE IN OMBRA -->
+                <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                    <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌑 Espressione in Ombra</strong>
+                    <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${dati.ombra || 'Non specificata.'}</div>
+                </div>
+
+                <!-- 4. 🗝️ CHIAVE EVOLUTIVA -->
+                ${dati.chiave ? `
+                <div style="background-color: #342816; border-left: 4px solid #f39c12; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                    <strong style="color: #f1c40f; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🗝️ Chiave Evolutiva</strong>
+                    <div style="color: #fdebd0; font-size: 13px; line-height: 1.4;">${dati.chiave}</div>
+                </div>` : ''}
+
+                <!-- 5. 📈 PERCORSO EVOLUTIVO -->
+                ${evoluzionevHTML ? `
+                <div style="background-color: #1a2a3a; border-left: 4px solid #2980b9; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                    <strong style="color: #3498db; display: block; margin-bottom: 8px; font-size: 13px; text-transform: uppercase;">📈 Percorso Evolutivo</strong>
+                    ${evoluzionevHTML}
+                </div>` : ''}
+
+                <!-- 6. 🌱 CONSIGLIO PRATICO -->
+                ${dati.consiglio ? `
+                <div style="background-color: #1b3320; border-left: 4px solid #16a085; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                    <strong style="color: #1abc9c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌱 Consiglio pratico</strong>
+                    <div style="color: #e8f8f5; font-size: 13px; line-height: 1.4;">${dati.consiglio}</div>
+                </div>` : ''}
+
+                <!-- 7. 🔮 MANTRA DELL'ARCHETIPO -->
+                ${dati.mantra ? `
+                <div style="background-color: #2c1a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: center;">
+                    <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔮 Mantra dell'Archetipo</strong>
+                    <div style="color: #f5eed3; font-size: 13px; font-style: italic; font-weight: 600;">"${dati.mantra}"</div>
+                </div>` : ''}
             </div>
-
         `;
-
     }
 
+    // 1. SCHEDA DELL'ARCHETIPO PRINCIPALE (Maestro o Monocifra)
+    let eMaestro = [11, 22, 33, 44].includes(numeroPulito);
+    let etichettaPrincipale = eMaestro ? "👑 ARCHETIPO MAESTRO" : "🏛️ ARCHETIPO DI BASE";
+    let schedaBaseHTML = generaHTMLArchetipo(datiArchetipo, etichettaPrincipale, chiaveFinestra);
 
+    // 1b. SE È UN MAESTRO, APPENDIAMO ANCHE L'ARCHETIPO DI BASE DI RADICE (es. 11 genera anche la scheda del 2)
+    if (eMaestro && databaseArchetipi[base]) {
+        schedaBaseHTML += generaHTMLArchetipo(databaseArchetipi[base], "🏛️ RADICE ARCHETIPICA DI BASE", base);
+    }
 
-    // VERSIONE ESTESA STANDARD (Per Anima, Persona, Destino, ecc.)
+    // 2. SCHEDA KARMICA (es. Numero 13) - Generata solo se il numero è Karmico
+    let schedaKarmicaHTML = '';
+    if (typeof databaseKarmici !== 'undefined' && databaseKarmici[numeroPulito]) {
+        let k = databaseKarmici[numeroPulito];
+
+        if (typeof k === 'object') {
+            let nomeKarmico = k.nome || `Prova Karmica ${numeroPulito}`;
+            titolo += ` <span style="color:#d35400; font-size:12px; display:block; margin-top:2px;">(${nomeKarmico})</span>`;
+
+            schedaKarmicaHTML = `
+                <div style="background: rgba(211, 84, 0, 0.08); border: 1px solid #d35400; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                    <h3 style="color: #e67e22; text-align: center; margin-top: 0; margin-bottom: 12px; font-size: 15px; text-transform: uppercase;">
+                        ⚠️ LEZIONE E SFIDA KARMICA ${numeroPulito}: ${nomeKarmico}
+                    </h3>
+
+                    <!-- SIGNIFICATO KARMICO -->
+                    ${k.significato ? `
+                    <div style="background-color: #342816; border-left: 4px solid #d35400; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
+                        <strong style="color: #e67e22; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">✨ Lezione Karmica</strong>
+                        <div style="color: #fdebd0; font-size: 13px; line-height: 1.4;">${k.significato}</div>
+                    </div>` : ''}
+
+                    <!-- ORIGINE E MEMORIE -->
+                    ${k.origine_memoria ? `
+                    <div style="background-color: #2b1820; border-left: 4px solid #900C3F; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
+                        <strong style="color: #f1948a; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">📜 Origine e Memorie</strong>
+                        <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${k.origine_memoria}</div>
+                    </div>` : ''}
+
+                    <!-- MANIFESTAZIONE OMBRA KARMICA -->
+                    ${k.manifestazione_ombra ? `
+                    <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
+                        <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌑 Ombra Karmica</strong>
+                        <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${k.manifestazione_ombra}</div>
+                    </div>` : ''}
+
+                    <!-- CHIAVE DI INTEGRAZIONE KARMICA -->
+                    ${k.chiave_integrazione ? `
+                    <div style="background-color: #1a2a3a; border-left: 4px solid #2980b9; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
+                        <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔑 Chiave di Integrazione</strong>
+                        <div style="color: #d4e6f1; font-size: 13px; line-height: 1.4;">${k.chiave_integrazione}</div>
+                    </div>` : ''}
+
+                    <!-- CONSIGLIO KARMICO -->
+                    ${k.consiglio ? `
+                    <div style="background-color: #1b3320; border-left: 4px solid #16a085; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
+                        <strong style="color: #1abc9c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌱 Consiglio Karmico</strong>
+                        <div style="color: #e8f8f5; font-size: 13px; line-height: 1.4;">${k.consiglio}</div>
+                    </div>` : ''}
+
+                    <!-- MANTRA KARMICO -->
+                    ${k.mantra ? `
+                    <div style="background-color: #2c1a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: center;">
+                        <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔮 Mantra Karmico</strong>
+                        <div style="color: #f5eed3; font-size: 13px; font-style: italic; font-weight: 600;">"${k.mantra}"</div>
+                    </div>` : ''}
+                </div>
+            `;
+        } else {
+            // Fallback per vecchie stringhe semplici
+            titolo += ` <span style="color:#d35400; font-size:12px; display:block; margin-top:2px;">(Prova Karmica ${numeroPulito})</span>`;
+            schedaKarmicaHTML = `
+                <div style="background-color: #342816; border-left: 4px solid #d35400; padding: 12px; border-radius: 6px; margin-bottom: 15px; text-align: left;">
+                    <strong style="color: #e67e22; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">⚠️ SFIDA DEL KARMA ${numeroPulito}</strong>
+                    <div style="color: #fdebd0; font-size: 13px; line-height: 1.4;">${k}</div>
+                </div>
+            `;
+        }
+    }
+
+    // 3. COMPOSTO FINALE: Prima il blocco Karmico (se presente), poi l'Archetipo Maestro e/o di Base
+    const quadrantiPopupHTML = schedaKarmicaHTML + schedaBaseHTML;
+
+    // SE COMPATTA (es. Grandi Cicli)
+    if (compatta) {
+        return `
+            <div class="card-cliccabile" onclick="apriApprofondimento(this)" style="padding: 5px; cursor: pointer;">
+                <span class="archetipo-nome" style="font-weight: bold; color: var(--accent-gold);">${datiArchetipo.nome.split(' (')[0]}</span>
+                <div class="descrizione" style="font-size:12px; line-height:1.3; opacity: 0.8;">${luceTesto.substring(0, 80)}...</div>
+                
+                <div class="testo-segreto" style="display: none;">
+                    <div class="carte-popup-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
+                        <img src="${imgCarta}" alt="Carta ${numeroPulito}" onerror="this.style.display='none';" style="width: 140px; max-width: 50%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
+                    </div>
+                    ${quadrantiPopupHTML}
+                </div>
+            </div>
+        `;
+    }
+
+    // VERSIONE ESTESA STANDARD
     return `
         <div class="ns-level-container card-cliccabile" onclick="apriApprofondimento(this)">
-
-            <!-- Miniature carte CENTRATE nell'anteprima -->
             <div class="carte-mini-container" style="display: flex; gap: 15px; margin: 15px 0; justify-content: center;">
                 <img src="${imgCarta}" alt="Carta ${numeroPulito}" class="mini-carta-archetipo" onerror="this.style.display='none';" style="width: 75px; height: auto; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-
             </div>
 
             <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
@@ -758,27 +1463,103 @@ function compilaScheda(numero, compatta = false) {
             </span>
             <span style="font-size: 12px; opacity: 0.6; display: block;">➔ Clicca qui per leggere l'analisi completa</span>
 
-            <!-- Contenuto segreto letto dal popup -->
             <div class="testo-segreto" style="display: none;">
                 <div class="carte-popup-container" style="display: flex; justify-content: center; margin-bottom: 25px;">
                     <img src="${imgCarta}" alt="Carta ${numeroPulito}" onerror="this.style.display='none';" style="width: 140px; max-width: 50%; height: auto; border-radius: 10px; border: 2px solid var(--accent-gold); box-shadow: 0 8px 20px rgba(0,0,0,0.6);">
-
                 </div>
-
-                <p><strong>Significato Evolutivo:</strong><br>${significatoTesto}</p>
-                <p style="color: #196f3d; background-color: #d4efdf; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>✨ Espressione in Luce:</strong><br>${luceTesto}</p>
-                <p style="color: #943126; background-color: #fadbd8; padding: 10px; border-radius: 6px; margin-top: 15px;"><strong>⚠️ Espressione in Ombra:</strong><br>${ombraTesto}</p>
-
+                ${quadrantiPopupHTML}
             </div>
-
         </div>
-
     `;
 }
-function compilaSchedaOmbra(valoreOmbra) {
-    let datiOmbra = databaseOmbreMazzo[valoreOmbra] || { nome: `Ombra ${valoreOmbra}`, sfida: "Sfida evolutiva." };
-    return `<span class="archetipo-nome" style="color: #c0392b;">${datiOmbra.nome}</span><div class="descrizione">${datiOmbra.sfida}</div>`;
 
+function compilaSchedaOmbra(valoreOmbra) {
+    // 1. Convertiamo valoreOmbra in numero puro
+    let num = parseInt(valoreOmbra, 10);
+    
+    // 2. Cerchiamo nel database
+    let d = databaseOmbreMazzo[num] || databaseOmbreMazzo[valoreOmbra];
+
+    // Fallback se l'ombra non viene trovata
+    if (!d) {
+        return `
+            <span class="archetipo-nome" style="color: #c0392b;">Ombra ${valoreOmbra}</span>
+            <div class="descrizione">Scheda ombra non trovata per il valore: ${valoreOmbra}</div>
+        `;
+    }
+
+    // Estrazione parametri con fallback
+    let nome = d.nome || `Ombra ${num}`;
+    let sfida = d.sfida_principale || d.sfida || "Informazione non disponibile.";
+    let manifestazione = d.manifestazione_inconscia || d.manifestazione || "Informazione non disponibile.";
+    let risorsa = d.risorsa_nascosta || d.risorsa || "Informazione non disponibile.";
+    let strategia = d.strategia_integrazione || d.strategia || "Informazione non disponibile.";
+    let consiglio = d.consiglio || "Informazione non disponibile.";
+    let mantra = d.mantra_trasformazione || d.mantra || "";
+
+    // Costruzione dinamica del blocco Fasi di Risoluzione (stesso stile del Percorso Evolutivo)
+    let fasiHTML = '';
+    if (d.fasi_risoluzione && Array.isArray(d.fasi_risoluzione)) {
+        fasiHTML = d.fasi_risoluzione.map(item => `
+            <div style="margin-bottom: 8px; padding: 8px 10px; background: rgba(255, 255, 255, 0.05); border-left: 3px solid #8e44ad; border-radius: 4px; text-align: left;">
+                <strong style="color: #ecf0f1; display: block; margin-bottom: 3px; font-size: 13px;">${item.fase}</strong>
+                <span style="font-size: 12px; color: #bdc3c7; line-height: 1.3; display: block;">${item.descrizione}</span>
+            </div>
+        `).join('');
+    }
+
+    // Costruzione dei quadranti uniformati allo stile compilaScheda
+    return `
+        <div class="scheda-ombra-container" style="text-align: left;">
+            <span class="info-responso" style="color: #e74c3c; font-weight: bold; font-style: italic; display: block; margin-bottom: 8px; font-size: 16px;">
+                ${nome}
+            </span>
+
+            <!-- 1. ⚠️ SFIDA PRINCIPALE -->
+            <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">⚠️ Sfida Principale</strong>
+                <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${sfida}</div>
+            </div>
+
+            <!-- 2. 🌑 MANIFESTAZIONE INCONSCIA -->
+            <div style="background-color: #2b1820; border-left: 4px solid #900C3F; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                <strong style="color: #f1948a; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌑 Manifestazione Inconscia</strong>
+                <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${manifestazione}</div>
+            </div>
+
+            <!-- 3. 💎 RISORSA NASCOSTA -->
+            <div style="background-color: #1e372a; border-left: 4px solid #27ae60; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                <strong style="color: #2ecc71; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">💎 Risorsa Nascosta</strong>
+                <div style="color: #d4efdf; font-size: 13px; line-height: 1.4;">${risorsa}</div>
+            </div>
+
+            <!-- 4. 🔑 STRATEGIA DI INTEGRAZIONE -->
+            <div style="background-color: #1a2a3a; border-left: 4px solid #2980b9; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔑 Strategia di Integrazione</strong>
+                <div style="color: #d4e6f1; font-size: 13px; line-height: 1.4;">${strategia}</div>
+            </div>
+
+            <!-- 5. 📈 FASI DI RISOLUZIONE -->
+            ${fasiHTML ? `
+            <div style="background-color: #251a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                <strong style="color: #a569bd; display: block; margin-bottom: 8px; font-size: 13px; text-transform: uppercase;">📈 Fasi di Risoluzione</strong>
+                ${fasiHTML}
+            </div>` : ''}
+
+            <!-- 6. 🌱 CONSIGLIO PRATICO -->
+            <div style="background-color: #342816; border-left: 4px solid #f39c12; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
+                <strong style="color: #f1c40f; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌱 Consiglio Pratico</strong>
+                <div style="color: #fdebd0; font-size: 13px; line-height: 1.4; font-style: italic;">"${consiglio}"</div>
+            </div>
+
+            <!-- 7. 🔮 MANTRA DI TRASFORMAZIONE -->
+            ${mantra ? `
+            <div style="background-color: #2c1a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: center;">
+                <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔮 Mantra di Trasformazione</strong>
+                <div style="color: #f5eed3; font-size: 13px; font-style: italic; font-weight: 600;">"${mantra}"</div>
+            </div>` : ''}
+        </div>
+    `;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
