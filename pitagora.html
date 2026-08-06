@@ -435,24 +435,24 @@
                     </div>
                 </div>
 
-                <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi (Il Clima di Vita)</div>
-                <div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
-                    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
-                        <h3 style="font-size:12px;">Ciclo Formativo<br>(Mese)</h3>
-                        <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                        <div id="descCicloForm" style="font-size:12px;"></div>
-                    </div>
-                    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
-                        <h3 style="font-size:12px;">Ciclo Produttivo<br>(Giorno)</h3>
-                        <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                        <div id="descCicloProd" style="font-size:12px;"></div>
-                    </div>
-                    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
-                        <h3 style="font-size:12px;">Ciclo Conclusivo<br>(Anno)</h3>
-                        <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085; font-size:18px;"></div>
-                        <div id="descCicloConc" style="font-size:12px;"></div>
-                    </div>
-                </div>
+               <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb;">I 3 Grandi Cicli Evolutivi (Il Clima di Vita)</div>
+<div class="grid-cards" style="grid-template-columns: repeat(3, 1fr); gap: 10px;">
+    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
+        <h3 style="font-size:13px;">Ciclo Formativo<br>(Mese)</h3>
+        <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085; font-size:20px;"></div>
+        <div id="descCicloForm"></div>
+    </div>
+    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
+        <h3 style="font-size:13px;">Ciclo Produttivo<br>(Giorno)</h3>
+        <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085; font-size:20px;"></div>
+        <div id="descCicloProd"></div>
+    </div>
+    <div class="card" style="border-left-color: #16a085; padding: 12px; cursor: pointer;" onclick="apriApprofondimento(this)">
+        <h3 style="font-size:13px;">Ciclo Conclusivo<br>(Anno)</h3>
+        <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085; font-size:20px;"></div>
+        <div id="descCicloConc"></div>
+    </div>
+</div>
                 <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
 
                 <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1;">I 4 Cicli di Realizzazione</div>
@@ -1511,9 +1511,9 @@ function compilaSchedaOmbra(valoreOmbra) {
     // Costruzione dei quadranti uniformati allo stile compilaScheda
     return `
         <div class="scheda-ombra-container" style="text-align: left;">
-            <span class="info-responso" style="color: #e74c3c; font-weight: bold; font-style: italic; display: block; margin-bottom: 8px; font-size: 16px;">
-                ${nome}
-            </span>
+            <span class="archetipo-nome" style="display: block; margin-bottom: 4px; font-weight: bold;">
+    Archetipo: ${nome}
+</span>
 
             <!-- 1. ⚠️ SFIDA PRINCIPALE -->
             <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
@@ -1561,7 +1561,27 @@ function compilaSchedaOmbra(valoreOmbra) {
         </div>
     `;
 }
+function creaAnteprimaOmbra(numeroOmbra) {
+    if (!numeroOmbra) return '';
+    
+    // Recupera l'archetipo/ombra dal database esistente
+    let num = parseInt(numeroOmbra, 10);
+    let d = (typeof databaseOmbreMazzo !== 'undefined' && databaseOmbreMazzo[num]) || 
+            (typeof databaseArchetipi !== 'undefined' && databaseArchetipi[num]) || null;
+    
+    // Se trova il nome usa quello, altrimenti usa il numero
+    let nomeArchetipo = d && d.nome ? d.nome : `Ombra ${num}`;
 
+    // Restituisce la stessa identica struttura grafica delle schede in alto
+    return `
+        <div class="scheda-preview">
+            <span class="archetipo-nome" style="display: block; font-weight: bold; margin-bottom: 4px;">
+                Archetipo: ${nomeArchetipo}
+            </span>
+            <small style="color: #888; font-style: italic;">→ Clicca qui per leggere l'analisi completa</small>
+        </div>
+    `;
+}
 document.addEventListener("DOMContentLoaded", function() {
     const inputData = document.getElementById('dataNascita');
     if (inputData) {
@@ -1664,6 +1684,11 @@ function salvaNelDatabase() {
     const oGiov = document.getElementById('numOmbraGiov')?.innerText || "";
     const oMat = document.getElementById('numOmbraMat')?.innerText || "";
     const oPrinc = document.getElementById('numOmbraPrinc')?.innerText || "";
+    
+    document.getElementById('descOmbraGiov').innerHTML = creaAnteprimaOmbra(oGiov);
+    document.getElementById('descOmbraMat').innerHTML = creaAnteprimaOmbra(oMat);
+    document.getElementById('descOmbraPrinc').innerHTML = creaAnteprimaOmbra(oPrinc);
+
     const ombre = `Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}`;
 
 
