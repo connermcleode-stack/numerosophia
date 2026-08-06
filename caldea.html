@@ -497,9 +497,9 @@
                     <div id="numOmbraMat" class="numero-evidenziato" style="color: #e74c3c;"></div>
                     <div id="descOmbraMat"></div>
                 </div>
-                <div class="card" style="grid-column: span 2; border-left-color: #c0392b;">
+                <div class="card" style="grid-column: span 2; border-left-color: #e74c3c">
                     <h3>Afflizione Karmica Principale</h3>
-                    <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #c0392b;"></div>
+                    <div id="numOmbraPrinc" class="numero-evidenziato" style="color: #e74c3c"></div>
                     <div id="descOmbraPrinc"></div>
                 </div>
             </div>
@@ -999,7 +999,7 @@ function compilaSchedaOmbra(valoreOmbra) {
     
     // Mostra solo il nome e l'invito al click
     return `<div style="cursor: pointer;" onclick="apriApprofondimentoOmbra('${base}', '${valoreOmbra}')">
-                <span class="archetipo-nome" style="color: #c0392b; font-weight: bold; display: block; margin-bottom: 4px;">${datiOmbra.nome}</span>
+                <span class="archetipo-nome" style="display: block; margin-bottom: 4px;">${datiOmbra.nome}</span>
                 <small style="color: #888; font-style: italic;">👉 Clicca per la descrizione completa</small>
             </div>`;
 }
