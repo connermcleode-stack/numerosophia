@@ -611,20 +611,33 @@ const DESCRIZIONI_LEGAME = {
     chiave: "Prendersi cura dell'altro è prezioso, ma ricordate di nutrire anche voi stessi."
   },
 
+  7: {
+    titolo: "Legame Karmico Spirituale e Ricerca di Solitudine Condivisa",
+    badge: "Legame Spirituale",
+    badgeClass: "badge-spiritual",
+    testo: "Questa relazione spinge entrambi a guardarsi dentro e a porsi domande profonde sul senso della vita e del legame stesso. Spesso l'incontro avviene per sviluppare una maggiore consapevolezza o per superare schemi mentali ed illusioni. È una connessione che richiede spazio, rispetto per i momenti di introspezione e un ascolto privo di giudizio. Il rischio principale è la chiusura o la difficoltà nell'esprimere le proprie emozioni, creando distanze inaspettate. Quando l'analisi lascia il posto alla fiducia autentica, la coppia diventa un rifugio di saggezza, intesa intellettuale e profonda sintonia spirituale.",
+    chiave: "Cercare insieme la verità significa rispettare anche i silenzi dell'altro."
+  },
+
   8: {
     titolo: "Legame di Potere ed Equilibrio",
     badge: "Test di Maturità",
     badgeClass: "badge-soft",
     testo: "Questa relazione mette alla prova il modo in cui entrambi gestiscono forza, ambizione e responsabilità. Possono emergere differenze nella gestione del denaro, del lavoro o delle decisioni importanti. Ogni confronto rappresenta un'opportunità per imparare il rispetto reciproco e la collaborazione. Quando il desiderio di prevalere lascia spazio alla fiducia, il rapporto sviluppa stabilità, solidità e una notevole capacità di affrontare insieme le sfide della vita.",
     chiave: "Il vero potere di una coppia nasce dall'equilibrio, non dal controllo."
+  },
+
+  9: {
+    titolo: "Chiusura di un Ciclo Karmico e Compimento",
+    badge: "Legame Karmico Attivo",
+    badgeClass: "badge-karmic",
+    testo: "L'incontro rappresenta il punto di arrivo di un lungo percorso evolutivo intrapreso dalle due anime. È un legame caratterizzato da un'intensa empatia, senso di compassione e spesso dalla sensazione di conoscersi da sempre. La lezione principale consiste nel saper lasciare andare vecchi risentimenti, schemi del passato o aspettative egoiche per completare un'antica promessa. Questa relazione invita a vivere un amore universale e disinteressato; quando si impara a non trattenere ma a donare con generosità, il legame offre una sensazione di profonda liberazione, guarigione interiore e compimento spirituale.",
+    chiave: "La vera unione si compie quando si impara ad amare senza trattenere."
   }
 };
 
 // Significati per il Ciclo della Relazione (Metodo 4)
-// Messaggi Numerosophici del Ciclo della Relazione
-
 const DESCRIZIONI_CICLO = {
-
   7: "Ogni relazione attraversa momenti di silenzio. È proprio lì che l'anima impara ad ascoltare ciò che le parole non riescono a raccontare. Quando il cuore smette di cercare risposte immediate, la saggezza inizia lentamente a rivelarsi.",
   9: "Nessun incontro è davvero casuale. Alcune persone arrivano per chiudere capitoli rimasti aperti, altre per insegnarci il valore del perdono. Lasciare andare ciò che ha compiuto il proprio percorso non significa perdere qualcosa, ma creare lo spazio necessario perché possa nascere un nuovo inizio.",
   14: "La libertà non separa due anime autentiche, le rende capaci di incontrarsi ogni giorno per scelta. Quando il rispetto sostituisce il controllo, la relazione smette di essere una prigione e diventa un luogo in cui entrambi possono continuare a crescere.",
@@ -635,7 +648,6 @@ const DESCRIZIONI_CICLO = {
   6: "L'amore più autentico non nasce dal sacrificio, ma dall'equilibrio. Chi si prende cura dell'altro senza dimenticare sé stesso alimenta una fiamma che continua a riscaldare entrambi nel tempo.",
   8: "Il vero potere non consiste nell'avere ragione, ma nel saper creare armonia anche nelle differenze. Quando due persone imparano a mettere la propria forza al servizio della relazione, ogni sfida diventa una possibilità di crescita condivisa.",
   19: "La luce di una persona non diminuisce quella dell'altra. Due anime evolvono davvero quando imparano a brillare insieme, senza competere, senza nascondersi e senza temere il valore reciproco."
-
 };
 
 /**
@@ -652,23 +664,29 @@ function validaECalcolaRelazioneKarmica() {
     return;
   }
 
-  // 1. Destini Personali e Analisi Singola
+  // Destini Personali
   const destinoA = calcolaDestino(dataA);
   const destinoB = calcolaDestino(dataB);
 
-  // 2. Metodo 2: Somma dei Destini della Coppia
+  // Lettura di Anima e Io
+  const animaA = typeof calcolaAnima === 'function' ? calcolaAnima(nomeA) : (parseInt(document.getElementById('animaA')?.value, 10) || null);
+  const animaB = typeof calcolaAnima === 'function' ? calcolaAnima(nomeB) : (parseInt(document.getElementById('animaB')?.value, 10) || null);
+  const ioA = typeof calcolaIo === 'function' ? calcolaIo(nomeA) : (parseInt(document.getElementById('ioA')?.value, 10) || null);
+  const ioB = typeof calcolaIo === 'function' ? calcolaIo(nomeB) : (parseInt(document.getElementById('ioB')?.value, 10) || null);
+
+  // ==========================================================================
+  // PUNTO C: Somma mirata: Destino A + Destino B
+  // ==========================================================================
   const sommaDestini = destinoA + destinoB;
   let numeroSintesi = riduciNumeroKarmico(sommaDestini);
   if (!DESCRIZIONI_LEGAME[numeroSintesi]) {
     numeroSintesi = riduciInSingolaOCifraMaestra(numeroSintesi);
   }
 
-  // 3. Metodo 4: Numero di Ciclo della Relazione
+  // Metodo 4: Numero di Ciclo della Relazione
   const numCiclo = calcolaCicloRelazione(dataA, dataB);
 
-  // --- RENDERING DEI RISULTATI ---
-
-  // Impronta Principale
+  // --- RENDERING RISULTATO PUNTO C ---
   document.getElementById('numeroSintesi').innerText = numeroSintesi;
   const info = DESCRIZIONI_LEGAME[numeroSintesi] || {
     titolo: "Incontro di Affinità",
@@ -683,26 +701,98 @@ function validaECalcolaRelazioneKarmica() {
   `;
   document.getElementById('descrizioneSintesi').innerText = info.testo;
 
-  // ESPANSIONE 1: Karma Personali Singoli (Metodo 1)
+  // ==========================================================================
+  // PUNTO A: Numeri Karmici Personali (13, 14, 16, 19)
+  // ==========================================================================
   let htmlKarmiciSingoli = "";
-  const karmiciValidi = [13, 14, 16, 19, 11, 22];
+  const karmiciPuri = [13, 14, 16, 19];
 
-  if (karmiciValidi.includes(destinoA)) {
-    htmlKarmiciSingoli += `<li style="margin-bottom:6px;"><strong>${nomeA}</strong> porta il Destino <strong>${destinoA}</strong> (karma/energia attiva personale).</li>`;
+  if (karmiciPuri.includes(destinoA)) {
+    htmlKarmiciSingoli += `<li style="margin-bottom:6px;"><strong>${nomeA}</strong> ha il Destino <strong>${destinoA}</strong> 👉 porta karma attivo nella relazione.</li>`;
   }
-  if (karmiciValidi.includes(destinoB)) {
-    htmlKarmiciSingoli += `<li style="margin-bottom:6px;"><strong>${nomeB}</strong> porta il Destino <strong>${destinoB}</strong> (karma/energia attiva personale).</li>`;
+  if (karmiciPuri.includes(destinoB)) {
+    htmlKarmiciSingoli += `<li style="margin-bottom:6px;"><strong>${nomeB}</strong> ha il Destino <strong>${destinoB}</strong> 👉 porta karma attivo nella relazione.</li>`;
   }
 
   const boxKarmici = document.getElementById('boxKarmiciSingoli');
-  if (htmlKarmiciSingoli !== "") {
-    document.getElementById('listaKarmiciSingoli').innerHTML = htmlKarmiciSingoli;
-    boxKarmici.style.display = 'block';
-  } else {
-    boxKarmici.style.display = 'none';
+  if (boxKarmici) {
+    if (htmlKarmiciSingoli !== "") {
+      document.getElementById('listaKarmiciSingoli').innerHTML = htmlKarmiciSingoli;
+      boxKarmici.style.display = 'block';
+    } else {
+      boxKarmici.style.display = 'none';
+    }
   }
 
-  // ESPANSIONE 2: Ciclo della Relazione (Metodo 4)
+  // ==========================================================================
+  // PUNTO B & RISPECCHIAMENTI COMPLETI: Legame Pregresso
+  // ==========================================================================
+  let coincidenze = [];
+
+  // --- 1. STESSO ASPETTO NUMERICO (Destino=Destino, Anima=Anima, Io=Io) ---
+  if (destinoA && destinoB && destinoA === destinoB) {
+    coincidenze.push(`<strong>Stesso Destino (${destinoA}):</strong> ${nomeA} e ${nomeB} condividono la stessa direzione evolutiva.`);
+  }
+  if (animaA && animaB && animaA === animaB) {
+    coincidenze.push(`<strong>Stessa Anima (${animaA}):</strong> Desideri e motivazioni profonde perfettamente identici.`);
+  }
+  if (ioA && ioB && ioA === ioB) {
+    coincidenze.push(`<strong>Stesso Io (${ioA}):</strong> Modalità espressive e personalità sociale identiche.`);
+  }
+
+  // --- 2. ANIMA ↔ DESTINO ---
+  if (animaA && destinoB && animaA === destinoB) {
+    coincidenze.push(`L'<strong>Anima di ${nomeA}</strong> (${animaA}) = <strong>Destino di ${nomeB}</strong> (${destinoB})`);
+  }
+  if (animaB && destinoA && animaB === destinoA) {
+    coincidenze.push(`L'<strong>Anima di ${nomeB}</strong> (${animaB}) = <strong>Destino di ${nomeA}</strong> (${destinoA})`);
+  }
+
+  // --- 3. ANIMA ↔ IO ---
+  if (animaA && ioB && animaA === ioB) {
+    coincidenze.push(`L'<strong>Anima di ${nomeA}</strong> (${animaA}) = <strong>Io di ${nomeB}</strong> (${ioB})`);
+  }
+  if (animaB && ioA && animaB === ioA) {
+    coincidenze.push(`L'<strong>Anima di ${nomeB}</strong> (${animaB}) = <strong>Io di ${nomeA}</strong> (${ioA})`);
+  }
+
+  // --- 4. DESTINO ↔ IO ---
+  if (destinoA && ioB && destinoA === ioB) {
+    coincidenze.push(`Il <strong>Destino di ${nomeA}</strong> (${destinoA}) = <strong>Io di ${nomeB}</strong> (${ioB})`);
+  }
+  if (destinoB && ioA && destinoB === ioA) {
+    coincidenze.push(`Il <strong>Destino di ${nomeB}</strong> (${destinoB}) = <strong>Io di ${nomeA}</strong> (${ioA})`);
+  }
+
+  // Rendering Box Rispecchiamento (Legame Pregresso)
+  let boxRispecchiamento = document.getElementById('boxRispecchiamento');
+  if (coincidenze.length > 0) {
+    let htmlRispecchiamento = `
+      <div style="background: rgba(212, 175, 55, 0.1); border-left: 4px solid #d4af37; padding: 14px; margin-top: 15px; border-radius: 6px;">
+        <h4 style="margin:0 0 10px 0; color:#d4af37; font-size:1.1rem; display:flex; align-items:center; gap:6px;">
+          <span>✨</span> Legame Pregresso (Rispecchiamento Numerico)
+        </h4>
+        <ul style="margin:0; padding-left:20px; font-size:0.95rem; line-height:1.5;">
+          ${coincidenze.map(c => `<li style="margin-bottom:6px;">${c}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+
+    if (!boxRispecchiamento) {
+      boxRispecchiamento = document.createElement('div');
+      boxRispecchiamento.id = 'boxRispecchiamento';
+      const container = document.getElementById('risultati-container');
+      container.appendChild(boxRispecchiamento);
+    }
+    boxRispecchiamento.innerHTML = htmlRispecchiamento;
+    boxRispecchiamento.style.display = 'block';
+  } else if (boxRispecchiamento) {
+    boxRispecchiamento.style.display = 'none';
+  }
+
+  // ==========================================================================
+  // RENDERING CICLO DELLA RELAZIONE (Metodo 4)
+  // ==========================================================================
   document.getElementById('numeroCiclo').innerText = numCiclo;
   let descCiclo = DESCRIZIONI_CICLO[numCiclo] || `Numero di ciclo ${numCiclo}: definisce la frequenza evolutiva generale lungo il percorso comune della coppia.`;
   document.getElementById('descrizioneCiclo').innerText = descCiclo;
