@@ -650,43 +650,116 @@ const DESCRIZIONI_CICLO = {
   19: "La luce di una persona non diminuisce quella dell'altra. Due anime evolvono davvero quando imparano a brillare insieme, senza competere, senza nascondersi e senza temere il valore reciproco."
 };
 
+
 /**
  * Funzione principale esecutiva
  */
+/**
+ * Helper universale per estrarre il valore numerico da Anima/Io/Destino
+ */
+function estraiNumeroPuro(valore) {
+  if (valore === null || valore === undefined) return null;
+  
+  // Se la funzione calcolaAnima/calcolaIo restituisce un oggetto (es. { numero: 5 } o { ridotto: 5 })
+  if (typeof valore === 'object') {
+    valore = valore.numero || valore.ridotto || valore.valore || Object.values(valore)[0];
+  }
+
+  // Se è già un numero o una stringa numerica
+  let n = parseInt(valore, 10);
+  if (isNaN(n) || n === 0) return null;
+
+  // Riduzione a cifra singola o numero maestro (11, 22) / karmico
+  while (n > 9 && ![11, 22, 33, 44, 13, 14, 16, 19].includes(n)) {
+    n = String(n).split('').reduce((sum, d) => sum + parseInt(d, 10), 0);
+  }
+  return n;
+}
+
+/**
+ * Funzione autonoma che calcola Destino, Anima e Io direttamente
+ */
 function validaECalcolaRelazioneKarmica() {
-  const nomeA = document.getElementById('nomeA').value.trim() || 'Persona A';
-  const nomeB = document.getElementById('nomeB').value.trim() || 'Persona B';
-  const dataA = document.getElementById('dataA').value.trim();
-  const dataB = document.getElementById('dataB').value.trim();
+  // 1. Lettura dei campi HTML
+  const nomeAInput = document.getElementById('nomeA')?.value.trim() || '';
+  const cognomeAInput = document.getElementById('cognomeA')?.value.trim() || '';
+  const nomeBInput = document.getElementById('nomeB')?.value.trim() || '';
+  const cognomeBInput = document.getElementById('cognomeB')?.value.trim() || '';
+
+  const nomeCompletoA = `${nomeAInput} ${cognomeAInput}`.trim();
+  const nomeCompletoB = `${nomeBInput} ${cognomeBInput}`.trim();
+
+  const dataA = document.getElementById('dataA')?.value.trim();
+  const dataB = document.getElementById('dataB')?.value.trim();
 
   if (!dataA || dataA.length < 10 || !dataB || dataB.length < 10) {
     alert("Inserisci entrambe le date di nascita nel formato completo GG/MM/AAAA.");
     return;
   }
 
-  // Destini Personali
-  const destinoA = calcolaDestino(dataA);
-  const destinoB = calcolaDestino(dataB);
+  // --- CALCOLATORE PITAGORICO INTERNO (Anima e Io) ---
+  const MAPPATURA_LETTERE = {
+    A:1, J:1, S:1,  B:2, K:2, T:2,  C:3, L:3, U:3,
+    D:4, M:4, V:4,  E:5, N:5, W:5,  F:6, O:6, X:6,
+    G:7, P:7, Y:7,  H:8, Q:8, Z:8,  I:9, R:9
+  };
+  const VOCALI = ['A', 'E', 'I', 'O', 'U'];
 
-  // Lettura di Anima e Io
-  const animaA = typeof calcolaAnima === 'function' ? calcolaAnima(nomeA) : (parseInt(document.getElementById('animaA')?.value, 10) || null);
-  const animaB = typeof calcolaAnima === 'function' ? calcolaAnima(nomeB) : (parseInt(document.getElementById('animaB')?.value, 10) || null);
-  const ioA = typeof calcolaIo === 'function' ? calcolaIo(nomeA) : (parseInt(document.getElementById('ioA')?.value, 10) || null);
-  const ioB = typeof calcolaIo === 'function' ? calcolaIo(nomeB) : (parseInt(document.getElementById('ioB')?.value, 10) || null);
+  function calcolaAnimaEIoDiretto(testoCompleto) {
+    if (!testoCompleto) return { anima: null, io: null };
+    
+    let sommaAnima = 0;
+    let sommaIo = 0;
+    const pulito = testoCompleto.toUpperCase().replace(/[^A-Z]/g, '');
 
-  // ==========================================================================
-  // PUNTO C: Somma mirata: Destino A + Destino B
-  // ==========================================================================
+    for (let char of pulito) {
+      const val = MAPPATURA_LETTERE[char] || 0;
+      if (VOCALI.includes(char)) {
+        sommaAnima += val;
+      } else {
+        sommaIo += val;
+      }
+    }
+
+    const riduci = (n) => {
+      if (!n) return null;
+      while (n > 9 && ![11, 22, 33].includes(n)) {
+        n = String(n).split('').reduce((a, b) => a + parseInt(b, 10), 0);
+      }
+      return n;
+    };
+
+    return {
+      anima: riduci(sommaAnima),
+      io: riduci(sommaIo)
+    };
+  }
+
+  // Calcolo dei valori per Persona A e Persona B
+  const calcoliA = calcolaAnimaEIoDiretto(nomeCompletoA);
+  const calcoliB = calcolaAnimaEIoDiretto(nomeCompletoB);
+
+  const animaA = calcoliA.anima;
+  const ioA = calcoliA.io;
+  const animaB = calcoliB.anima;
+  const ioB = calcoliB.io;
+
+  const destinoA = estraiNumeroPuro(calcolaDestino(dataA));
+  const destinoB = estraiNumeroPuro(calcolaDestino(dataB));
+
+  console.log("--- NUOVO CALCOLO AUTONOMO ---");
+  console.log(`Persona A (${nomeCompletoA}): Destino=${destinoA}, Anima=${animaA}, Io=${ioA}`);
+  console.log(`Persona B (${nomeCompletoB}): Destino=${destinoB}, Anima=${animaB}, Io=${ioB}`);
+
+  // Resto della logica di sintesi...
   const sommaDestini = destinoA + destinoB;
   let numeroSintesi = riduciNumeroKarmico(sommaDestini);
   if (!DESCRIZIONI_LEGAME[numeroSintesi]) {
     numeroSintesi = riduciInSingolaOCifraMaestra(numeroSintesi);
   }
 
-  // Metodo 4: Numero di Ciclo della Relazione
   const numCiclo = calcolaCicloRelazione(dataA, dataB);
 
-  // --- RENDERING RISULTATO PUNTO C ---
   document.getElementById('numeroSintesi').innerText = numeroSintesi;
   const info = DESCRIZIONI_LEGAME[numeroSintesi] || {
     titolo: "Incontro di Affinità",
@@ -702,69 +775,57 @@ function validaECalcolaRelazioneKarmica() {
   document.getElementById('descrizioneSintesi').innerText = info.testo;
 
   // ==========================================================================
-  // PUNTO A: Numeri Karmici Personali (13, 14, 16, 19)
-  // ==========================================================================
-  let htmlKarmiciSingoli = "";
-  const karmiciPuri = [13, 14, 16, 19];
-
-  if (karmiciPuri.includes(destinoA)) {
-    htmlKarmiciSingoli += `<li style="margin-bottom:6px;"><strong>${nomeA}</strong> ha il Destino <strong>${destinoA}</strong> 👉 porta karma attivo nella relazione.</li>`;
-  }
-  if (karmiciPuri.includes(destinoB)) {
-    htmlKarmiciSingoli += `<li style="margin-bottom:6px;"><strong>${nomeB}</strong> ha il Destino <strong>${destinoB}</strong> 👉 porta karma attivo nella relazione.</li>`;
-  }
-
-  const boxKarmici = document.getElementById('boxKarmiciSingoli');
-  if (boxKarmici) {
-    if (htmlKarmiciSingoli !== "") {
-      document.getElementById('listaKarmiciSingoli').innerHTML = htmlKarmiciSingoli;
-      boxKarmici.style.display = 'block';
-    } else {
-      boxKarmici.style.display = 'none';
-    }
-  }
-
-  // ==========================================================================
-  // PUNTO B & RISPECCHIAMENTI COMPLETI: Legame Pregresso
+  // CONFRONTI E RISPECCHIAMENTI
   // ==========================================================================
   let coincidenze = [];
+  const pA = nomeAInput || 'Persona A';
+  const pB = nomeBInput || 'Persona B';
 
-  // --- 1. STESSO ASPETTO NUMERICO (Destino=Destino, Anima=Anima, Io=Io) ---
-  if (destinoA && destinoB && destinoA === destinoB) {
-    coincidenze.push(`<strong>Stesso Destino (${destinoA}):</strong> ${nomeA} e ${nomeB} condividono la stessa direzione evolutiva.`);
-  }
-  if (animaA && animaB && animaA === animaB) {
-    coincidenze.push(`<strong>Stessa Anima (${animaA}):</strong> Desideri e motivazioni profonde perfettamente identici.`);
-  }
-  if (ioA && ioB && ioA === ioB) {
-    coincidenze.push(`<strong>Stesso Io (${ioA}):</strong> Modalità espressive e personalità sociale identiche.`);
-  }
+  const base = (n) => {
+    if (!n) return null;
+    let x = parseInt(n, 10);
+    while (x > 9 && ![11, 22].includes(x)) {
+      x = String(x).split('').reduce((s, d) => s + parseInt(d, 10), 0);
+    }
+    return x;
+  };
 
-  // --- 2. ANIMA ↔ DESTINO ---
-  if (animaA && destinoB && animaA === destinoB) {
-    coincidenze.push(`L'<strong>Anima di ${nomeA}</strong> (${animaA}) = <strong>Destino di ${nomeB}</strong> (${destinoB})`);
+  // 1. Stessi Aspetti (Destino=Destino, Anima=Anima, Io=Io)
+  if (destinoA && destinoB && base(destinoA) === base(destinoB)) {
+    coincidenze.push(`<strong>Stesso Destino (${destinoA}):</strong> ${pA} e ${pB} condividono la stessa direzione evolutiva.`);
   }
-  if (animaB && destinoA && animaB === destinoA) {
-    coincidenze.push(`L'<strong>Anima di ${nomeB}</strong> (${animaB}) = <strong>Destino di ${nomeA}</strong> (${destinoA})`);
+  if (animaA && animaB && base(animaA) === base(animaB)) {
+    coincidenze.push(`<strong>Stessa Anima (${animaA}):</strong> ${pA} e ${pB} condividono gli stessi desideri e motivazioni profonde.`);
   }
-
-  // --- 3. ANIMA ↔ IO ---
-  if (animaA && ioB && animaA === ioB) {
-    coincidenze.push(`L'<strong>Anima di ${nomeA}</strong> (${animaA}) = <strong>Io di ${nomeB}</strong> (${ioB})`);
-  }
-  if (animaB && ioA && animaB === ioA) {
-    coincidenze.push(`L'<strong>Anima di ${nomeB}</strong> (${animaB}) = <strong>Io di ${nomeA}</strong> (${ioA})`);
+  if (ioA && ioB && base(ioA) === base(ioB)) {
+    coincidenze.push(`<strong>Stesso Io (${ioA}):</strong> ${pA} e ${pB} condividono la stessa modalità espressiva e personalità.`);
   }
 
-  // --- 4. DESTINO ↔ IO ---
-  if (destinoA && ioB && destinoA === ioB) {
-    coincidenze.push(`Il <strong>Destino di ${nomeA}</strong> (${destinoA}) = <strong>Io di ${nomeB}</strong> (${ioB})`);
+  // 2. Anima <-> Destino
+  if (animaA && destinoB && base(animaA) === base(destinoB)) {
+    coincidenze.push(`L'<strong>Anima di ${pA}</strong> (${animaA}) = <strong>Destino di ${pB}</strong> (${destinoB})`);
   }
-  if (destinoB && ioA && destinoB === ioA) {
-    coincidenze.push(`Il <strong>Destino di ${nomeB}</strong> (${destinoB}) = <strong>Io di ${nomeA}</strong> (${ioA})`);
+  if (animaB && destinoA && base(animaB) === base(destinoA)) {
+    coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Destino di ${pA}</strong> (${destinoA})`);
   }
 
-  // Rendering Box Rispecchiamento (Legame Pregresso)
+  // 3. Anima <-> Io
+  if (animaA && ioB && base(animaA) === base(ioB)) {
+    coincidenze.push(`L'<strong>Anima di ${pA}</strong> (${animaA}) = <strong>Io di ${pB}</strong> (${ioB})`);
+  }
+  if (animaB && ioA && base(animaB) === base(ioA)) {
+    coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Io di ${pA}</strong> (${ioA})`);
+  }
+
+  // 4. Destino <-> Io
+  if (destinoA && ioB && base(destinoA) === base(ioB)) {
+    coincidenze.push(`Il <strong>Destino di ${pA}</strong> (${destinoA}) = <strong>Io di ${pB}</strong> (${ioB})`);
+  }
+  if (destinoB && ioA && base(destinoB) === base(ioA)) {
+    coincidenze.push(`Il <strong>Destino di ${pB}</strong> (${destinoB}) = <strong>Io di ${pA}</strong> (${ioA})`);
+  }
+
+  // Rendering Box Rispecchiamento
   let boxRispecchiamento = document.getElementById('boxRispecchiamento');
   if (coincidenze.length > 0) {
     let htmlRispecchiamento = `
@@ -790,19 +851,15 @@ function validaECalcolaRelazioneKarmica() {
     boxRispecchiamento.style.display = 'none';
   }
 
-  // ==========================================================================
-  // RENDERING CICLO DELLA RELAZIONE (Metodo 4)
-  // ==========================================================================
+  // Rendering Ciclo
   document.getElementById('numeroCiclo').innerText = numCiclo;
   let descCiclo = DESCRIZIONI_CICLO[numCiclo] || `Numero di ciclo ${numCiclo}: definisce la frequenza evolutiva generale lungo il percorso comune della coppia.`;
   document.getElementById('descrizioneCiclo').innerText = descCiclo;
 
-  // Mostra il contenitore e scrolla
   const containerRisultati = document.getElementById('risultati-container');
   containerRisultati.style.display = 'block';
   containerRisultati.scrollIntoView({ behavior: 'smooth' });
 }
-
 // ============================================================================
 // LIGNAGGIO FAMILIARE - GESTIONE INTERFACCIA E LOGICA DI PRESENTAZIONE
 // (Utilizza esclusivamente il motore centrale di calcolo da calcoli.js)
