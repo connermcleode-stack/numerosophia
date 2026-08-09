@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lignaggio Familiare - Numerosophia</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=500;700&family=Cormorant+Garamond:ital,wght=0,400;0,600;1,400&family=Montserrat:wght=300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Sfondo Grigio Elegante */
+            --bg-color: #1a1918;
+            --bg-gradient-center: #2d2b28;
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa7c11;
+            --card-bg: rgba(35, 33, 30, 0.7);
+            --card-border: rgba(212, 175, 55, 0.25);
+            --input-bg: rgba(20, 19, 18, 0.85);
+            --text-muted: #b3ad9e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 16px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Sfondo Grigio Elegante */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 50% 20%, #2e2a24 0%, #141312 80%),
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px) 0 0 / 40px 40px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .page-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            border: 1px solid var(--gold-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .page-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--gold-primary);
+            fill: none;
+            stroke-width: 1.2;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 500;
+            font-size: clamp(22px, 6vw, 28px);
+            letter-spacing: 3px;
+            background: linear-gradient(to bottom, #ebd197 0%, #bca060 50%, #997d3f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: #e0dbd1;
+        }
+
+        .gold-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 12px 0;
+            width: 100%;
+        }
+
+        .gold-divider::before, .gold-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to var(--dir, right), transparent, var(--gold-dark));
+            max-width: 60px;
+        }
+        .gold-divider::before { --dir: right; }
+        .gold-divider::after { --dir: left; }
+
+        .gold-divider svg {
+            width: 8px;
+            height: 8px;
+            fill: var(--gold-primary);
+            margin: 0 8px;
+        }
+
+        /* Form Scheda */
+        .card-form {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px 16px;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.05), 0 4px 18px rgba(0,0,0,0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        label {
+    	    font-size: 0.65rem;
+    	    text-transform: uppercase;
+    	    letter-spacing: 1px;
+    	    color: var(--gold-light);
+    	    margin-bottom: 6px;
+    	    font-weight: 500;
+    	    line-height: 1.3; /* Aumenta leggermente lo spazio tra le due righe */
+    	    display: block;
+	}
+
+	label span {
+    	    font-size: 0.55rem; /* Un po' più piccolo rispetto al titolo */
+    	    opacity: 0.8;       /* Effetto visivo più morbido per la parentesi */
+    	    text-transform: uppercase;
+	}
+
+        input[type="text"] {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Contenitore Pulsanti Affiancati */
+        .actions-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-home-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 38px;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-home-arrow svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gold-primary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .btn-home-arrow:active {
+            transform: scale(0.95);
+            border-color: var(--gold-primary);
+        }
+
+        .btn-calculate {
+            flex-grow: 1;
+            height: 38px;
+            background: linear-gradient(135deg, #aa7c11 0%, #d4af37 50%, #aa7c11 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 0 16px;
+            color: #0b0a08;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-calculate:active {
+            transform: scale(0.98);
+        }
+
+        /* Contenitore Risultati Generale */
+        .results-container {
+            display: none;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        /* Schede dei singoli Rami */
+        .lineage-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .result-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--gold-light);
+            letter-spacing: 1.5px;
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 6px;
+        }
+
+        .result-item {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 6px;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .riga-cliccabile {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .riga-cliccabile:hover {
+            background-color: rgba(212, 175, 55, 0.12);
+        }
+
+        .result-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .result-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: var(--gold-primary);
+            font-weight: 700;
+        }
+
+        footer {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .version {
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.25);
+            text-transform: uppercase;
+        }
+
+        @keyframes compariModale {
+            from { 
+                transform: scale(0.92); 
+                opacity: 0; 
+            }
+            to { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
+        }
+
+        /* STILI CARTA E SEZIONI GRAFICHE NELLA MODALE (Pitagora style) */
+        .card-image-container {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .card-image {
+            max-width: 140px;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .section-box {
+            background: rgba(20, 24, 33, 0.6);
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--gold-primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+
+        .section-box.archetipo-box {
+            border-left-color: #d4af37;
+            background: rgba(45, 38, 20, 0.35);
+        }
+
+        .section-box.dono-box {
+            border-left-color: #4a90e2;
+            background: rgba(20, 35, 55, 0.45);
+        }
+
+        .section-box.ombra-box {
+            border-left-color: #e67e22;
+            background: rgba(45, 28, 18, 0.45);
+        }
+
+        .section-box.integrazione-box {
+            border-left-color: #2ecc71;
+            background: rgba(18, 40, 28, 0.45);
+        }
+
+        .section-title-modale {
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .archetipo-box .section-title-modale { color: #f3e5ab; }
+        .dono-box .section-title-modale { color: #7cb5ec; }
+        .ombra-box .section-title-modale { color: #f39c12; }
+        .integrazione-box .section-title-modale { color: #2ecc71; }
+
+        .section-text-modale {
+            font-size: 0.83rem;
+            line-height: 1.5;
+            color: #e0dbd1;
+        }
+
+        /* Scrollbar personalizzata per la modale */
+        #modaleContenuto::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        #modaleContenuto::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+
+        #modaleContenuto::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+        }
+
+        /* --- MEDIA QUERY PER DISPOSITIVI MOBILI --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+
+            h1 {
+                font-size: 22px;
+                letter-spacing: 2px;
+            }
+            
+            .container {
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 20px 15px !important;
+            }
+
+            #modaleApprofondimento {
+                padding: 10px !important; 
+            }
+
+            #modaleApprofondimento > div {
+                width: 96% !important;
+                max-width: 96% !important;
+                padding: 20px 15px 15px 15px !important;
+                max-height: 90vh !important;
+                border-radius: 12px !important;
+            }
+
+            #modaleApprofondimento span[onclick] {
+                top: 8px !important;
+                right: 12px !important;
+                font-size: 28px !important;
+                padding: 5px;
+            }
+
+            #modaleTitolo {
+                font-size: 18px !important;
+                padding-right: 25px;
+            }
+
+            #modaleSottotitolo {
+                font-size: 14px !important;
+            }
+
+            .card-image {
+                max-width: 110px;
+            }
+        }
+    </style>
+
+    <!-- Inclusione dello script di calcolo esterno -->
+    <script src="calcoli.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registrato!'))
+                    .catch(err => console.error('Errore SW:', err));
+            });
+        }
+    </script>
+</head>
+<body>
+
+<!-- Modale di Approfondimento per Lignaggio Familiare (Grafica Pitagora) -->
+<div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(5, 8, 14, 0.85); align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+    <div style="background-color: #0d121c; border: 1px solid rgba(212, 175, 55, 0.35); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 8px 32px rgba(0,0,0,0.9); position: relative; animation: compariModale 0.3s ease;">
+        <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95; transition: color 0.2s;" onmouseover="this.style.color='#d4af37'" onmouseout="this.style.color='#a69f95'">&times;</span>
+        <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px;">Titolo</h2>
+        <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 16px; font-style: italic; font-weight: 400;">Sottotitolo</h4>
+        <div id="modaleContenuto" style="max-height: 65vh; overflow-y: auto; padding-right: 6px;"></div>
+    </div>
+</div>
+
+    <div class="container">
+
+        <div class="header-section">
+            <!-- Simbolo Albero del Lignaggio -->
+<div class="header-logo">
+    <svg viewBox="0 0 100 100"
+         class="main-sacred-symbol"
+         style="width: 95px; height: 95px;"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+            <!-- Bagliore dorato -->
+            <filter id="treeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.8" result="blur"/>
+                <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+
+        <!-- Cerchio esterno -->
+        <circle
+            cx="50"
+            cy="50"
+            r="27"
+            fill="none"
+            stroke="#c9a227"
+            stroke-width="0.8"
+            opacity="0.75"
+        />
+
+        <!-- Albero -->
+        <g
+            fill="none"
+            stroke="#d4af37"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            filter="url(#treeGlow)"
+        >
+
+            <!-- TRONCO -->
+            <path
+                d="M50 73
+                   C49 64, 49 56, 50 48
+                   C50 42, 50 37, 50 31"
+                stroke-width="2.2"
+            />
+
+            <!-- RAMO SINISTRO PRINCIPALE -->
+            <path
+                d="M50 52
+                   C44 48, 38 44, 34 37"
+                stroke-width="1.7"
+            />
+
+            <!-- RAMO DESTRO PRINCIPALE -->
+            <path
+                d="M50 52
+                   C56 48, 62 44, 66 37"
+                stroke-width="1.7"
+            />
+
+            <!-- RAMO SINISTRO ALTO -->
+            <path
+                d="M50 43
+                   C46 39, 42 35, 40 30"
+                stroke-width="1.4"
+            />
+
+            <!-- RAMO DESTRO ALTO -->
+            <path
+                d="M50 43
+                   C54 39, 58 35, 60 30"
+                stroke-width="1.4"
+            />
+
+            <!-- PICCOLI RAMI ESTERNI -->
+            <path
+                d="M38 44
+                   C34 43, 31 40, 29 37"
+                stroke-width="1.2"
+            />
+
+            <path
+                d="M62 44
+                   C66 43, 69 40, 71 37"
+                stroke-width="1.2"
+            />
+
+            <!-- RAMETTI SUPERIORI -->
+            <path
+                d="M40 31
+                   C37 29, 35 26, 35 23"
+                stroke-width="1.1"
+            />
+
+            <path
+                d="M60 31
+                   C63 29, 65 26, 65 23"
+                stroke-width="1.1"
+            />
+
+            <!-- RADICI -->
+            <path
+                d="M50 67
+                   C45 69, 41 72, 37 77"
+                stroke-width="1.4"
+            />
+
+            <path
+                d="M50 67
+                   C55 69, 59 72, 63 77"
+                stroke-width="1.4"
+            />
+
+            <path
+                d="M47 70
+                   C43 74, 39 76, 34 77"
+                stroke-width="1.1"
+            />
+
+            <path
+                d="M53 70
+                   C57 74, 61 76, 66 77"
+                stroke-width="1.1"
+            />
+
+            <path
+                d="M50 69
+                   C50 73, 50 76, 48 80"
+                stroke-width="1.1"
+            />
+
+        </g>
+
+        <!-- FOGLIE / NODI DELLA DISCENDENZA -->
+        <g fill="#d4af37" filter="url(#treeGlow)">
+
+            <!-- cima -->
+            <circle cx="50" cy="27" r="2.1"/>
+
+            <!-- ramo sinistro alto -->
+            <circle cx="39" cy="28" r="1.7"/>
+
+            <!-- ramo destro alto -->
+            <circle cx="61" cy="28" r="1.7"/>
+
+            <!-- ramo sinistro -->
+            <circle cx="34" cy="36" r="1.8"/>
+
+            <!-- ramo destro -->
+            <circle cx="66" cy="36" r="1.8"/>
+
+            <!-- estremità -->
+            <circle cx="29" cy="36" r="1.5"/>
+            <circle cx="71" cy="36" r="1.5"/>
+
+        </g>
+
+        <!-- Piccolo punto centrale -->
+        <circle
+            cx="50"
+            cy="50"
+            r="1.8"
+            fill="#d4af37"
+        />
+
+    </svg>
+</div>
+            <h1>LIGNAGGIO FAMILIARE</h1>
+            <p class="subtitle">L'eredità profonda dei tuoi antenati</p>
+            
+            <div class="gold-divider">
+                <svg viewBox="0 0 10 10"><polygon points="5,0 10,5 5,10 0,5"/></svg>
+            </div>
+        </div>
+
+        <!-- FORM INPUT -->
+        <div class="card-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fatherSurname">Cognome Padre <br><span>(Energia maschile)</span></label>
+                    <input type="text" id="fatherSurname" placeholder="Es. Rossi" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="motherSurname">Cognome Madre <br><span>(Energia femminile)</span></label>
+                    <input type="text" id="motherSurname" placeholder="Es. Bianchi" autocomplete="off">
+                </div>
+            </div>
+
+            <div class="actions-row">
+                <a href="index.html" class="btn-home-arrow" aria-label="Torna alla Home">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                </a>
+                <button type="button" class="btn-calculate" onclick="calculateLineage()">Calcola</button>
+            </div>
+        </div>
+
+        <!-- CONTENITORE RISULTATI DINAMICI -->
+        <div class="results-container" id="results">
+            
+            <!-- RAMO PATERNO -->
+            <div id="paternalCard" class="lineage-card">
+                <div class="result-title">Lignaggio Paterno</div>
+                <div class="result-item riga-cliccabile" onclick="mostraDescrizione('Paterno', 'Lignaggio Animico', 'patVoc')">
+                    <span class="result-label">Lignaggio Animico</span>
+                    <span class="result-value" id="patVoc">-</span>
+                </div>
+                <div class="result-item riga-cliccabile" onclick="mostraDescrizione('Paterno', 'Lignaggio della Personalità', 'patCons')">
+                    <span class="result-label">Lignaggio della Personalità</span>
+                    <span class="result-value" id="patCons">-</span>
+                </div>
+                <div class="result-item riga-cliccabile" onclick="mostraDescrizione('Paterno', 'Lignaggio Familiare', 'patTot')">
+                    <span class="result-label">Lignaggio Familiare</span>
+                    <span class="result-value" id="patTot">-</span>
+                </div>
+            </div>
+
+            <!-- RAMO MATERNO -->
+            <div id="maternalCard" class="lineage-card">
+                <div class="result-title">Lignaggio Materno</div>
+                <div class="result-item riga-cliccabile" onclick="mostraDescrizione('Materno', 'Lignaggio Animico', 'matVoc')">
+                    <span class="result-label">Lignaggio Animico</span>
+                    <span class="result-value" id="matVoc">-</span>
+                </div>
+                <div class="result-item riga-cliccabile" onclick="mostraDescrizione('Materno', 'Lignaggio della Personalità', 'matCons')">
+                    <span class="result-label">Lignaggio della Personalità</span>
+                    <span class="result-value" id="matCons">-</span>
+                </div>
+                <div class="result-item riga-cliccabile" onclick="mostraDescrizione('Materno', 'Lignaggio Familiare', 'matTot')">
+                    <span class="result-label">Lignaggio Familiare</span>
+                    <span class="result-value" id="matTot">-</span>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <div class="gold-divider" style="margin: 0;">
+                <svg viewBox="0 0 10 10"><polygon points="5,0 10,5 5,10 0,5"/></svg>
+            </div>
+            <div class="version">Numerosophia v1.0</div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Database dei significati del Lignaggio
+        const databaseLignaggio = {
+            1: {
+                archetipo: "L'Iniziatore / Il Guerriero",
+                paterno: {
+                    dono: "Spinta all'azione, leadership, indipendenza e capacità di aprire nuove strade.",
+                    sfidaOmbra: "Eccesso di autoritarismo, solitudine del leader o difficoltà a chiedere aiuto.",
+                    integrazione: "Avanzare con determinazione mantenendo l'ascolto degli altri."
+                },
+                materno: {
+                    dono: "Forza interiore, autonomia emotiva, spinta al riscatto personale e coraggio.",
+                    sfidaOmbra: "Durezza difensiva, rifiuto della vulnerabilità e senso di autosufficienza forzata.",
+                    integrazione: "Affidarsi alla propria forza senza dover dimostrare costantemente il proprio valore."
+                }
+            },
+            2: {
+                archetipo: "Il Fanciullo (Empatico e Mediatore)",
+                paterno: {
+                    dono: "Capacità diplomatica, senso dell'alleanza, protezione silenziosa e spirito di collaborazione.",
+                    sfidaOmbra: "Tendenza alla passività, dipendenza dalle approvazioni esterne o rinuncia all'azione.",
+                    integrazione: "Collaborare e proteggere mantenendo salda la propria identità."
+                },
+                materno: {
+                    dono: "Accoglienza viscerale, intuito empatico, nutrimento emotivo e grande sensibilità.",
+                    sfidaOmbra: "Ipersensibilità, tendenza al ricatto affettivo o fusionalità che annulla i confini.",
+                    integrazione: "Guidare l'altro senza smarrire sé stessi."
+                }
+            },
+            3: {
+                archetipo: "Il Giullare (Artista e Comunicatore)",
+                paterno: {
+                    dono: "Visibilità, talento comunicativo, carisma sociale e visione ottimistica della vita.",
+                    sfidaOmbra: "Superficialità, tendenza al dramma o dispersione delle energie in troppi progetti.",
+                    integrazione: "Canalizzare la propria voce e creatività in progetti concreti."
+                },
+                materno: {
+                    dono: "Gioia di vivere, nutrimento della bellezza, espressione emotiva libera e spontaneità.",
+                    sfidaOmbra: "Volubilità emotiva, paura del giudizio estetico o bisogno costante di conferme.",
+                    integrazione: "Esprimere la propria verità interiore con leggerezza e profondità."
+                }
+            },
+	    4: {
+                archetipo: "Il Costruttore (Organizzato e concreto)",
+                paterno: {
+                    dono: "Senso del dovere, stabilità, concretezza, capacità di dare struttura e radici solide.",
+                    sfidaOmbra: "Rigidità, eccessivo attaccamento al lavoro, resistenza al cambiamento o ostinazione.",
+                    integrazione: "Costruire basi stabili senza permettere che le regole soffochino la flessibilità."
+                },
+                materno: {
+                    dono: "Capacità di accoglienza concreta, ordine, senso di protezione quotidiana e costanza.",
+                    sfidaOmbra: "Ansia di controllo, paura della scarsità materiale o rigidità nelle abitudini.",
+                    integrazione: "Nutrire la propria stabilità interiore lasciando spazio alla spontaneità."
+                }
+            },
+            5: {
+                archetipo: "Il Cercatore (Esploratore e Spirito Libero)",
+                paterno: {
+                    dono: "Spirito di libertà, capacità di adattamento, apertura all'innovazione e gusto per l'avventura.",
+                    sfidaOmbra: "Incostanza, paura dei legami legati alla responsabilità o dispersione di risorse.",
+                    integrazione: "Sperimentare la libertà mantenendo la fedeltà ai propri obiettivi."
+                },
+                materno: {
+                    dono: "Curiosità intellettuale, dinamismo emotivo, flessibilità e capacità di trasformazione.",
+                    sfidaOmbra: "Irrequietezza interiore, paura della stasi o tendenza a fuggire davanti ai conflitti.",
+                    integrazione: "Trovare il proprio centro nell'instabilità senza ricorrere alla fuga."
+                }
+            },
+            6: {
+                archetipo: "L'Angelo Custode (Protettivo e Mediatore)",
+                paterno: {
+                    dono: "Responsabilità verso la comunità, senso di giustizia, guida protettiva e amore per la casa.",
+                    sfidaOmbra: "Iper-controllo, tendenza a giudicare o perfezionismo rigido applicato agli altri.",
+                    integrazione: "Offrire guida e supporto lasciando agli altri la libertà di sbagliare."
+                },
+                materno: {
+                    dono: "Amore incondizionato, cura del nido, senso dell'armonia estetica ed empatia profonda.",
+                    sfidaOmbra: "Tendenza al sacrificio di sé, dipendenza affettiva o senso di colpa paralizzante.",
+                    integrazione: "Prendersi cura degli altri senza trascurare le proprie necessità primarie."
+                }
+            },
+            7: {
+                archetipo: "Il Saggio (Filosofo e Mistico)",
+
+                paterno: {
+                    dono: "Profondità d'analisi, rigore mentale, ricerca della verità e inclinazione spirituale.",
+                    sfidaOmbra: "Isolamento, distacco emotivo, scetticismo difensivo o freddezza relazionale.",
+                    integrazione: "Coltivare la sapienza senza chiudersi alla condivisione emotiva."
+                },
+                materno: {
+                    dono: "Intuizione sottile, saggezza interiore, sensibilità spirituale e capacità d'ascolto.",
+                    sfidaOmbra: "Tendenza a chiudersi in sé stesse, difficoltà a sentirsi comprese o sfiducia verso il mondo.",
+                    integrazione: "Fidarsi del proprio intuito mantenendo un contatto attivo con la realtà."
+                }
+            },
+            8: {
+                archetipo: "Il Sovrano (Realizzatore e Stratega)",
+                paterno: {
+                    dono: "Autorevolezza, capacità gestionali, manifestazione materiale e senso del potere personale.",
+                    sfidaOmbra: "Lotta per il potere, attaccamento allo status, materialismo o autoritarismo.",
+                    integrazione: "Esercitare la forza e la leadership al servizio del bene comune."
+                },
+                materno: {
+                    dono: "Resilienza profonda, gestione efficiente delle risorse, forza d'animo e determinazione.",
+                    sfidaOmbra: "Controllo emotivo ferreo, paura della debolezza o durezza verso se stesse.",
+                    integrazione: "Reclamare il proprio potere personale senza rinunciare alla gentilezza."
+                }
+            },
+            9: {
+                archetipo: "Il Liberatore (Ispiratore e Umanitario)",
+                paterno: {
+                    dono: "Visione universale, compassione, capacità di ispirare e spirito di servizio.",
+                    sfidaOmbra: "Disillusione, tendenza a portare i pesi del mondo o idealismo ingenuo.",
+                    integrazione: "Agire con altruismo mantenendo sani confini personali."
+                },
+                materno: {
+                    dono: "Nutrimento universale, empatia senza confini, saggezza emotiva e perdono.",
+                    sfidaOmbra: "Sindrome della crocerossina, senso di sopraffazione o smarrimento della propria identità.",
+                    integrazione: "Amare e accogliere senza dissolversi nella sofferenza altrui."
+                }
+            },
+	    11: {
+                archetipo: "Il Genio (Ispiratore e Visionario)",
+                paterno: {
+                    dono: "Visione profetica, intuizione fulminea, capacità di ispirare le masse e fare da ponte tra visibile e invisibile.",
+                    sfidaOmbra: "Tensione nervosa estrema, sovraccarico sensoriale, timore di non riuscire a comprendere o gestire la propria sensibilità.",
+                    integrazione: "Fidarsi delle proprie intuizioni trasformandole in una guida pratica e comprensibile."
+                },
+                materno: {
+                    dono: "Profonda sensibilità empatica, canale di guarigione, percezione sottile e grande carisma spirituale.",
+                    sfidaOmbra: "Assorbimento incontrollato delle emozioni altrui, sbalzi d'umore, tendenza al vittimismo o isolamento rigenerativo.",
+                    integrazione: "Proteggere il proprio campo energetico mantenendo aperto il cuore alla visione profonda."
+                }
+            },
+            22: {
+                archetipo: "Il Creatore (Architetto Celeste e Mastro Costruttore)",
+                paterno: {
+                    dono: "Capacità di tradurre grandi ideali e visioni utopiche in strutture concrete di beneficio collettivo.",
+                    sfidaOmbra: "Ansia da prestazione su scala monumentale, paura del fallimento, rigidità o manipolazione per scopi personali.",
+                    integrazione: "Mettere il grande potere organizzativo al servizio di progetti che elevano la comunità."
+                },
+                materno: {
+                    dono: "Forza manifestativa, maestria nel radicare sogni complessi, senso di stabilità e protezione universale.",
+                    sfidaOmbra: "Sensazione di schiacciamento sotto il peso della responsabilità, iper-controllo e chiusura emotiva.",
+                    integrazione: "Costruire grandi opere senza dimenticare la cura e la dolcezza nei dettagli quotidiani."
+                }
+            },
+            33: {
+                archetipo: "Il Maestro (Guida Spirituale e Amore Cristico)",
+                paterno: {
+                    dono: "Servizio disinteressato, guida compassionevole, carisma protettivo e capacità di elevare il morale collettivo.",
+                    sfidaOmbra: "Complesso del Salvatore, tendenza al martirio, pretesa di perfezione negli altri o sacrificio infruttuoso.",
+                    integrazione: "Guida e proteggere con amore incondizionato lasciando agli altri il proprio percorso di vita."
+                },
+                materno: {
+                    dono: "Nutrimento spirituale supremo, dedizione assoluta, creatività rigenerativa ed empatia sconfinata.",
+                    sfidaOmbra: "Annullamento totale di sé, senso di colpa per non poter salvare tutti, esaurimento emotivo profondo.",
+                    integrazione: "Amare il mondo partendo dal rispetto e dalla cura incondizionata verso se stesse."
+                }
+            },
+            44: {
+                archetipo: "Lo Sciamano (Guaritore e Custode della Terra)",
+                paterno: {
+                    dono: "Capacità di dominare la materia a livelli elevati, governance etica, straordinaria resilienza e visione d'insieme.",
+                    sfidaOmbra: "Eccessivo peso materiale, inclinazione al controllo assoluto, inflessibilità o abuso di autorità.",
+                    integrazione: "Esercitare il potere materiale come una sacra custodia a favore delle generazioni future."
+                },
+                materno: {
+                    dono: "Saggezza ancestrale, capacità di creare spazi di guarigione e sicurezza totale, forza interiore inesauribile.",
+                    sfidaOmbra: "Durezza difensiva e inaccessibilità emotiva di fronte a grandi traumi, paura della vulnerabilità.",
+                    integrazione: "Unire la solidità incrollabile della Terra alla flessibilità dell'ascolto interiore."
+                }
+            },
+	    13: {
+                archetipo: "L'Alchimista (Prova Karmica del Costruttore)",
+                paterno: {
+                    dono: "Grande capacità di lavoro, resilienza incrollabile di fronte alle avversità e talento per la ristrutturazione profonda.",
+                    sfidaOmbra: "Lotta contro il cambiamento, tendenza alla rigidità o sensazione di dover fare sempre una fatica immane per ottenere risultati.",
+                    integrazione: "Accettare la fine dei vecchi schemi come passaggio necessario per costruire su basi nuove e più autentiche."
+                },
+                materno: {
+                    dono: "Forza di rigenerazione emotiva, capacità di superare lutti e rotture trasformando la sofferenza in saggezza.",
+                    sfidaOmbra: "Trattenere il passato, paura dell'abbandono o tendenza ad accumulare pesi emotivi per senso del dovere.",
+                    integrazione: "Lasciare andare il superfluo e il dolore antico per permettere al nuovo di fiorire."
+                }
+            },
+            14: {
+                archetipo: "L'Amante (Prova Karmica del Cercatore)",
+                paterno: {
+                    dono: "Adattabilità, capacità di mediazione, gestione dei cambiamenti improvvisi e ricerca dell'armonia.",
+                    sfidaOmbra: "Tendenza agli eccessi, impulsività, fuga dalle responsabilità o difficoltà a mantenere una direzione costante.",
+                    integrazione: "Trovare la misura interiore e la costanza senza cedere agli estremi o alle distrazioni."
+                },
+                materno: {
+                    dono: "Guarigione emotiva, flessibilità nelle relazioni, capacità di fluidificare le tensioni e ritrovare la pace.",
+                    sfidaOmbra: "Incostanza affettiva, ricerca di evasioni per non affrontare la realtà o dipendenze difensive.",
+                    integrazione: "Mantenere il proprio centro emotivo stabile anche nel mezzo delle trasformazioni."
+                }
+            },
+            16: {
+                archetipo: "Il Perfezionista (Prova Karmica del Saggio)",
+                paterno: {
+                    dono: "Profonda intuizione, capacità di smantellare le illusioni e ricerca di una verità autentica e incrollabile.",
+                    sfidaOmbra: "Orgoglio, paura del crollo delle proprie certezze, rigidità dogmatica o tendenza ad attirare eventi improvvisi per cambiare.",
+                    integrazione: "Coltivare l'umiltà e abbattere spontaneamente le maschere dell'ego prima che la vita chieda di farlo."
+                },
+                materno: {
+                    dono: "Sensibilità spirituale elevata, risveglio dell'intuito e capacità di ricostruire la fiducia dopo una crisi.",
+                    sfidaOmbra: "Chiusura in difese inaccessibili, paura di mettersi a nudo o senso di vulnerabilità lacerante.",
+                    integrazione: "Riconoscere che la vera forza risiede nella vulnerabilità e nella connessione con il proprio Sé."
+                }
+            },
+            19: {
+                archetipo: "Il Condottiero (Prova karmica del Guerriero)",
+                paterno: {
+                    dono: "Carisma, indipendenza, luce personale, capacità di guidare ed essere di esempio agli altri.",
+                    sfidaOmbra: "Egoismo, difficoltà ad accettare l'aiuto esterno, abuso di autorità o senso di solitudine al vertice.",
+                    integrazione: "Imparare a condividere il successo e la leadership, riconoscendo il valore del sostegno altrui."
+                },
+                materno: {
+                    dono: "Calore umano, capacità di illuminare chi sta intorno, generosità e forte senso di dignità.",
+                    sfidaOmbra: "Orgoglio ferito, bisogno continuo di approvazione o tendenza a nascondere le fragilità per sembrare sempre forti.",
+                    integrazione: "Mettere la propria luce al servizio del bene comune senza temere la dipendenza sana negli affetti."
+                }
+            },  
+        };
+
+        // Funzioni Gestione Modale
+        function apriModale(titolo, sottotitolo, contenuto) {
+            document.getElementById('modaleTitolo').innerText = titolo;
+            document.getElementById('modaleSottotitolo').innerText = sottotitolo;
+            document.getElementById('modaleContenuto').innerHTML = contenuto;
+            document.getElementById('modaleApprofondimento').style.display = 'flex';
+        }
+
+        function chiudiModale() {
+            document.getElementById('modaleApprofondimento').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modale = document.getElementById('modaleApprofondimento');
+            if (event.target == modale) {
+                chiudiModale();
+            }
+        };
+
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                chiudiModale();
+            }
+        });
+
+        // Funzione per mostrare la descrizione al click sui risultati con layout Pitagora
+        function mostraDescrizione(ramo, voce, idElemento) {
+            const valore = document.getElementById(idElemento).innerText.trim();
+            if (valore === '-' || valore === '') return;
+
+            const num = parseInt(valore, 10);
+            const dati = databaseLignaggio[num];
+            const chiaveRamo = ramo.toLowerCase(); // 'paterno' o 'materno'
+
+            let contenutoHTML = "";
+
+            // Immagine della Carta
+            contenutoHTML += `
+                <div class="card-image-container">
+                    <img src="carte/${num}.jpg" alt="Carta ${num}" class="card-image" onerror="this.onerror=null; this.src='carte/${num}.png'; this.onerror=function(){this.style.display='none';}">
+                </div>
+            `;
+
+            if (dati && dati[chiaveRamo]) {
+                const info = dati[chiaveRamo];
+
+                contenutoHTML += `
+                    <div class="section-box archetipo-box">
+                        <div class="section-title-modale">✨ Archetipo</div>
+                        <div class="section-text-modale">${dati.archetipo}</div>
+                    </div>
+
+                    <div class="section-box dono-box">
+                        <div class="section-title-modale">🎁 Dono Ereditato</div>
+                        <div class="section-text-modale">${info.dono}</div>
+                    </div>
+
+                    <div class="section-box ombra-box">
+                        <div class="section-title-modale">⚠️ Sfida / Ombra</div>
+                        <div class="section-text-modale">${info.sfidaOmbra}</div>
+                    </div>
+
+                    <div class="section-box integrazione-box">
+                        <div class="section-title-modale">🌱 Integrazione</div>
+                        <div class="section-text-modale">${info.integrazione}</div>
+                    </div>
+                `;
+            } else {
+                contenutoHTML += `
+                    <div class="section-box archetipo-box">
+                        <div class="section-title-modale">ℹ️ Info</div>
+                        <div class="section-text-modale">Descrizione in fase di preparazione per il numero <strong>${valore}</strong> (${ramo}).</div>
+                    </div>
+                `;
+            }
+
+            apriModale(`${voce} (${ramo})`, `Numero ${valore}`, contenutoHTML);
+        }
+
+        // Funzione di calcolo
+        function calculateLineage() {
+            const father = document.getElementById('fatherSurname').value.trim();
+            const mother = document.getElementById('motherSurname').value.trim();
+
+            if (!father && !mother) {
+                alert("Inserisci almeno un cognome (padre o madre).");
+                return;
+            }
+
+            const patCard = document.getElementById('paternalCard');
+            const matCard = document.getElementById('maternalCard');
+
+            // Funzione di calcolo interna che dialoga con calcoli.js
+            function elaboraRamo(cognome) {
+                if (typeof calcolaStringaNumerica === 'function') {
+                    const res = calcolaStringaNumerica(cognome);
+                    return {
+                        animico: res.anima || '-',
+                        personalita: res.persona || '-',
+                        familiare: res.espressione || '-'
+                    };
+                } else if (typeof calcolaDettaglioPitagorico === 'function') {
+                    const res = calcolaDettaglioPitagorico(cognome);
+                    return {
+                        animico: res.vocali || '-',
+                        personalita: res.consonanti || '-',
+                        familiare: res.totale || '-'
+                    };
+                }
+                return { animico: '-', personalita: '-', familiare: '-' };
+            }
+
+            // Elaborazione Cognome Padre
+            if (father) {
+                patCard.style.display = 'block';
+                const fatherRes = elaboraRamo(father);
+                document.getElementById('patVoc').innerText = fatherRes.animico;
+                document.getElementById('patCons').innerText = fatherRes.personalita;
+                document.getElementById('patTot').innerText = fatherRes.familiare;
+            } else {
+                patCard.style.display = 'none';
+            }
+
+            // Elaborazione Cognome Madre
+            if (mother) {
+                matCard.style.display = 'block';
+                const motherRes = elaboraRamo(mother);
+                document.getElementById('matVoc').innerText = motherRes.animico;
+                document.getElementById('matCons').innerText = motherRes.personalita;
+                document.getElementById('matTot').innerText = motherRes.familiare;
+            } else {
+                matCard.style.display = 'none';
+            }
+
+            // Mostra il contenitore dei risultati
+            document.getElementById('results').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -199,6 +199,7 @@
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             text-align: left;
+            user-select: none;
         }
 
         .menu-button:hover {
@@ -271,6 +272,63 @@
         .menu-button:hover .arrow-right {
             stroke: var(--gold-primary);
             transform: translateX(2px);
+        }
+
+        /* --- STILI SWIPER --- */
+        .slider-container {
+            width: 100%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            cursor: grab;
+        }
+
+        .slider-container:active {
+            cursor: grabbing;
+        }
+
+        .slider-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .slider-track {
+            display: flex;
+            width: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            flex-shrink: 0;
+            scroll-snap-align: start;
+            box-sizing: border-box;
+        }
+
+        /* Indicatore a pallini dello swipe */
+        .swipe-indicators {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin: 2px 0 6px 0;
+        }
+
+        .swipe-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--gold-dark);
+            opacity: 0.35;
+            transition: all 0.3s ease;
+        }
+
+        .swipe-dot.active {
+            background-color: var(--gold-primary);
+            opacity: 1;
+            transform: scale(1.25);
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
         }
 
         footer {
@@ -348,74 +406,153 @@
             <span>Scegli il metodo</span>
         </div>
 
-        <!-- Pitagorica -->
-        <a href="pitagora.html" class="menu-button">
-            <div class="icon-container">
-                <svg viewBox="0 0 24 24">
-                    <polygon points="12,4.5 5,18.5 19,18.5" />
-                    <line x1="8.5" y1="11.5" x2="15.5" y2="11.5" />
-                    <line x1="8.5" y1="11.5" x2="12" y2="18.5" />
-                    <line x1="15.5" y1="11.5" x2="12" y2="18.5" />
-                    <circle cx="12" cy="4.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                    <circle cx="8.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                    <circle cx="15.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                    <circle cx="5" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                    <circle cx="12" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                    <circle cx="19" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                </svg>
-            </div>
-            <div class="button-text">
-                <span class="button-category">Numerologia</span>
-                <span class="button-main-title">Pitagorica</span>
-            </div>
-            <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
+       <!-- BLOCCO SLIDER PER SWIPE TASTI -->
+<div class="slider-container" id="methodsSlider">
+    <div class="slider-track">
+        
+        <!-- PAGINA 1: I PRIMI 4 TASTI -->
+        <div class="slide">
+            <!-- Pitagorica -->
+            <a href="pitagora.html" class="menu-button">
+                <div class="icon-container">
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="12,4.5 5,18.5 19,18.5" />
+                        <line x1="8.5" y1="11.5" x2="15.5" y2="11.5" />
+                        <line x1="8.5" y1="11.5" x2="12" y2="18.5" />
+                        <line x1="15.5" y1="11.5" x2="12" y2="18.5" />
+                        <circle cx="12" cy="4.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                        <circle cx="8.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                        <circle cx="15.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                        <circle cx="5" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                        <circle cx="12" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                        <circle cx="19" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                    </svg>
+                </div>
+                <div class="button-text">
+                    <span class="button-category">Numerologia</span>
+                    <span class="button-main-title">Pitagorica</span>
+                </div>
+                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
 
-        <!-- Caldea -->
-        <a href="caldea.html" class="menu-button">
-            <div class="icon-container">
-                <svg viewBox="0 0 24 24">
-                    <path d="M 12.00,3.50 L 20.50,12.00 L 12.00,20.50 L 3.50,12.00 Z" />
-                    <path d="M 18.01,5.99 L 18.01,18.01 L 5.99,18.01 L 5.99,5.99 Z" />
-                </svg>
-            </div>
-            <div class="button-text">
-                <span class="button-category">Numerologia</span>
-                <span class="button-main-title">Caldea</span>
-            </div>
-            <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
+            <!-- Caldea -->
+            <!-- Caldea -->
+<a href="caldea.html" class="menu-button">
+    <div class="icon-container">
+        <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
+            <!-- Cerchio centrale -->
+            <circle cx="12" cy="12" r="1.8" fill="var(--gold-primary)" />
+            <circle cx="12" cy="12" r="3.2" stroke-width="0.8" />
 
-        <!-- Compatibilità -->
-        <a href="compatibilita.html" class="menu-button">
-            <div class="icon-container">
-                <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    <path d="M12 7c.5-1 1.5-2 3-2 2 0 3.5 1.5 3.5 3.5 0 2-2 4-5.5 7" opacity="0.6" stroke-dasharray="1 1"/>
-                </svg>
-            </div>
-            <div class="button-text">
-                <span class="button-category">Affinità e</span>
-                <span class="button-main-title">Compatibilità</span>
-            </div>
-            <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
+            <!-- Petali cardinali (Nord, Sud, Est, Ovest) -->
+            <path d="M 12 8.8 C 10.3 6.4, 10.3 3.1, 12 1.2 C 13.7 3.1, 13.7 6.4, 12 8.8 Z" fill="none" stroke-linejoin="round" />
+            <path d="M 12 15.2 C 10.3 17.6, 10.3 20.9, 12 22.8 C 13.7 20.9, 13.7 17.6, 12 15.2 Z" fill="none" stroke-linejoin="round" />
+            <path d="M 10.1 12 C 7.7 10.3, 4.4 10.3, 2.5 12 C 4.4 13.7, 7.7 13.7, 10.1 12 Z" fill="none" stroke-linejoin="round" />
+            <path d="M 13.9 12 C 16.3 10.3, 19.6 10.3, 21.5 12 C 19.6 13.7, 16.3 13.7, 13.9 12 Z" fill="none" stroke-linejoin="round" />
 
-        <!-- NUOVO: Relazioni Karmiche -->
-        <a href="relazioni-karmiche.html" class="menu-button">
-            <div class="icon-container">
-                <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
-                    <circle cx="8" cy="12" r="5" stroke-dasharray="2 1" />
-                    <circle cx="16" cy="12" r="5" />
-                    <path d="M 12 8.5 A 5 5 0 0 1 12 15.5 A 5 5 0 0 1 12 8.5" fill="rgba(212, 175, 55, 0.25)" stroke="var(--gold-primary)" stroke-width="1.2" />
-                </svg>
-            </div>
-            <div class="button-text">
-                <span class="button-category">Legami d'Anima</span>
-                <span class="button-main-title">Relazioni Karmiche</span>
-            </div>
-            <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
+            <!-- Petali diagonali (ruotati di 45 gradi) -->
+            <g transform="rotate(45 12 12)">
+                <path d="M 12 8.8 C 10.3 6.4, 10.3 3.1, 12 1.2 C 13.7 3.1, 13.7 6.4, 12 8.8 Z" fill="none" stroke-linejoin="round" />
+                <path d="M 12 15.2 C 10.3 17.6, 10.3 20.9, 12 22.8 C 13.7 20.9, 13.7 17.6, 12 15.2 Z" fill="none" stroke-linejoin="round" />
+                <path d="M 10.1 12 C 7.7 10.3, 4.4 10.3, 2.5 12 C 4.4 13.7, 7.7 13.7, 10.1 12 Z" fill="none" stroke-linejoin="round" />
+                <path d="M 13.9 12 C 16.3 10.3, 19.6 10.3, 21.5 12 C 19.6 13.7, 16.3 13.7, 13.9 12 Z" fill="none" stroke-linejoin="round" />
+            </g>
+
+            <!-- Cerchio di contenimento tratteggiato -->
+            <circle cx="12" cy="12" r="11" stroke-width="0.7" stroke-dasharray="1 1" opacity="0.5" />
+        </svg>
+    </div>
+    <div class="button-text">
+        <span class="button-category">Numerologia</span>
+        <span class="button-main-title">Caldea</span>
+    </div>
+    <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+</a>
+
+            <!-- Compatibilità -->
+            <a href="compatibilita.html" class="menu-button">
+                <div class="icon-container">
+                   <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
+    <!-- Triangolo verso l'alto -->
+    <polygon points="12,4 19,16 5,16" />
+    <!-- Triangolo verso il basso -->
+    <polygon points="12,20 5,8 19,8" opacity="0.75" />
+    <!-- Centro di bilanciamento -->
+    <circle cx="12" cy="12" r="1" fill="var(--gold-primary)" />
+</svg>
+                </div>
+                <div class="button-text">
+                    <span class="button-category">Affinità e</span>
+                    <span class="button-main-title">Compatibilità</span>
+                </div>
+                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+
+            <!-- Relazioni Karmiche -->
+            <a href="relazioni-karmiche.html" class="menu-button">
+                <div class="icon-container">
+                    <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
+                        <circle cx="8" cy="12" r="5" stroke-dasharray="2 1" />
+                        <circle cx="16" cy="12" r="5" />
+                        <path d="M 12 8.5 A 5 5 0 0 1 12 15.5 A 5 5 0 0 1 12 8.5" fill="rgba(212, 175, 55, 0.25)" stroke="var(--gold-primary)" stroke-width="1.2" />
+                    </svg>
+                </div>
+                <div class="button-text">
+                    <span class="button-category">Legami d'Anima</span>
+                    <span class="button-main-title">Relazioni Karmiche</span>
+                </div>
+                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+        <!-- PAGINA 2: TASTO LIGNAGGIO FAMILIARE -->
+        <div class="slide">
+            <!-- Lignaggio Familiare -->
+            <a href="lignaggio-familiare.html" class="menu-button">
+                <div class="icon-container">
+                    <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
+                        <!-- Cerchio di sfondo opzionale -->
+                        <circle cx="12" cy="12" r="10" stroke-width="0.8" opacity="0.4" />
+                        
+                        <!-- Tronco -->
+                        <path d="M12 18V11" stroke-width="1.4" stroke-linecap="round" />
+                        
+                        <!-- Rami principali -->
+                        <path d="M12 15C10 13.5 8.5 12.5 7.5 10.5" stroke-width="1.2" stroke-linecap="round" />
+                        <path d="M12 15C14 13.5 15.5 12.5 16.5 10.5" stroke-width="1.2" stroke-linecap="round" />
+                        
+                        <!-- Rami alti -->
+                        <path d="M12 13C10.5 11.5 9.5 10 9 8.5" stroke-width="1.1" stroke-linecap="round" />
+                        <path d="M12 13C13.5 11.5 14.5 10 15 8.5" stroke-width="1.1" stroke-linecap="round" />
+                        
+                        <!-- Radici -->
+                        <path d="M12 17.5C10.5 18.5 9 19 8 19.5" stroke-width="1.1" stroke-linecap="round" />
+                        <path d="M12 17.5C13.5 18.5 15 19 16 19.5" stroke-width="1.1" stroke-linecap="round" />
+                        
+                        <!-- Nodi / Foglie -->
+                        <circle cx="12" cy="6.5" r="0.9" fill="var(--gold-primary)" />
+                        <circle cx="9" cy="8.5" r="0.8" fill="var(--gold-primary)" />
+                        <circle cx="15" cy="8.5" r="0.8" fill="var(--gold-primary)" />
+                        <circle cx="7.5" cy="10.5" r="0.8" fill="var(--gold-primary)" />
+                        <circle cx="16.5" cy="10.5" r="0.8" fill="var(--gold-primary)" />
+                    </svg>
+                </div>
+                <div class="button-text">
+                    <span class="button-category">Eredità Ancestrale</span>
+                    <span class="button-main-title">Lignaggio Familiare</span>
+                </div>
+                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+        <!-- INDICATORI DI SCORRIMENTO (DOTS) -->
+        <div class="swipe-indicators" id="swipeIndicators">
+            <span class="swipe-dot active"></span>
+            <span class="swipe-dot"></span>
+        </div>
 
         <div class="section-title">
             <span>I tuoi consulti</span>
@@ -451,5 +588,63 @@
 
     </div>
 
+    <!-- Script per aggiornare i pallini e gestire il trascinamento da PC -->
+    <script>
+        const slider = document.getElementById('methodsSlider');
+        const dots = document.querySelectorAll('#swipeIndicators .swipe-dot');
+
+        // Aggiornamento dinamico pallini
+        if (slider && dots.length > 0) {
+            slider.addEventListener('scroll', () => {
+                const pageIndex = Math.round(slider.scrollLeft / slider.clientWidth);
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === pageIndex);
+                });
+            });
+        }
+
+        // Drag to Scroll per Mouse PC
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            setTimeout(() => { isDragging = false; }, 50);
+        });
+
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX);
+            
+            if (Math.abs(walk) > 5) {
+                isDragging = true;
+                e.preventDefault();
+                slider.scrollLeft = scrollLeft - walk * 1.5;
+            }
+        });
+
+        const links = slider.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

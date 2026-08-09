@@ -80,6 +80,23 @@
             box-sizing: border-box;
         }
 
+.header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.header-logo svg {
+    margin: 0 auto;
+}
+
+
+
+
+
+
         .ns-header-banner {
             border: 1px solid var(--border-color);
             padding: clamp(15px, 3vw, 25px);
@@ -433,6 +450,52 @@
 <body>
 
     <div class="sezione-dinamica">
+
+<div class="header-logo">
+    <svg viewBox="0 0 100 100"
+         class="main-sacred-symbol"
+         style="width: 95px; height: 95px;"
+         xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+            <!-- Bagliore dorato -->
+            <filter id="hexGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="1.8" result="blur"/>
+                <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+
+        <!-- Cerchio esterno sottile di contenimento -->
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a227" stroke-width="0.8" opacity="0.6" />
+
+        <!-- EsagrammaSacro -->
+        <g stroke="#d4af37" stroke-linecap="round" stroke-linejoin="round" filter="url(#hexGlow)">
+            <!-- Triangolo rivolto verso l'alto -->
+            <polygon points="50,18 78,66 22,66" fill="none" stroke-width="1.8" />
+            
+            <!-- Triangolo rivolto verso il basso -->
+            <polygon points="50,82 22,34 78,34" fill="none" stroke-width="1.8" opacity="0.85" />
+        </g>
+
+        <!-- Punti di luce dorati sui vertici e al centro -->
+        <g fill="#d4af37" filter="url(#hexGlow)">
+            <circle cx="50" cy="18" r="2.2" />
+            <circle cx="78" cy="66" r="2.2" />
+            <circle cx="22" cy="66" r="2.2" />
+            <circle cx="50" cy="82" r="2.2" />
+            <circle cx="22" cy="34" r="2.2" />
+            <circle cx="78" cy="34" r="2.2" />
+            <!-- Punto centrale di bilanciamento -->
+            <circle cx="50" cy="50" r="2.8" />
+        </g>
+    </svg>
+</div>
+
+
+
 
         <div class="ns-header-banner">
             <h2>Affinità Numerosophica</h2>

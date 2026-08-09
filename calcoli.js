@@ -802,3 +802,100 @@ function validaECalcolaRelazioneKarmica() {
   containerRisultati.style.display = 'block';
   containerRisultati.scrollIntoView({ behavior: 'smooth' });
 }
+
+// ============================================================================
+// LIGNAGGIO FAMILIARE - GESTIONE INTERFACCIA E LOGICA DI PRESENTAZIONE
+// (Utilizza esclusivamente il motore centrale di calcolo da calcoli.js)
+// ============================================================================
+
+/**
+ * Calcola l'impronta numerologica del Lignaggio Familiare
+ * richiamando unicamente le funzioni esposte da calcoli.js
+ * 
+ * @param {Object} datiFamiglia - { cognomePaterno, cognomeMaterno }
+ * @returns {Object} Risultato dell'analisi del lignaggio
+ */
+function calcolaLignaggioFamiliare(datiFamiglia) {
+    const cognomeP = datiFamiglia.cognomePaterno || "";
+    const cognomeM = datiFamiglia.cognomeMaterno || "";
+
+    // Calcoli sui singoli rami tramite calcolaStringaNumerica di calcoli.js
+    const ramoPaterno = window.calcolaStringaNumerica ? window.calcolaStringaNumerica(cognomeP) : { anima: 0, persona: 0, espressione: 0 };
+    const ramoMaterno = window.calcolaStringaNumerica ? window.calcolaStringaNumerica(cognomeM) : { anima: 0, persona: 0, espressione: 0 };
+
+    // Formattazione per la visualizzazione (mantiene Maestri e Karmici con / monocifra)
+    function formattaValore(num) {
+        if (!num) return "-";
+        if ([11, 22, 33, 13, 14, 16, 19].includes(num) && window.riduciMonocifraStretta) {
+            return `${num}/${window.riduciMonocifraStretta(num)}`;
+        }
+        return num;
+    }
+
+    // Estrazione dinamica dell'Archetipo dal database globale
+    function estraiArchetipo(num) {
+        if (!num) return "Archetipo";
+        let base = window.riduciMonocifraStretta ? window.riduciMonocifraStretta(num) : num;
+        const db = window.databaseArchetipi || {};
+        return (db[num] || db[base] || { nome: "Archetipo" }).nome;
+    }
+
+    return {
+        paterno: {
+            cognome: cognomeP.toUpperCase(),
+            lignaggioAnimico: formattaValore(ramoPaterno.anima),
+            lignaggioPersonalita: formattaValore(ramoPaterno.persona),
+            lignaggioFamiliare: formattaValore(ramoPaterno.espressione),
+            archetipo: estraiArchetipo(ramoPaterno.espressione)
+        },
+        materno: {
+            cognome: cognomeM.toUpperCase(),
+            lignaggioAnimico: formattaValore(ramoMaterno.anima),
+            lignaggioPersonalita: formattaValore(ramoMaterno.persona),
+            lignaggioFamiliare: formattaValore(ramoMaterno.espressione),
+            archetipo: estraiArchetipo(ramoMaterno.espressione)
+        }
+    };
+}
+
+/**
+ * Legge gli input dell'interfaccia utente, invoca il calcolo e aggiorna il DOM.
+ */
+function eseguiCalcoloLignaggioUI() {
+    const inputPaterno = document.getElementById('cognomePaterno');
+    const inputMaterno = document.getElementById('cognomeMaterno');
+
+    const cognomeP = inputPaterno ? inputPaterno.value.trim() : "";
+    const cognomeM = inputMaterno ? inputMaterno.value.trim() : "";
+
+    if (!cognomeP && !cognomeM) {
+        alert("Inserisci almeno un cognome per calcolare il Lignaggio Familiare.");
+        return;
+    }
+
+    // Elaborazione tramite motore esterno
+    const risultato = calcolaLignaggioFamiliare({
+        cognomePaterno: cognomeP,
+        cognomeMaterno: cognomeM
+    });
+
+    // --- AGGIORNAMENTO DOM RAMO PATERNO ---
+    if (document.getElementById('resCognomePaterno')) document.getElementById('resCognomePaterno').innerText = risultato.paterno.cognome || "-";
+    if (document.getElementById('resAnimicoPaterno')) document.getElementById('resAnimicoPaterno').innerText = risultato.paterno.lignaggioAnimico;
+    if (document.getElementById('resPersonalitaPaterno')) document.getElementById('resPersonalitaPaterno').innerText = risultato.paterno.lignaggioPersonalita;
+    if (document.getElementById('resFamiliarePaterno')) document.getElementById('resFamiliarePaterno').innerText = risultato.paterno.lignaggioFamiliare;
+
+    // --- AGGIORNAMENTO DOM RAMO MATERNO ---
+    if (document.getElementById('resCognomeMaterno')) document.getElementById('resCognomeMaterno').innerText = risultato.materno.cognome || "-";
+    if (document.getElementById('resAnimicoMaterno')) document.getElementById('resAnimicoMaterno').innerText = risultato.materno.lignaggioAnimico;
+    if (document.getElementById('resPersonalitaMaterno')) document.getElementById('resPersonalitaMaterno').innerText = risultato.materno.lignaggioPersonalita;
+    if (document.getElementById('resFamiliareMaterno')) document.getElementById('resFamiliareMaterno').innerText = risultato.materno.lignaggioFamiliare;
+
+    // Mostra il contenitore dei risultati se presente
+    const bloccoRisultati = document.getElementById('risultatiLignaggio');
+    if (bloccoRisultati) bloccoRisultati.style.display = 'block';
+}
+
+// Esposizione funzioni al contesto globale
+window.calcolaLignaggioFamiliare = calcolaLignaggioFamiliare;
+window.eseguiCalcoloLignaggioUI = eseguiCalcoloLignaggioUI;
