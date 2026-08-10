@@ -284,39 +284,77 @@ function eseguiCalcoloCompleto() {
             if (document.getElementById('etaCiclo4')) document.getElementById('etaCiclo4').innerText = `Da ${fineC3 + 1} anni in poi`;
             if (document.getElementById('descCiclo4')) document.getElementById('descCiclo4').innerHTML = compilaSchedaSicura(p4);
 
-            function ottieniNomeImmagineOmbra(valoreOmbra) {
-                return (valoreOmbra === 0 || valoreOmbra === 9) ? 'ombra9' : 'ombra' + valoreOmbra;
-            }
-            const dbOmbre = window.databaseOmbreMazzo || {};
-            const nomeGiov = dbOmbre[oGiov] ? dbOmbre[oGiov].nome : 'Ombra';
-            const nomeMat = dbOmbre[oMat] ? dbOmbre[oMat].nome : 'Ombra';
-            const nomePrinc = dbOmbre[oPrinc] ? dbOmbre[oPrinc].nome : 'Ombra';
+function ottieniNomeImmagineOmbra(valoreOmbra) {
+    return (valoreOmbra === 0 || valoreOmbra === 9) ? 'ombra9' : 'ombra' + valoreOmbra;
+}
 
-            const ombreSetup = [
-                { idNum: 'numOmbraGiov', idDesc: 'descOmbraGiov', valore: oGiov, nome: nomeGiov },
-                { idNum: 'numOmbraMat', idDesc: 'descOmbraMat', valore: oMat, nome: nomeMat },
-                { idNum: 'numOmbraPrinc', idDesc: 'descOmbraPrinc', valore: oPrinc, nome: nomePrinc }
-            ];
+// Mappa diretta per i nomi delle ombre se i database non sono pronti
+const nomiOmbreDefault = {
+    1: "Il Ribelle (L'ombra del Guerriero)",
+    2: "L'Orfano (L'ombra del Fanciullo)",
+    3: "Lo Straniero (L'ombra del Giullare)",
+    4: "Il Prigioniero (L'ombra del Costruttore)",
+    5: "Il Girovago (L'ombra del Cercatore)",
+    6: "Il Martire (L'ombra dell'Angelo Custode)",
+    7: "Il Solitario (L'ombra del Saggio)",
+    8: "Il Tiranno (L'ombra del Sovrano)",
+    9: "L'Angelo caduto (L'ombra del Liberatore)"
+};
 
-            ombreSetup.forEach(ombra => {
-                const imgNome = ottieniNomeImmagineOmbra(ombra.valore);
-                if (document.getElementById(ombra.idNum)) document.getElementById(ombra.idNum).innerText = ombra.valore;
-                if (document.getElementById(ombra.idDesc)) {
-                    document.getElementById(ombra.idDesc).innerHTML = `
-                        <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" style="width: 70px; display: block; margin: 8px auto; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);">
-                        <div style="text-align: center; margin-top: 10px; font-style: italic; font-weight: bold; color: #c5a059; font-size: 13px;">
-                            Archetipo: ${ombra.nome}
-                        </div>
-                        <div style="text-align: center; font-size: 11px; color: #888; margin-top: 4px; font-style: italic;">
-                            → Clicca qui per leggere l'analisi completa
-                        </div>
-                        <div class="testo-segreto" style="display: none;">
-                            <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
-                            ${typeof compilaSchedaOmbra === 'function' ? compilaSchedaOmbra(ombra.valore) : 'Sfida evolutiva.'}
-                        </div>
-                    `;
-                }
-            });
+function estraiEtichettaOmbra(valore) {
+    let num = parseInt(valore, 10);
+    
+    // 1. Controlla prima se esiste nei database trasversali
+    let d = (window.databaseOmbreMazzo && (window.databaseOmbreMazzo[num] || window.databaseOmbreMazzo[valore])) || 
+            (window.databaseArchetipi && (window.databaseArchetipi[num] || window.databaseArchetipi[valore])) || null;
+
+    if (d) {
+        let nome = d.nome || "";
+        let titolo = d.titolo || d.sottotitolo || "";
+        
+        // Se d ha sia nome sia titolo e nome non è genericamente "Ombra X"
+        if (nome && !nome.toLowerCase().includes("ombra")) {
+            return titolo ? `${nome} (${titolo})` : nome;
+        }
+    }
+
+    // 2. Se il database non restituisce un testo valido, usa la mappa predefinita integrata
+    return nomiOmbreDefault[num] || `Ombra ${num}`;
+}
+
+const ombreSetup = [
+    { idNum: 'numOmbraGiov', idDesc: 'descOmbraGiov', valore: oGiov },
+    { idNum: 'numOmbraMat', idDesc: 'descOmbraMat', valore: oMat },
+    { idNum: 'numOmbraPrinc', idDesc: 'descOmbraPrinc', valore: oPrinc }
+];
+
+ombreSetup.forEach(ombra => {
+    const imgNome = ottieniNomeImmagineOmbra(ombra.valore);
+    const etichettaCompleta = estraiEtichettaOmbra(ombra.valore);
+
+    if (document.getElementById(ombra.idNum)) {
+        document.getElementById(ombra.idNum).innerText = ombra.valore;
+    }
+
+    if (document.getElementById(ombra.idDesc)) {
+        document.getElementById(ombra.idDesc).innerHTML = `
+            <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" style="width: 75px; display: block; margin: 8px auto; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+            
+            <div class="info-responso" style="text-align: center; margin-top: 12px; font-weight: bold; color: #ffffff; font-size: 15px; font-style: normal; line-height: 1.3;">
+                Archetipo: ${etichettaCompleta}
+            </div>
+            
+            <div style="text-align: center; font-size: 12px; color: #a0aec0; margin-top: 6px;">
+                ➔ Clicca qui per leggere l'analisi completa
+            </div>
+
+            <div class="testo-segreto" style="display: none;">
+                <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                ${typeof compilaSchedaOmbra === 'function' ? compilaSchedaOmbra(ombra.valore) : 'Sfida evolutiva.'}
+            </div>
+        `;
+    }
+});
 
             testoCopiaGlobale += `Giorno di Nascita Isolato: ${format(giornoIsolato)}\n`;
             testoCopiaGlobale += `Numero del Destino (Cammino di Vita): ${format(destino)}\n`;

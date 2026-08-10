@@ -1490,6 +1490,9 @@ function compilaSchedaOmbra(valoreOmbra) {
 
     // Estrazione parametri con fallback
     let nome = d.nome || `Ombra ${num}`;
+    let titolo = d.titolo || d.sottotitolo || "";
+    let nomeCompleto = titolo ? `${nome} (${titolo})` : nome;
+
     let sfida = d.sfida_principale || d.sfida || "Informazione non disponibile.";
     let manifestazione = d.manifestazione_inconscia || d.manifestazione || "Informazione non disponibile.";
     let risorsa = d.risorsa_nascosta || d.risorsa || "Informazione non disponibile.";
@@ -1497,7 +1500,7 @@ function compilaSchedaOmbra(valoreOmbra) {
     let consiglio = d.consiglio || "Informazione non disponibile.";
     let mantra = d.mantra_trasformazione || d.mantra || "";
 
-    // Costruzione dinamica del blocco Fasi di Risoluzione (stesso stile del Percorso Evolutivo)
+    // Costruzione dinamica del blocco Fasi di Risoluzione
     let fasiHTML = '';
     if (d.fasi_risoluzione && Array.isArray(d.fasi_risoluzione)) {
         fasiHTML = d.fasi_risoluzione.map(item => `
@@ -1511,9 +1514,9 @@ function compilaSchedaOmbra(valoreOmbra) {
     // Costruzione dei quadranti uniformati allo stile compilaScheda
     return `
         <div class="scheda-ombra-container" style="text-align: left;">
-            <span class="archetipo-nome" style="display: block; margin-bottom: 4px; font-weight: bold;">
-    Archetipo: ${nome}
-</span>
+            <span class="archetipo-nome" style="display: block; margin-bottom: 4px; font-weight: bold; color: var(--accent-gold);">
+                Archetipo: ${nomeCompleto}
+            </span>
 
             <!-- 1. ⚠️ SFIDA PRINCIPALE -->
             <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
@@ -1561,24 +1564,30 @@ function compilaSchedaOmbra(valoreOmbra) {
         </div>
     `;
 }
+
 function creaAnteprimaOmbra(numeroOmbra) {
     if (!numeroOmbra) return '';
     
-    // Recupera l'archetipo/ombra dal database esistente
+    // Recupera l'ombra dal database dedicato o dal database archetipi
     let num = parseInt(numeroOmbra, 10);
     let d = (typeof databaseOmbreMazzo !== 'undefined' && databaseOmbreMazzo[num]) || 
             (typeof databaseArchetipi !== 'undefined' && databaseArchetipi[num]) || null;
     
-    // Se trova il nome usa quello, altrimenti usa il numero
-    let nomeArchetipo = d && d.nome ? d.nome : `Ombra ${num}`;
+    if (!d) return `<div class="scheda-preview">Archetipo non trovato (${num})</div>`;
 
-    // Restituisce la stessa identica struttura grafica delle schede in alto
+    let nome = d.nome || `Ombra ${num}`;
+    let titolo = d.titolo || d.sottotitolo || "";
+    
+    // Se c'è un titolo/sottotitolo lo compone come nei Picchi: Nome (Titolo)
+    let etichettaArchetipo = titolo ? `${nome} (${titolo})` : nome;
+
+    // Restituisce la dicitura "Archetipo: Nome (Titolo)" con colore bianco/oro coordinato
     return `
         <div class="scheda-preview">
-            <span class="archetipo-nome" style="display: block; font-weight: bold; margin-bottom: 4px;">
-                Archetipo: ${nomeArchetipo}
+            <span class="archetipo-nome" style="display: block; font-weight: bold; margin-bottom: 4px; color: #ffffff;">
+                Archetipo: ${etichettaArchetipo}
             </span>
-            <small style="color: #888; font-style: italic;">→ Clicca qui per leggere l'analisi completa</small>
+            <small style="color: #888; font-style: italic;">➔ Clicca qui per leggere l'analisi completa</small>
         </div>
     `;
 }
