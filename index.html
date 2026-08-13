@@ -281,8 +281,8 @@
             scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
             cursor: grab;
         }
 
@@ -291,7 +291,7 @@
         }
 
         .slider-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
         }
 
         .slider-track {
@@ -306,7 +306,6 @@
             box-sizing: border-box;
         }
 
-        /* Indicatore a pallini dello swipe */
         .swipe-indicators {
             display: flex;
             justify-content: center;
@@ -383,7 +382,6 @@
     <div class="container">
         
         <div class="header-logo">
-            <!-- Cerchio Dorato Luminoso con Effetto Bagliore -->
             <svg viewBox="0 0 100 100" class="main-sacred-symbol" style="display: block; margin: 0 auto 15px auto; filter: drop-shadow(0px 0px 6px rgba(255, 223, 112, 0.7));">
                 <circle cx="50" cy="50" r="45" fill="none" stroke="#ffdf70" stroke-width="2.5" />
                 <polygon points="50,23 26,67 74,67" fill="none" stroke="#ffdf70" stroke-width="2.5" stroke-linejoin="round" />
@@ -406,147 +404,124 @@
             <span>Scegli il metodo</span>
         </div>
 
-       <!-- BLOCCO SLIDER PER SWIPE TASTI -->
-<div class="slider-container" id="methodsSlider">
-    <div class="slider-track">
-        
-        <!-- PAGINA 1: I PRIMI 4 TASTI -->
-        <div class="slide">
-            <!-- Pitagorica -->
-            <a href="pitagora.html" class="menu-button">
-                <div class="icon-container">
-                    <svg viewBox="0 0 24 24">
-                        <polygon points="12,4.5 5,18.5 19,18.5" />
-                        <line x1="8.5" y1="11.5" x2="15.5" y2="11.5" />
-                        <line x1="8.5" y1="11.5" x2="12" y2="18.5" />
-                        <line x1="15.5" y1="11.5" x2="12" y2="18.5" />
-                        <circle cx="12" cy="4.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                        <circle cx="8.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                        <circle cx="15.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                        <circle cx="5" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                        <circle cx="12" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                        <circle cx="19" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
-                    </svg>
-                </div>
-                <div class="button-text">
-                    <span class="button-category">Numerologia</span>
-                    <span class="button-main-title">Pitagorica</span>
-                </div>
-                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
+        <!-- BLOCCO SLIDER PER SWIPE TASTI -->
+        <div class="slider-container" id="methodsSlider">
+            <div class="slider-track">
+                
+                <!-- PAGINA 1: I PRIMI 4 TASTI -->
+                <div class="slide">
+                    <!-- Pitagorica -->
+                    <a href="pitagora.html" class="menu-button">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="12,4.5 5,18.5 19,18.5" />
+                                <line x1="8.5" y1="11.5" x2="15.5" y2="11.5" />
+                                <line x1="8.5" y1="11.5" x2="12" y2="18.5" />
+                                <line x1="15.5" y1="11.5" x2="12" y2="18.5" />
+                                <circle cx="12" cy="4.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                                <circle cx="8.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                                <circle cx="15.5" cy="11.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                                <circle cx="5" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                                <circle cx="12" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                                <circle cx="19" cy="18.5" r="1.6" fill="var(--gold-primary)" stroke="#0b0a08" stroke-width="0.6"/>
+                            </svg>
+                        </div>
+                        <div class="button-text">
+                            <span class="button-category">Numerologia</span>
+                            <span class="button-main-title">Pitagorica</span>
+                        </div>
+                        <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
 
-            <!-- Caldea -->
-            <!-- Caldea -->
-<a href="caldea.html" class="menu-button">
-    <div class="icon-container">
-        <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
-            <!-- Cerchio centrale -->
-            <circle cx="12" cy="12" r="1.8" fill="var(--gold-primary)" />
-            <circle cx="12" cy="12" r="3.2" stroke-width="0.8" />
+                    <!-- Caldea -->
+                    <a href="caldea.html" class="menu-button">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="1.8" fill="var(--gold-primary)" />
+                                <circle cx="12" cy="12" r="3.2" stroke-width="0.8" />
+                                <path d="M 12 8.8 C 10.3 6.4, 10.3 3.1, 12 1.2 C 13.7 3.1, 13.7 6.4, 12 8.8 Z" fill="none" stroke-linejoin="round" />
+                                <path d="M 12 15.2 C 10.3 17.6, 10.3 20.9, 12 22.8 C 13.7 20.9, 13.7 17.6, 12 15.2 Z" fill="none" stroke-linejoin="round" />
+                                <path d="M 10.1 12 C 7.7 10.3, 4.4 10.3, 2.5 12 C 4.4 13.7, 7.7 13.7, 10.1 12 Z" fill="none" stroke-linejoin="round" />
+                                <path d="M 13.9 12 C 16.3 10.3, 19.6 10.3, 21.5 12 C 19.6 13.7, 16.3 13.7, 13.9 12 Z" fill="none" stroke-linejoin="round" />
+                                <g transform="rotate(45 12 12)">
+                                    <path d="M 12 8.8 C 10.3 6.4, 10.3 3.1, 12 1.2 C 13.7 3.1, 13.7 6.4, 12 8.8 Z" fill="none" stroke-linejoin="round" />
+                                    <path d="M 12 15.2 C 10.3 17.6, 10.3 20.9, 12 22.8 C 13.7 20.9, 13.7 17.6, 12 15.2 Z" fill="none" stroke-linejoin="round" />
+                                    <path d="M 10.1 12 C 7.7 10.3, 4.4 10.3, 2.5 12 C 4.4 13.7, 7.7 13.7, 10.1 12 Z" fill="none" stroke-linejoin="round" />
+                                    <path d="M 13.9 12 C 16.3 10.3, 19.6 10.3, 21.5 12 C 19.6 13.7, 16.3 13.7, 13.9 12 Z" fill="none" stroke-linejoin="round" />
+                                </g>
+                                <circle cx="12" cy="12" r="11" stroke-width="0.7" stroke-dasharray="1 1" opacity="0.5" />
+                            </svg>
+                        </div>
+                        <div class="button-text">
+                            <span class="button-category">Numerologia</span>
+                            <span class="button-main-title">Caldea</span>
+                        </div>
+                        <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
 
-            <!-- Petali cardinali (Nord, Sud, Est, Ovest) -->
-            <path d="M 12 8.8 C 10.3 6.4, 10.3 3.1, 12 1.2 C 13.7 3.1, 13.7 6.4, 12 8.8 Z" fill="none" stroke-linejoin="round" />
-            <path d="M 12 15.2 C 10.3 17.6, 10.3 20.9, 12 22.8 C 13.7 20.9, 13.7 17.6, 12 15.2 Z" fill="none" stroke-linejoin="round" />
-            <path d="M 10.1 12 C 7.7 10.3, 4.4 10.3, 2.5 12 C 4.4 13.7, 7.7 13.7, 10.1 12 Z" fill="none" stroke-linejoin="round" />
-            <path d="M 13.9 12 C 16.3 10.3, 19.6 10.3, 21.5 12 C 19.6 13.7, 16.3 13.7, 13.9 12 Z" fill="none" stroke-linejoin="round" />
+                    <!-- Compatibilità -->
+                    <a href="compatibilita.html" class="menu-button">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="12,4 19,16 5,16" />
+                                <polygon points="12,20 5,8 19,8" opacity="0.75" />
+                                <circle cx="12" cy="12" r="1" fill="var(--gold-primary)" />
+                            </svg>
+                        </div>
+                        <div class="button-text">
+                            <span class="button-category">Affinità e</span>
+                            <span class="button-main-title">Compatibilità</span>
+                        </div>
+                        <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
 
-            <!-- Petali diagonali (ruotati di 45 gradi) -->
-            <g transform="rotate(45 12 12)">
-                <path d="M 12 8.8 C 10.3 6.4, 10.3 3.1, 12 1.2 C 13.7 3.1, 13.7 6.4, 12 8.8 Z" fill="none" stroke-linejoin="round" />
-                <path d="M 12 15.2 C 10.3 17.6, 10.3 20.9, 12 22.8 C 13.7 20.9, 13.7 17.6, 12 15.2 Z" fill="none" stroke-linejoin="round" />
-                <path d="M 10.1 12 C 7.7 10.3, 4.4 10.3, 2.5 12 C 4.4 13.7, 7.7 13.7, 10.1 12 Z" fill="none" stroke-linejoin="round" />
-                <path d="M 13.9 12 C 16.3 10.3, 19.6 10.3, 21.5 12 C 19.6 13.7, 16.3 13.7, 13.9 12 Z" fill="none" stroke-linejoin="round" />
-            </g>
-
-            <!-- Cerchio di contenimento tratteggiato -->
-            <circle cx="12" cy="12" r="11" stroke-width="0.7" stroke-dasharray="1 1" opacity="0.5" />
-        </svg>
-    </div>
-    <div class="button-text">
-        <span class="button-category">Numerologia</span>
-        <span class="button-main-title">Caldea</span>
-    </div>
-    <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-</a>
-
-            <!-- Compatibilità -->
-            <a href="compatibilita.html" class="menu-button">
-                <div class="icon-container">
-                   <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
-    <!-- Triangolo verso l'alto -->
-    <polygon points="12,4 19,16 5,16" />
-    <!-- Triangolo verso il basso -->
-    <polygon points="12,20 5,8 19,8" opacity="0.75" />
-    <!-- Centro di bilanciamento -->
-    <circle cx="12" cy="12" r="1" fill="var(--gold-primary)" />
-</svg>
+                    <!-- Relazioni Karmiche -->
+                    <a href="relazioni-karmiche.html" class="menu-button">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="8" cy="12" r="5" stroke-dasharray="2 1" />
+                                <circle cx="16" cy="12" r="5" />
+                                <path d="M 12 8.5 A 5 5 0 0 1 12 15.5 A 5 5 0 0 1 12 8.5" fill="rgba(212, 175, 55, 0.25)" stroke="var(--gold-primary)" stroke-width="1.2" />
+                            </svg>
+                        </div>
+                        <div class="button-text">
+                            <span class="button-category">Legami d'Anima</span>
+                            <span class="button-main-title">Relazioni Karmiche</span>
+                        </div>
+                        <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
                 </div>
-                <div class="button-text">
-                    <span class="button-category">Affinità e</span>
-                    <span class="button-main-title">Compatibilità</span>
-                </div>
-                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
 
-            <!-- Relazioni Karmiche -->
-            <a href="relazioni-karmiche.html" class="menu-button">
-                <div class="icon-container">
-                    <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
-                        <circle cx="8" cy="12" r="5" stroke-dasharray="2 1" />
-                        <circle cx="16" cy="12" r="5" />
-                        <path d="M 12 8.5 A 5 5 0 0 1 12 15.5 A 5 5 0 0 1 12 8.5" fill="rgba(212, 175, 55, 0.25)" stroke="var(--gold-primary)" stroke-width="1.2" />
-                    </svg>
+                <!-- PAGINA 2: TASTO LIGNAGGIO FAMILIARE -->
+                <div class="slide">
+                    <a href="lignaggio-familiare.html" class="menu-button">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="0.8" opacity="0.4" />
+                                <path d="M12 18V11" stroke-width="1.4" stroke-linecap="round" />
+                                <path d="M12 15C10 13.5 8.5 12.5 7.5 10.5" stroke-width="1.2" stroke-linecap="round" />
+                                <path d="M12 15C14 13.5 15.5 12.5 16.5 10.5" stroke-width="1.2" stroke-linecap="round" />
+                                <path d="M12 13C10.5 11.5 9.5 10 9 8.5" stroke-width="1.1" stroke-linecap="round" />
+                                <path d="M12 13C13.5 11.5 14.5 10 15 8.5" stroke-width="1.1" stroke-linecap="round" />
+                                <path d="M12 17.5C10.5 18.5 9 19 8 19.5" stroke-width="1.1" stroke-linecap="round" />
+                                <path d="M12 17.5C13.5 18.5 15 19 16 19.5" stroke-width="1.1" stroke-linecap="round" />
+                                <circle cx="12" cy="6.5" r="0.9" fill="var(--gold-primary)" />
+                                <circle cx="9" cy="8.5" r="0.8" fill="var(--gold-primary)" />
+                                <circle cx="15" cy="8.5" r="0.8" fill="var(--gold-primary)" />
+                                <circle cx="7.5" cy="10.5" r="0.8" fill="var(--gold-primary)" />
+                                <circle cx="16.5" cy="10.5" r="0.8" fill="var(--gold-primary)" />
+                            </svg>
+                        </div>
+                        <div class="button-text">
+                            <span class="button-category">Eredità Ancestrale</span>
+                            <span class="button-main-title">Lignaggio Familiare</span>
+                        </div>
+                        <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    </a>
                 </div>
-                <div class="button-text">
-                    <span class="button-category">Legami d'Anima</span>
-                    <span class="button-main-title">Relazioni Karmiche</span>
-                </div>
-                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
+
+            </div>
         </div>
-
-        <!-- PAGINA 2: TASTO LIGNAGGIO FAMILIARE -->
-        <div class="slide">
-            <!-- Lignaggio Familiare -->
-            <a href="lignaggio-familiare.html" class="menu-button">
-                <div class="icon-container">
-                    <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary); stroke-width: 1.2;">
-                        <!-- Cerchio di sfondo opzionale -->
-                        <circle cx="12" cy="12" r="10" stroke-width="0.8" opacity="0.4" />
-                        
-                        <!-- Tronco -->
-                        <path d="M12 18V11" stroke-width="1.4" stroke-linecap="round" />
-                        
-                        <!-- Rami principali -->
-                        <path d="M12 15C10 13.5 8.5 12.5 7.5 10.5" stroke-width="1.2" stroke-linecap="round" />
-                        <path d="M12 15C14 13.5 15.5 12.5 16.5 10.5" stroke-width="1.2" stroke-linecap="round" />
-                        
-                        <!-- Rami alti -->
-                        <path d="M12 13C10.5 11.5 9.5 10 9 8.5" stroke-width="1.1" stroke-linecap="round" />
-                        <path d="M12 13C13.5 11.5 14.5 10 15 8.5" stroke-width="1.1" stroke-linecap="round" />
-                        
-                        <!-- Radici -->
-                        <path d="M12 17.5C10.5 18.5 9 19 8 19.5" stroke-width="1.1" stroke-linecap="round" />
-                        <path d="M12 17.5C13.5 18.5 15 19 16 19.5" stroke-width="1.1" stroke-linecap="round" />
-                        
-                        <!-- Nodi / Foglie -->
-                        <circle cx="12" cy="6.5" r="0.9" fill="var(--gold-primary)" />
-                        <circle cx="9" cy="8.5" r="0.8" fill="var(--gold-primary)" />
-                        <circle cx="15" cy="8.5" r="0.8" fill="var(--gold-primary)" />
-                        <circle cx="7.5" cy="10.5" r="0.8" fill="var(--gold-primary)" />
-                        <circle cx="16.5" cy="10.5" r="0.8" fill="var(--gold-primary)" />
-                    </svg>
-                </div>
-                <div class="button-text">
-                    <span class="button-category">Eredità Ancestrale</span>
-                    <span class="button-main-title">Lignaggio Familiare</span>
-                </div>
-                <svg class="arrow-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            </a>
-        </div>
-
-    </div>
-</div>
 
         <!-- INDICATORI DI SCORRIMENTO (DOTS) -->
         <div class="swipe-indicators" id="swipeIndicators">
@@ -561,7 +536,7 @@
         <!-- Archivio -->
         <a href="archivio.html" class="menu-button">
             <div class="icon-container">
-                <svg viewBox="0 0 24 24" style="fill: none; stroke: var(--gold-primary);">
+                <svg viewBox="0 0 24 24">
                     <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" stroke-width="1.5"/>
                 </svg>
             </div>
@@ -588,12 +563,10 @@
 
     </div>
 
-    <!-- Script per aggiornare i pallini e gestire il trascinamento da PC -->
     <script>
         const slider = document.getElementById('methodsSlider');
         const dots = document.querySelectorAll('#swipeIndicators .swipe-dot');
 
-        // Aggiornamento dinamico pallini
         if (slider && dots.length > 0) {
             slider.addEventListener('scroll', () => {
                 const pageIndex = Math.round(slider.scrollLeft / slider.clientWidth);
@@ -603,7 +576,6 @@
             });
         }
 
-        // Drag to Scroll per Mouse PC
         let isDown = false;
         let startX;
         let scrollLeft;

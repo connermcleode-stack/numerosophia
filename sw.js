@@ -6,6 +6,7 @@ const FILES_TO_CACHE = [
   './index.html',
   './caldea.html',
   './pitagora.html',
+  './testi_pitagora.html',
   './archivio.html',
   './compatibilita.html',
   './condividi-compatibilita.html',

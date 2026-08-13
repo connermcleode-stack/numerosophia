@@ -240,9 +240,106 @@ function eseguiCalcoloCompleto() {
             
             giornoPersonale = riduciNumero(riduciMonocifraStretta(annoPersonale) + rOggiGiorno + rOggiMese, true);
 
-            if (document.getElementById('numGiornoIsolato')) document.getElementById('numGiornoIsolato').innerText = format(giornoIsolato);
-            if (document.getElementById('descGiornoIsolato')) document.getElementById('descGiornoIsolato').innerHTML = compilaSchedaSicura(giornoIsolato);
-            
+// ============================================================================
+// RENDERING GIORNO DI NASCITA (ANTEPRIMA E MODALE CORRETTA)
+// ============================================================================
+if (document.getElementById('numGiornoIsolato')) {
+    document.getElementById('numGiornoIsolato').innerText = g; // Es. 27
+}
+
+const sorgenteTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
+
+if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTesti.GIORNI_NASCITA && sorgenteTesti.GIORNI_NASCITA[g]) {
+    const datiG = sorgenteTesti.GIORNI_NASCITA[g];
+    const archetipoG = sorgenteTesti.ARCHETIPI_GIORNI[g] || "";
+
+    // Calcolo del numero della carta
+    let numeroCarta = g;
+    const karmiciEMaestri = [11, 13, 14, 16, 19, 22, 33, 44];
+
+    if (!karmiciEMaestri.includes(g) && g > 9) {
+        let somma = g;
+        while (somma > 9 && !karmiciEMaestri.includes(somma)) {
+            somma = String(somma).split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+        }
+        numeroCarta = somma;
+    }
+
+    // Percorso blindato: cartella "carte/", nome numerico, formato ".png"
+    document.getElementById('descGiornoIsolato').innerHTML = `
+        <div class="anteprima-card" style="text-align: center; cursor: pointer;" onclick="apriModalGiorno(${g})">
+            <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" style="width: 90px; max-width: 100px; height: auto; margin: 10px auto; display: block; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);" onerror="this.style.display='none';">
+            <h4 style="margin: 8px 0 4px 0;">Archetipo: ${archetipoG} (Giorno ${g})</h4>
+            <p style="font-size: 0.85em; opacity: 0.8; margin-top: 4px;">➔ Clicca qui per leggere l'analisi completa</p>
+        </div>
+    `;
+}
+
+function apriModalGiorno(giorno) {
+    const sorgenteTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
+    if (!sorgenteTesti || !sorgenteTesti.GIORNI_NASCITA || !sorgenteTesti.GIORNI_NASCITA[giorno]) return;
+
+    const t = sorgenteTesti.GIORNI_NASCITA[giorno];
+    const archetipo = sorgenteTesti.ARCHETIPI_GIORNI[giorno] || "";
+
+    let numeroCarta = giorno;
+    const karmiciEMaestri = [11, 13, 14, 16, 19, 22, 33, 44];
+    if (!karmiciEMaestri.includes(giorno) && giorno > 9) {
+        let somma = giorno;
+        while (somma > 9 && !karmiciEMaestri.includes(somma)) {
+            somma = String(somma).split('').reduce((acc, digit) => acc + parseInt(digit), 0);
+        }
+        numeroCarta = somma;
+    }
+
+    // Impostiamo direttamente il titolo e i contenuti usando gli ID nativi della modale del tuo sito
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) {
+        titoloModale.innerText = `${archetipo.toUpperCase()} (GIORNO ${giorno})`;
+    }
+    
+    if (sottotitoloModale) {
+        sottotitoloModale.innerHTML = "";
+    }
+
+    if (contenutoModale) {
+        contenutoModale.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="carte/${numeroCarta}.png" alt="${archetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+            </div>
+
+            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">🏛️ SOTTOTITOLO</h4>
+                <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
+            </div>
+
+            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">✨ SIGNIFICATO</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
+            </div>
+
+            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">⚠️ PUNTI DEBOLI</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.puntiDeboli}</p>
+            </div>
+
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">💼 PROFESSIONI IDEALI</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.professioniIdeali}</p>
+            </div>
+        `;
+    }
+
+    if (modaleContainer) {
+        modaleContainer.style.display = 'flex';
+    }
+}
+
+window.apriModalGiorno = apriModalGiorno;
             if (document.getElementById('numCammino')) document.getElementById('numCammino').innerText = format(destino);
             if (document.getElementById('descCammino')) document.getElementById('descCammino').innerHTML = compilaSchedaSicura(destino);
             
@@ -268,22 +365,73 @@ function eseguiCalcoloCompleto() {
             if (document.getElementById('numCicloConc')) document.getElementById('numCicloConc').innerText = format(cConc);
             if (document.getElementById('descCicloConc')) document.getElementById('descCicloConc').innerHTML = compilaSchedaSicura(cConc);
 
-            if (document.getElementById('numCiclo1')) document.getElementById('numCiclo1').innerText = format(p1);
-            if (document.getElementById('etaCiclo1')) document.getElementById('etaCiclo1').innerText = `Da 0 a ${fineC1} anni`;
-            if (document.getElementById('descCiclo1')) document.getElementById('descCiclo1').innerHTML = compilaSchedaSicura(p1);
+            
+// Cerca il database sotto tutte le possibili variabili note
+const tPitagora = window.TESTI_PITAGORA || window.TESTI_CICLI || (typeof TESTI_CICLI !== 'undefined' ? TESTI_CICLI : null);
 
-            if (document.getElementById('numCiclo2')) document.getElementById('numCiclo2').innerText = format(p2);
-            if (document.getElementById('etaCiclo2')) document.getElementById('etaCiclo2').innerText = `Da ${fineC1 + 1} a ${fineC2} anni`;
-            if (document.getElementById('descCiclo2')) document.getElementById('descCiclo2').innerHTML = compilaSchedaSicura(p2);
+// --- 1° CICLO DI REALIZZAZIONE (p1) ---
+if (document.getElementById('numCiclo1')) document.getElementById('numCiclo1').innerText = format(p1);
+if (document.getElementById('etaCiclo1')) document.getElementById('etaCiclo1').innerText = `Da 0 a ${fineC1} anni`;
+if (document.getElementById('descCiclo1')) {
+    const anteprima = compilaSchedaSicura(p1);
+    const testoEsteso = ottieniTestoEstesoCiclo(p1, 'ciclo1');
+    document.getElementById('descCiclo1').innerHTML = anteprima;
+    
+    const card = document.getElementById('descCiclo1').closest('.card');
+    if (card) {
+        const vecchio = card.querySelector('.testo-segreto');
+        if (vecchio) vecchio.remove();
+        card.insertAdjacentHTML('beforeend', `<div class="testo-segreto" style="display:none;">${testoEsteso}</div>`);
+    }
+}
 
-            if (document.getElementById('numCiclo3')) document.getElementById('numCiclo3').innerText = format(p3);
-            if (document.getElementById('etaCiclo3')) document.getElementById('etaCiclo3').innerText = `Da ${fineC2 + 1} a ${fineC3} anni`;
-            if (document.getElementById('descCiclo3')) document.getElementById('descCiclo3').innerHTML = compilaSchedaSicura(p3);
+// --- 2° CICLO DI REALIZZAZIONE (p2) ---
+if (document.getElementById('numCiclo2')) document.getElementById('numCiclo2').innerText = format(p2);
+if (document.getElementById('etaCiclo2')) document.getElementById('etaCiclo2').innerText = `Da ${fineC1 + 1} a ${fineC2} anni`;
+if (document.getElementById('descCiclo2')) {
+    const anteprima = compilaSchedaSicura(p2);
+    const testoEsteso = ottieniTestoEstesoCiclo(p2, 'ciclo2');
+    document.getElementById('descCiclo2').innerHTML = anteprima;
+    
+    const card = document.getElementById('descCiclo2').closest('.card');
+    if (card) {
+        const vecchio = card.querySelector('.testo-segreto');
+        if (vecchio) vecchio.remove();
+        card.insertAdjacentHTML('beforeend', `<div class="testo-segreto" style="display:none;">${testoEsteso}</div>`);
+    }
+}
 
-            if (document.getElementById('numCiclo4')) document.getElementById('numCiclo4').innerText = format(p4);
-            if (document.getElementById('etaCiclo4')) document.getElementById('etaCiclo4').innerText = `Da ${fineC3 + 1} anni in poi`;
-            if (document.getElementById('descCiclo4')) document.getElementById('descCiclo4').innerHTML = compilaSchedaSicura(p4);
+// --- 3° CICLO DI REALIZZAZIONE (p3) ---
+if (document.getElementById('numCiclo3')) document.getElementById('numCiclo3').innerText = format(p3);
+if (document.getElementById('etaCiclo3')) document.getElementById('etaCiclo3').innerText = `Da ${fineC2 + 1} a ${fineC3} anni`;
+if (document.getElementById('descCiclo3')) {
+    const anteprima = compilaSchedaSicura(p3);
+    const testoEsteso = ottieniTestoEstesoCiclo(p3, 'ciclo3');
+    document.getElementById('descCiclo3').innerHTML = anteprima;
+    
+    const card = document.getElementById('descCiclo3').closest('.card');
+    if (card) {
+        const vecchio = card.querySelector('.testo-segreto');
+        if (vecchio) vecchio.remove();
+        card.insertAdjacentHTML('beforeend', `<div class="testo-segreto" style="display:none;">${testoEsteso}</div>`);
+    }
+}
 
+// --- 4° CICLO DI REALIZZAZIONE (p4) ---
+if (document.getElementById('numCiclo4')) document.getElementById('numCiclo4').innerText = format(p4);
+if (document.getElementById('etaCiclo4')) document.getElementById('etaCiclo4').innerText = `Da ${fineC3 + 1} anni in poi`;
+if (document.getElementById('descCiclo4')) {
+    const anteprima = compilaSchedaSicura(p4);
+    const testoEsteso = ottieniTestoEstesoCiclo(p4, 'ciclo4');
+    document.getElementById('descCiclo4').innerHTML = anteprima;
+    
+    const card = document.getElementById('descCiclo4').closest('.card');
+    if (card) {
+        const vecchio = card.querySelector('.testo-segreto');
+        if (vecchio) vecchio.remove();
+        card.insertAdjacentHTML('beforeend', `<div class="testo-segreto" style="display:none;">${testoEsteso}</div>`);
+    }
+}
 function ottieniNomeImmagineOmbra(valoreOmbra) {
     return (valoreOmbra === 0 || valoreOmbra === 9) ? 'ombra9' : 'ombra' + valoreOmbra;
 }
@@ -300,6 +448,86 @@ const nomiOmbreDefault = {
     8: "Il Tiranno (L'ombra del Sovrano)",
     9: "L'Angelo caduto (L'ombra del Liberatore)"
 };
+
+/**
+ * Restituisce il contenuto HTML completo ed esteso per il Modal del Ciclo.
+ * Gestisce correttamente percorsi immagini, fallback su base monocifra e numeri karmici/maestri.
+ */
+function ottieniTestoEstesoCiclo(valoreNumero, chiaveCiclo) {
+    try {
+        // PERCORSO DELLE TUE IMMAGINI: cambia se sono in una cartella (es. 'immagini/' o 'carte/')
+        const CARTELLA = 'carte/';
+
+        const tPitagora = window.TESTI_PITAGORA || window.TESTI_CICLI || (typeof TESTI_PITAGORA !== 'undefined' ? TESTI_PITAGORA : null);
+        const valStr = String(valoreNumero || '').trim();
+        if (!valStr) return compilaSchedaSicura(valoreNumero);
+
+        // Estrazione parti (es. "13/4" -> numOriginale: "13", baseMonocifra: "4")
+        let numOriginale = valStr;
+        let baseMonocifra = valStr;
+
+        if (valStr.includes('/')) {
+            const parti = valStr.split('/');
+            numOriginale = parti[0].trim();
+            baseMonocifra = parti[1].trim();
+        } else if (valStr.length > 1 && !['11', '22', '33'].includes(valStr)) {
+            const somma = valStr.split('').reduce((a, b) => parseInt(a || 0) + parseInt(b || 0), 0);
+            baseMonocifra = String(somma);
+        }
+
+        if (!tPitagora) return compilaSchedaSicura(valoreNumero);
+
+        const sorgente = tPitagora.cicli || tPitagora;
+
+        // Cerca l'archetipo nei testi (prova prima il numero completo, poi il karmico, infine la base)
+        let archetipo = sorgente[valStr] || 
+                        sorgente[numOriginale] || 
+                        sorgente[parseInt(numOriginale, 10)] || 
+                        sorgente[baseMonocifra] || 
+                        sorgente[parseInt(baseMonocifra, 10)];
+
+        if (!archetipo) return compilaSchedaSicura(valoreNumero);
+
+        // Cerca il blocco del ciclo specifico
+        let c = archetipo.cicli ? archetipo.cicli[chiaveCiclo] : null;
+
+        // Se l'archetipo karmico (es. 13 o 16) non ha la sezione del ciclo specificata,
+        // recupera la descrizione del ciclo dall'archetipo di BASE monocifra (es. 4 o 7)
+        if (!c && numOriginale !== baseMonocifra) {
+            const archetipoBase = sorgente[baseMonocifra] || sorgente[parseInt(baseMonocifra, 10)];
+            if (archetipoBase && archetipoBase.cicli) {
+                c = archetipoBase.cicli[chiaveCiclo];
+            }
+        }
+
+        if (!c) return compilaSchedaSicura(valoreNumero);
+
+        // Costruzione percorsi immagini sicuri
+        const srcPrincipale = CARTELLA ? `${CARTELLA}${numOriginale}.png` : `${numOriginale}.png`;
+        const srcFallback = CARTELLA ? `${CARTELLA}${baseMonocifra}.png` : `${baseMonocifra}.png`;
+
+        return `
+            <div class="modal-ciclo-esteso" style="text-align: center;">
+                <div style="margin-bottom: 15px;">
+                    <img src="${srcPrincipale}" 
+                         onerror="this.onerror=null; this.src='${srcFallback}';" 
+                         alt="Carta ${archetipo.nome}" 
+                         style="max-width: 140px; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                </div>
+                <h3 style="color: #d69e2e; margin-bottom: 6px;">${archetipo.nome} ${valStr.includes('/') ? '(' + valStr + ')' : ''}</h3>
+                <h5 style="font-style: italic; color: #a0aec0; margin-bottom: 12px;">${archetipo.sottotitolo || ''}</h5>
+                <p style="margin-bottom: 16px; line-height: 1.5; text-align: left;">${archetipo.introduzione || ''}</p>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 12px 0;">
+                <h4 style="color: #ecc94b; margin-bottom: 8px; text-align: left;">${c.titolo || ''}</h4>
+                <p style="margin-bottom: 10px; text-align: left;"><strong>Lezioni:</strong> ${c.lezioni || ''}</p>
+                <p style="text-align: left;"><strong>Potenziali:</strong> ${c.potenziali || ''}</p>
+            </div>
+        `;
+    } catch (e) {
+        console.error("Errore ottieniTestoEstesoCiclo:", e);
+        return compilaSchedaSicura(valoreNumero);
+    }
+}
 
 function estraiEtichettaOmbra(valore) {
     let num = parseInt(valore, 10);
