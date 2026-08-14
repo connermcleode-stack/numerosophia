@@ -312,41 +312,86 @@ window.TESTI_PITAGORA = {
 }
   },
 13: {
-  nome: "L'Alchimista",
-  sottotitolo: "Gli anni della trasmutazione e del rinnovamento",
-  introduzione: "Il numero karmico 13 attiva l'archetipo dell'Alchimista, rappresentando la morte simbolica delle vecchie strutture e la rinascita verso una nuova forma di consapevolezza. Nasce dalla necessità di trascendere la rigidità e l'illusione di controllo tipiche del 4, attraverso la spinta dinamica dell'1 e del 3. È un ciclo di profonda purificazione che insegna l'arte di lasciar andare ciò che non serve più, trasformando l'ostacolo in risorsa e la fatica in valore. La lezione risiede nell'accettare il cambiamento con fiducia, superando la tentazione della pigrizia o della resistenza al rinnovamento.",
-  cicli: {
-    ciclo2: {
-      titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
-      lezioni: "La sfida è superare il senso di frustrazione o di blocco di fronte alle inevitabili ristrutturazioni che la vita impone. Occorre evitare di attaccarsi alle certezze formali o di cadere in schemi di lavoro coercitivi per paura del futuro. Se la transizione del 13 non viene integrata, il ciclo tenderà a essere vissuto attraverso la sola vibrazione di base del numero 4 (Il Costruttore).",
-      potenziali: "Attraverso il processo di trasmutazione interiore, si sviluppa una forza di volontà incrollabile e una straordinaria capacità di rigenerazione. È il momento propizio per ricostruire la propria carriera o vita personale su basi autentiche, convertendo crisi in opportunità e diventando esperti nella gestione dei cambiamenti e nella risoluzione di situazioni complesse."
-    }
-}
-  },
+        nome: "L'Alchimista",
+        sottotitolo: "Gli anni della trasmutazione e del rinnovamento",
+        introduzione: "Il numero karmico 13 attiva l'archetipo dell'Alchimista, rappresentando la morte simbolica delle vecchie strutture e la rinascita verso una nuova forma di consapevolezza. Nasce dalla necessità di trascendere la rigidità e l'illusione di controllo tipiche del 4, attraverso la spinta dinamica dell'1 e del 3. È un ciclo di profonda purificazione che insegna l'arte di lasciar andare ciò che non serve più, trasformando l'ostacolo in risorsa e la fatica in valore. La lezione risiede nell'accettare il cambiamento con fiducia, superando la tentazione della pigrizia o della resistenza al rinnovamento.",
+        cicli: {
+            ciclo1: {
+                titolo: "1° Ciclo di Vita (Infanzia e Giovinezza)",
+                lezioni: "Nella fase iniziale della vita, la sfida del 13 si manifesta attraverso piccoli e grandi reset improvvisi, abituando a non dare nulla per scontato. La lezione consiste nell'imparare a ripartire da zero dopo ogni delusione o cambiamento radicale, superando la resistenza infantile al distacco dalle vecchie abitudini o dagli ambienti limitanti.",
+                potenziali: "Si sviluppa una precoce resilienza, una spiccata flessibilità mentale e la capacità di metabolizzare rapidamente i cambiamenti. I giovani anni diventano un fertile terreno di apprendimento in cui si gettano le basi per un'autentica e precoce indipendenza interiore."
+            },
+            ciclo2: {
+                titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
+                lezioni: "La sfida è superare il senso di frustrazione o di blocco di fronte alle inevitabili ristrutturazioni che la vita impone. Occorre evitare di attaccarsi alle certezze formali o di cadere in schemi di lavoro coercitivi per paura del futuro. Se la transizione del 13 non viene integrata, il ciclo tenderà a essere vissuto attraverso la sola vibrazione di base del numero 4 (Il Costruttore).",
+                potenziali: "Attraverso il processo di trasmutazione interiore, si sviluppa una forza di volontà incrollabile e una straordinaria capacità di rigenerazione. È il momento propizio per ricostruire la propria carriera o vita personale su basi autentiche, convertendo crisi in opportunità e diventando esperti nella gestione dei cambiamenti e nella risoluzione di situazioni complesse."
+            },
+            ciclo3: {
+                titolo: "3° Ciclo di Vita (Maturità e Trasformazione)",
+                lezioni: "Nel pieno della maturità professionale e personale, la prova del 13 richiede di abbandonare definitivamente metodi di lavoro obsoleti o stili di vita che non rispecchiano più la propria evoluzione. La sfida è non temere le svolte drastiche (come cambi di carriera o di rotta), affrontandole come un'opportunità di purificazione e rinnovamento.",
+                potenziali: "Si sprigiona una straordinaria energia creativa e rigenerativa, capace di dare nuova vita a progetti in stallo. Si diventa maestri nell'arte di ottimizzare le risorse, eliminare il superfluo e costruire strutture solide e durature fondate sulla reale essenza delle cose."
+            },
+            ciclo4: {
+                titolo: "4° Ciclo di Vita (Integrazione e Nuova Saggezza)",
+                lezioni: "Il ciclo conclusivo invita a fare pace con le fatiche e le trasformazioni vissute nel corso dell'esistenza. La lezione finale è comprendere il senso profondo di ogni crollo e di ogni rinascita, accettando il fluire ciclico dell'esistenza senza rimpianti.",
+                potenziali: "Si incarna la figura del saggio alchimista, la cui vita è testimonianza vivente della capacità di trarre oro dalle difficoltà. Si possiede una profonda pace interiore e una straordinaria autorevolezza da trasmettere agli altri, offrendo una visione illuminata sul valore trasformativo del tempo e dell'esperienza."
+            }
+        }
+    },
 14: {
-  nome: "L'Amante",
-  sottotitolo: "Gli anni dell’armonia e dell’uso consapevole della libertà",
-  introduzione: "Il numero karmico 14 attiva l'archetipo dell'Amante e della Temperanza, rappresentando il passaggio dall'insofferenza per i limiti alla ricerca di un vero equilibrio interiore. Nasce dall'esigenza di integrare l'indipendenza dell'1 e la stabilità del 4 per fluire nel cambiamento libero del 5. È un ciclo che mette alla prova la capacità di gestire la propria libertà senza cedere agli eccessi, alle dipendenze o alla costante ricerca di evasioni. La lezione fondamentale è comprendere che la vera libertà non coincide con il disordine o la fuga dalle responsabilità, ma con la padronanza di sé, l'armonia emotiva e la capacità di adattamento.",
-  cicli: {
-    ciclo2: {
-      titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
-      lezioni: "La sfida è evitare gli sbalzi estremi tra rigidità e sregolatezza, imparando a non disperdere energie vitali e risorse in troppe direzioni contemporaneamente. Occorre affrontare l'ansia del cambiamento e la tentazione di abbandonare i progetti non appena richiedono continuità. Se la lezione di temperanza del 14 non viene integrata, il ciclo tenderà a essere vissuto attraverso la sola vibrazione di base del numero 5 (Il Cercatore).",
-      potenziali: "Sviluppando moderazione e centratura, si acquisisce un'eccellente fluidità comunicativa, versatilità e talento nel mediare tra posizioni opposte. È una fase ideale per avviare progetti dinamici, viaggiare, curare relazioni interpersonali e trasformare la propria flessibilità in un potente strumento di crescita professionale e personale."
-    }
-}
-  },
+        nome: "L'Amante",
+        sottotitolo: "Gli anni dell’armonia e dell’uso consapevole della libertà",
+        introduzione: "Il numero karmico 14 attiva l'archetipo dell'Amante e della Temperanza, rappresentando il passaggio dall'insofferenza per i limiti alla ricerca di un vero equilibrio interiore. Nasce dall'esigenza di integrare l'indipendenza dell'1 e la stabilità del 4 per fluire nel cambiamento libero del 5. È un ciclo che mette alla prova la capacità di gestire la propria libertà senza cedere agli eccessi, alle dipendenze o alla costante ricerca di evasioni. La lezione fondamentale è comprendere che la vera libertà non coincide con il disordine o la fuga dalle responsabilità, ma con la padronanza di sé, l'armonia emotiva e la capacità di adattamento.",
+        cicli: {
+            ciclo1: {
+                titolo: "1° Ciclo di Vita (Infanzia e Giovinezza)",
+                lezioni: "Negli anni della giovinezza, la sfida del 14 si esprime come un forte fermento e un'inquietudine di fondo, oscillando tra il bisogno di regole e il desiderio irrefrenabile di trasgredirle. La lezione consiste nell'imparare a incanalare l'energia e la curiosità esplorativa senza disperderle in mille rivoli o in tentazioni di fuga dalla realtà.",
+                potenziali: "Si sviluppa una straordinaria apertura mentale, una spiccata curiosità per il mondo e un talento naturale per l'adattamento ai contesti più diversi. È un'età in cui si impara rapidamente attraverso l'esperienza diretta, la socialità e il contatto con culture o punti di vista differenti."
+            },
+            ciclo2: {
+                titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
+                lezioni: "La sfida è evitare gli sbalzi estremi tra rigidità e sregolatezza, imparando a non disperdere energie vitali e risorse in troppe direzioni contemporaneamente. Occorre affrontare l'ansia del cambiamento e la tentazione di abbandonare i progetti non appena richiedono continuità. Se la lezione di temperanza del 14 non viene integrata, il ciclo tenderà a essere vissuto attraverso la sola vibrazione di base del numero 5 (Il Cercatore).",
+                potenziali: "Sviluppando moderazione e centratura, si acquisisce un'eccellente fluidità comunicativa, versatilità e talento nel mediare tra posizioni opposte. È una fase ideale per avviare progetti dinamici, viaggiare, curare relazioni interpersonali e trasformare la propria flessibilità in un potente strumento di crescita professionale e personale."
+            },
+            ciclo3: {
+                titolo: "3° Ciclo di Vita (Maturità e Trasformazione)",
+                lezioni: "Nel pieno della maturità, la prova del 14 richiede di armonizzare gli impegni concreti con il profondo bisogno di evoluzione e movimento interiore. La sfida chiave è non cedere alla tentazione della dispersione o dell'insoddisfazione cronica, trovando invece il giusto punto d'equilibrio tra stabilità lavorativa e innovazione.",
+                potenziali: "Si consolida una rara abilità diplomatica e una notevole competenza nel gestire situazioni complesse o mutevoli con grazia ed efficacia. Si diventa punti di riferimento capaci di unire la concretezza dei risultati alla lungimiranza e alla flessibilità strategica."
+            },
+            ciclo4: {
+                titolo: "4° Ciclo di Vita (Integrazione e Nuova Saggezza)",
+                lezioni: "Il ciclo finale invita a raccogliere i frutti di una libertà pienamente compresa e disciplinata dall'amore e dalla saggezza. La lezione consiste nel superare ogni traccia di inquietudine interiore, celebrando la pace dei sensi e la riconciliazione con la propria storia.",
+                potenziali: "Si incarna la quintessenza della moderazione saggia e ispiratrice. La persona diventa un faro di serenità e comprensione, capace di infondere armonia negli altri, trasmettendo il valore inestimabile di una vita vissuta integrando la libertà con la fedeltà ai propri valori più alti."
+            }
+        }
+    },
 16: {
-    nome: "Il Perfezionista",
-    sottotitolo: "Gli anni del risveglio interiore e del crollo delle illusioni",
-    introduzione: "Il numero karmico 16 attiva l'archetipo del Perfezionista e della Torre, rappresentando la distruzione delle maschere dell'ego per far emergere la verità profonda dell'anima. Nasce dalla necessità di superare l'orgoglio, l'idealizzazione e la rigidità razionale dell'1 e del 6, trovando la vera saggezza nella vibrazione del 7. È un ciclo di forte risveglio spirituale, spesso innescato da eventi imprevisti che abbattono le vecchie certezze materiali e gli attaccamenti illusori. La lezione principale è imparare la resa, l'umiltà e l'ascolto interiore, comprendendo che la dissoluzione delle false strutture è la premessa indispensabile per una rinascita autentica.",
-    cicli: {
-      ciclo2: {
-        titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
-        lezioni: "La sfida è rilasciare il bisogno di controllo, il perfezionismo ossessivo e la paura del giudizio o del fallimento. Abbandonare l'ostinazione ad arroccarsi nelle proprie convinzioni evita che le 'crisi di risveglio' si trasformino in dolorosi crolli. Se la trasformazione profonda del 16 non viene integrata, il ciclo tenderà a essere vissuto attraverso la sola vibrazione di base del numero 7 (Il Saggio).",
-        potenziali: "Attraverso il superamento delle illusioni, si sviluppa una lucidità straordinaria, un'intuizione penetrante e un senso di pace incorruttibile. È la fase ideale per spogliarsi del superfluo, intraprendere percorsi di profonda ricerca interiore o filosofica e diventare guide o consulenti di rara saggezza, capaci di aiutare gli altri ad attraversare i propri momenti di transizione e ristrutturazione."
-      }
-    }
-  }, // <--- Chiude il 16 e apre il 19
+        nome: "Il Perfezionista",
+        sottotitolo: "Gli anni del risveglio interiore e del crollo delle illusioni",
+        introduzione: "Il numero karmico 16 attiva l'archetipo del Perfezionista e della Torre, rappresentando la distruzione delle maschere dell'ego per far emergere la verità profonda dell'anima. Nasce dalla necessità di superare l'orgoglio, l'idealizzazione e la rigidità razionale dell'1 e del 6, trovando la vera saggezza nella vibrazione del 7. È un ciclo di forte risveglio spirituale, spesso innescato da eventi imprevisti che abbattono le vecchie certezze materiali e gli attaccamenti illusori. La lezione principale è imparare la resa, l'umiltà e l'ascolto interiore, comprendendo che la dissoluzione delle false strutture è la premessa indispensabile per una rinascita autentica.",
+        cicli: {
+            ciclo1: {
+                titolo: "1° Ciclo di Vita (Infanzia e Giovinezza)",
+                lezioni: "In questa prima fase, la sfida del 16 si manifesta attraverso un senso di diversità, idealizzazioni infrante o la sensazione che le certezze infantili crollino precocemente. La lezione sta nell'imparare a non ritirarsi in un guscio di freddezza o iper-razionalità difensiva, accettando la vulnerabilità come fonte di autentica forza.",
+                potenziali: "Si sviluppa una precoce profondità d'analisi, un'intuizione spiccata e una spinta naturale verso la ricerca della verità. La mente impara fin da giovane a guardare oltre le apparenze e a diffidare dei modelli vuoti o di facciata."
+            },
+            ciclo2: {
+                titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
+                lezioni: "La sfida è rilasciare il bisogno di controllo, il perfezionismo ossessivo e la paura del giudizio o del fallimento. Abbandonare l'ostinazione ad arroccarsi nelle proprie convinzioni evita che le 'crisi di risveglio' si trasformino in dolorosi crolli. Se la trasformazione profonda del 16 non viene integrata, il ciclo tenderà a essere vissuto attraverso la sola vibrazione di base del numero 7 (Il Saggio).",
+                potenziali: "Attraverso il superamento delle illusioni, si sviluppa una lucidità straordinaria, un'intuizione penetrante e un senso di pace incorruttibile. È la fase ideale per spogliarsi del superfluo, intraprendere percorsi di profonda ricerca interiore o filosofica e diventare guide o consulenti di rara saggezza, capaci di aiutare gli altri ad attraversare i propri momenti di transizione e ristrutturazione."
+            },
+            ciclo3: {
+                titolo: "3° Ciclo di Vita (Maturità e Trasformazione)",
+                lezioni: "Nel pieno della maturità, la prova del 16 richiede di mettere in discussione le strutture lavorative o personali basate solo sull'orgoglio o sulle aspettative altrui. La sfida è accettare i ridimensionamenti o le svolte impreviste senza rigidità, abbandonando l'illusione di poter controllare ogni variabile dell'esistenza.",
+                potenziali: "Si raggiunge un'elevata padronanza intellettuale e spirituale. Si è in grado di realizzare progetti di grande spessore e valore autentico, fondati su basi trasparenti ed etiche, diventando un punto di riferimento credibile e privo di condizionamenti per la propria comunità o professione."
+            },
+            ciclo4: {
+                titolo: "4° Ciclo di Vita (Integrazione e Nuova Saggezza)",
+                lezioni: "Nel ciclo conclusivo, la lezione del 16 si traduce nel completo distacco dall'ego e dalle sovrastrutture materiali. Si impara la resa fiduciosa al flusso della vita, liberando la mente da ogni residuo di perfezionismo o giudizio verso se stessi e verso il passato.",
+                potenziali: "Si incarna la vera saggezza del ricercatore giunto a destinazione: una profonda serenità, una vista spirituale limpida e una capacità di visione trascendente. L'esistenza diventa una testimonianza di pace e verità, capace di donare luce e discernimento a chiunque vi si accosti."
+            }
+        }
+    },
   19: {
     nome: "Il Condottiero",
     sottotitolo: "Gli anni dell’autonomia e dell’uso etico del potere",
@@ -355,8 +400,18 @@ window.TESTI_PITAGORA = {
       ciclo2: {
         titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
         lezioni: "La sfida è bilanciare un forte desiderio di affermazione personale con la capacità di collaborare e ascoltare. Occorre evitare di barricarsi in un'autosufficienza esasperata per timore di mostrare fragilità, o di assumere atteggiamenti tirannici nel lavoro e nelle relazioni. Se la trasformazione del 19 non viene integrata appieno, il ciclo tenderà a essere vissuto attraverso la sola vibrazione di base del numero 1 (L'Innovatore).",
-        potenziali: "Superando le prove di solitudine e responsabilizzazione, si sviluppa una carismatica capacità di guida, una resilienza incrollabile e uno spirito d'iniziativa senza pari. È la fase ideale per avviare progetti altamente innovativi, assumere ruoli di responsabilità autonoma e diventare un punto di riferimento capace di aprire nuove strade e ispirare gli altri con l'esempio di una leadership etica."
-      }
+        potenziali: "Superando le prove di solitudine e responsabilizzazione, si sviluppa una carismatica capacità di guida, una resilienza incrollabile e uno spirito d'iniziativa senza pari. È la fase ideale per avviare progetti altamente innovativi, assumere ruoli di responsabilità autonoma e diventare un punto di riferimento capace di aprire nuove strade e ispirare gli altri con l'esempio di una leadership etica." 
+      },
+      ciclo3: {
+                titolo: "3° Ciclo di Vita (Maturità e Trasformazione)",
+                lezioni: "In questa fase di piena maturità, la sfida del 19 richiede di gestire il potere personale e la visibilità senza cadere nella rigidità o nel bisogno di controllo assoluto. Occorre imparare a delegare, valorizzando le competenze altrui e comprendendo che la vera autorevolezza unisce e non isola.",
+                potenziali: "Si manifesta una straordinaria capacità di leadership etica, realizzazione professionale di alto profilo e concretezza visionaria. È il momento in cui l'esperienza accumulata diventa faro e guida autorevole, capace di lasciare un segno duraturo e di successo nei progetti concreti."
+      },
+      ciclo4: {
+                titolo: "4° Ciclo di Vita (Integrazione e Nuova Saggezza)",
+                lezioni: "Il ciclo della saggezza invita a integrare definitivamente l'indipendenza dell'1 con la compassione universale del 9. La lezione consiste nel lasciare andare il bisogno di lottare o di dimostrare continuamente il proprio valore, accogliendo una pacata autorevolezza interiore.",
+                potenziali: "Si esprime la quintessenza del saggio e della guida illuminata. La vita diventa testimonianza di un percorso di emancipazione e autonomia completato, offrendo agli altri una saggezza profonda, un distacco saggio e una generosa trasmissione di competenze ed esperienze."
+            }
     }
   } // Chiude il 19
 }, // Chiude la proprietà "cicli" dell'oggetto principale
