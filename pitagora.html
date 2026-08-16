@@ -406,9 +406,9 @@
                 <div class="sezione-titolo" style="color: #e67e22;">Destino e Carattere (Dalla Data)</div>
                 <div class="grid-cards">
                     <div class="card" style="border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Giorno di Nascita</h3>
-                            <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-bottom: 2px; width: 100%;">
+                            <h3 style="margin: 0; font-size: 11.5px; white-space: nowrap;">Giorno di Nascita</h3>
+                            <div id="numGiornoIsolato" class="numero-evidenziato" style="color: #e67e22; font-size: 18px; font-weight: bold; margin: 0; line-height: 1; flex-shrink: 0;"></div>
                         </div>
                         <div id="descGiornoIsolato"></div>
                     </div>
@@ -532,33 +532,6 @@
         </div>
     </div>
 </div>
-
-            <div id="sezioneSoprannome" style="display:none; margin-top: 40px;">
-                <div class="sezione-titolo" style="color: #d35400; border-bottom-color: #f3ebe1;">L'Energia Acquisita (Solo Soprannome)</div>
-                <div class="grid-cards">
-                    <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Anima del Soprannome</h3>
-                            <div id="numAnimaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                        </div>
-                        <div id="descAnimaSop"></div>
-                    </div>
-                    <div class="card" style="border-left-color: #d35400; cursor: pointer;" onclick="apriApprofondimento(this)">
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Persona del Soprannome</h3>
-                            <div id="numPersonaSop" class="numero-evidenziato" style="color: #d35400; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                        </div>
-                        <div id="descPersonaSop"></div>
-                    </div>
-                    <div class="card" style="grid-column: span 2; border-left-color: #e67e22; cursor: pointer;" onclick="apriApprofondimento(this)">
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; width: 100%;">
-                            <h3 style="margin: 0; font-size: 13px; white-space: nowrap;">Espressione del Soprannome</h3>
-                            <div id="numEspressioneSop" class="numero-evidenziato" style="color: #e67e22; font-size: 20px; font-weight: bold; margin: 0; line-height: 1;"></div>
-                        </div>
-                        <div id="descEspressioneSop"></div>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>
@@ -1077,6 +1050,36 @@ const databaseOmbreMazzo = {
     consiglio: "Smetti di essere come gli altri ti vogliono: non puoi piacere a tutti e va bene così. Ritagliati momenti di silenzio per entrare in contatto con il tuo centro, impara a dire chiaramente cosa provi e canalizza la tua creatività portando a termine un progetto alla volta.",
 
     mantra_trasformazione: "Tolgo la maschera ed esprimo la mia vera essenza. Sono degno di amore e rispetto semplicemente per quello che sono."
+},
+4: {
+    nome: "Il Prigioniero (L'Ombra del Costruttore)",
+
+    sfida_principale: "Superare l'ansia di base, il senso d'insicurezza e la paura dell'ignoto legati alle radici e alla famiglia d'origine. La ferita del Prigioniero nasce da un'infanzia vissuta in un clima di instabilità o, al contrario, da un'educazione troppo rigida che ha compromesso l'equilibrio psicosomatico e l'istinto di sopravvivenza, spingendo a cercare freneticamente certezze esterne.",
+
+    manifestazione_inconscia: "Costruzione di barriere mentali, rigidità e iper-controllo per proteggersi dal timore della disintegrazione. Oscilla tra un'adesione incondizionata alle regole (Super-Io dominante) e la ribellione totale. Può manifestare stakanovismo esasperato, stress cronico, paura della mancanza economica anche in condizioni agiate, e una resistenza ostinata al cambiamento che lo confina in routine o contesti alienanti, fino a possibili improvvise eruzioni emotive.",
+
+    risorsa_nascosta: "Straordinaria forza di volontà, determinazione, senso pratico, disciplina, capacità organizzativa e attitudine a costruire fondamenta solide ed equilibrate, fruibili appieno quando abbandona il bisogno ossessivo di controllo.",
+
+    strategia_integrazione: "Sostituire il dovere con la scelta libera, lasciar andare il bisogno di controllo e fidarsi dell'esistenza. Trasformare gli schemi mentali ripetitivi, svincolarsi dai condizionamenti del passato, far fluire le risorse (anche economiche) e aprirsi all'imprevisto con spirito di avventura.",
+
+    fasi_risoluzione: [
+        {
+            fase: "1. Resistenza e Controllo",
+            descrizione: "Sperimenta un'ansia profonda legata alla sopravvivenza. Si rifugia in routine rigide, iper-lavoro e barriere difensive, rimanendo prigioniero di schemi mentali ed abitudini che limitano la sua libertà."
+        },
+        {
+            fase: "2. Presa di Coscienza",
+            descrizione: "Riconosce che i muri difensivi e la paura del futuro dipendono da ferite dell'infanzia e non da minacce reali. Prende atto dei propri automatismi e comprende di essere l'unico creatore dei propri limiti."
+        },
+        {
+            fase: "3. Integrazione del Costruttore",
+            descrizione: "Sostituisce il 'devo' con il 'posso', abbandona la rigidità e impara a fidarsi della vita. Canalizza la disciplina e la determinazione per edificare una stabilità reale, flessibile e libera."
+        }
+    ],
+
+    consiglio: "Smetti di essere schiavo del 'devo': concediti la libertà di scegliere e di fidarti della vita. Alleggerisci il tuo spazio e la tua mente lasciando andare il passato, e impara a far fluire l'energia senza la paura di perdere il controllo.",
+
+    mantra_trasformazione: "Lascio andare il bisogno di controllo e mi fido della vita. Sono libero di creare la mia realtà su fondamenta di gioia e sicurezza interiore."
 },
 5: {
     nome: "Il Girovago (L'Ombra del Cercatore)",
