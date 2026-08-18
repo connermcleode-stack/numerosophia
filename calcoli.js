@@ -162,6 +162,7 @@ function eseguiCalcoloCompleto() {
     if (dataNascita) testoCopiaGlobale += `Data di Nascita: ${dataNascita}\n`;
     testoCopiaGlobale += `----------------------------------------------\n\n`;
 
+
     // 2. Calcoli sul Nome e Cognome (Dati Anagrafici)
     let datiTesto = { anima: "", persona: "", espressione: "" };
     if (nome || cognome) {
@@ -265,14 +266,14 @@ if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTes
         numeroCarta = somma;
     }
 
-    // Percorso blindato: cartella "carte/", nome numerico, formato ".png"
-    document.getElementById('descGiornoIsolato').innerHTML = `
-        <div class="anteprima-card" style="text-align: center; cursor: pointer;" onclick="apriModalGiorno(${g})">
-            <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" style="width: 90px; max-width: 100px; height: auto; margin: 10px auto; display: block; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);" onerror="this.style.display='none';">
-            <h4 style="margin: 8px 0 4px 0;">Archetipo: ${archetipoG} (Giorno ${g})</h4>
-            <p style="font-size: 0.85em; opacity: 0.8; margin-top: 4px;">➔ Clicca qui per leggere l'analisi completa</p>
-        </div>
-    `;
+// Percorso blindato: cartella "carte/", nome numerico, formato ".png"
+document.getElementById('descGiornoIsolato').innerHTML = `
+    <div class="anteprima-card" onclick="apriModalGiorno(${g})">
+        <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" onerror="this.style.display='none';">
+        <h4 class="titolo-archetipo">Archetipo: ${archetipoG}</h4>
+        <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+    </div>
+`;
 }
 
 function apriModalGiorno(giorno) {
@@ -313,7 +314,7 @@ function apriModalGiorno(giorno) {
             </div>
 
             <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">🏛️ SOTTOTITOLO</h4>
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">🏛️ DOTI</h4>
                 <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
             </div>
 
@@ -352,9 +353,9 @@ window.apriModalGiorno = apriModalGiorno;
             const fineC1 = 36 - riduciMonocifraStretta(destino);
             const fineC2 = fineC1 + 9;
             const fineC3 = fineC2 + 9;
-            if (document.getElementById('infoEtaGrandiCicli')) {
-                document.getElementById('infoEtaGrandiCicli').innerText = `Fasce: Formativo (0 a ${fineC1} anni) | Produttivo (${fineC1 + 1} a ${fineC2} anni) | Conclusivo (da ${fineC2 + 1} anni)`;
-            }
+            if (document.getElementById('etaCicloForm')) document.getElementById('etaCicloForm').innerText = `Da 0 a ${fineC1} anni`;
+	    if (document.getElementById('etaCicloProd')) document.getElementById('etaCicloProd').innerText = `Da ${fineC1 + 1} a ${fineC2} anni`;
+	    if (document.getElementById('etaCicloConc')) document.getElementById('etaCicloConc').innerText = `Da ${fineC2 + 1} anni in poi`;
 
             if (document.getElementById('numCicloForm')) document.getElementById('numCicloForm').innerText = format(cForm);
             if (document.getElementById('descCicloForm')) document.getElementById('descCicloForm').innerHTML = compilaSchedaSicura(cForm);
@@ -559,6 +560,9 @@ const ombreSetup = [
 ombreSetup.forEach(ombra => {
     const imgNome = ottieniNomeImmagineOmbra(ombra.valore);
     const etichettaCompleta = estraiEtichettaOmbra(ombra.valore);
+    
+    // Inserisce il <br> prima della parentesi aperta
+    const etichettaFormattata = etichettaCompleta ? etichettaCompleta.replace(/\s*\(/, '<br>(') : '';
 
     if (document.getElementById(ombra.idNum)) {
         document.getElementById(ombra.idNum).innerText = ombra.valore;
@@ -566,18 +570,14 @@ ombreSetup.forEach(ombra => {
 
     if (document.getElementById(ombra.idDesc)) {
         document.getElementById(ombra.idDesc).innerHTML = `
-            <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" style="width: 75px; display: block; margin: 8px auto; border-radius: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-            
-            <div class="info-responso" style="text-align: center; margin-top: 12px; font-weight: bold; color: #ffffff; font-size: 15px; font-style: normal; line-height: 1.3;">
-                Archetipo: ${etichettaCompleta}
-            </div>
-            
-            <div style="text-align: center; font-size: 12px; color: #a0aec0; margin-top: 6px;">
-                ➔ Clicca qui per leggere l'analisi completa
+            <div class="anteprima-card">
+                <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" class="img-carta">
+                <h4 class="titolo-archetipo">Archetipo: ${etichettaFormattata}</h4>
+                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
             </div>
 
             <div class="testo-segreto" style="display: none;">
-                <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" style="width: 140px; display: block; margin: 10px auto; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" class="img-carta-modale">
                 ${typeof compilaSchedaOmbra === 'function' ? compilaSchedaOmbra(ombra.valore) : 'Sfida evolutiva.'}
             </div>
         `;
