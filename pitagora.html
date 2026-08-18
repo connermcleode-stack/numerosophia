@@ -192,7 +192,7 @@
             gap: 15px; 
         }
         
-        .card { background: #0f192b; border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; }
+        .card { background: #0f192b; border: 1px solid rgba(212, 175, 55, 0.2); padding: 18px; border-radius: 10px; border-left: 4px solid #8e7355; text-align: center !important; }
         .card h3 { margin: 0 0 8px 0; font-size: 14px; color: #c4beb3; text-transform: uppercase; letter-spacing: 0.5px; }
         .numero-evidenziato { font-size: 22px; font-weight: bold; color: #d4af37; margin-bottom: 5px; }
         .archetipo-nome { font-weight: bold; color: #e8e3d9; font-size: 15px; display: block; margin-bottom: 5px; }
@@ -204,37 +204,46 @@
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
+
 /* Layout flessibile per la riga superiore della card (Titolo + Numero) */
 .card-header-flex {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 4px;
+    justify-content: center;
+    flex-wrap: wrap; /* Permette il passaggio a capo se il titolo è lungo */
+    gap: 6px;
     margin-bottom: 2px;
     width: 100%;
 }
 
-/* Gestione dell'età / sottotitolo sotto l'intestazione */
-.card-sottotitolo {
-    font-weight: bold;
-    font-size: 11px;
-    color: #7f8c8d;
-    margin-bottom: 6px;
-}
-
-/* Allinea e ridimensiona il titolo h3 della card */
+/* Titolo della card: testo adattabile al contenitore */
 .card-header-flex h3 {
     margin: 0;
-    font-size: 11.5px;
-    white-space: nowrap;
-    flex: 1;
+    font-size: 11.5px !important;
+    white-space: normal !important; /* Permette al testo di andare a capo se non entra */
+    text-align: center !important;
+    flex: 0 1 auto;
+    word-break: break-word;
 }
 
-/* Ridimensiona il numero in alto a destra */
+/* Numero evidenziato affiancato al titolo */
 .card-header-flex .numero-evidenziato {
     font-size: 14px;
     line-height: 1;
     flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+/* Sottotitolo età: sempre centrato sotto l'intestazione */
+.card-sottotitolo {
+    display: block !important;
+    width: 100% !important;
+    font-weight: 500;
+    font-size: 11px !important;
+    color: #a69f95 !important;
+    margin-top: 2px !important;
+    margin-bottom: 8px !important;
+    text-align: center !important;
 }
 
 /* --- STILI PER LE CARTE E ANTEPRIME GENERATE DA JS --- */
