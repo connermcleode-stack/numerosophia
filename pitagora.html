@@ -1448,8 +1448,8 @@ function compilaScheda(numero, compatta = false) {
         return `
             <div style="margin-top: 20px; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 15px;">
                 <h3 style="color: var(--accent-gold); text-align: center; margin-bottom: 15px; font-size: 15px; text-transform: uppercase;">
-                    ${etichettaTitolo}: ${dati.nome} (${numeroRiferimento})
-                </h3>
+    		    ${etichettaTitolo ? etichettaTitolo + ': ' : ''}${dati.nome} (${numeroRiferimento})
+		</h3>
 
                 <!-- 1. ✨ SIGNIFICATO -->
                 <div style="background-color: #1a252f; border-left: 4px solid #34495e; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
@@ -1502,12 +1502,12 @@ function compilaScheda(numero, compatta = false) {
 
     // 1. SCHEDA DELL'ARCHETIPO PRINCIPALE (Maestro o Monocifra)
     let eMaestro = [11, 22, 33, 44].includes(numeroPulito);
-    let etichettaPrincipale = eMaestro ? "👑 ARCHETIPO MAESTRO" : "🏛️ ARCHETIPO DI BASE";
+    let etichettaPrincipale = "";
     let schedaBaseHTML = generaHTMLArchetipo(datiArchetipo, etichettaPrincipale, chiaveFinestra);
 
     // 1b. SE È UN MAESTRO, APPENDIAMO ANCHE L'ARCHETIPO DI BASE DI RADICE (es. 11 genera anche la scheda del 2)
     if (eMaestro && databaseArchetipi[base]) {
-        schedaBaseHTML += generaHTMLArchetipo(databaseArchetipi[base], "🏛️ RADICE ARCHETIPICA DI BASE", base);
+        schedaBaseHTML += generaHTMLArchetipo(databaseArchetipi[base], "", base);
     }
 
     // 2. SCHEDA KARMICA (es. Numero 13) - Generata solo se il numero è Karmico
