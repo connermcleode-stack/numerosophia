@@ -502,7 +502,7 @@ span.info-responso {
         <div id="risultati" class="risultati">
             
             <div id="bloccoAnagrafica" style="display:none;">
-                <div class="sezione-titolo" style="color: #8e7355; border-bottom-color: #d4e6f1; text-align: center; margin-top: 40px;">I Numeri Fondamentali (Dall'Anagrafica)</div>
+                <div class="sezione-titolo" style="color: #8e7355; border-bottom-color: #d4e6f1; text-align: center; margin-top: 40px;">I Numeri Fondamentali</div>
                 <div class="grid-cards">
                     <div class="card" style="border-left-color: #8e7355;" onclick="apriApprofondimento(this)">
                         <div class="card-header-flex">
@@ -529,7 +529,7 @@ span.info-responso {
             </div>
 
             <div id="bloccoData" style="display:none;">
-                <div class="sezione-titolo" style="color: #e67e22; border-bottom-color: #d4e6f1; text-align: center; margin-top: 40px;">Destino e Carattere (Dalla Data)</div>
+                <div class="sezione-titolo" style="color: #e67e22; border-bottom-color: #d4e6f1; text-align: center; margin-top: 40px;">Destino e Carattere</div>
                 <div class="grid-cards">
                     <div class="card" style="border-left-color: #e67e22;" onclick="apriApprofondimento(this)">
                         <div class="card-header-flex">
@@ -561,7 +561,7 @@ span.info-responso {
                     </div>
                 </div>
 
-               <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb; text-align: center; margin-top: 40px;">I 3 Grandi Cicli Evolutivi (Il Clima di Vita)</div>
+               <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb; text-align: center; margin-top: 40px;">I 3 Grandi Cicli Evolutivi</div>
 <div class="grid-cards">
     <div class="card" style="border-left-color: #16a085;" onclick="apriApprofondimento(this)">
     <div class="card-header-flex">
@@ -1415,14 +1415,18 @@ function compilaScheda(numero, compatta = false) {
     let numeroPulito = numero.toString().includes('/') ? parseInt(numero.toString().split('/')[0], 10) : parseInt(numero, 10);
     let base = riduciMonocifraStretta(numeroPulito);
 
-    let chiaveFinestra = [11, 22, 33, 44].includes(numeroPulito) ? numeroPulito : base;
+    // FIX: Cerca prima il numero specifico (es. 19/13), poi i Maestri, poi la base monocifra
+    let chiaveFinestra = databaseArchetipi[numeroPulito] 
+        ? numeroPulito 
+        : ([11, 22, 33, 44].includes(numeroPulito) ? numeroPulito : base);
+
     let datiArchetipo = databaseArchetipi[chiaveFinestra];
 
     if (!datiArchetipo) return "<i style='color: #888;'>Scheda non disponibile.</i>";
 
     const imgCarta = `./carte/${numeroPulito}.png`;
 
-    let titolo = datiArchetipo.nome;
+    let titoloAnteprima = datiArchetipo.nome;
     let significatoTesto = datiArchetipo.significato || 'Descrizione non disponibile.';
     let luceTesto = datiArchetipo.luce || 'Non specificata.';
     let ombraTesto = datiArchetipo.ombra || 'Non specificata.';
@@ -1512,8 +1516,9 @@ function compilaScheda(numero, compatta = false) {
         let k = databaseKarmici[numeroPulito];
 
         if (typeof k === 'object') {
-            let nomeKarmico = k.nome || `Prova Karmica ${numeroPulito}`;
-            titolo += ` <span style="color:#d35400; font-size:12px; display:block; margin-top:2px;">(${nomeKarmico})</span>`;
+    let nomeKarmico = k.nome || `Prova Karmica ${numeroPulito}`;
+    titoloAnteprima = nomeKarmico;
+
 
             schedaKarmicaHTML = `
                 <div style="background: rgba(211, 84, 0, 0.08); border: 1px solid #d35400; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
@@ -1583,7 +1588,7 @@ function compilaScheda(numero, compatta = false) {
     if (compatta) {
         return `
             <div class="card-cliccabile" onclick="apriApprofondimento(this)" style="padding: 5px; cursor: pointer;">
-                <span class="archetipo-nome" style="font-weight: bold; color: var(--accent-gold);">${datiArchetipo.nome.split(' (')[0]}</span>
+                <span class="archetipo-nome" style="font-weight: bold; color: var(--accent-gold);">${titoloAnteprima}</span>
                 <div class="descrizione" style="font-size:12px; line-height:1.3; opacity: 0.8;">${luceTesto.substring(0, 80)}...</div>
                 
                 <div class="testo-segreto" style="display: none;">
@@ -1598,7 +1603,7 @@ function compilaScheda(numero, compatta = false) {
 
     // VERSIONE ESTESA STANDARD
     // Formatta il titolo inserendo un <br> prima della parentesi aperta
-    let titoloFormattato = titolo ? titolo.replace(/\s*\(/, '<br>(') : '';
+    let titoloFormattato = titoloAnteprima ? titoloAnteprima.replace(/\s*\(/, '<br>(') : '';
 
     return `
         <div class="ns-level-container card-cliccabile" onclick="apriApprofondimento(this)">

@@ -252,7 +252,9 @@ const sorgenteTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
 
 if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTesti.GIORNI_NASCITA && sorgenteTesti.GIORNI_NASCITA[g]) {
     const datiG = sorgenteTesti.GIORNI_NASCITA[g];
-    const archetipoG = sorgenteTesti.ARCHETIPI_GIORNI[g] || "";
+    
+    // USIAMO 'let' INVECE DI 'const' PER POTERLO MODIFICARE
+    let archetipoG = sorgenteTesti.ARCHETIPI_GIORNI[g] || "";
 
     // Calcolo del numero della carta
     let numeroCarta = g;
@@ -266,14 +268,25 @@ if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTes
         numeroCarta = somma;
     }
 
-// Percorso blindato: cartella "carte/", nome numerico, formato ".png"
-document.getElementById('descGiornoIsolato').innerHTML = `
-    <div class="anteprima-card" onclick="apriModalGiorno(${g})">
-        <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" onerror="this.style.display='none';">
-        <h4 class="titolo-archetipo">Archetipo: ${archetipoG}</h4>
-        <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
-    </div>
-`;
+    // Se è un giorno karmico, mandiamo a capo la parentesi con <br>
+    if (g === 19 || g === '19') {
+        archetipoG = "il Condottiero<br>(Prova Karmica del Guerriero)";
+    } else if (g === 13 || g === '13') {
+        archetipoG = "L'Alchimista<br>(Prova Karmica del Costruttore)";
+    } else if (g === 14 || g === '14') {
+        archetipoG = "l'Innominabile<br>(Prova Karmica del Cercatore)";
+    } else if (g === 16 || g === '16') {
+        archetipoG = "la Torre<br>(Prova Karmica del Distruttore)";
+    }
+
+    // Percorso blindato: cartella "carte/", nome numerico, formato ".png"
+    document.getElementById('descGiornoIsolato').innerHTML = `
+        <div class="anteprima-card" onclick="apriModalGiorno(${g})">
+            <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" onerror="this.style.display='none';">
+            <h4 class="titolo-archetipo">Archetipo: ${archetipoG}</h4>
+            <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+        </div>
+    `;
 }
 
 function apriModalGiorno(giorno) {
