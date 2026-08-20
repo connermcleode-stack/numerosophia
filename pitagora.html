@@ -224,7 +224,6 @@
     text-align: center !important;
     flex: 0 1 auto;
     word-break: break-word;
-    color: #ebd197 !important; /* <--- COLOR ORO AGGIUNTO */
 }
 
 /* Numero evidenziato affiancato al titolo */
@@ -233,7 +232,6 @@
     line-height: 1;
     flex-shrink: 0;
     margin-bottom: 0;
-    color: #ebd197 !important; /* <--- COLOR ORO AGGIUNTO */
 }
 
 /* Sottotitolo età: sempre centrato sotto l'intestazione */
@@ -333,6 +331,90 @@ span.info-responso {
     margin: 8px auto 4px auto !important;
 }
 
+/* ============================================================================
+   STILE UNIFICATO MODELLO OMBRA PER TUTTI I POPUP
+   ============================================================================ */
+
+/* 1. Titolo principale e sottotitolo nella testata della modale */
+#modaleTitolo,
+#modaleSottotitolo {
+    text-align: center !important;
+    color: #ebd197 !important;
+    width: 100% !important;
+}
+
+/* Sottotitolo della Quintessenza */
+.sottotitolo-quintessenza {
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.85;
+    color: #ebd197 !important;
+    display: block;
+    text-align: center !important;
+}
+
+/* 2. Contenitori principali delle schede */
+.scheda-ombra-container,
+.modal-ciclo-esteso,
+#modaleContenuto > div {
+    text-align: center !important;
+    width: 100%;
+}
+
+/* 3. Nome dell'Archetipo e tutti i titoli/sottotitoli interni */
+.archetipo-nome,
+#modaleContenuto h2,
+#modaleContenuto h3,
+#modaleContenuto h4,
+#modaleContenuto h5,
+#modaleContenuto div > h3,
+#modaleContenuto div > h4,
+#modaleContenuto strong {
+    display: block !important;
+    margin-bottom: 8px !important;
+    font-weight: bold !important;
+    color: #ebd197 !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+/* 4. Box scuro interno (SFIDA PRINCIPALE / SIGNIFICATO / LEZIONI) */
+#modaleContenuto div[style*="background"],
+#modaleContenuto .box-sfida,
+#modaleContenuto .box-contenuto {
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center !important;
+}
+
+/* 5. Centratura di tutti i testi, paragrafi ed elementi descrittivi */
+#modaleContenuto p,
+#modaleContenuto em,
+#modaleContenuto div {
+    text-align: center !important;
+    line-height: 1.6;
+}
+
+/* Styling box e titolo Karmico unificato */
+.box-karmico {
+    background: rgba(211, 84, 0, 0.08);
+    border: 1px solid #d35400;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.titolo-karmico {
+    color: #ebd197 !important;
+    text-align: center !important;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 0.95rem !important; /* Stessa dimensione Foto 8 */
+    font-weight: bold !important;
+    text-transform: none !important; /* Toglie il tutto MAIUSCOLO */
+}
+
         /* --- MEDIA QUERY PER DISPOSITIVI MOBILI (Fino a 768px) --- */
         @media (max-width: 768px) {
             body {
@@ -414,14 +496,14 @@ span.info-responso {
 </head>
 <body>
 
-    <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
-        <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
-            <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
-            <h2 id="modaleTitolo" style="color: #d4af37; font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
-            <h4 id="modaleSottotitolo" style="color: #a69f95; margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
-            <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;"></div>
-        </div>
+   <div id="modaleApprofondimento" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center;">
+    <div style="background-color: #0c1524; border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 12px; max-width: 500px; width: 90%; box-shadow: 0 5px 25px rgba(0,0,0,0.8); position: relative; animation: compariModale 0.3s ease;">
+        <span onclick="chiudiModale()" style="position: absolute; top: 12px; right: 18px; font-size: 24px; font-weight: bold; cursor: pointer; color: #a69f95;">&times;</span>
+        <h2 id="modaleTitolo" style="font-family: 'Cinzel', serif; margin-top: 0; margin-bottom: 5px;">Titolo</h2>
+        <h4 id="modaleSottotitolo" style="margin-top: 0; margin-bottom: 15px; font-style: italic;">Sottotitolo</h4>
+        <div id="modaleContenuto" style="font-size: 14px; line-height: 1.6; color: #e8e3d9; max-height: 400px; overflow-y: auto; padding-right: 5px;"></div>
     </div>
+</div>
 
 <div class="container">
   
@@ -1449,9 +1531,9 @@ function compilaScheda(numero, compatta = false) {
 
         return `
             <div style="margin-top: 20px; border-top: 1px dashed rgba(212, 175, 55, 0.3); padding-top: 15px;">
-                <h3 style="color: var(--accent-gold); text-align: center; margin-bottom: 15px; font-size: 15px; text-transform: uppercase;">
-    		    ${etichettaTitolo ? etichettaTitolo + ': ' : ''}${dati.nome} (${numeroRiferimento})
-		</h3>
+    <h3 class="archetipo-nome">
+        ${etichettaTitolo} ${dati.nome || ''} ${dati.sottotitolo ? `(${dati.sottotitolo})` : ''}
+    </h3>
 
                 <!-- 1. ✨ SIGNIFICATO -->
                 <div style="background-color: #1a252f; border-left: 4px solid #34495e; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
@@ -1502,14 +1584,15 @@ function compilaScheda(numero, compatta = false) {
         `;
     }
 
-    // 1. SCHEDA DELL'ARCHETIPO PRINCIPALE (Maestro o Monocifra)
+ // 1. SCHEDA DELL'ARCHETIPO PRINCIPALE (Maestro o Monocifra)
     let eMaestro = [11, 22, 33, 44].includes(numeroPulito);
-    let etichettaPrincipale = "";
+    // Etichetta unica e pulita per tutti
+    let etichettaPrincipale = "Archetipo:";
     let schedaBaseHTML = generaHTMLArchetipo(datiArchetipo, etichettaPrincipale, chiaveFinestra);
 
     // 1b. SE È UN MAESTRO, APPENDIAMO ANCHE L'ARCHETIPO DI BASE DI RADICE (es. 11 genera anche la scheda del 2)
     if (eMaestro && databaseArchetipi[base]) {
-        schedaBaseHTML += generaHTMLArchetipo(databaseArchetipi[base], "", base);
+        schedaBaseHTML += generaHTMLArchetipo(databaseArchetipi[base], "Radice Archetipica:", base);
     }
 
     // 2. SCHEDA KARMICA (es. Numero 13) - Generata solo se il numero è Karmico
@@ -1518,15 +1601,16 @@ function compilaScheda(numero, compatta = false) {
         let k = databaseKarmici[numeroPulito];
 
         if (typeof k === 'object') {
-    let nomeKarmico = k.nome || `Prova Karmica ${numeroPulito}`;
-    titoloAnteprima = nomeKarmico;
+            let nomeKarmico = k.nome || `Prova Karmica ${numeroPulito}`;
+        titoloAnteprima = nomeKarmico;
 
+        // Titolo pulito: solo icona e nome (es. ⚠️ L'Alchimista)
+        schedaKarmicaHTML = `
+            <h3 class="titolo-karmico">
+                 Archetipo: ${nomeKarmico}
+            </h3>
 
-            schedaKarmicaHTML = `
-                <div style="background: rgba(211, 84, 0, 0.08); border: 1px solid #d35400; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-                    <h3 style="color: #e67e22; text-align: center; margin-top: 0; margin-bottom: 12px; font-size: 15px; text-transform: uppercase;">
-                        ⚠️ LEZIONE E SFIDA KARMICA ${numeroPulito}: ${nomeKarmico}
-                    </h3>
+            <div class="box-karmico">
 
                     <!-- SIGNIFICATO KARMICO -->
                     ${k.significato ? `
@@ -1717,10 +1801,10 @@ function compilaSchedaOmbra(valoreOmbra) {
 
     // Costruzione dei quadranti uniformati allo stile compilaScheda
     return `
-        <div class="scheda-ombra-container" style="text-align: left;">
-            <span class="archetipo-nome" style="display: block; margin-bottom: 4px; font-weight: bold; color: var(--accent-gold);">
-                Archetipo: ${nomeCompleto}
-            </span>
+       <div class="scheda-ombra-container">
+    <span class="archetipo-nome">
+        Archetipo: ${nomeCompleto}
+    </span>
 
             <!-- 1. ⚠️ SFIDA PRINCIPALE -->
             <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
@@ -1988,16 +2072,15 @@ function apriApprofondimento(elementoCard) {
     if (bloccoGenitore) {
         const numEl = bloccoGenitore.querySelector('.numero-evidenziato, [id^="num"]');
         if (numEl && numEl.innerText.trim() !== "") {
-            // Qui prendiamo il testo pulito SENZA parentesi
             numeroEvidenziato = numEl.innerText.trim();
         }
     }
 
     const titoloModaleEl = document.getElementById('modaleTitolo');
     
-    // Gestione specifica per la Quintessenza e per tutte le altre sezioni
+    // Gestione del titolo (Quintessenza o sezione standard)
     if (titoloSezione.toLowerCase().includes("quintessenza")) {
-        titoloModaleEl.innerHTML = `Quintessenza ${numeroEvidenziato}<br><span style="font-size: 14px; font-weight: normal; opacity: 0.85;">(Armonia Finale)</span>`;
+        titoloModaleEl.innerHTML = `Quintessenza ${numeroEvidenziato}<br><span class="sottotitolo-quintessenza">(Armonia Finale)</span>`;
     } else {
         let stringaNum = numeroEvidenziato ? ` ${numeroEvidenziato}` : "";
         titoloModaleEl.innerText = `${titoloSezione}${stringaNum}`;
@@ -2012,12 +2095,8 @@ function apriApprofondimento(elementoCard) {
 }
 
 function chiudiModale() {
-
     document.getElementById('modaleApprofondimento').style.display = 'none';
-
 }
-
-
 
 window.onclick = function(event) {
     const modale = document.getElementById('modaleApprofondimento');

@@ -252,9 +252,7 @@ const sorgenteTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
 
 if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTesti.GIORNI_NASCITA && sorgenteTesti.GIORNI_NASCITA[g]) {
     const datiG = sorgenteTesti.GIORNI_NASCITA[g];
-    
-    // USIAMO 'let' INVECE DI 'const' PER POTERLO MODIFICARE
-    let archetipoG = sorgenteTesti.ARCHETIPI_GIORNI[g] || "";
+    const archetipoG = sorgenteTesti.ARCHETIPI_GIORNI[g] || "";
 
     // Calcolo del numero della carta
     let numeroCarta = g;
@@ -268,25 +266,14 @@ if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTes
         numeroCarta = somma;
     }
 
-    // Se è un giorno karmico, mandiamo a capo la parentesi con <br>
-    if (g === 19 || g === '19') {
-        archetipoG = "il Condottiero<br>(Prova Karmica del Guerriero)";
-    } else if (g === 13 || g === '13') {
-        archetipoG = "L'Alchimista<br>(Prova Karmica del Costruttore)";
-    } else if (g === 14 || g === '14') {
-        archetipoG = "l'Innominabile<br>(Prova Karmica del Cercatore)";
-    } else if (g === 16 || g === '16') {
-        archetipoG = "la Torre<br>(Prova Karmica del Distruttore)";
-    }
-
-    // Percorso blindato: cartella "carte/", nome numerico, formato ".png"
-    document.getElementById('descGiornoIsolato').innerHTML = `
-        <div class="anteprima-card" onclick="apriModalGiorno(${g})">
-            <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" onerror="this.style.display='none';">
-            <h4 class="titolo-archetipo">Archetipo: ${archetipoG}</h4>
-            <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
-        </div>
-    `;
+// Percorso blindato: cartella "carte/", nome numerico, formato ".png"
+document.getElementById('descGiornoIsolato').innerHTML = `
+    <div class="anteprima-card" onclick="apriModalGiorno(${g})">
+        <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" onerror="this.style.display='none';">
+        <h4 class="titolo-archetipo">Archetipo: ${archetipoG}</h4>
+        <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+    </div>
+`;
 }
 
 function apriModalGiorno(giorno) {
@@ -306,33 +293,37 @@ function apriModalGiorno(giorno) {
         numeroCarta = somma;
     }
 
-    // Impostiamo direttamente il titolo e i contenuti usando gli ID nativi della modale del tuo sito
+   // Impostiamo direttamente il titolo e i contenuti usando gli ID nativi della modale del tuo sito
     const titoloModale = document.getElementById('modaleTitolo');
     const sottotitoloModale = document.getElementById('modaleSottotitolo');
     const contenutoModale = document.getElementById('modaleContenuto');
     const modaleContainer = document.getElementById('modaleApprofondimento');
 
     if (titoloModale) {
-        titoloModale.innerText = `${archetipo.toUpperCase()} (GIORNO ${giorno})`;
+        titoloModale.innerText = `Giorno di Nascita ${giorno}`;
     }
     
     if (sottotitoloModale) {
         sottotitoloModale.innerHTML = "";
     }
 
-    if (contenutoModale) {
+ if (contenutoModale) {
         contenutoModale.innerHTML = `
             <div style="text-align: center; margin-bottom: 20px;">
                 <img src="carte/${numeroCarta}.png" alt="${archetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
             </div>
 
-            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">🏛️ DOTI</h4>
+            <h3 class="archetipo-nome">
+                Archetipo: ${archetipo}
+            </h3>
+
+            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">🏛️ Doti</h4>
                 <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
             </div>
 
-            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">✨ SIGNIFICATO</h4>
+            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">✨ Significato</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
             </div>
 
@@ -521,21 +512,21 @@ function ottieniTestoEstesoCiclo(valoreNumero, chiaveCiclo) {
         const srcFallback = CARTELLA ? `${CARTELLA}${baseMonocifra}.png` : `${baseMonocifra}.png`;
 
         return `
-            <div class="modal-ciclo-esteso" style="text-align: center;">
-                <div style="margin-bottom: 15px;">
-                    <img src="${srcPrincipale}" 
-                         onerror="this.onerror=null; this.src='${srcFallback}';" 
-                         alt="Carta ${archetipo.nome}" 
-                         style="max-width: 140px; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-                </div>
-                <h3 style="color: #d69e2e; margin-bottom: 6px;">${archetipo.nome} ${valStr.includes('/') ? '(' + valStr + ')' : ''}</h3>
-                <h5 style="font-style: italic; color: #a0aec0; margin-bottom: 12px;">${archetipo.sottotitolo || ''}</h5>
-                <p style="margin-bottom: 16px; line-height: 1.5; text-align: left;">${archetipo.introduzione || ''}</p>
-                <hr style="border-color: rgba(255,255,255,0.1); margin: 12px 0;">
-                <h4 style="color: #ecc94b; margin-bottom: 8px; text-align: left;">${c.titolo || ''}</h4>
-                <p style="margin-bottom: 10px; text-align: left;"><strong>Lezioni:</strong> ${c.lezioni || ''}</p>
-                <p style="text-align: left;"><strong>Potenziali:</strong> ${c.potenziali || ''}</p>
-            </div>
+            <div class="modal-ciclo-esteso">
+    <div style="margin-bottom: 15px;">
+        <img src="${srcPrincipale}" 
+             onerror="this.onerror=null; this.src='${srcFallback}';" 
+             alt="Carta ${archetipo.nome}" 
+             style="max-width: 140px; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+    </div>
+    <h3 style="margin-bottom: 6px;">${archetipo.nome} ${valStr.includes('/') ? '(' + valStr + ')' : ''}</h3>
+    <h5 style="margin-bottom: 12px;">${archetipo.sottotitolo || ''}</h5>
+    <p style="margin-bottom: 16px; line-height: 1.5;">${archetipo.introduzione || ''}</p>
+    <hr style="border-color: rgba(255,255,255,0.1); margin: 12px 0;">
+    <h4 style="margin-bottom: 8px;">${c.titolo || ''}</h4>
+    <p style="margin-bottom: 10px;"><strong>Lezioni:</strong> ${c.lezioni || ''}</p>
+    <p><strong>Potenziali:</strong> ${c.potenziali || ''}</p>
+</div>
         `;
     } catch (e) {
         console.error("Errore ottieniTestoEstesoCiclo:", e);
