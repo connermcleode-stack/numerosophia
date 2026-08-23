@@ -332,6 +332,18 @@
         #btn-home:hover {
             background-color: rgba(197, 160, 89, 0.1);
         }
+
+/* BLOCCO ANTI-INVERSIONE PER IMMAGINI SU MOBILE */
+img, 
+.mini-carta-archetipo, 
+.carte-mini-container img, 
+.carte-popup-container img {
+    color-scheme: only light !important;
+    forced-color-adjust: none !important;
+    -webkit-filter: opacity(0.99) !important;
+    filter: opacity(0.99) !important;
+}
+
     </style>
  <script>
         if ('serviceWorker' in navigator) {

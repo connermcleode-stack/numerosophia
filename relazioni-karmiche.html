@@ -379,6 +379,17 @@
       animation: fadeIn 0.4s ease-in-out;
     }
 
+/* BLOCCO ANTI-INVERSIONE PER IMMAGINI SU MOBILE */
+img, 
+.mini-carta-archetipo, 
+.carte-mini-container img, 
+.carte-popup-container img {
+    color-scheme: only light !important;
+    forced-color-adjust: none !important;
+    -webkit-filter: opacity(0.99) !important;
+    filter: opacity(0.99) !important;
+}
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
