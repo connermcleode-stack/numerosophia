@@ -414,6 +414,175 @@
 #risultati-compatibilita {
     display: none;
 }
+
+/* STILE POPUP COMPATIBILITÀ UNIFORMATO A PITAGORA (FINALE) */
+
+/* 1. Sfondo e Struttura Modale Principale */
+#modaleApprofondimento > div,
+#modaleApprofondimento .modal-content,
+#modaleApprofondimento .modale-contenuto {
+    background: #1a050b !important;
+    background-color: #1a050b !important;
+    color: #e0d0b0 !important;
+    border: 1px solid rgba(212, 175, 55, 0.4) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9) !important;
+    padding: 24px 18px !important;
+}
+
+/* 2. Titolo e Sottotitolo del Popup */
+#modaleTitolo,
+#modaleApprofondimento h2,
+#modaleApprofondimento h3 {
+    color: #f3e5ab !important;
+    font-size: 1.25rem !important;
+    font-family: 'Cinzel', serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    text-align: center !important;
+    margin: 0 auto 8px auto !important;
+    display: block !important;
+}
+
+#modaleSottotitolo {
+    color: #d4af37 !important;
+    font-style: italic !important;
+    font-size: 0.95rem !important;
+    text-align: center !important;
+    margin: 0 auto 15px auto !important;
+    display: block !important;
+}
+
+/* 3. FORZA QUADRANTI SCURI SU OGNI BLOCCO DI TESTO */
+#modaleContenuto {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+#modaleContenuto p,
+#modaleContenuto > div,
+#modaleContenuto article,
+#modaleContenuto section,
+#modaleContenuto .box-suggerimento {
+    background: rgba(0, 0, 0, 0.45) !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    
+    /* Font, Colore e Centratura Forzata */
+    text-align: center !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+    font-size: 0.92rem !important;
+    line-height: 1.6 !important;
+    color: #e2e8f0 !important;
+}
+
+/* 4. Titoli interni ai Quadranti (DESCRIZIONE, COSA FARE, ecc.) */
+#modaleContenuto strong,
+#modaleContenuto b,
+#modaleContenuto h4,
+#modaleContenuto h5 {
+    display: block !important;
+    color: #f3e5ab !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    margin: 0 auto 8px auto !important;
+}
+
+/* Allineamento di sicurezza per qualsiasi elemento testuale interno */
+#modaleContenuto * {
+    text-align: center !important;
+}
+
+/* Tasto Chiusura X */
+#modaleApprofondimento .close,
+#modaleApprofondimento .chiudi-modale {
+    color: #d4af37 !important;
+    opacity: 0.9;
+}
+
+/* REGOLA PER I QUADRANTI GENERATI DA JS */
+#modaleContenuto .quadrante-modal {
+    background: rgba(0, 0, 0, 0.45) !important;
+    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    margin: 10px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    color: #e2e8f0 !important;
+}
+
+#modaleContenuto .quadrante-modal * {
+    text-align: center !important;
+}
+
+/* SOVRASCRITTURA BOX SUGGERIMENTI E AVVERTIZE (STILE SCURO NOBILE) */
+
+/* 1. Box Verde (Cosa Fare / Suggerimento) */
+#modaleContenuto div[style*="background-color: #e8f5e9"],
+#modaleContenuto div[style*="background-color:#e8f5e9"],
+#modaleContenuto div[style*="background: #e8f5e9"],
+#modaleContenuto .box-suggerimento,
+#modaleContenuto .box-verde {
+    background: rgba(16, 38, 26, 0.75) !important;
+    background-color: rgba(16, 38, 26, 0.75) !important;
+    border: 1px solid rgba(74, 158, 110, 0.4) !important;
+    border-radius: 8px !important;
+    color: #cce3d5 !important;
+    padding: 16px !important;
+    margin: 12px 0 !important;
+    text-align: center !important;
+}
+
+#modaleContenuto div[style*="background-color: #e8f5e9"] strong,
+#modaleContenuto div[style*="background-color: #e8f5e9"] b {
+    color: #8ed6aa !important;
+    display: block !important;
+    margin-bottom: 6px !important;
+    text-align: center !important;
+}
+
+/* 2. Box Rosso (Cosa Evitare / Avvertenza) */
+#modaleContenuto div[style*="background-color: #ffebee"],
+#modaleContenuto div[style*="background-color:#ffebee"],
+#modaleContenuto div[style*="background: #ffebee"],
+#modaleContenuto .box-evitare,
+#modaleContenuto .box-rosso {
+    background: rgba(45, 12, 18, 0.75) !important;
+    background-color: rgba(45, 12, 18, 0.75) !important;
+    border: 1px solid rgba(190, 65, 80, 0.4) !important;
+    border-radius: 8px !important;
+    color: #f2d6d8 !important;
+    padding: 16px !important;
+    margin: 12px 0 !important;
+    text-align: center !important;
+}
+
+#modaleContenuto div[style*="background-color: #ffebee"] strong,
+#modaleContenuto div[style*="background-color: #ffebee"] b {
+    color: #e87c88 !important;
+    display: block !important;
+    margin-bottom: 6px !important;
+    text-align: center !important;
+}
+
+/* Forzo la centratura di tutto il testo contenuto nei box */
+#modaleContenuto div[style*="background"] * {
+    text-align: center !important;
+}
+
         /* MEDIA QUERIES RESPONSIVE */
 
         @media (max-width: 600px) {
@@ -1907,7 +2076,7 @@ if (haTestoP1 && haTestoP2) {
             </div>
 
             <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
-                Responso<br>(${ioP1} & ${ioP2}): ${titoloIo}
+                Responso<br>${titoloIo}
             </span>
             <div style="font-size: 13px; color: #7f8c8d; margin-bottom: 5px; font-style: italic;">${sottotitoloIo}</div>
             <span style="font-size: 12px; opacity: 0.6; display: block; text-align: center; width: 100%;">➔ Clicca qui per leggere l'analisi completa</span>
@@ -1952,7 +2121,7 @@ if (haTestoP1 && haTestoP2) {
             </div>
 
             <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
-                Responso<br>(${animaP1} & ${animaP2}): ${titoloAnima}
+                Responso<br>${titoloAnima}
             </span>
             <span style="font-size: 12px; opacity: 0.6; display: block; text-align: center; width: 100%;">➔ Clicca qui per leggere l'analisi completa</span>
             
@@ -1996,7 +2165,7 @@ if (p1Data && p2Data) {
             </div>
 
             <span class="info-responso" style="color: var(--accent-gold); font-weight: bold; font-style: italic; display: block; margin-bottom: 8px;">
-                Responso<br>(${destinoP1} & ${destinoP2}): ${titoloDestino}
+                Responso<br>${titoloDestino}
             </span>
             <span style="font-size: 12px; opacity: 0.6; display: block; text-align: center; width: 100%;">➔ Clicca qui per leggere l'analisi completa</span>
             
@@ -2118,22 +2287,40 @@ if (p1Data && p2Data) {
 // GESTIONE POPUP COMPATIBILITÀ (STILE PITAGORA)
 // ==========================================
 function apriApprofondimentoCompatibilita(elementoCard) {
-    // Risale al contenitore padre per trovare il titolo della sezione
     const contenitorePadre = elementoCard.closest('.ns-level-container') || elementoCard.parentElement;
     const elTitolo = contenitorePadre ? contenitorePadre.querySelector('.ns-level-title') : null;
     
-    // Recupera il testo del titolo o usa un fallback se non trovato
     const titoloSezione = elTitolo ? elTitolo.innerText : 'Approfondimento Compatibilità';
     
     const elInfo = elementoCard.querySelector('.info-responso');
     const infoResponso = elInfo ? elInfo.innerText : '';
     
     const elTesto = elementoCard.querySelector('.testo-segreto');
-    const testoCompleto = elTesto ? elTesto.innerHTML : '';
+    let testoGrezzo = elTesto ? elTesto.innerHTML : '';
+
+    // Dividiamo il testo dove inizia la sezione "COSA FARE" o "💡"
+    let htmlFormattato = '';
+    
+    if (testoGrezzo.includes('COSA FARE') || testoGrezzo.includes('💡')) {
+        // Separiamo la prima parte (descrizione) dalla seconda (consiglio)
+        const parti = testoGrezzo.split(/(?=COSA FARE|💡)/i);
+        
+        htmlFormattato = `
+            <div class="quadrante-modal">
+                ${parti[0]}
+            </div>
+            <div class="quadrante-modal">
+                ${parti.slice(1).join('')}
+            </div>
+        `;
+    } else {
+        // Se c'è solo un blocco di testo, creiamo un unico quadrante
+        htmlFormattato = `<div class="quadrante-modal">${testoGrezzo}</div>`;
+    }
     
     document.getElementById('modaleTitolo').innerText = titoloSezione;
     document.getElementById('modaleSottotitolo').innerText = infoResponso;
-    document.getElementById('modaleContenuto').innerHTML = testoCompleto;
+    document.getElementById('modaleContenuto').innerHTML = htmlFormattato;
     
     document.getElementById('modaleApprofondimento').style.display = 'flex';
 }
