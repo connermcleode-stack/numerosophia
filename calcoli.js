@@ -233,7 +233,7 @@ function eseguiCalcoloCompleto() {
             oMat = Math.abs(rGiornoStretto - rAnnoStretto);
             oPrinc = Math.abs(oGiov - oMat);
 
-            annoPersonale = riduciNumero(rGiornoStretto + rMeseStretto + riduciMonocifraStretta(annoTarget), true);
+            annoPersonale = riduciMonocifraStretta(rGiornoStretto + rMeseStretto + riduciMonocifraStretta(annoTarget));
             
             const oggi = new Date();
             const rOggiGiorno = riduciMonocifraStretta(oggi.getDate());
