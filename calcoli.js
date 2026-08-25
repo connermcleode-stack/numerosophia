@@ -233,7 +233,7 @@ function eseguiCalcoloCompleto() {
             oMat = Math.abs(rGiornoStretto - rAnnoStretto);
             oPrinc = Math.abs(oGiov - oMat);
 
-            annoPersonale = riduciMonocifraStretta(rGiornoStretto + rMeseStretto + riduciMonocifraStretta(annoTarget));
+            annoPersonale = riduciNumero(rGiornoStretto + rMeseStretto + riduciMonocifraStretta(annoTarget), false);
             
             const oggi = new Date();
             const rOggiGiorno = riduciMonocifraStretta(oggi.getDate());
@@ -1074,7 +1074,7 @@ function validaECalcolaRelazioneKarmica() {
   `;
   document.getElementById('descrizioneSintesi').innerText = info.testo;
 
-  // ==========================================================================
+ // ==========================================================================
   // CONFRONTI E RISPECCHIAMENTI
   // ==========================================================================
   let coincidenze = [];
@@ -1090,7 +1090,7 @@ function validaECalcolaRelazioneKarmica() {
     return x;
   };
 
-  // 1. Stessi Aspetti (Destino=Destino, Anima=Anima, Io=Io)
+  // 1. Stessi Aspetti (Destino=Destino, Anima=Anima, Persona=Persona)
   if (destinoA && destinoB && base(destinoA) === base(destinoB)) {
     coincidenze.push(`<strong>Stesso Destino (${destinoA}):</strong> ${pA} e ${pB} condividono la stessa direzione evolutiva.`);
   }
@@ -1098,7 +1098,7 @@ function validaECalcolaRelazioneKarmica() {
     coincidenze.push(`<strong>Stessa Anima (${animaA}):</strong> ${pA} e ${pB} condividono gli stessi desideri e motivazioni profonde.`);
   }
   if (ioA && ioB && base(ioA) === base(ioB)) {
-    coincidenze.push(`<strong>Stesso Io (${ioA}):</strong> ${pA} e ${pB} condividono la stessa modalità espressiva e personalità.`);
+    coincidenze.push(`<strong>Stesso Numero Persona (${ioA}):</strong> ${pA} e ${pB} condividono la stessa modalità espressiva e personalità.`);
   }
 
   // 2. Anima <-> Destino
@@ -1109,20 +1109,20 @@ function validaECalcolaRelazioneKarmica() {
     coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Destino di ${pA}</strong> (${destinoA})`);
   }
 
-  // 3. Anima <-> Io
+  // 3. Anima <-> Persona
   if (animaA && ioB && base(animaA) === base(ioB)) {
-    coincidenze.push(`L'<strong>Anima di ${pA}</strong> (${animaA}) = <strong>Io di ${pB}</strong> (${ioB})`);
+    coincidenze.push(`L'<strong>Anima di ${pA}</strong> (${animaA}) = <strong>Persona di ${pB}</strong> (${ioB})`);
   }
   if (animaB && ioA && base(animaB) === base(ioA)) {
-    coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Io di ${pA}</strong> (${ioA})`);
+    coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Persona di ${pA}</strong> (${ioA})`);
   }
 
-  // 4. Destino <-> Io
+  // 4. Destino <-> Persona
   if (destinoA && ioB && base(destinoA) === base(ioB)) {
-    coincidenze.push(`Il <strong>Destino di ${pA}</strong> (${destinoA}) = <strong>Io di ${pB}</strong> (${ioB})`);
+    coincidenze.push(`Il <strong>Destino di ${pA}</strong> (${destinoA}) = <strong>Persona di ${pB}</strong> (${ioB})`);
   }
   if (destinoB && ioA && base(destinoB) === base(ioA)) {
-    coincidenze.push(`Il <strong>Destino di ${pB}</strong> (${destinoB}) = <strong>Io di ${pA}</strong> (${ioA})`);
+    coincidenze.push(`Il <strong>Destino di ${pB}</strong> (${destinoB}) = <strong>Persona di ${pA}</strong> (${ioA})`);
   }
 
   // Rendering Box Rispecchiamento
