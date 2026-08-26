@@ -373,7 +373,154 @@ window.apriModalGiorno = apriModalGiorno;
             if (document.getElementById('numCicloConc')) document.getElementById('numCicloConc').innerText = format(cConc);
             if (document.getElementById('descCicloConc')) document.getElementById('descCicloConc').innerHTML = compilaSchedaSicura(cConc);
 
-            
+// ============================================================================
+// RENDERING ANNO PERSONALE
+// ============================================================================
+if (document.getElementById('numAnnoPers')) {
+    document.getElementById('numAnnoPers').innerText = format(annoPersonale);
+}
+
+if (document.getElementById('descAnnoPers')) {
+    const sorgenteAnnoPers = window.TESTI_PITAGORA || TESTI_PITAGORA;
+    const datiMappaAP = sorgenteAnnoPers?.annoPersonale || sorgenteAnnoPers?.ANNI_PERSONALI;
+
+    if (datiMappaAP && datiMappaAP[annoPersonale]) {
+        const datiAP = datiMappaAP[annoPersonale];
+        const archetipoAP = datiAP.nome || "";
+        const archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
+
+        document.getElementById('descAnnoPers').innerHTML = `
+            <div class="anteprima-card" onclick="apriModalAnnoPersonale(${annoPersonale})">
+                <img src="carte/${annoPersonale}.png" alt="${archetipoAP}" class="img-carta" onerror="this.style.display='none';">
+                <h4 class="titolo-archetipo">${archetipoAPFormattato}</h4>
+                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+            </div>
+        `;
+    } else {
+        document.getElementById('descAnnoPers').innerHTML = compilaSchedaSicura(annoPersonale);
+    }
+}
+// ============================================================================
+// ANNO PERSONALE (FUNZIONE MODALE + RENDERING ANTEPRIMA)
+// ============================================================================
+function apriModalAnnoPersonale(anno) {
+    const srcTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
+    const tMap = srcTesti?.annoPersonale || srcTesti?.ANNI_PERSONALI;
+    
+    if (!tMap || !tMap[anno]) return;
+
+    const t = tMap[anno];
+    const archetipo = t.nome || "";
+    const archetipoFormattato = (archetipo || '').replace(/\s*\(/, '<br>(');
+
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) titoloModale.innerText = `Anno Personale ${anno}`;
+    if (sottotitoloModale) sottotitoloModale.innerHTML = "";
+
+    if (contenutoModale) {
+        contenutoModale.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="carte/${anno}.png" alt="${archetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+            </div>
+
+            <h3 class="archetipo-nome">${archetipoFormattato}</h3>
+
+            ${t.sottotitolo ? `
+            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">🏛️ Doti & Energia</h4>
+                <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
+            </div>
+            ` : ''}
+
+            ${t.introduzione ? `
+            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">✨ Significato dell'Anno</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
+            </div>
+            ` : ''}
+
+            ${t.opportunita ? `
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">🌟 OPPORTUNITÀ</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.opportunita}</p>
+            </div>
+            ` : ''}
+
+            ${t.sfide ? `
+            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">⚠️ SFIDE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.sfide}</p>
+            </div>
+            ` : ''}
+
+            ${t.consigliPratici ? `
+            <div style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">💡 CONSIGLI PRATICI</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.consigliPratici}</p>
+            </div>
+            ` : ''}
+        `;
+    }
+
+    if (modaleContainer) modaleContainer.style.display = 'flex';
+}
+window.apriModalAnnoPersonale = apriModalAnnoPersonale;
+
+// Rendering nell'anteprima
+if (document.getElementById('numAnnoPers')) {
+    document.getElementById('numAnnoPers').innerText = format(annoPersonale);
+}
+
+if (document.getElementById('descAnnoPers')) {
+    let srcText = window.TESTI_PITAGORA || TESTI_PITAGORA;
+    let mapData = srcText?.annoPersonale || srcText?.ANNI_PERSONALI;
+
+    if (mapData && mapData[annoPersonale]) {
+        let datiAP = mapData[annoPersonale];
+        let archetipoAP = datiAP.nome || "";
+        let archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
+
+        document.getElementById('descAnnoPers').innerHTML = `
+            <div class="anteprima-card" onclick="apriModalAnnoPersonale(${annoPersonale})">
+                <img src="carte/${annoPersonale}.png" alt="${archetipoAP}" class="img-carta" onerror="this.style.display='none';">
+                <h4 class="titolo-archetipo">${archetipoAPFormattato}</h4>
+                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+            </div>
+        `;
+    } else {
+        document.getElementById('descAnnoPers').innerHTML = compilaSchedaSicura(annoPersonale);
+    }
+}
+
+// ============================================================================
+// RENDERING ANNO PERSONALE
+// ============================================================================
+if (document.getElementById('numAnnoPers')) {
+    document.getElementById('numAnnoPers').innerText = format(annoPersonale);
+}
+
+const mappaAnniAP = (window.TESTI_PITAGORA || TESTI_PITAGORA)?.annoPersonale || (window.TESTI_PITAGORA || TESTI_PITAGORA)?.ANNI_PERSONALI;
+
+if (document.getElementById('descAnnoPers') && mappaAnniAP && mappaAnniAP[annoPersonale]) {
+    const datiAP = mappaAnniAP[annoPersonale];
+    const archetipoAP = datiAP.nome || "";
+    const archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
+
+    document.getElementById('descAnnoPers').innerHTML = `
+        <div class="anteprima-card" onclick="apriModalAnnoPersonale(${annoPersonale})">
+            <img src="carte/${annoPersonale}.png" alt="${archetipoAP}" class="img-carta" onerror="this.style.display='none';">
+            <h4 class="titolo-archetipo">${archetipoAPFormattato}</h4>
+            <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+        </div>
+    `;
+} else if (document.getElementById('descAnnoPers')) {
+    document.getElementById('descAnnoPers').innerHTML = compilaSchedaSicura(annoPersonale);
+}
+      
 // Cerca il database sotto tutte le possibili variabili note
 const tPitagora = window.TESTI_PITAGORA || window.TESTI_CICLI || (typeof TESTI_CICLI !== 'undefined' ? TESTI_CICLI : null);
 
@@ -1005,19 +1152,23 @@ function validaECalcolaRelazioneKarmica() {
   };
   const VOCALI = ['A', 'E', 'I', 'O', 'U'];
 
-  function calcolaAnimaEIoDiretto(testoCompleto) {
-    if (!testoCompleto) return { anima: null, io: null };
+function calcolaAnimaEIoDiretto(testoCompleto) {
+    if (!testoCompleto) return { anima: null, io: null, persona: null };
     
-    let sommaAnima = 0;
-    let sommaIo = 0;
+    let sommaAnima = 0;   // Vocali
+    let sommaPersona = 0; // Consonanti (Ciò che attualmente chiamavi sommaIo)
+    let sommaIo = 0;      // Vocali + Consonanti (Nome Completo)
+
     const pulito = testoCompleto.toUpperCase().replace(/[^A-Z]/g, '');
 
     for (let char of pulito) {
       const val = MAPPATURA_LETTERE[char] || 0;
+      sommaIo += val; // L'IO è la somma totale di TUTTE le lettere (Vocali + Consonanti)
+
       if (VOCALI.includes(char)) {
-        sommaAnima += val;
+        sommaAnima += val; // L'ANIMA è la somma delle sole vocali
       } else {
-        sommaIo += val;
+        sommaPersona += val; // LA PERSONA è la somma delle sole consonanti
       }
     }
 
@@ -1031,7 +1182,8 @@ function validaECalcolaRelazioneKarmica() {
 
     return {
       anima: riduci(sommaAnima),
-      io: riduci(sommaIo)
+      persona: riduci(sommaPersona), // Mantenuto separato per chiarezza
+      io: riduci(sommaIo)             // ORA L'IO RITORNA IL VALORE REALE (11/2 per Chiara, 7 per Davide)!
     };
   }
 
@@ -1051,30 +1203,128 @@ function validaECalcolaRelazioneKarmica() {
   console.log(`Persona A (${nomeCompletoA}): Destino=${destinoA}, Anima=${animaA}, Io=${ioA}`);
   console.log(`Persona B (${nomeCompletoB}): Destino=${destinoB}, Anima=${animaB}, Io=${ioB}`);
 
-  // Resto della logica di sintesi...
-  const sommaDestini = destinoA + destinoB;
-  let numeroSintesi = riduciNumeroKarmico(sommaDestini);
-  if (!DESCRIZIONI_LEGAME[numeroSintesi]) {
-    numeroSintesi = riduciInSingolaOCifraMaestra(numeroSintesi);
-  }
+// ==========================================================================
+  // CALCOLO E RENDERING INTEGRATO (Con priorità personalizzata sui numeri)
+  // ==========================================================================
+  const sommaDestini = (destinoA || 0) + (destinoB || 0);
+  const sommaAnime = (animaA || 0) + (animaB || 0);
+  const sommaIo = (ioA || 0) + (ioB || 0);
 
-  const numCiclo = calcolaCicloRelazione(dataA, dataB);
+  // Calcolo dei cicli specifici
+  const cicloDestino = calcolaCicloRelazione(dataA, dataB);
+  const cicloAnima = riduciNumeroKarmico(sommaAnime);
+  const cicloIo = riduciNumeroKarmico(sommaIo);
 
-  document.getElementById('numeroSintesi').innerText = numeroSintesi;
-  const info = DESCRIZIONI_LEGAME[numeroSintesi] || {
-    titolo: "Incontro di Affinità",
-    badge: "Legame di Esperienza",
-    badgeClass: "badge-soft",
-    testo: "Questa combinazione non presenta un karma attivo primario o un numero maestro sulla somma dei destini, ma rappresenta un percorso di apprendimento libero da pesi o debiti del passato."
+  // Funzione per calcolare il livello di priorità di un numero
+  const calcolaPesoPriorita = (numero) => {
+    const num = Number(numero);
+    if ([13, 14, 16, 19].includes(num)) return 1; // 1°: Karmici
+    if ([11, 22, 33].includes(num)) return 2;     // 2°: Maestri
+    if ([6, 7, 8, 9].includes(num)) return 3;     // 3°: 6, 7, 8, 9
+    return 4;                                     // 4°: Tutti gli altri
   };
 
-  document.getElementById('badgeContenitore').innerHTML = `
-    <span class="badge ${info.badgeClass}">${info.badge}</span>
-    <strong style="display:block; margin-top:8px; color:var(--accent-gold-light); font-size:1.05rem;">${info.titolo}</strong>
-  `;
-  document.getElementById('descrizioneSintesi').innerText = info.testo;
+  const costruisciDatiSezione = (sommaImpronta, numCiclo, etichetta, prioritaBase) => {
+    // Gestione Impronta
+    let numImp = riduciNumeroKarmico(sommaImpronta);
+    if (!DESCRIZIONI_LEGAME[numImp]) {
+      numImp = riduciInSingolaOCifraMaestra(numImp);
+    }
+    const infoImp = DESCRIZIONI_LEGAME[numImp] || {
+      titolo: "Incontro di Affinità",
+      badge: "Legame di Esperienza",
+      badgeClass: "badge-soft",
+      testo: "Questa combinazione rappresenta un percorso di apprendimento libero da pesi o debiti del passato."
+    };
 
- // ==========================================================================
+    // Gestione Ciclo
+    let numCic = DESCRIZIONI_CICLO[numCiclo] ? numCiclo : riduciInSingolaOCifraMaestra(numCiclo);
+    const descCic = DESCRIZIONI_CICLO[numCic] || `Numero di ciclo ${numCic}: definisce la frequenza evolutiva generale lungo il percorso comune della coppia.`;
+
+    // Assegnazione del peso di priorità in base al numero dell'Impronta
+    const peso = calcolaPesoPriorita(numImp);
+
+    return {
+      etichetta,
+      impronta: { numero: numImp, ...infoImp },
+      ciclo: { numero: numCic, testo: descCic },
+      peso,
+      prioritaBase // Preserva l'ordine naturale (Destino -> Anima -> Io) in caso di pari peso
+    };
+  };
+
+  let sezioni = [
+    costruisciDatiSezione(sommaDestini, cicloDestino, "DESTINO (Cammino Comune)", 1),
+    costruisciDatiSezione(sommaAnime, cicloAnima, "ANIMA (Affinità Profonda)", 2),
+    costruisciDatiSezione(sommaIo, cicloIo, "IO (Espressione e Azione)", 3)
+  ];
+
+  // ORDINAMENTO GERARCHICO RIGIDO
+  sezioni.sort((a, b) => {
+    if (a.peso !== b.peso) {
+      return a.peso - b.peso; // Ordina prima per fascia di importanza (1, poi 2, poi 3, poi 4)
+    }
+    return a.prioritaBase - b.prioritaBase; // A parità di fascia, mantiene l'ordine Destino -> Anima -> Io
+  });
+
+  // Nasconde la card originaria del ciclo per evitare duplicati
+  const elCiclo = document.getElementById('numeroCiclo');
+  const cardCicloOriginale = elCiclo ? elCiclo.closest('.card') : null;
+  if (cardCicloOriginale) {
+    cardCicloOriginale.style.display = 'none';
+  }
+
+  // Cerca il contenitore dove inserire le card (o lo crea se non esiste)
+  let contenitoreSintesi = document.getElementById('contenitoreSintesiDinamico');
+  
+  if (!contenitoreSintesi) {
+    const elSintesi = document.getElementById('numeroSintesi');
+    const cardOriginale = elSintesi ? elSintesi.closest('.card') : null;
+
+    if (cardOriginale) {
+      contenitoreSintesi = document.createElement('div');
+      contenitoreSintesi.id = 'contenitoreSintesiDinamico';
+      cardOriginale.parentNode.insertBefore(contenitoreSintesi, cardOriginale);
+      cardOriginale.remove();
+    }
+  }
+
+  // Genera ed eroga l'HTML fresco e ordinato ad ogni ricalcolo
+  if (contenitoreSintesi) {
+    let htmlGruppo = '';
+
+    sezioni.forEach(s => {
+      htmlGruppo += `
+        <div class="card" style="text-align: center; margin-bottom: 25px; padding: 20px;">
+          
+          <!-- SEZIONE IMPRONTA -->
+          <div class="card-title center">IMPRONTA DEL LEGAME - ${s.etichetta}</div>
+          <h2 style="font-size: 2.8rem; color: var(--accent-gold); font-family: var(--font-title); margin: 6px 0;">${s.impronta.numero}</h2>
+          <div>
+            <span class="badge ${s.impronta.badgeClass}">${s.impronta.badge}</span>
+            <strong style="display:block; margin-top:8px; color:var(--accent-gold-light); font-size:1.05rem;">${s.impronta.titolo}</strong>
+          </div>
+          <p style="margin-top: 14px; font-size: 0.9rem; color: var(--text-main); line-height: 1.5;">${s.impronta.testo}</p>
+
+          <!-- SEPARATORE ELEGANTE -->
+          <hr style="border: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.4), transparent); margin: 20px 0;">
+
+          <!-- SEZIONE CICLO INTEGRATA -->
+          <div class="card-title center" style="font-size: 0.85rem; opacity: 0.9;">CICLO DELLA RELAZIONE</div>
+          <h3 style="font-size: 2rem; color: var(--accent-gold-light); font-family: var(--font-title); margin: 4px 0;">${s.ciclo.numero}</h3>
+          <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-main); line-height: 1.45; font-style: italic;">${s.ciclo.testo}</p>
+
+        </div>
+      `;
+    });
+
+    contenitoreSintesi.innerHTML = htmlGruppo;
+  }
+
+  // MANTIENI LA RIGA DEL CICLO SUBITO DOPO:
+  const numCiclo = calcolaCicloRelazione(dataA, dataB);
+
+  // ==========================================================================
   // CONFRONTI E RISPECCHIAMENTI
   // ==========================================================================
   let coincidenze = [];
@@ -1090,7 +1340,7 @@ function validaECalcolaRelazioneKarmica() {
     return x;
   };
 
-  // 1. Stessi Aspetti (Destino=Destino, Anima=Anima, Persona=Persona)
+  // 1. Stessi Aspetti (Destino=Destino, Anima=Anima, Io=Io)
   if (destinoA && destinoB && base(destinoA) === base(destinoB)) {
     coincidenze.push(`<strong>Stesso Destino (${destinoA}):</strong> ${pA} e ${pB} condividono la stessa direzione evolutiva.`);
   }
@@ -1098,7 +1348,7 @@ function validaECalcolaRelazioneKarmica() {
     coincidenze.push(`<strong>Stessa Anima (${animaA}):</strong> ${pA} e ${pB} condividono gli stessi desideri e motivazioni profonde.`);
   }
   if (ioA && ioB && base(ioA) === base(ioB)) {
-    coincidenze.push(`<strong>Stesso Numero Persona (${ioA}):</strong> ${pA} e ${pB} condividono la stessa modalità espressiva e personalità.`);
+    coincidenze.push(`<strong>Stesso Io (${ioA}):</strong> ${pA} e ${pB} condividono la stessa modalità espressiva e personalità.`);
   }
 
   // 2. Anima <-> Destino
@@ -1109,20 +1359,20 @@ function validaECalcolaRelazioneKarmica() {
     coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Destino di ${pA}</strong> (${destinoA})`);
   }
 
-  // 3. Anima <-> Persona
+  // 3. Anima <-> Io
   if (animaA && ioB && base(animaA) === base(ioB)) {
-    coincidenze.push(`L'<strong>Anima di ${pA}</strong> (${animaA}) = <strong>Persona di ${pB}</strong> (${ioB})`);
+    coincidenze.push(`L'<strong>Anima di ${pA}</strong> (${animaA}) = <strong>Io di ${pB}</strong> (${ioB})`);
   }
   if (animaB && ioA && base(animaB) === base(ioA)) {
-    coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Persona di ${pA}</strong> (${ioA})`);
+    coincidenze.push(`L'<strong>Anima di ${pB}</strong> (${animaB}) = <strong>Io di ${pA}</strong> (${ioA})`);
   }
 
-  // 4. Destino <-> Persona
+  // 4. Destino <-> Io
   if (destinoA && ioB && base(destinoA) === base(ioB)) {
-    coincidenze.push(`Il <strong>Destino di ${pA}</strong> (${destinoA}) = <strong>Persona di ${pB}</strong> (${ioB})`);
+    coincidenze.push(`Il <strong>Destino di ${pA}</strong> (${destinoA}) = <strong>Io di ${pB}</strong> (${ioB})`);
   }
   if (destinoB && ioA && base(destinoB) === base(ioA)) {
-    coincidenze.push(`Il <strong>Destino di ${pB}</strong> (${destinoB}) = <strong>Persona di ${pA}</strong> (${ioA})`);
+    coincidenze.push(`Il <strong>Destino di ${pB}</strong> (${destinoB}) = <strong>Io di ${pA}</strong> (${ioA})`);
   }
 
   // Rendering Box Rispecchiamento
