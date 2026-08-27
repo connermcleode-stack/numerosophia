@@ -749,19 +749,44 @@ ombreSetup.forEach(ombra => {
         document.getElementById(ombra.idNum).innerText = ombra.valore;
     }
 
-    if (document.getElementById(ombra.idDesc)) {
-        document.getElementById(ombra.idDesc).innerHTML = `
-            <div class="anteprima-card">
-                <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" class="img-carta">
+    const containerDesc = document.getElementById(ombra.idDesc);
+    if (containerDesc) {
+        containerDesc.innerHTML = `
+            <div class="anteprima-card" style="cursor: pointer;">
+                <img src="carte/${imgNome}.png" 
+                     onerror="this.onerror=null; this.src='carte/ombra9.png';" 
+                     alt="Ombra ${ombra.valore}" 
+                     class="img-carta">
                 <h4 class="titolo-archetipo">Archetipo: ${etichettaFormattata}</h4>
                 <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
             </div>
 
             <div class="testo-segreto" style="display: none;">
-                <img src="carte/${imgNome}.png" alt="Ombra ${ombra.valore}" class="img-carta-modale">
+                <img src="carte/${imgNome}.png" 
+                     onerror="this.onerror=null; this.src='carte/ombra9.png';" 
+                     alt="Ombra ${ombra.valore}" 
+                     class="img-carta-modale">
                 ${typeof compilaSchedaOmbra === 'function' ? compilaSchedaOmbra(ombra.valore) : 'Sfida evolutiva.'}
             </div>
         `;
+
+        // Attacca l'evento di Apertura Popup direttamente all'elemento creato
+        containerDesc.onclick = function() {
+            const contenutoModal = this.querySelector('.testo-segreto').innerHTML;
+            
+            if (typeof apriModal === 'function') {
+                apriModal(contenutoModal);
+            } else if (typeof mostraPopup === 'function') {
+                mostraPopup(contenutoModal);
+            } else {
+                const modalElement = document.getElementById('modalOmbra') || document.getElementById('modalGenerico');
+                if (modalElement) {
+                    const modalBody = modalElement.querySelector('.modal-body') || modalElement;
+                    modalBody.innerHTML = contenutoModal;
+                    modalElement.style.display = 'block';
+                }
+            }
+        };
     }
 });
 
