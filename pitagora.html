@@ -689,13 +689,13 @@ img,
                         </div>
                         <div id="descAnnoPers"></div>
                     </div>
-                    <div class="card" style="border-left-color: #e67e22;" onclick="apriApprofondimento(this)">
-                        <div class="card-header-flex">
-                            <h3>Giorno Personale</h3>
-                            <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
-                        </div>
-                        <div id="descGiornoPers"></div>
-                    </div>
+                    <div class="card" style="border-left-color: #e67e22;">
+    <div class="card-header-flex">
+        <h3>Giorno Personale</h3>
+        <div id="numGiornoPers" class="numero-evidenziato" style="color: #e67e22;"></div>
+    </div>
+    <div id="descGiornoPers"></div>
+</div>
                 </div>
 
                <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb; text-align: center; margin-top: 40px;">I 3 Grandi Cicli Evolutivi</div>
@@ -825,15 +825,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Guerriero Egoico",
+            livello: "1° Livello • Guerriero Egoico",
             descrizione: "Combatte per affermare se stesso, conquistare il proprio spazio e dimostrare il proprio valore. Il successo personale diventa la misura della propria identità e l'ego guida gran parte delle sue scelte."
         },
         {
-            livello: "🥈 2° Livello • Guerriero Idealista",
+            livello: "2° Livello • Guerriero Idealista",
             descrizione: "La sua forza viene messa al servizio di un ideale più grande. Difende la giustizia, la libertà e ciò in cui crede, diventando un punto di riferimento capace di motivare e guidare gli altri."
         },
         {
-            livello: "🥇 3° Livello • Guerriero Consapevole",
+            livello: "3° Livello • Guerriero Consapevole",
             descrizione: "Comprende che la battaglia più importante è quella contro i propri limiti interiori. Agisce con fermezza ma senza aggressività, unendo coraggio, umiltà e compassione. La sua leadership nasce dall'esempio e non dal bisogno di dominare."
         }
     ],
@@ -855,15 +855,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • La Ricerca dell'Innocenza",
+            livello: "1° Livello • La Ricerca dell'Innocenza",
             descrizione: "Ricerca protezione, appartenenza e sicurezza emotiva. Tende ad affidare il proprio benessere agli altri, desiderando un ambiente dove sentirsi accolto e amato senza condizioni."
         },
         {
-            livello: "🥈 2° Livello • Il Confronto con l'Ombra",
+            livello: "2° Livello • Il Confronto con l'Ombra",
             descrizione: "Le delusioni e le esperienze di vita lo portano ad affrontare le proprie paure, imparando che l'amore autentico non nasce dalla dipendenza ma dalla consapevolezza. Inizia così un percorso di maturazione emotiva."
         },
         {
-            livello: "🥇 3° Livello • Il Ritorno all'Equilibrio",
+            livello: "3° Livello • Il Ritorno all'Equilibrio",
             descrizione: "Ritrova la spontaneità e la fiducia del bambino, unite però alla saggezza dell'adulto. Ama con autenticità, sa proteggere il proprio spazio personale e costruisce relazioni fondate sul rispetto reciproco, senza rinunciare alla propria sensibilità."
         }
     ],
@@ -885,15 +885,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • La Gioia della Superficialità",
+            livello: "1° Livello • La Gioia della Superficialità",
             descrizione: "Vive il presente con entusiasmo, ricerca il divertimento e desidera sperimentare continuamente nuove emozioni. La leggerezza domina le sue scelte, ma può mancare profondità e continuità."
         },
         {
-            livello: "🥈 2° Livello • Il Risveglio della Creatività",
+            livello: "2° Livello • Il Risveglio della Creatività",
             descrizione: "Scopre che il proprio talento può diventare uno strumento di crescita personale e di espressione autentica. Impara a canalizzare la propria energia creativa verso obiettivi concreti, dando forma alle proprie intuizioni."
         },
         {
-            livello: "🥇 3° Livello • Il Messaggero Illuminato",
+            livello: "3° Livello • Il Messaggero Illuminato",
             descrizione: "Comprende che la comunicazione è un dono da mettere al servizio degli altri. Attraverso la parola, l'arte e la creatività diventa fonte di ispirazione, diffondendo conoscenza, speranza e consapevolezza con semplicità e autenticità."
         }
     ],
@@ -1588,51 +1588,51 @@ function compilaScheda(numero, compatta = false) {
         ${etichettaTitolo} ${(dati.nome || '').replace(' (', '<br>(')}
     </h3>
 
-                <!-- 1. ✨ SIGNIFICATO -->
+                <!-- 1. SIGNIFICATO -->
                 <div style="background-color: #1a252f; border-left: 4px solid #34495e; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                    <strong style="color: #ecf0f1; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">✨ Significato</strong>
+                    <strong style="color: #ecf0f1; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Significato</strong>
                     <div style="color: #d5dbdb; font-size: 13px; line-height: 1.4;">${dati.significato || 'Descrizione non disponibile.'}</div>
                 </div>
 
-                <!-- 2. ☀️ ESPRESSIONE IN LUCE -->
+                <!-- 2. ESPRESSIONE IN LUCE -->
                 <div style="background-color: #1e372a; border-left: 4px solid #27ae60; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                    <strong style="color: #2ecc71; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">☀️ Espressione in Luce</strong>
+                    <strong style="color: #2ecc71; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Espressione in Luce</strong>
                     <div style="color: #d4efdf; font-size: 13px; line-height: 1.4;">${dati.luce || 'Non specificata.'}</div>
                 </div>
 
-                <!-- 3. 🌑 ESPRESSIONE IN OMBRA -->
+                <!-- 3. ESPRESSIONE IN OMBRA -->
                 <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                    <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌑 Espressione in Ombra</strong>
+                    <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Espressione in Ombra</strong>
                     <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${dati.ombra || 'Non specificata.'}</div>
                 </div>
 
-               <!-- 4. 🗝️ CHIAVE EVOLUTIVA -->
+               <!-- 4. CHIAVE EVOLUTIVA -->
 	       ${dati.chiave ? `
 	       <div style="background-color: #342816; border-left: 4px solid #f39c12; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-    	       <strong style="color: #f1c40f; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🗝️ Chiave Evolutiva</strong>
+    	       <strong style="color: #f1c40f; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Chiave Evolutiva</strong>
     	       <div style="color: #fdebd0; font-size: 13px; line-height: 1.4;">${dati.chiave}</div>
 	       </div>` : ''}
 
-	       <!-- 5. 📈 PERCORSO EVOLUTIVO -->
+	       <!-- 5. PERCORSO EVOLUTIVO -->
 	       ${evoluzionevHTML ? `
 	       <div style="background-color: #1a2a3a; border-left: 4px solid #2980b9; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-    	       <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">📈 Percorso Evolutivo</strong>
+    	       <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Percorso Evolutivo</strong>
    	       <div style="color: #d6eaf8; font-size: 13px; line-height: 1.4;">
                ${evoluzionevHTML}
     	       </div>
 	       </div>` : ''}
 
-                <!-- 6. 🌱 CONSIGLIO PRATICO -->
+                <!-- 6. CONSIGLIO PRATICO -->
                 ${dati.consiglio ? `
                 <div style="background-color: #1b3320; border-left: 4px solid #16a085; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                    <strong style="color: #1abc9c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌱 Consiglio pratico</strong>
+                    <strong style="color: #1abc9c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Consiglio pratico</strong>
                     <div style="color: #e8f8f5; font-size: 13px; line-height: 1.4;">${dati.consiglio}</div>
                 </div>` : ''}
 
-                <!-- 7. 🔮 MANTRA DELL'ARCHETIPO -->
+                <!-- 7. MANTRA DELL'ARCHETIPO -->
                 ${dati.mantra ? `
                 <div style="background-color: #2c1a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: center;">
-                    <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔮 Mantra dell'Archetipo</strong>
+                    <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Mantra dell'Archetipo</strong>
                     <div style="color: #f5eed3; font-size: 13px; font-style: italic; font-weight: 600;">"${dati.mantra}"</div>
                 </div>` : ''}
             </div>
@@ -1715,7 +1715,7 @@ schedaKarmicaHTML = `
             titolo += ` <span style="color: #ff4d4d !important; font-size: 12px; display: block; margin-top: 2px;">(Prova Karmica ${numeroPulito})</span>`;
             schedaKarmicaHTML = `
                 <div style="background-color: #342816; border-left: 4px solid #d35400; padding: 12px; border-radius: 6px; margin-bottom: 15px; text-align: left;">
-                    <strong style="color: #e67e22; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">⚠️ SFIDA DEL KARMA ${numeroPulito}</strong>
+                    <strong style="color: #e67e22; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">SFIDA DEL KARMA ${numeroPulito}</strong>
                     <div style="color: #fdebd0; font-size: 13px; line-height: 1.4;">${k}</div>
                 </div>
             `;
@@ -1861,44 +1861,44 @@ function compilaSchedaOmbra(valoreOmbra) {
         Archetipo: ${nomeCompleto}
     </span>
 
-            <!-- 1. ⚠️ SFIDA PRINCIPALE -->
+            <!-- 1. SFIDA PRINCIPALE -->
             <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
                 <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">⚠️ Sfida Principale</strong>
                 <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${sfida}</div>
             </div>
 
-            <!-- 2. 🌑 MANIFESTAZIONE INCONSCIA -->
+            <!-- 2. MANIFESTAZIONE INCONSCIA -->
             <div style="background-color: #2b1820; border-left: 4px solid #900C3F; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
                 <strong style="color: #f1948a; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌑 Manifestazione Inconscia</strong>
                 <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${manifestazione}</div>
             </div>
 
-            <!-- 3. 💎 RISORSA NASCOSTA -->
+            <!-- 3. RISORSA NASCOSTA -->
             <div style="background-color: #1e372a; border-left: 4px solid #27ae60; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
                 <strong style="color: #2ecc71; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">💎 Risorsa Nascosta</strong>
                 <div style="color: #d4efdf; font-size: 13px; line-height: 1.4;">${risorsa}</div>
             </div>
 
-            <!-- 4. 🔑 STRATEGIA DI INTEGRAZIONE -->
+            <!-- 4. STRATEGIA DI INTEGRAZIONE -->
             <div style="background-color: #1a2a3a; border-left: 4px solid #2980b9; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
                 <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔑 Strategia di Integrazione</strong>
                 <div style="color: #d4e6f1; font-size: 13px; line-height: 1.4;">${strategia}</div>
             </div>
 
-            <!-- 5. 📈 FASI DI RISOLUZIONE -->
+            <!-- 5. FASI DI RISOLUZIONE -->
             ${fasiHTML ? `
             <div style="background-color: #251a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
                 <strong style="color: #a569bd; display: block; margin-bottom: 8px; font-size: 13px; text-transform: uppercase;">📈 Fasi di Risoluzione</strong>
                 ${fasiHTML}
             </div>` : ''}
 
-            <!-- 6. 🌱 CONSIGLIO PRATICO -->
+            <!-- 6. CONSIGLIO PRATICO -->
             <div style="background-color: #342816; border-left: 4px solid #f39c12; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
                 <strong style="color: #f1c40f; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌱 Consiglio Pratico</strong>
                 <div style="color: #fdebd0; font-size: 13px; line-height: 1.4; font-style: italic;">"${consiglio}"</div>
             </div>
 
-            <!-- 7. 🔮 MANTRA DI TRASFORMAZIONE -->
+            <!-- 7. MANTRA DI TRASFORMAZIONE -->
             ${mantra ? `
             <div style="background-color: #2c1a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: center;">
                 <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔮 Mantra di Trasformazione</strong>

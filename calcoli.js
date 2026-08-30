@@ -239,7 +239,8 @@ function eseguiCalcoloCompleto() {
             const rOggiGiorno = riduciMonocifraStretta(oggi.getDate());
             const rOggiMese = riduciMonocifraStretta(oggi.getMonth() + 1);
             
-            giornoPersonale = riduciNumero(riduciMonocifraStretta(annoPersonale) + rOggiGiorno + rOggiMese, true);
+           // FORZATURA GIORNO PERSONALE (Solo cifre da 1 a 9, senza Maestri né Karmici)
+	   giornoPersonale = riduciMonocifraStretta(riduciMonocifraStretta(annoPersonale) + rOggiGiorno + rOggiMese);
 
 // ============================================================================
 // RENDERING GIORNO DI NASCITA (ANTEPRIMA E MODALE CORRETTA)
@@ -321,22 +322,22 @@ function apriModalGiorno(giorno) {
             </h3>
 
             <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">🏛️ Doti</h4>
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Doti</h4>
                 <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
             </div>
 
             <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">✨ Significato</h4>
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Significato</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
             </div>
 
             <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">⚠️ PUNTI DEBOLI</h4>
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">PUNTI DEBOLI</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.puntiDeboli}</p>
             </div>
 
             <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
-                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">💼 PROFESSIONI IDEALI</h4>
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">PROFESSIONI IDEALI</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.professioniIdeali}</p>
             </div>
         `;
@@ -374,37 +375,10 @@ window.apriModalGiorno = apriModalGiorno;
             if (document.getElementById('descCicloConc')) document.getElementById('descCicloConc').innerHTML = compilaSchedaSicura(cConc);
 
 // ============================================================================
-// RENDERING ANNO PERSONALE
-// ============================================================================
-if (document.getElementById('numAnnoPers')) {
-    document.getElementById('numAnnoPers').innerText = format(annoPersonale);
-}
-
-if (document.getElementById('descAnnoPers')) {
-    const sorgenteAnnoPers = window.TESTI_PITAGORA || TESTI_PITAGORA;
-    const datiMappaAP = sorgenteAnnoPers?.annoPersonale || sorgenteAnnoPers?.ANNI_PERSONALI;
-
-    if (datiMappaAP && datiMappaAP[annoPersonale]) {
-        const datiAP = datiMappaAP[annoPersonale];
-        const archetipoAP = datiAP.nome || "";
-        const archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
-
-        document.getElementById('descAnnoPers').innerHTML = `
-            <div class="anteprima-card" onclick="apriModalAnnoPersonale(${annoPersonale})">
-                <img src="carte/${annoPersonale}.png" alt="${archetipoAP}" class="img-carta" onerror="this.style.display='none';">
-                <h4 class="titolo-archetipo">${archetipoAPFormattato}</h4>
-                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
-            </div>
-        `;
-    } else {
-        document.getElementById('descAnnoPers').innerHTML = compilaSchedaSicura(annoPersonale);
-    }
-}
-// ============================================================================
-// ANNO PERSONALE (FUNZIONE MODALE + RENDERING ANTEPRIMA)
+// ANNO PERSONALE: FUNZIONE MODALE
 // ============================================================================
 function apriModalAnnoPersonale(anno) {
-    const srcTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
+    const srcTesti = window.TESTI_PITAGORA || window.TESTI_CICLI || (typeof TESTI_CICLI !== 'undefined' ? TESTI_CICLI : null);
     const tMap = srcTesti?.annoPersonale || srcTesti?.ANNI_PERSONALI;
     
     if (!tMap || !tMap[anno]) return;
@@ -431,35 +405,35 @@ function apriModalAnnoPersonale(anno) {
 
             ${t.sottotitolo ? `
             <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">🏛️ Doti & Energia</h4>
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Doti & Energia</h4>
                 <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
             </div>
             ` : ''}
 
             ${t.introduzione ? `
             <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">✨ Significato dell'Anno</h4>
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Significato dell'Anno</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
             </div>
             ` : ''}
 
             ${t.opportunita ? `
             <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">🌟 OPPORTUNITÀ</h4>
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">OPPORTUNITÀ</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.opportunita}</p>
             </div>
             ` : ''}
 
             ${t.sfide ? `
             <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">⚠️ SFIDE</h4>
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">SFIDE</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.sfide}</p>
             </div>
             ` : ''}
 
             ${t.consigliPratici ? `
             <div style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
-                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">💡 CONSIGLI PRATICI</h4>
+                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">CONSIGLI PRATICI</h4>
                 <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.consigliPratici}</p>
             </div>
             ` : ''}
@@ -470,19 +444,21 @@ function apriModalAnnoPersonale(anno) {
 }
 window.apriModalAnnoPersonale = apriModalAnnoPersonale;
 
-// Rendering nell'anteprima
+// ============================================================================
+// ANNO PERSONALE: RENDERING ANTEPRIMA CARD
+// ============================================================================
 if (document.getElementById('numAnnoPers')) {
     document.getElementById('numAnnoPers').innerText = format(annoPersonale);
 }
 
 if (document.getElementById('descAnnoPers')) {
-    let srcText = window.TESTI_PITAGORA || TESTI_PITAGORA;
-    let mapData = srcText?.annoPersonale || srcText?.ANNI_PERSONALI;
+    const srcText = window.TESTI_PITAGORA || window.TESTI_CICLI || (typeof TESTI_CICLI !== 'undefined' ? TESTI_CICLI : null);
+    const mapData = srcText?.annoPersonale || srcText?.ANNI_PERSONALI;
 
     if (mapData && mapData[annoPersonale]) {
-        let datiAP = mapData[annoPersonale];
-        let archetipoAP = datiAP.nome || "";
-        let archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
+        const datiAP = mapData[annoPersonale];
+        const archetipoAP = datiAP.nome || "";
+        const archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
 
         document.getElementById('descAnnoPers').innerHTML = `
             <div class="anteprima-card" onclick="apriModalAnnoPersonale(${annoPersonale})">
@@ -496,33 +472,116 @@ if (document.getElementById('descAnnoPers')) {
     }
 }
 
-// ============================================================================
-// RENDERING ANNO PERSONALE
-// ============================================================================
-if (document.getElementById('numAnnoPers')) {
-    document.getElementById('numAnnoPers').innerText = format(annoPersonale);
+// FORZATURA RENDERING GIORNO PERSONALE
+const numGP = parseInt(giornoPersonale, 10);
+
+if (document.getElementById('numGiornoPers')) {
+    document.getElementById('numGiornoPers').innerText = numGP;
 }
 
-const mappaAnniAP = (window.TESTI_PITAGORA || TESTI_PITAGORA)?.annoPersonale || (window.TESTI_PITAGORA || TESTI_PITAGORA)?.ANNI_PERSONALI;
+const mappaGiorniGP = (window.TESTI_PITAGORA || TESTI_PITAGORA)?.giornoPersonale || 
+                      (window.TESTI_PITAGORA || TESTI_PITAGORA)?.GIORNI_PERSONALI;
 
-if (document.getElementById('descAnnoPers') && mappaAnniAP && mappaAnniAP[annoPersonale]) {
-    const datiAP = mappaAnniAP[annoPersonale];
-    const archetipoAP = datiAP.nome || "";
-    const archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
+// Cerchiamo sia come numero che come stringa per sicurezza
+const datiGP = mappaGiorniGP ? (mappaGiorniGP[numGP] || mappaGiorniGP[String(numGP)]) : null;
 
-    document.getElementById('descAnnoPers').innerHTML = `
-        <div class="anteprima-card" onclick="apriModalAnnoPersonale(${annoPersonale})">
-            <img src="carte/${annoPersonale}.png" alt="${archetipoAP}" class="img-carta" onerror="this.style.display='none';">
-            <h4 class="titolo-archetipo">${archetipoAPFormattato}</h4>
+if (document.getElementById('descGiornoPers') && datiGP) {
+    const archetipoGP = datiGP.archetipo || "";
+    const archetipoGPFormattato = (archetipoGP || '').replace(/\s*\(/, '<br>(');
+
+    document.getElementById('descGiornoPers').innerHTML = `
+        <div class="anteprima-card" onclick="apriModalGiornoPersonale(${numGP})">
+            <img src="carte/${numGP}.png" alt="${archetipoGP}" class="img-carta" onerror="this.style.display='none';">
+            <h4 class="titolo-archetipo">${archetipoGPFormattato}</h4>
             <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
         </div>
     `;
-} else if (document.getElementById('descAnnoPers')) {
-    document.getElementById('descAnnoPers').innerHTML = compilaSchedaSicura(annoPersonale);
+} else if (document.getElementById('descGiornoPers')) {
+    // Se finisce qui, significa che i dati non sono stati trovati nell'oggetto!
+    console.error("Dati non trovati in mappaGiorniGP per il giorno:", numGP, mappaGiorniGP);
 }
-      
-// Cerca il database sotto tutte le possibili variabili note
-const tPitagora = window.TESTI_PITAGORA || window.TESTI_CICLI || (typeof TESTI_CICLI !== 'undefined' ? TESTI_CICLI : null);
+
+// ============================================================================
+// GIORNO PERSONALE (FUNZIONE MODALE)
+// ============================================================================
+function apriModalGiornoPersonale(giorno) {
+    // 1. Forzatura riduzione a numero compreso tra 1 e 9
+    let giornoRidotto = parseInt(giorno, 10);
+    while (giornoRidotto > 9) {
+        giornoRidotto = giornoRidotto.toString().split('').reduce((acc, d) => acc + parseInt(d, 10), 0);
+    }
+
+    // 2. Recupero mappa dei dati (cerca prima giornoPersonale, poi GIORNI_PERSONALI)
+    const srcTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
+    const tMap = srcTesti?.giornoPersonale || srcTesti?.GIORNI_PERSONALI;
+    
+    if (!tMap || !tMap[giornoRidotto]) {
+        console.warn("Testi Giorno Personale non trovati per il numero:", giornoRidotto);
+        return;
+    }
+
+    const t = tMap[giornoRidotto];
+    const archetipo = t.archetipo || t.nome || "";
+    const archetipoFormattato = (archetipo || '').replace(/\s*\(/, '<br>(');
+
+    // 3. Recupero elementi DOM della modale
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) titoloModale.innerText = `Giorno Personale ${giornoRidotto}`;
+    if (sottotitoloModale) sottotitoloModale.innerHTML = "";
+
+    // 4. Iniezione del layout specifico per il Giorno Personale
+    if (contenutoModale) {
+        contenutoModale.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="carte/${giornoRidotto}.png" alt="${archetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+            </div>
+
+            <h3 class="archetipo-nome">${archetipoFormattato}</h3>
+
+            ${t.paroleChiave ? `
+            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Qualità</h4>
+                <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.paroleChiave}</p>
+            </div>
+            ` : ''}
+
+            ${t.descrizione ? `
+            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">ENERGIA DEL GIORNO</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.descrizione}</p>
+            </div>
+            ` : ''}
+
+            ${t.lavoro ? `
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">LAVORO</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.lavoro}</p>
+            </div>
+            ` : ''}
+
+            ${t.amore ? `
+            <div style="background: rgba(236, 72, 153, 0.12); border: 1px solid rgba(244, 114, 182, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #f472b6; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">AMORE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.amore}</p>
+            </div>
+            ` : ''}
+
+            ${t.daEvitare ? `
+            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">DA EVITARE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.daEvitare}</p>
+            </div>
+            ` : ''}
+        `;
+    }
+
+    if (modaleContainer) modaleContainer.style.display = 'flex';
+}
+window.apriModalGiornoPersonale = apriModalGiornoPersonale;
 
 // --- 1° CICLO DI REALIZZAZIONE (p1) ---
 if (document.getElementById('numCiclo1')) document.getElementById('numCiclo1').innerText = format(p1);
@@ -683,7 +742,7 @@ function ottieniTestoEstesoCiclo(valoreNumero, chiaveCiclo) {
                 <!-- BOX 1: SIGNIFICATO (Blu) -->
                 ${archetipo.introduzione ? `
                 <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                    <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">✨ SIGNIFICATO</h4>
+                    <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">SIGNIFICATO</h4>
                     <p style="margin: 0; line-height: 1.5; font-size: 0.95em; color: #e8e3d9;">
                         ${archetipo.introduzione}
                     </p>

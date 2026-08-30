@@ -85,7 +85,7 @@ window.TESTI_PITAGORA = {
 }
   },
 4: {
-  nome: "Il Costruttore (Organizzato e concreto)",
+  nome: "Il Costruttore (Organizzato e Concreto)",
   sottotitolo: "Gli anni del radicamento",
   introduzione: "Questo ciclo invita a creare basi solide, pianificare attentamente e imparare le regole della materia per concretizzare i propri sogni. È una fase di duro lavoro, ordine e gestione pratica in cui famiglia, casa e professione sono in primo piano. Per chi ha già i piedi per terra è il momento di consolidare grandi traguardi; per chi tende a svagare con la testa tra le nuvole, sarà un'opportunità impegnativa ma necessaria per fare i conti con la realtà ed evitare che l'egocentrismo o la venalità portino a inutili perdite.",
   cicli: {
@@ -640,7 +640,7 @@ ARCHETIPI_GIORNI: {
     1: "Il Guerriero (Leader e Pioniere)",
     2: "Il Fanciullo (Empatico e Mediatore)",
     3: "Il Giullare (Artista e Comunicatore)",
-    4: "Il Costruttore (Organizzato e concreto)",
+    4: "Il Costruttore (Organizzato e Concreto)",
     5: "Il Cercatore (Esploratore e Spirito Libero)",
     6: "L'Angelo Custode (Protettivo e Mediatore)",
     7: "Il Saggio (Filosofo e Mistico)",
@@ -672,7 +672,7 @@ ARCHETIPI_GIORNI: {
 
 annoPersonale: {
  1: {
-  nome: "Archetipo 1: Il Guerriero",
+  nome: "Archetipo 1: Il Guerriero (Leader e Pioniere)",
   sottotitolo: "Inizio di un nuovo ciclo di 9 anni, coraggio, azione e indipendenza",
   introduzione: "L'Anno Personale 1 segna l'inizio di un nuovo ciclo di vita di nove anni, un momento di forte rinascita in cui il seme del tuo futuro viene piantato. Dopo aver concluso la fase precedente, affiora la tua parte più audace e creativa, spingendoti a tagliare i rami secchi del passato e a varcare la soglia del rinnovamento. È il momento di uscire dalle vecchie abitudini, fidarti delle tue intuizioni e prendere in mano le redini della tua vita con determinazione e autonomia, sia in ambito personale che professionale. Ciò che metti in campo ora determinerà la rotta dei prossimi anni.",
   opportunita: "Si apre una fase ideale per avviare nuovi progetti, cambiare lavoro, intraprendere un percorso di studi o rivoluzionare il tuo stile di vita. Questo periodo favorisce enormemente l'espressione dell'autostima, la crescita materiale e lo sviluppo di un'indipendenza autentica. È anche un momento propizio per espandere le tue risorse finanziarie o fare scelte coraggiose sul piano relazionale e professionale.",
@@ -680,7 +680,7 @@ annoPersonale: {
   consigliPratici: "Definisci con precisione i tuoi obiettivi stilando una lista di priorità per ogni area della tua vita. Non aspettare l'approvazione esterna per agire e non delegare ciò che puoi fare da solo: fidati della tua capacità di trovare soluzioni originali. Fissa la rotta, elimina le distrazioni e muovi con fermezza il primo passo verso i tuoi traguardi."
 },
 2: {
-  nome: "Archetipo 2: Il Fanciullo",
+  nome: "Archetipo 2: Il Fanciullo (Empatico e Mediatore)",
   sottotitolo: "Gestazione, pazienza, sensibilità emotiva e cooperazione",
   introduzione: "L'Anno Personale 2 rappresenta una fase di incubazione e di lento consolidamento: il seme piantato nell'Anno 1 riposa nella terra, assorbendo il nutrimento necessario prima di germogliare. È un periodo introspettivo in cui il ritmo generale rallenta e le situazioni richiedono diplomazia, ascolto e cooperazione anziché sforzi d'impulso. Questa vibrazione sviluppa una profonda sensibilità emotiva, l'intuito e la consapevolezza spirituale, invitandoti a mettere da parte la competizione per cercare l'armonia, la condivisione e l'empatia nelle relazioni.",
   opportunita: "È un momento propizio per stringere alleanze, avviare collaborazioni professionali o affettive e dedicarsi alla propria crescita interiore. Aumenta la percezione dei livelli sottili, la creatività e la capacità intuitiva, rendendo ideale la pratica della meditazione e dell'ascolto passivo. Possono presentarsi aiuti inattesi, promozioni, miglioramenti economici o l'incontro con persone chiave capaci di favorire la tua evoluzione.",
@@ -688,7 +688,7 @@ annoPersonale: {
   consigliPratici: "Impara a rallentare il passo e ad accettare i compromessi senza forzare le tappe. Coltiva l'ascolto empatico nelle conversazioni, rinunciando al bisogno di avere sempre ragione. Permetti a te stesso di ricevere aiuto, affetto e nutrimento dagli altri, e usa la meditazione come strumento per riequilibrare il sistema emotivo e mantenere la stabilità interiore."
 },
 3: {
-  nome: "Archetipo 3: Il Giullare",
+  nome: "Archetipo 3: Il Giullare (Artista e Comunicatore)",
   sottotitolo: "Espressione di sé, socialità, ottimismo e vivacità mentale",
   introduzione: "L'Anno Personale 3 è il momento in cui il seme germogliato emerge alla luce: è un periodo solare di emancipazione, creatività e rinnovamento. Rispetto all'introversione dell'anno precedente, la tua energia si proietta all'esterno con spontaneità, curiosità e voglia di vivere. La mente si fa vigile, desiderosa di imparare ed esplorare. È l'anno ideale per uscire dal guscio, rinnovare la propria immagine, promuovere le proprie idee ed esprimere liberamente i propri sentimenti e talenti senza lasciarsi imbrigliare da vecchi dubbi o condizionamenti.",
   opportunita: "Fase straordinaria per la comunicazione, la scrittura, le arti visive o dilettevoli (teatro, ballo, nuovi hobby) e l'espansione intellettuale tramite studi e viaggi. I progetti messi in pausa in passato possono finalmente decollare grazie a una ritrovata visibilità. Aumenta la facilità di allacciare nuove amicizie, trovare opportunità lavorative sotto i riflettori e vivere occasioni di svago e leggerezza.",
@@ -696,7 +696,7 @@ annoPersonale: {
   consigliPratici: "Rinnova il tuo look, cura la tua immagine ed esponiti con fiducia. Riserva uno spazio fisso nella settimana al divertimento, alla socialità e ai tuoi desideri più autentici. Per stimolare l'intelletto e la gratitudine, tieni un diario in cui annotare cosa ti ha fatto divertire e cosa hai apprezzato di più ogni giorno, coltivando un'attitudine positiva e solare."
 },
 4: {
-  nome: "Archetipo 4: Il Costruttore",
+  nome: "Archetipo 4: Il Costruttore (Organizzato e concreto)",
   sottotitolo: "Radicamento, organizzazione, lavoro sodo e stabilità",
   introduzione: "L'Anno Personale 4 richiede di concretizzare le idee e porre basi solide e durature per il futuro. Dopo la spinta espansiva dei primi tre anni, questa vibrazione invita a rallentare, mettere ordine nelle questioni pratiche e assumersi responsabilità concrete. È il momento di pianificare a medio e lungo termine, regolarizzare posizioni lavorative o personali e stabilire regole chiare. È una fase di 'potatura' e consolidamento: anziché avventurarsi in colpi di testa o stravolgimenti azzardati, occorre radicarsi, curare la realtà materiale e costruire con perseveranza.",
   opportunita: "Fase estremamente favorevole per dare stabilità al lavoro o alla vita affettiva, assumere nuovi incarichi, regolarizzare posizioni fiscali o stipulare contratti duraturi (come un matrimonio o l'apertura di un'attività). È anche un periodo propizio per l'acquisizione, la vendita o la ristrutturazione di beni immobili. Attraverso la disciplina e una routine ben strutturata, si possono raggiungere ottimi risultati anche nella cura della forma fisica e nella prevenzione.",
@@ -704,7 +704,7 @@ annoPersonale: {
   consigliPratici: "Definisci un'agenda dettagliata stabilendo priorità chiare e affronta le faccende pratiche un passo alla volta. Crea una routine quotidiana sana con attività fisica e alimentazione equilibrata. Per rafforzare la disciplina, impegnati a portare avanti una nuova piccola abitudine costruttiva per 21 giorni consecutivi. Ritagliati momenti di riposo e meditazione per rigenerare il sistema nervoso."
 },
 5: {
-  nome: "Archetipo 5: Il Cercatore",
+  nome: "Archetipo 5: Il Cercatore (Esploratore e Spirito Libero)",
   sottotitolo: "Libertà, cambiamento, avventura ed espressione personale",
   introduzione: "L'Anno Personale 5 segna il punto centrale del ciclo di nove anni ed è un periodo dinamico di trasformazione, espansione e libertà. Dopo la fase di stasi e radicamento dell'anno precedente, i gusci delle vecchie abitudini si rompono per lasciare spazio all'avventura, alla curiosità e alla sperimentazione. Questa vibrazione ti invita a uscire dalla tua zona di comfort, superare le restrizioni sociali e materiali e spalancare le porte al nuovo. È il momento di abbracciare l'incertezza con fiducia, viaggiare, fare nuove esperienze ed esplorare sia nuove opportunità professionali che forme di espressione artistica e sensoriale.",
   opportunita: "Fase straordinaria per la promozione personale, l'espansione degli affari, i cambiamenti di carriera o persino di residenza (come un trasferimento). Le sincronicità saranno forti: troverai spesso le persone giuste al momento giusto. Aumentano il fascino, la seduzione, la socialità e il desiderio di appagare i sensi e liberare l'istinto. È anche un anno eccellente per incanalare l'energia emotiva in attività artistiche (musica, pittura, scrittura) capaci di offrire una profonda sensazione di libertà interiore.",
@@ -712,7 +712,7 @@ annoPersonale: {
   consigliPratici: "Sperimenta cose nuove e lasciati alle spalle la routine. Riconnettiti con il corpo e riduci lo stress accumulato regalandoti momenti di svago e divertimento senza sensi di colpa. Per sbloccare l'energia, fai una lista di cose mai provate o che ti piacerebbe fare, sceglierne una e definisci un piano concreto per attuarla entro tre mesi."
 },
 6: {
-  nome: "Archetipo 6: L'Angelo Custode / Il Creativo",
+  nome: "Archetipo 6: L'Angelo Custode (Protettivo e Mediatore)",
   sottotitolo: "Scelte importanti, affetti, responsabilità e creatività",
   introduzione: "L'Anno Personale 6 pone al centro dell'attenzione la casa, la famiglia, le relazioni intime e l'espressione della creatività. Dopo i cambiamenti e la spinta all'avventura del periodo precedente, senti il bisogno di trovare stabilità, bellezza e armonia nel tuo ambiente. È un momento di maturazione e di 'ritorno in se stessi', caratterizzato da scelte fondamentali per il futuro. Questa vibrazione ti chiama ad assumerti nuove responsabilità e a prenderti cura di chi ami, ponendo però al primo posto il rispetto per la tua dignità e la tua autostima.",
   opportunita: "Fase estremamente propizia per consolidare relazioni d'amore, sposarsi, ingrandire la famiglia o cambiare/arredare casa rendendola più accogliente. In ambito lavorativo o personale, è un anno fortunato per avviare progetti creativi di valore, assumere ruoli di guida o consulenza e raggiungere un solido successo economico. Si creano legami autentici e nascono amicizie basate sulla condivisione sincera.",
@@ -720,7 +720,7 @@ annoPersonale: {
   consigliPratici: "Impara a bilanciare l'aiuto verso gli altri con la tua libertà personale, evitando di diventare invadente. Dedicati ad attività artistiche, alla cura degli spazi di casa e al tuo senso estetico. Per rafforzare la tua autostima, fai un elenco delle tue qualità migliori, dei motivi per cui apprezzi te stesso e dei complimento sinceri che ricevi più di frequente."
 },
 7: {
-  nome: "Archetipo 7: Il Saggio",
+  nome: "Archetipo 7: Il Saggio (Filosofo e Mistico)",
   sottotitolo: "Riflessione, analisi interiore, studio e maturazione spirituale",
   introduzione: "L'Anno Personale 7 è una fondamentale pausa di riflessione e consolidamento in cui il ritmo esterno rallenta per fare spazio al mondo interiore. Dopo le intense esperienze dei sei anni precedenti, questa vibrazione ti invita ad analizzare a fondo la tua vita, ascoltare i messaggi dell'anima e comprendere se le tue scelte attuali sono davvero allineate con i tuoi valori autentici. È un tempo di 'crisi costruttiva' e di maturazione: non è il momento di forzare gli eventi o avventurarsi in grandi stravolgimenti fisici o lavorativi, ma di studiare, comprendere il passato, potare i rami secchi e preparare la visione per il nuovo ciclo di prosperità che ti attende.",
   opportunita: "Fase ideale per riprendere gli studi, specializzarsi, perfezionare le proprie competenze lavorative, dedicarsi alla scrittura, alla meditazione e alla crescita personale. Aumentano l'intuito, la comprensione delle dinamiche della vita e la capacità di trasmettere saggezza, rendendo questo periodo favorevole per insegnare o guidare gli altri. È anche un anno eccellente per fare un viaggio, sia fisico che interiore, rigenerando mente e spirito.",
@@ -728,7 +728,7 @@ annoPersonale: {
   consigliPratici: "Impara a stare bene da solo e non temere i momenti di silenzio. Rallenta il passo, evita decisioni affrettate negli affari o in casa e dedica del tempo alla lettura e alla cura dello spirito. Se senti il bisogno di risposte, regalati una passeggiata in mezzo alla natura senza fretta, acquietando i pensieri per metterti in ascolto dei segnali del tuo intuito."
 },
 8: {
-  nome: "Archetipo 8: Il Sovrano",
+  nome: "Archetipo 8: Il Sovrano (Realizzatore e Stratega)",
   sottotitolo: "Raccolta, potere personale, indipendenza e affermazione",
   introduzione: "L'Anno Personale 8 è un periodo di forte accelerazione, realizzazione e ricompensa in cui raccogli i frutti di ciò che hai seminato otto anni prima. Dopo la pausa dell'anno precedente, senti risvegliarsi l'ambizione, la forza decisionale e il desiderio di accettare sfide importanti. È il momento di uscire dal ruolo di vittima, riconoscere il tuo valore e reclamare ciò che ti spetta con autorevolezza e disciplina. La tua capacità organizzativa si unisce a un'indipendenza e a una saggezza crescenti, permettendoti di prendere il controllo attivo della tua vita anziché limitarti a reagire agli eventi.",
   opportunita: "Fase straordinaria per il successo finanziario, l'espansione del business, gli investimenti, gli acquisti di proprietà e la firma di contratti importanti. Potresti ricevere promozioni, premi o riconoscimenti per la tua competenza professionale, assumendo ruoli di leadership e responsabilità. Sviluppi una spiccata capacità di negoziazione e una forte attrattiva basata sulla fiducia e sul rispetto che proietti negli altri.",
@@ -736,7 +736,7 @@ annoPersonale: {
   consigliPratici: "Impara a essere assertivo e rivendica i tuoi diritti con fermezza e dignità. Aumenta il valore che attribuisci al tuo tempo e alle tue prestazioni professionali. Concentrati su obiettivi ambiziosi e non temere di negoziare o chiedere ciò che meriti, ricordando che il valore che dai a te stesso è la chiave di ogni tuo successo."
 },
 9: {
-  nome: "Archetipo 9: Il Liberatore",
+  nome: "Archetipo 9: Il Liberatore (Ispiratore e Umanitario)",
   sottotitolo: "Compimento, chiusura dei cicli, perdono e liberazione",
   introduzione: "L'Anno Personale 9 rappresenta il culmine e la chiusura dell'intero ciclo di nove anni. È un crocevia fondamentale, un 'punto zero' in cui la fine e l'inizio si toccano per fare spazio a una rinascita. Questa vibrazione ti invita a portare a termine i progetti rimasti in sospeso, tagliando i rami secchi e rilasciando le zavorre del passato. Piuttosto che avviare iniziative totalmente nuove, è il momento di fare pulizia materiale, emotiva e relazionale, accogliendo il perdono e la gratitudine per liberarti da ferite e condizionamenti obsoleti.",
   opportunita: "Fase straordinaria per chiudere capitoli ormai logori e raccogliere i frutti finali del tuo percorso con un forte senso di liberazione. Aumentano la generosità, l'idealismo, la tolleranza e la spinta verso il volontariato o l'aiuto al prossimo. È un anno estremamente propizio per saldare debiti, fare viaggi rigeneranti, traslocare, vendere immobili o persino concedersi un periodo di pausa sabbatica per riconnetterti con la tua vera vocazione.",
@@ -744,9 +744,80 @@ annoPersonale: {
   consigliPratici: "Fai decluttering nel tuo spazio fisico eliminando o regalando ciò che non ti serve più. Svolgi un esercizio sul perdono: individua chi ti ha ferito in passato, riconsci quali lezioni di forza ne hai tratto e sciogli il legame dicendo 'ti benedico e ti lascio andare'. Accogli la fine come la premessa indispensabile per la tua prossima fioritura."
 }
 },
+
 giornoPersonale: {
-  1: "Testo per il Giorno Personale 1...",
-  2: "Testo per il Giorno Personale 2..."
+ 1: {
+  archetipo: "Archetipo 1: Il Guerriero (Leader e Pioniere)",
+  paroleChiave: "Obiettivi e strategia",
+  descrizione: "Giornata ideale per agire con slancio, determinazione e ambizione. Fai chiarezza sui tuoi obiettivi, supera le paure e prendi l'iniziativa senza aspettare gli altri. Esprimi la tua unicità, fai valere le tue idee e impara a dire di no se necessario. È il momento perfetto per avviare qualcosa di nuovo e correre il rischio di seguire ciò in cui credi.",
+  lavoro: "Pianifica le priorità e definisci un programma chiaro. È un giorno favorevole per avviare progetti, sbloccare situazioni con autonomia e proporre idee alternative. Sii deciso, assertivo e comunica chiaramente le tue intenzioni.",
+  amore: "Abbi il coraggio di osare, conquistare e fare la prima mossa. Esprimi chiaramente quello che senti e mantieni la tua indipendenza, ritagliandoti dei momenti per te. Metti al primo posto il rispetto per te stesso e la tua dignità.",
+  daEvitare: "Rimandare gli impegni, indulgere in pigrizia o apatia e cedere al senso di fallimento. Evita sia l'eccesso di aggressività, impulsività e rigidità, sia l'assecondare passivamente gli altri solo per evitare conflitti."
+},
+2: {
+  archetipo: "Archetipo 2: Il Fanciullo (Empatico e Mediatore)",
+  paroleChiave: "Sensibilità e cooperazione",
+  descrizione: "Giornata dedicata al rallentamento, all'ascolto interiore e all'armonia. La tua intuizione ed emotività sono ai massimi livelli: fidati delle tue sensazioni e dei messaggi dell'anima. Concediti momenti di relax e ricerca la cooperazione con gli altri, lasciando spazio anche a possibili coincidenze significative.",
+  lavoro: "Adotta un approccio gentile, paziente e diplomatico. È un ottimo momento per collaborare, cercare punti d'incontro, rifinire dettagli, riordinare o programmare riunioni. Ascolta il sesto senso nel prendere decisioni e crea empatia con colleghi e partner.",
+  amore: "Aprite il cuore ed esprimi apertamente i tuoi bisogni di affetto e cura senza chiuderti in diffidenze mentali. Giorno ideale per incontri romantici, scambi affettuosi, coccole e vicinanza emotiva con le persone care.",
+  daEvitare: "L'impulsività e le reazioni affrettate: conta fino a dieci prima di parlare. Evita la ruminazione mentale, l'autocommiserazione, il vittimismo e l'indecisione. Non alimentare polemiche o conflitti inutili."
+},
+3: {
+  archetipo: "Archetipo 3: Il Giullare (Artista e Comunicatore)",
+  paroleChiave: "Creatività e ottimismo",
+  descrizione: "Giornata all'insegna del buonumore, della socialità e dell'espressione personale. Approcciati agli altri con cordialità, sorrisetto e ottimismo. È il momento perfetto per comunicare, scrivere, condividere e farti notare in modo autentico e senza inibizioni. Esci, divertiti e vivi la giornata con leggerezza ed entusiasmo.",
+  lavoro: "Ottima giornata per pubbliche relazioni, promozione, vendite e comunicazione. Cura la tua immagine, proponi idee originali e usa la creatività per risolvere vecchi problemi. Affronta i compiti con entusiasmo e spirito di gioco, cogliendo al volo le opportunità.",
+  amore: "Giorno ideale per corteggiare, flirtare e mettere in luce il tuo fascino. Sorprendi chi ami con un gesto romantico, un regalo o un invito a cena. Mostra ammirazione sincera e goditi serate piacevoli in compagnia o ad eventi culturali e di intrattenimento.",
+  daEvitare: "Chiusura in casa, trascuratezza ed evitare di affondare in pensieri tristi o drammi emotivi. Evita i pettegolezzi, le critiche sterili e le parole a vuoto. Non disperdere le tue energie e sdrammatizza le tensioni con un sorriso."
+},
+4: {
+  archetipo: "Archetipo 4: Il Costruttore (Organizzato e concreto)",
+  paroleChiave: "Ordine e concretezza",
+  descrizione: "Giornata dedicata a disciplina, organizzazione e concretezza. Inizia con un programma chiaro e porta a termine ciò che hai intrapreso. È il momento ideale per sistemare questioni pratiche, burocrazia, conti e faccende domestiche. Ascolta i bisogni del corpo, pratica attività fisica o fai una passeggiata nella natura.",
+  lavoro: "Pianifica con metodo, definisci le priorità e organizza il tuo tempo per gestire al meglio ogni impegno. Ottima giornata per strutturare progetti, curare la contabilità, archiviare documenti e curare i dettagli del tuo spazio di lavoro.",
+  amore: "Mostra la tua presenza e vicinanza attraverso gesti pratici e concreti. Assumiti piccole responsabilità quotidiane in casa e fai sentire il tuo supporto ai cari. Pianifica insieme alla famiglia o al partner progetti futuri, casa o investimenti.",
+  daEvitare: "Rimandare le scadenze, procrastinare e disperdere le energie in cose inutili. Evita la rigidità mentale e i soliti vizi o eccessi (cibo, fumo, ritmi sregolati). Non trascurare la tua salute saltando i pasti o lavorando fino all'esaurimento."
+},
+5: {
+  archetipo: "Archetipo 5: Il Cercatore (Esploratore e Spirito Libero)",
+  paroleChiave: "Libertà ed entusiasmo",
+  descrizione: "Giornata dinamica da vivere nel 'qui e ora' con curiosità, disinvoltura e flessibilità. Esci dalla routine, accogli l'imprevisto e concediti qualche piccolo rischio o novità. Sii aperto alle nuove conoscenze, parla con le persone e lasciati sorprendere dal flusso degli eventi.",
+  lavoro: "Ottimo giorno per pubbliche relazioni, negoziazioni, vendite e viaggi. Approfitta dei cambiamenti e delle sincronicità per proporre idee innovative o cambiare prospettiva. La tua comunicazione brillante favorisce contratti e collaborazioni.",
+  amore: "L'avventura e la seduzione sono nell'aria. Segui l'istinto, lascia andare le inibizioni e fai la prima mossa se un'intesa ti stuzzica. Se sei in coppia, rompi la routine: esci, balla, divertiti e risveglia la passione con la stessa intensità dei primi tempi.",
+  daEvitare: "Impantanarti nella solita routine o disperdere le energie rincorrendo troppe cose insieme. Evita di fare troppi castelli in aria, frenati dalle polemiche impulsive e fai attenzione agli eccessi e all'alta velocità."
+},
+6: {
+  archetipo: "Archetipo 6: L'Angelo Custode (Protettivo e Mediatore)",
+  paroleChiave: "Amore e famiglia",
+  descrizione: "Giornata dedicata all'armonia, alla generosità e agli affetti. Apri il cuore, ascolta e fai sentire la tua vicinanza a chi ha bisogno. Goditi la calore della casa, abbellisci il tuo ambiente o dedicati a un hobby creativo. Coltiva la gratitudine per ciò che hai e condividi momenti sereni in famiglia o con le persone care.",
+  lavoro: "Sii responsabile, gentile e amichevole, creando un clima sereno attorno a te. La tua presenza porta equilibrio e ispirazione. È una giornata ideale per riunioni, cene aziendali, fare scelte importanti o avviare nuove partnership e associazioni.",
+  amore: "Giorno ideale per la vita di coppia e la cura del partner. Organizza una cena romantica, esprimi chiaramente quello che provi e permetti all'altro di prendersi cura di te. Giornata propizia per riappacificarsi e ritrovare complicità.",
+  daEvitare: "Isolarti, caricarti di troppe responsabilità e farti prosciugare da 'vampiri emotivi'. Evita la rigidità, la scontrosità e le discussioni inutili. Attento a non diventare troppo apprensivo o invadente con le persone che ami."
+},
+7: {
+  archetipo: "Archetipo 7: Il Saggio (Filosofo e Mistico)",
+  paroleChiave: "Introspezione e fede",
+  descrizione: "Giornata dedicata al riposo, alla quiete interiore e al ricaricare le pile. L'Universo ti invita a rallentare e a eliminare la confusione senza agire precipitosamente. Medita, fai yoga o passeggia nella natura per ritrovare la pace interiore e sintonizzarti con la tua saggezza profonda.",
+  lavoro: "Momento perfetto per studiare, analizzare dati, riflettere e definire i dettagli di un progetto. Punta sulla qualità anziché sulla quantità. La tua intuizione è al massimo: potresti avere intuizioni geniali o trovare soluzioni semplici a problemi complessi.",
+  amore: "Giorno fortemente introspettivo in cui potresti sentire il bisogno di spazi individuali. Si possono creare connessioni profonde e quasi telepatiche con il partner. Ideale per condividere riflessioni spirituali in un'atmosfera intima, magari a luci soffuse e candele.",
+  daEvitare: "Cedere a dubbi, rimuginazioni e autocritica severa. Evita di isolarti troppo, di cadere nel cinismo o di lasciarti rattristare dai troppi pensieri mentali. Coltiva la fiducia nell'esistenza."
+},
+8: {
+  archetipo: "Archetipo 8: Il Sovrano (Realizzatore e Stratega)",
+  paroleChiave: "Potere personale",
+  descrizione: "Giornata carica di determinazione, grinta ed energia di realizzazione. È il momento di concretizzare i tuoi progetti, mostrare la tua competenza e raccogliere i frutti del tuo impegno. Nutri la tua autostima, riconosci il tuo valore e non aver paura di pretendere ciò che ti spetta. Concediti anche un piccolo lusso o un acquisto importante.",
+  lavoro: "Agisci con fermezza, sicurezza e franchezza. Ottimo momento per negoziazioni, firme di contratti, investimenti e transazioni commerciali. Fatti avanti per chiedere ciò che meriti (come un aumento o un riconoscimento) e gesti le situazioni da leader.",
+  amore: "Mostra generosità e sicurezza in te stesso, evitando ruoli da vittima e pretendendo rispetto. Sorprendi chi ami invitandolo in un luogo speciale o con un gesto magnifico. Sii franco, diretto e trasparente nei sentimenti.",
+  daEvitare: "Incertezza, rinuncia o compiacenza passiva solo per evitare scontri. Non permettere agli altri di approfittarsene, ma fai attenzione a non sconfinare nell'arroganza, nella durezza o nell'eccesso di controllo."
+},
+9: {
+  archetipo: "Archetipo 9: Il Liberatore (Ispiratore e Umanitario)",
+  paroleChiave: "Compimento e perdono",
+  descrizione: "Giornata di transizione, chiusura di cicli e liberazione. Non è il momento di avviare cose nuove, ma di completare ciò che è rimasto in sospeso. Se qualcosa si interrompe, lascia andare con fiducia. Coltiva la tolleranza, la creatività e l'altruismo. Dedicati ad attività culturali o a ritrovare persone del passato.",
+  lavoro: "Concludi i progetti aperti e porta a termine le tue mansioni: gli sforzi saranno premiati. È un giorno ideale per consulenze, celebrazioni, apparizioni pubbliche o eventi aziendali. Mettere al centro i tuoi ideali porterà anche frutti economici.",
+  amore: "Pratica il perdono, la comprensione e l'amore incondizionato, donando senza aspettarti nulla in cambio. Sostieni chi ami nell'esprimere i propri talenti. Condividi momenti culturali con il partner o organizza un viaggio per riabbracciare amici lontani.",
+  daEvitare: "Rimuginare sul passato, cedere alla nostalgia o alimentare drammi e delusioni. Non opporre resistenza ai cambiamenti: quando una porta si chiude, si sta preparando un nuovo e più ampio inizio."
+}
 }
 };
 
