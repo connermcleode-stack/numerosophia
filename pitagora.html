@@ -675,13 +675,13 @@ img,
                         </div>
                         <div id="descGiornoIsolato"></div>
                     </div>
-                    <div class="card" style="border-left-color: #e67e22;" onclick="apriApprofondimento(this)">
-                        <div class="card-header-flex">
-                            <h3>Destino</h3>
-                            <div id="numCammino" class="numero-evidenziato" style="color: #e67e22;"></div>
-                        </div>
-                        <div id="descCammino"></div>
-                    </div>
+                  <div class="card" style="border-left-color: #e67e22;">
+    <div class="card-header-flex">
+        <h3>Destino</h3>
+        <div id="numCammino" class="numero-evidenziato" style="color: #e67e22;"></div>
+    </div>
+    <div id="descCammino"></div>
+</div>
                     <div class="card" style="border-left-color: #e67e22;" onclick="apriApprofondimento(this)">
                         <div class="card-header-flex">
                             <h3>Anno Personale</h3>
@@ -1944,18 +1944,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
 </script>
 
 <script src="testi_pitagora.js"></script>
+<!-- Aggiungi qui il riferimento al nuovo file dei testi -->
+<script src="destino_anima.js"></script>
 
 <!-- Collegamento al file esterno dei calcoli -->
 <script src="calcoli.js"></script>
 
 <!-- Blocco finale per la gestione dell'archivio locale IndexedDB e Modale -->
 <script>
-
-
-
 
 const DB_NAME = 'NumerologiaDB';
 const DB_VERSION = 2;

@@ -582,6 +582,131 @@ function apriModalGiornoPersonale(giorno) {
     if (modaleContainer) modaleContainer.style.display = 'flex';
 }
 window.apriModalGiornoPersonale = apriModalGiornoPersonale;
+// ============================================================================
+// RENDERING ANTEPRIMA NUMERO DEL DESTINO
+// ============================================================================
+let numDestinoVal = 0;
+
+if (typeof numeroDestino !== 'undefined' && numeroDestino) {
+    numDestinoVal = parseInt(numeroDestino, 10);
+} else if (window.numeroDestino) {
+    numDestinoVal = parseInt(window.numeroDestino, 10);
+} else if (document.getElementById('numCammino') && document.getElementById('numCammino').innerText) {
+    numDestinoVal = parseInt(document.getElementById('numCammino').innerText, 10);
+}
+
+if (numDestinoVal && !isNaN(numDestinoVal)) {
+
+    // 1. Aggiorna il numero in alto nella card
+    if (document.getElementById('numCammino')) {
+        document.getElementById('numCammino').innerText = numDestinoVal;
+    }
+
+    // 2. Recupero sorgente dati (priorità assoluta a DESTINO_ANIMA)
+    const mappaDestino = window.DESTINO_ANIMA?.destino || 
+                         (window.TESTI_PITAGORA || TESTI_PITAGORA)?.destino;
+
+    const datiDestino = mappaDestino ? (mappaDestino[numDestinoVal] || mappaDestino[String(numDestinoVal)]) : null;
+
+    // 3. Iniezione dell'anteprima cliccabile dentro descCammino
+    if (document.getElementById('descCammino') && datiDestino) {
+        const nomeDestino = datiDestino.nome || "";
+        const nomeFormattato = (nomeDestino || '').replace(/\s*\(/, '<br>(');
+
+        document.getElementById('descCammino').innerHTML = `
+            <div class="anteprima-card" onclick="apriModalDestino(${numDestinoVal})">
+                <img src="carte/${numDestinoVal}.png" alt="${nomeDestino}" class="img-carta" onerror="this.style.display='none';">
+                <h4 class="titolo-archetipo">${nomeFormattato}</h4>
+                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+            </div>
+        `;
+    }
+}
+
+// ============================================================================
+// NUMERO DEL DESTINO (FUNZIONE MODALE)
+// ============================================================================
+function apriModalDestino(numero) {
+    const num = parseInt(numero, 10);
+
+    // Diamo PRIORITÀ assoluta al nuovo file DESTINO_ANIMA
+    const srcTesti = window.DESTINO_ANIMA || window.TESTI_DESTINO_ANIMA || window.TESTI_PITAGORA;
+    const tMap = srcTesti?.destino;
+    
+    if (!tMap || !tMap[num]) {
+        console.warn("Testi Destino non trovati per il numero:", num);
+        return;
+    }
+
+    const t = tMap[num];
+    const nomeArchetipo = t.nome || "";
+    const nomeFormattato = (nomeArchetipo || '').replace(/\s*\(/, '<br>(');
+
+    // Contenitori DOM
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) titoloModale.innerText = `DESTINO ${num}`;
+    if (sottotitoloModale) sottotitoloModale.innerHTML = "";
+
+    // Iniezione con la nuova struttura (introduzione, opportunita, sfide, consigliPratici, carriera)
+    if (contenutoModale) {
+        contenutoModale.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="carte/${num}.png" alt="${nomeArchetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);" onerror="this.style.display='none';">
+            </div>
+
+            <h3 class="archetipo-nome" style="text-align: center; margin-bottom: 15px;">${nomeFormattato}</h3>
+
+            ${t.sottotitolo ? `
+	    <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: center;">
+    	    <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 6px; font-size: 0.95em; text-transform: uppercase;">QUALITÀ</h4>
+   	    <p style="margin: 0; font-style: italic; color: #d4af37; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
+	    </div>
+	    ` : ''}
+
+            ${t.introduzione ? `
+            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">SCOPO E CAMMINO DI VITA</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
+            </div>
+            ` : ''}
+
+            ${t.opportunita ? `
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">POTENZIALI E PUNTI DI FORZA</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.opportunita}</p>
+            </div>
+            ` : ''}
+
+            ${t.sfide ? `
+            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">SFIDE E TENDENZE DA SUPERARE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.sfide}</p>
+            </div>
+            ` : ''}
+
+            ${t.consigliPratici ? `
+            <div style="background: rgba(147, 51, 234, 0.12); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">CONSIGLI EVOLUTIVI</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.consigliPratici}</p>
+            </div>
+            ` : ''}
+
+            ${t.carriera ? `
+            <div style="background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(250, 204, 21, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                <h4 style="color: #facc15; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">CARRIERA E AMBITI FAVORITI</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.carriera}</p>
+            </div>
+            ` : ''}
+        `;
+    }
+
+    if (modaleContainer) modaleContainer.style.display = 'flex';
+}
+window.apriModalDestino = apriModalDestino;
 
 // --- 1° CICLO DI REALIZZAZIONE (p1) ---
 if (document.getElementById('numCiclo1')) document.getElementById('numCiclo1').innerText = format(p1);
