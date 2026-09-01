@@ -484,7 +484,7 @@ anima: {
 1: {
     nome: "Il Guerriero (La Quintessenza della Determinazione e dell'Autonomia)",
     sottotitolo: "Integrazione dell'individualità, coraggio di esistere e centratura nel Sé",
-    introduzione: "Quando Destino e Persona si fondono nella Quintessenza 1, il punto di equilibrio risiede nel ritrovare una ferma autonomia interiore. Questa frequenza invita a non dipendere dal giudizio esterno e a canalizzare la propria forza di volontà in modo costruttivo e focalizzato.",
+    introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 1, il punto di equilibrio risiede nel ritrovare una ferma autonomia interiore. Questa frequenza invita a non dipendere dal giudizio esterno e a canalizzare la propria forza di volontà in modo costruttivo e focalizzato.",
     opportunità: "Capacità di iniziativa, leadership naturale, autonomia di pensiero e forza di rigenerazione personale di fronte alle avversità.",
     sfide: "Il rischio di scivolare nell'individualismo rigido, nell'impulsività o nella solitudine difensiva per paura di perdere il controllo.",
     consigliPratici: "Agisci con intenzione chiara senza cercare la validazione altrui. Impara a guidare te stesso con disciplina prima di voler dirigere il mondo esterno.",
@@ -493,7 +493,7 @@ anima: {
 2: {
   nome: "Il Fanciullo (La Quintessenza della Sensibilità e dell'Unione)",
   sottotitolo: "Integrazione della polarità, ricettività alchemica, empatia e armonia relazionale",
-  introduzione: "Quando Destino e Persona convergono nella Quintessenza 2, il centro di equilibrio risiede nel risveglio del Fanciullo interiore: la capacità di accogliere, collaborare e sentire profondamente senza difese. Questa frequenza invita a bilanciare la propria azione con l'ascolto e ad agire come ponte e mediatore, trasformando la sensibilità in una raffinata forza d'unione.",
+  introduzione: "Quando numero del Destino e numero dell'Io convergono nella Quintessenza 2, il centro di equilibrio risiede nel risveglio del Fanciullo interiore: la capacità di accogliere, collaborare e sentire profondamente senza difese. Questa frequenza invita a bilanciare la propria azione con l'ascolto e ad agire come ponte e mediatore, trasformando la sensibilità in una raffinata forza d'unione.",
   opportunita: "Straordinaria intuizione relazionale, talento diplomatico, capacità di creare armonia nei contesti di conflitto e innata grazia nel sentire le esigenze sottili degli altri.",
   sfide: "La tendenza alla dipendenza affettiva, la paura del rifiuto o del conflitto che porta a reprimere i propri bisogni, e il rischio di assorbire passivamente le tensioni dell'ambiente circostante.",
   consigliPratici: "Impara a definire confini sani e premurosi verso te stesso prima che verso gli altri. Coltiva la tua sensibilità come uno strumento di percezione e non come una vulnerabilità da nascondere.",
@@ -502,7 +502,7 @@ anima: {
 3: {
   nome: "Il Giullare (La Quintessenza della Creatività e della Comunicazione)",
   sottotitolo: "Integrazione della gioia, espressione spontanea, leggerezza alchemica e potere della parola",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 3, il punto d'arrivo e di centratura risiede nell'Archetipo del Giullare: la capacità di esprimere il proprio mondo interiore con spontaneità, entusiasmo e ironia. Questa frequenza invita a liberarsi dalle rigidità mentali e dalle maschere troppo serie, ritrovando l'equilibrio attraverso l'arte, il contatto umano e la libera manifestazione del proprio talento creativo.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 3, il punto d'arrivo e di centratura risiede nell'Archetipo del Giullare: la capacità di esprimere il proprio mondo interiore con spontaneità, entusiasmo e ironia. Questa frequenza invita a liberarsi dalle rigidità mentali e dalle maschere troppo serie, ritrovando l'equilibrio attraverso l'arte, il contatto umano e la libera manifestazione del proprio talento creativo.",
   opportunita: "Straordinario carisma comunicativo, vivacità di pensiero, spiccato talento artistico ed espressivo, capacità di portare entusiasmo e di smorzare le tensioni negli ambienti più complessi.",
   sfide: "Il rischio della dispersione di energie in troppi progetti, la tendenza alla superficialità come fuga dalle emozioni dolorose e la ricerca di approvazione esterna per nutrire l'autostima.",
   consigliPratici: "Usa la parola e la creatività per portare luce e verità, non soltanto per compiacere. Impara a focalizzare il tuo entusiasmo su un obiettivo alla volta e non temere di mostrare la profondità che si nasconde dietro la tua leggerezza.",
@@ -511,7 +511,7 @@ anima: {
 4: {
   nome: "Il Costruttore (La Quintessenza della Stabilità e della Forma)",
   sottotitolo: "Integrazione della disciplina, radicamento alchemico, ordine e manifestazione concreta",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 4, il punto d'equilibrio e di sintesi risiede nell'Archetipo del Costruttore. Questa frequenza invita a passare dalle idee ai fatti, portando stabilità, ordine e presenza nella vita quotidiana. La centratura si raggiunge attraverso la pazienza, la perseveranza e la capacità di erigere strutture solide e durature nel tempo.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 4, il punto d'equilibrio e di sintesi risiede nell'Archetipo del Costruttore. Questa frequenza invita a passare dalle idee ai fatti, portando stabilità, ordine e presenza nella vita quotidiana. La centratura si raggiunge attraverso la pazienza, la perseveranza e la capacità di erigere strutture solide e durature nel tempo.",
   opportunita: "Straordinario senso pratico, tenacia inossidabile, forte senso di responsabilità, affidabilità e naturale predisposizione nell'organizzare e concretizzare progetti complessi.",
   sfide: "Il rischio di scivolare nella rigidità mentale, nel controllo ossessivo o nella resistenza al cambiamento per paura dell'instabilità, riducendo l'esistenza a una pura routine.",
   consigliPratici: "Ricorda che la vera stabilità include anche la flessibilità: costruisci le tue strutture come un albero che affonda radici profonde ma sa piegarsi al vento senza spezzarsi. Fai della disciplina uno strumento di libertà e non una gabbia.",
@@ -520,7 +520,7 @@ anima: {
 5: {
   nome: "Il Cercatore (La Quintessenza della Libertà e dell'Esperienza)",
   sottotitolo: "Integrazione del cambiamento, dinamismo alchemico, curiosità e spirito d'avventura",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 5, il punto d'equilibrio e di sintesi si trova nell'Archetipo del Cercatore. Questa frequenza invita a liberarsi dai condizionamenti e dagli schemi rigidi per abbracciare l'esistenza come un viaggio di continua scoperta. La centratura si raggiunge attraverso la flessibilità, il coraggio di sperimentare e la capacità di vivere la libertà come responsabilità ed espansione di coscienza.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 5, il punto d'equilibrio e di sintesi si trova nell'Archetipo del Cercatore. Questa frequenza invita a liberarsi dai condizionamenti e dagli schemi rigidi per abbracciare l'esistenza come un viaggio di continua scoperta. La centratura si raggiunge attraverso la flessibilità, il coraggio di sperimentare e la capacità di vivere la libertà come responsabilità ed espansione di coscienza.",
   opportunita: "Straordinaria adattabilità alle novità, versatilità, mente aperta e priva di pregiudizi, talento nella comunicazione interdisciplinare e spiccato spirito d'esplorazione.",
   sfide: "La tendenza all'irrequietezza, la difficoltà a mettere radici o a portare a termine i progetti per paura del legame, e il rischio di scivolare negli eccessi sensoriali come fuga dalla routine.",
   consigliPratici: "Impara a trovare la vera stabilità e la libertà all'interno di te stesso, anziché cercarla unicamente nel continuo cambio di stimoli esterni. Coltiva la disciplina di approfondire prima di passare alla meta successiva.",
@@ -529,7 +529,7 @@ anima: {
 6: {
   nome: "L'Angelo Custode (La Quintessenza dell'Armonia e della Cura)",
   sottotitolo: "Integrazione dell'amore etico, guarigione alchemica, responsabilità e bellezza",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 6, il punto di sintesi e di centratura risiede nell'Archetipo dell'Angelo Custode. Questa frequenza invita a portare armonia, bellezza e guarigione nelle relazioni e negli ambienti in cui si vive. La stabilità interiore si raggiunge integrando il servizio amorevole verso gli altri con il rispetto dei propri confini, trasformando l'empatia in una guida salda ed equilibrata.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 6, il punto di sintesi e di centratura risiede nell'Archetipo dell'Angelo Custode. Questa frequenza invita a portare armonia, bellezza e guarigione nelle relazioni e negli ambienti in cui si vive. La stabilità interiore si raggiunge integrando il servizio amorevole verso gli altri con il rispetto dei propri confini, trasformando l'empatia in una guida salda ed equilibrata.",
   opportunita: "Spiccata sensibilità estetica ed etica, innata capacità di conciliazione e pacificazione, talento nell'accoglienza e profonda dedizione al benessere delle persone amate e della comunità.",
   sfide: "Il rischio del perfezionismo idealistico, la tendenza all'iper-protettività o all'ingerenza nella vita altrui, e il pericolo di cadere nel vittimista 'snodo del martire' trascurando i propri bisogni.",
   consigliPratici: "Ricorda che la vera cura inizia da te stesso: non puoi versare acqua da una brocca vuota. Impara ad accettare le imperfezioni altrui senza voler aggiustare ogni cosa e permetti a chi ami di fare le proprie esperienze.",
@@ -538,7 +538,7 @@ anima: {
 7: {
   nome: "Il Saggio (La Quintessenza della Conoscenza e dell'Introspezione)",
   sottotitolo: "Integrazione della verità interiore, discriminazione alchemica, analisi e spiritualità",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 7, la centratura e l'equilibrio profondo si raggiungono nell'Archetipo del Saggio. Questa frequenza invita al distacco dalle illusioni superficiali per esplorare le leggi sottili della vita. La sintesi interiore si ottiene coltivando il silenzio, lo studio e la meditazione, permettendo alla mente analitica di dialogare in perfetta sintonia con l'intuizione spirituale.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 7, la centratura e l'equilibrio profondo si raggiungono nell'Archetipo del Saggio. Questa frequenza invita al distacco dalle illusioni superficiali per esplorare le leggi sottili della vita. La sintesi interiore si ottiene coltivando il silenzio, lo studio e la meditazione, permettendo alla mente analitica di dialogare in perfetta sintonia con l'intuizione spirituale.",
   opportunita: "Straordinaria profondità d'analisi, lucido intuito, acuto spirito critico, predisposizione alla ricerca scientifica o filosofico-esoterica e capacità di comprendere la reale essenza delle cose.",
   sfide: "Il rischio dell'isolamento difensivo, dello scetticismo iper-razionale o della rigidità dogmatica, e la tendenza ad accumulare sapere teorico senza tradurlo in esperienza vissuta e condivisa.",
   consigliPratici: "Usa i momenti di solitudine per rigenerarti e accedere alla tua verità, ma fai attenzione a non chiuderti al mondo. Trasforma la conoscenza in saggezza viva attraverso la presenza pratica nella vita di tutti i giorni.",
@@ -547,7 +547,7 @@ anima: {
 8: {
   nome: "Il Sovrano (La Quintessenza del Potere e della Realizzazione)",
   sottotitolo: "Integrazione dell'autorevolezza, maestria alchemica, abbondanza e giustizia",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 8, il centro d'equilibrio e di massima sintesi si trova nell'Archetipo del Sovrano. Questa frequenza richiede di assumere pienamente la responsabilità del proprio potere personale e materiale. La centratura si raggiunge attraverso la capacità di governare le proprie risorse con etica e visione, bilanciando il mondo spirituale con quello visibile senza cedere al controllo o alla brama.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 8, il centro d'equilibrio e di massima sintesi si trova nell'Archetipo del Sovrano. Questa frequenza richiede di assumere pienamente la responsabilità del proprio potere personale e materiale. La centratura si raggiunge attraverso la capacità di governare le proprie risorse con etica e visione, bilanciando il mondo spirituale con quello visibile senza cedere al controllo o alla brama.",
   opportunita: "Elevata capacità organizzativa e gestionale, forte carisma direttivo, intuito finanziario e strategico, senso di giustizia e straordinaria perseveranza nel tradurre grandi visioni in realtà concrete.",
   sfide: "Il rischio dell'abuso di potere, della rigidità autoritaria o dell'ossessione per il controllo, la ricchezza e lo status, con la tendenza a valutare le persone e se stessi unicamente in base ai risultati pratici.",
   consigliPratici: "Ricorda che il vero potere è al servizio della crescita collettiva, non dell'Ego. Esercita la tua autorità con generosità ed equità, ricordando che l'equilibrio interiore è la reale misura di ogni tuo successo materiale.",
@@ -556,7 +556,7 @@ anima: {
 9: {
   nome: "Il Liberatore (La Quintessenza dell'Amore Universale e della Trasmutazione)",
   sottotitolo: "Integrazione del compimento, altruismo alchemico, compassione e saggezza transpersonale",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 9, il punto di equilibrio e di massima integrazione risiede nell'Archetipo del Liberatore. Questa frequenza rappresenta il compimento del viaggio dell'anima: invita ad ampliare i propri confini individuali per abbracciare una visione cosmica e umanitaria. La centratura si raggiunge imparando l'arte del lasciare andare, trasformando ogni vissuto personale in saggezza al servizio del bene comune.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 9, il punto di equilibrio e di massima integrazione risiede nell'Archetipo del Liberatore. Questa frequenza rappresenta il compimento del viaggio dell'anima: invita ad ampliare i propri confini individuali per abbracciare una visione cosmica e umanitaria. La centratura si raggiunge imparando l'arte del lasciare andare, trasformando ogni vissuto personale in saggezza al servizio del bene comune.",
   opportunita: "Profonda empatia e visione d'insieme, intuito spirituale superiore, magnetismo generoso, attitudine alla guarigione interiore e straordinaria capacità di guidare gli altri attraverso le fasi di transizione e chiusura di ciclo.",
   sfide: "La tendenza all'evasione dalla realtà o al sacrificio insensato ('la sindrome del salvatore'), la difficoltà a chiudere con il passato e il rischio di subire sbalzi emotivi legati all'eccessiva spugnosità rispetto ai dolori del mondo.",
   consigliPratici: "Pratica il distacco con rispetto e amore: lascia scorrere ciò che ha concluso la sua funzione nella tua vita senza trattenerlo per nostalgia o paura. Fai in modo che il tuo idealismo rimanga sempre ben radicato nella presenza concreta.",
@@ -565,7 +565,7 @@ anima: {
 11: {
   nome: "Il Genio (La Quintessenza dell'Intuizione e della Luce)",
   sottotitolo: "Integrazione della visione profetica, canale alchemico, illuminazione e maestria intuitiva",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 11, il centro di equilibrio risiede nell'Archetipo del Genio. Questa frequenza richiede di canalizzare una potente energia intuitiva e spirituale nel mondo concreto. La centratura si raggiunge agendo come ponte tra l'invisibile e la realtà quotidiana, trasformando le intuizioni folgoranti in ispirazione e guida per se stessi e per gli altri, senza farsi travolgere dall'iper-sensibilità.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 11, il centro di equilibrio risiede nell'Archetipo del Genio. Questa frequenza richiede di canalizzare una potente energia intuitiva e spirituale nel mondo concreto. La centratura si raggiunge agendo come ponte tra l'invisibile e la realtà quotidiana, trasformando le intuizioni folgoranti in ispirazione e guida per se stessi e per gli altri, senza farsi travolgere dall'iper-sensibilità.",
   opportunita: "Straordinario intuito profetico, percezione elettrizzante delle dinamiche sottili, carisma spirituale, spiccata creatività d'avanguardia e capacità di ispirare profonde trasformazioni negli altri.",
   sfide: "Tensione nervosa eccessiva, tendenza agli sbalzi emotivi, rischio di vanità spirituale o, al contrario, insicurezza paralizzante e fuga dalla realtà materiale se l'energia del Maestro 11 non viene sostenuta dalla stabilità del numero base 2.",
   consigliPratici: "Impara a curare il tuo sistema nervoso con momenti di silenzio e radicamento nella natura. Considera le tue visioni come strumenti di servizio e non come motivo di separazione dagli altri.",
@@ -574,7 +574,7 @@ anima: {
 22: {
   nome: "Il Creatore (La Quintessenza del Architetto Cosmico)",
   sottotitolo: "Integrazione della grande manifestazione, maestria di struttura, visione globale e concretezza",
-  introduzione: "Quando Destino e Persona convergono nella Quintessenza 22, il punto d'equilibrio e di sintesi si trova nell'Archetipo del Creatore (o Mastro Costruttore). Questa frequenza unisce la grande intuizione spirituale con una capacità pratica fuori dal comune. La centratura si ottiene traducendo ideali elevati e progetti di vasta portata in strutture concrete capaci di portare beneficio a un'intera comunità o sistema.",
+  introduzione: "Quando numero del Destino e numero dell'Io convergono nella Quintessenza 22, il punto d'equilibrio e di sintesi si trova nell'Archetipo del Creatore (o Mastro Costruttore). Questa frequenza unisce la grande intuizione spirituale con una capacità pratica fuori dal comune. La centratura si ottiene traducendo ideali elevati e progetti di vasta portata in strutture concrete capaci di portare beneficio a un'intera comunità o sistema.",
   opportunita: "Geniale visione sistemica, straordinaria efficienza realizzativa, talento nel combinare utopia e pragmatismo, e spiccata attitudine alla leadership su progetti complessi a lungo termine.",
   sfide: "Rischio di cadere in un perfezionismo patologico, sovraccarico di responsabilità, stress da controllo o scivolamento nelle ombre della rigidità del numero base 4 di fronte al timore del fallimento.",
   consigliPratici: "Fai un passo alla volta: applica la tua immensa visione ideale a tappe concrete e pratiche. Non caricare sulle tue sole spalle il peso dell'opera intera e impara a delegare con fiducia.",
@@ -583,7 +583,7 @@ anima: {
 33: {
   nome: "Il Maestro (La Quintessenza della Guida e del Servizio Incondizionato)",
   sottotitolo: "Integrazione dell'amore cosmico, guarigione alchemica suprema, guida etica e insegnamento",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 33, la massima sintesi e centratura risiede nell'Archetipo del Maestro. Questa frequenza incarna l'amore incondizionato, la compassione attiva e l'insegnamento illuminato. L'equilibrio interiore si raggiunge facendosi strumento di cura ed elevazione per l'umanità, fondendo la protezione responsabile del numero base 6 con l'espressione universale della maestria interiore.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 33, la massima sintesi e centratura risiede nell'Archetipo del Maestro. Questa frequenza incarna l'amore incondizionato, la compassione attiva e l'insegnamento illuminato. L'equilibrio interiore si raggiunge facendosi strumento di cura ed elevazione per l'umanità, fondendo la protezione responsabile del numero base 6 con l'espressione universale della maestria interiore.",
   opportunita: "Profondo magnetismo d'amore e compassione, talento naturale nell'insegnamento e nella trasmissione di conoscenze elevate, capacità di guarigione emotiva e carisma di guida altruista.",
   sfide: "Sindrome del martire esasperata, tendenza a farsi carico dei dolori del mondo esaurendo le proprie risorse fisiche ed emotive, e potenziale arroganza di chi si sente investito di una missione superiore.",
   consigliPratici: "Ricorda che la vera maestria risiede nel quotidiano e nella semplicità. Coltiva prima di tutto l'amore empatico e il rispetto verso te stesso e confini sani prima di metterti al servizio altrui.",
@@ -592,7 +592,7 @@ anima: {
 44: {
   nome: "Lo Sciamano (La Quintessenza della Maestria della Materia e dello Spirito)",
   sottotitolo: "Integrazione del potere alchemico, guarigione sistemica, radicamento profondo e sovranità etica",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 44, il centro d'equilibrio risiede nell'Archetipo dello Sciamano. È una frequenza di sintesi rara e imponente che unisce la padronanza delle leggi materiali (8) con la capacità di canalizzare e ancorare le energie invisibili della terra e del cosmo. La stabilità si raggiunge agendo da custode dell'equilibrio tra i mondi e usando la propria forza per curare e strutturare le basi della vita.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 44, il centro d'equilibrio risiede nell'Archetipo dello Sciamano. È una frequenza di sintesi rara e imponente che unisce la padronanza delle leggi materiali (8) con la capacità di canalizzare e ancorare le energie invisibili della terra e del cosmo. La stabilità si raggiunge agendo da custode dell'equilibrio tra i mondi e usando la propria forza per curare e strutturare le basi della vita.",
   opportunita: "Straordinaria forza di rigenerazione e guarigione energetica/fisica, capacità di ancorare progetti di immensa portata, innato senso di giustizia alchemica e sovranità interiore inamovibile.",
   sfide: "Il rischio di affrontare prove materiali e fisiche molto intense, la tentazione del controllo totale sulle energie e sulle persone, o il senso di estraniazione dovuto al peso di questa carica.",
   consigliPratici: "Mantieni un radicamento corporeo costante e frequenta la natura selvaggia per scaricare il surplus energetico. Esercita il tuo grande potere sempre in armonia con le leggi della natura e del cuore.",
@@ -601,7 +601,7 @@ anima: {
 13: {
   nome: "L'alchimista (La Quintessenza della Trasmutazione e della Rinascita)",
   sottotitolo: "Superamento dell'inerzia karmica, morte del superfluo, disciplina e costante rinascita",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 13, la centratura interiore si ottiene attraversando la prova della trasformazione profonda. Questa frequenza richiede di superare la pigrizia, la rigidità e l'attaccamento alle vecchie forme (il karma del lavoro insoddisfacente o della resistenza al cambiamento) per lasciar morire ciò che non serve più. L'equilibrio si raggiunge ricostruendo sulle ceneri con costanza, pazienza e rigore.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 13, la centratura interiore si ottiene attraversando la prova della trasformazione profonda. Questa frequenza richiede di superare la pigrizia, la rigidità e l'attaccamento alle vecchie forme (il karma del lavoro insoddisfacente o della resistenza al cambiamento) per lasciar morire ciò che non serve più. L'equilibrio si raggiunge ricostruendo sulle ceneri con costanza, pazienza e rigore.",
   opportunita: "Straordinaria forza di rigenerazione e resilienza, talento nel tagliare i rami secchi, profonda determinazione pratico-organizzativa e capacità di guidare gli altri nei momenti di vera crisi o ristrutturazione.",
   sfide: "La tentazione di opporre resistenza al cambiamento per paura della perdita, il rischio di scivolare nella rigidità distruttiva o nella frustrazione quando le strutture vecchie crollano.",
   consigliPratici: "Accetta che la fine di una fase è la condizione indispensabile per una nuova creazione. Trasforma il lavoro e la disciplina quotidiana nella tua pietra filosofale, senza temere la fatica del ricominciare.",
@@ -610,7 +610,7 @@ anima: {
 14: {
   nome: "L'Amante (La Quintessenza della Temperanza e della Libertà Responsabile)",
   sottotitolo: "Integrazione del limite, padronanza degli appetiti sensoriali, misura e flessibilità",
-  introduzione: "Quando Destino e Persona convergono nella Quintessenza 14, il centro d'equilibrio richiede la trasmutazione del karma legato agli eccessi, all'impulsività o all'abuso della libertà personale. La lezione alchemica è ritrovare la misura e l'armonia tra mente, corpo e spirito. La stabilità si raggiunge imparando l'autocontrollo consapevole e canalizzando la spinta al cambiamento verso scopi costruttivi.",
+  introduzione: "Quando numero del Destino e numero dell'Io convergono nella Quintessenza 14, il centro d'equilibrio richiede la trasmutazione del karma legato agli eccessi, all'impulsività o all'abuso della libertà personale. La lezione alchemica è ritrovare la misura e l'armonia tra mente, corpo e spirito. La stabilità si raggiunge imparando l'autocontrollo consapevole e canalizzando la spinta al cambiamento verso scopi costruttivi.",
   opportunita: "Grande spirito di adattamento, equilibrio energetico, intelligenza intuitiva, talento nell'armonizzare gli opposti e innata capacità di vivere la vera libertà interiore attraverso la moderazione.",
   sfide: "La tendenza agli sbalzi estremi (dall'iper-controllo alla sregolatezza), la fuga dalle responsabilità e la ricerca compulsiva di stimoli esterni per colmare un vuoto interiore.",
   consigliPratici: "Pratica la moderazione in ogni ambito della vita quotidiana. Ricorda che la vera libertà non è assenza di vincoli, ma la capacità di scegliere consapevolmente la propria rotta senza farsi dominare dagli impulsi.",
@@ -619,7 +619,7 @@ anima: {
 16: {
   nome: "Il Perfezionista (La Quintessenza del Risveglio e della Verità Spoglia)",
   sottotitolo: "Superamento dell'orgoglio, crollo delle false illusioni, umiltà e illuminazione interiore",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 16, la sintesi alchemica passa attraverso la prova della verità essenziale. Questo karma richiede il crollo di tutte le strutture costruite sull'Ego, sull'orgoglio o su illusioni rassicuranti ma false. La centratura e l'equilibrio profondo del Saggio si raggiungono spogliandosi delle maschere e accettando di fondare la propria vita solo su ciò che è autentico, eterno e spirituale.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 16, la sintesi alchemica passa attraverso la prova della verità essenziale. Questo karma richiede il crollo di tutte le strutture costruite sull'Ego, sull'orgoglio o su illusioni rassicuranti ma false. La centratura e l'equilibrio profondo del Saggio si raggiungono spogliandosi delle maschere e accettando di fondare la propria vita solo su ciò che è autentico, eterno e spirituale.",
   opportunita: "Lucidità di visione folgorante, spiccata intuizione spirituale, profondo distacco dai valori effimeri della materia e capacità di rinascere più forti e autentici dopo ogni crollo.",
   sfide: "L'arroganza intellettuale, la paura del giudizio altrui che spinge a erigere difese posticce e il dolore legato alla resistenza verso le inevitabili rivelazioni della verità.",
   consigliPratici: "Abbandona la pretesa di controllare ogni evento e coltiva l'umiltà del ricercatore. Quando un'illusione crolla, non piangere la perdita della gabbia, ma celebra la libertà appena conquistata.",
@@ -628,7 +628,7 @@ anima: {
 19: {
   nome: "Il Condottiero (La Quintessenza dell'Azione Ispirata e del Servizio)",
   sottotitolo: "Trascendenza dell'Ego, resa alla volontà superiore, leadership etica e amore in azione",
-  introduzione: "Quando Destino e Persona si fondono nella Quintessenza 19, il punto di equilibrio massimo risiede nel superamento del karma del personalismo, dell'orgoglio e dell'ambizione egocentrica. È la tappa finale dell'individuazione: richiede di arrendersi alla volontà del Cielo per porre la propria forza solare e il proprio carisma al servizio dell'umanità, apprendendo la nobile 'arte del non fare'.",
+  introduzione: "Quando numero del Destino e numero dell'Io si fondono nella Quintessenza 19, il punto di equilibrio massimo risiede nel superamento del karma del personalismo, dell'orgoglio e dell'ambizione egocentrica. È la tappa finale dell'individuazione: richiede di arrendersi alla volontà del Cielo per porre la propria forza solare e il proprio carisma al servizio dell'umanità, apprendendo la nobile 'arte del non fare'.",
   opportunita: "Presenza solare straordinaria, carisma naturale, visione ad ampio raggio, spiccata capacità di guidare gli altri verso mete elevate e successo attraverso l'azione pura e disinteressata.",
   sfide: "L'ansia da prestazione dovuta all'attaccamento ai risultati, la tentazione del dominio o dell'egocentrismo mascherato da altruismo e la rigidità di chi fatica ad affidarsi al flusso dell'universo.",
   consigliPratici: "Impara ad agire rimanendo centrato nel Sé, senza legare il tuo valore al risultato dell'azione. Metti il tuo carisma al servizio del bene collettivo e permetti alla tua luce di illuminare la strada altrui.",

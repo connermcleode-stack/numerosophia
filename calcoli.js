@@ -1058,7 +1058,11 @@ function apriModalQuintessenza(numero) {
     const contenutoModale = document.getElementById('modaleContenuto');
     const modaleContainer = document.getElementById('modaleApprofondimento');
 
-    if (titoloModale) titoloModale.innerText = `QUINTESSENZA (Armonia finale) ${etichettaNumero}`;
+    // CORREZIONE: Usa innerHTML e forza il br prima della parentesi
+    if (titoloModale) {
+        titoloModale.innerHTML = `QUINTESSENZA<br>(Armonia finale) ${etichettaNumero}`;
+    }
+    
     if (sottotitoloModale) sottotitoloModale.innerHTML = "";
 
     if (contenutoModale) {
