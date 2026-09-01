@@ -639,22 +639,23 @@ img,
         <div id="risultati" class="risultati">
             
             <div id="bloccoAnagrafica" style="display:none;">
-                <div class="sezione-titolo" style="color: #8e7355; border-bottom-color: #d4e6f1; text-align: center; margin-top: 40px;">I Numeri Fondamentali</div>
-                <div class="grid-cards">
-                    <div class="card" style="border-left-color: #8e7355;" onclick="apriApprofondimento(this)">
-                        <div class="card-header-flex">
-                            <h3>Anima (Chi sei dentro)</h3>
-                            <div id="numAnima" class="numero-evidenziato" style="color: #8e7355;"></div>
-                        </div>
-                        <div id="descAnima"></div>
-                    </div>
-                    <div class="card" style="border-left-color: #8e7355;" onclick="apriApprofondimento(this)">
-                        <div class="card-header-flex">
-                            <h3>Persona (Come appari)</h3>
-                            <div id="numPersona" class="numero-evidenziato" style="color: #8e7355;"></div>
-                        </div>
-                        <div id="descPersona"></div>
-                    </div>
+    <div class="sezione-titolo" style="color: #8e7355; border-bottom-color: #d4e6f1; text-align: center; margin-top: 40px;">I Numeri Fondamentali</div>
+    <div class="grid-cards">
+        <!-- Card Anima Aggiornata -->
+        <div class="card" style="border-left-color: #8e7355;">
+            <div class="card-header-flex">
+                <h3>Anima (Chi sei dentro)</h3>
+                <div id="numAnima" class="numero-evidenziato" style="color: #8e7355;"></div>
+            </div>
+            <div id="descAnima"></div>
+        </div>
+                    <div class="card" style="border-left-color: #8e7355;">
+    <div class="card-header-flex">
+        <h3>Persona (Come appari)</h3>
+        <div id="numPersona" class="numero-evidenziato" style="color: #8e7355;"></div>
+    </div>
+    <div id="descPersona"></div>
+</div>
                     <div class="card" style="border-left-color: #8e7355;" onclick="apriApprofondimento(this)">
                         <div class="card-header-flex">
                             <h3>Io (Il Talento Nativo)</h3>
@@ -794,10 +795,12 @@ img,
                 </div>
             </div>
 
-           <div id="sezioneQuintessenza" style="display:none;">
+   <div id="sezioneQuintessenza" style="display:none;">
     <div class="sezione-titolo" style="color: #8e44ad; border-bottom-color: #e8daef; text-align: center; margin-top: 40px;">Il Punto d'Arrivo</div>
     <div class="grid-cards">
-        <div class="card" style="border-left-color: #8e44ad;" onclick="apriApprofondimento(this)">
+        <div class="card card-quintessenza" 
+             style="border-left-color: #8e44ad; cursor: pointer;" 
+             onclick="event.stopPropagation(); apriModalQuintessenza(window.numeroQuintessenza);">
             <div class="card-header-flex">
                 <h3>Quintessenza (Armonia Finale)</h3>
                 <div id="numQuintessenza" class="numero-evidenziato" style="color: #8e44ad;"></div>
@@ -806,10 +809,10 @@ img,
         </div>
     </div>
 </div>
-
         </div>
     </div>
 </div>
+
 <script>
 const databaseArchetipi = {
  1: {
@@ -1670,42 +1673,42 @@ schedaKarmicaHTML = `
                     <!-- SIGNIFICATO KARMICO -->
                     ${k.significato ? `
                     <div style="background-color: #342816; border-left: 4px solid #d35400; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
-                        <strong style="color: #e67e22; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">✨ Lezione Karmica</strong>
+                        <strong style="color: #e67e22; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Lezione Karmica</strong>
                         <div style="color: #fdebd0; font-size: 13px; line-height: 1.4;">${k.significato}</div>
                     </div>` : ''}
 
                     <!-- ORIGINE E MEMORIE -->
                     ${k.origine_memoria ? `
                     <div style="background-color: #2b1820; border-left: 4px solid #900C3F; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
-                        <strong style="color: #f1948a; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">📜 Origine e Memorie</strong>
+                        <strong style="color: #f1948a; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Origine e Memorie</strong>
                         <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${k.origine_memoria}</div>
                     </div>` : ''}
 
                     <!-- MANIFESTAZIONE OMBRA KARMICA -->
                     ${k.manifestazione_ombra ? `
                     <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
-                        <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌑 Ombra Karmica</strong>
+                        <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Ombra Karmica</strong>
                         <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${k.manifestazione_ombra}</div>
                     </div>` : ''}
 
                     <!-- CHIAVE DI INTEGRAZIONE KARMICA -->
                     ${k.chiave_integrazione ? `
                     <div style="background-color: #1a2a3a; border-left: 4px solid #2980b9; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
-                        <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔑 Chiave di Integrazione</strong>
+                        <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Chiave di Integrazione</strong>
                         <div style="color: #d4e6f1; font-size: 13px; line-height: 1.4;">${k.chiave_integrazione}</div>
                     </div>` : ''}
 
                     <!-- CONSIGLIO KARMICO -->
                     ${k.consiglio ? `
                     <div style="background-color: #1b3320; border-left: 4px solid #16a085; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: left;">
-                        <strong style="color: #1abc9c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌱 Consiglio Karmico</strong>
+                        <strong style="color: #1abc9c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Consiglio Karmico</strong>
                         <div style="color: #e8f8f5; font-size: 13px; line-height: 1.4;">${k.consiglio}</div>
                     </div>` : ''}
 
                     <!-- MANTRA KARMICO -->
                     ${k.mantra ? `
                     <div style="background-color: #2c1a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 10px; text-align: center;">
-                        <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔮 Mantra Karmico</strong>
+                        <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Mantra Karmico</strong>
                         <div style="color: #f5eed3; font-size: 13px; font-style: italic; font-weight: 600;">"${k.mantra}"</div>
                     </div>` : ''}
                 </div>
@@ -2131,31 +2134,62 @@ function apriApprofondimento(elementoCard) {
         }
     }
 
-    const titoloModaleEl = document.getElementById('modaleTitolo');
-    
-    // Gestione del titolo (Quintessenza o sezione standard)
+  // ============================================================================
+    // REINDIRIZZAMENTO QUINTESSENZA ROBUSTO
+    // ============================================================================
     if (titoloSezione.toLowerCase().includes("quintessenza")) {
-        titoloModaleEl.innerHTML = `Quintessenza ${numeroEvidenziato}<br><span class="sottotitolo-quintessenza">(Armonia Finale)</span>`;
-    } else {
-        let stringaNum = numeroEvidenziato ? ` ${numeroEvidenziato}` : "";
-        titoloModaleEl.innerText = `${titoloSezione}${stringaNum}`;
+        // 1. Tenta il recupero dal DOM o da variabile globale
+        let numToUse = parseInt(numeroEvidenziato || window.numeroQuintessenza || document.getElementById('numQuintessenza')?.innerText, 10);
+        
+        // 2. Se è ancora NaN, effettua il calcolo di riserva (Destino + Persona)
+        if (isNaN(numToUse) || !numToUse) {
+            const dVal = parseInt(window.numeroDestino || document.getElementById('numDestino')?.innerText || 0, 10);
+            const pVal = parseInt(window.numeroPersona || document.getElementById('numPersona')?.innerText || 0, 10);
+            if (dVal && pVal) {
+                let somma = dVal + pVal;
+                while (somma > 9 && somma !== 11 && somma !== 22 && somma !== 33 && somma !== 44 && somma !== 13 && somma !== 14 && somma !== 16 && somma !== 19) {
+                    somma = String(somma).split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
+                }
+                numToUse = somma;
+            }
+        }
+
+        // 3. Esegue l'apertura se il numero è valido
+        if (!isNaN(numToUse) && numToUse > 0) {
+            apriModalQuintessenza(numToUse);
+        } else {
+            console.error("Impossibile recuperare un numero valido per la Quintessenza:", numToUse);
+        }
+        return; // Interrompe l'esecuzione del vecchio codice
     }
 
-  document.getElementById('modaleSottotitolo').innerHTML = "";
-const testoSegretoEl = elementoCard.querySelector('.testo-segreto');
-if (testoSegretoEl) {
-    document.getElementById('modaleContenuto').innerHTML = testoSegretoEl.innerHTML;
-    
-    // --- FORMATTAZIONE AUTOMATICA PARENTESI A CAPO ---
-    const contenuto = document.getElementById('modaleContenuto');
-    contenuto.querySelectorAll('h3, h4, .titolo-karmico, .archetipo-nome').forEach(el => {
-        if (el.innerHTML.includes('(') && !el.innerHTML.includes('<br>')) {
-            el.innerHTML = el.innerHTML.replace(/\s*\(/g, '<br>(');
-        }
-    });
+    // ============================================================================
+    // GESTIONE STANDARD PER TUTTE LE ALTRE SEZIONI
+    // ============================================================================
+    const titoloModaleEl = document.getElementById('modaleTitolo');
+    let stringaNum = numeroEvidenziato ? ` ${numeroEvidenziato}` : "";
+    if (titoloModaleEl) titoloModaleEl.innerText = `${titoloSezione}${stringaNum}`;
 
-    document.getElementById('modaleApprofondimento').style.display = 'flex';
-}
+    const sottotitoloEl = document.getElementById('modaleSottotitolo');
+    if (sottotitoloEl) sottotitoloEl.innerHTML = "";
+
+    const testoSegretoEl = elementoCard.querySelector('.testo-segreto');
+    if (testoSegretoEl) {
+        const contenutoEl = document.getElementById('modaleContenuto');
+        if (contenutoEl) {
+            contenutoEl.innerHTML = testoSegretoEl.innerHTML;
+            
+            // --- FORMATTAZIONE AUTOMATICA PARENTESI A CAPO ---
+            contenutoEl.querySelectorAll('h3, h4, .titolo-karmico, .archetipo-nome').forEach(el => {
+                if (el.innerHTML.includes('(') && !el.innerHTML.includes('<br>')) {
+                    el.innerHTML = el.innerHTML.replace(/\s*\(/g, '<br>(');
+                }
+            });
+        }
+
+        const modaleContainer = document.getElementById('modaleApprofondimento');
+        if (modaleContainer) modaleContainer.style.display = 'flex';
+    }
 }
 
 function chiudiModale() {

@@ -582,6 +582,7 @@ function apriModalGiornoPersonale(giorno) {
     if (modaleContainer) modaleContainer.style.display = 'flex';
 }
 window.apriModalGiornoPersonale = apriModalGiornoPersonale;
+
 // ============================================================================
 // RENDERING ANTEPRIMA NUMERO DEL DESTINO
 // ============================================================================
@@ -707,6 +708,427 @@ function apriModalDestino(numero) {
     if (modaleContainer) modaleContainer.style.display = 'flex';
 }
 window.apriModalDestino = apriModalDestino;
+
+// ============================================================================
+// RENDERING ANTEPRIMA NUMERO DELL'ANIMA
+// ============================================================================
+let numAnimaVal = 0;
+
+if (typeof numeroAnima !== 'undefined' && numeroAnima) {
+    numAnimaVal = parseInt(numeroAnima, 10);
+} else if (window.numeroAnima) {
+    numAnimaVal = parseInt(window.numeroAnima, 10);
+} else if (document.getElementById('numAnima') && document.getElementById('numAnima').innerText) {
+    numAnimaVal = parseInt(document.getElementById('numAnima').innerText, 10);
+}
+
+if (numAnimaVal && !isNaN(numAnimaVal)) {
+
+    // 1. Aggiorna il numero nella card dell'Anima (se presente l'elemento DOM)
+    if (document.getElementById('numAnima')) {
+        document.getElementById('numAnima').innerText = numAnimaVal;
+    }
+
+    // 2. Recupero sorgente dati dal ramo .anima (priorità a DESTINO_ANIMA)
+    const mappaAnima = window.DESTINO_ANIMA?.anima || 
+                       (window.TESTI_PITAGORA || TESTI_PITAGORA)?.anima;
+
+    const datiAnima = mappaAnima ? (mappaAnima[numAnimaVal] || mappaAnima[String(numAnimaVal)]) : null;
+
+    // 3. Iniezione dell'anteprima cliccabile dentro descAnima
+    if (document.getElementById('descAnima') && datiAnima) {
+        const nomeAnima = datiAnima.nome || "";
+        const nomeFormattato = (nomeAnima || '').replace(/\s*\(/, '<br>(');
+
+        document.getElementById('descAnima').innerHTML = `
+            <div class="anteprima-card" onclick="apriModalAnima(${numAnimaVal})">
+                <img src="carte/${numAnimaVal}.png" alt="${nomeAnima}" class="img-carta" onerror="this.style.display='none';">
+                <h4 class="titolo-archetipo">${nomeFormattato}</h4>
+                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+            </div>
+        `;
+    }
+}
+
+// ============================================================================
+// NUMERO DELL'ANIMA (FUNZIONE MODALE)
+// ============================================================================
+function apriModalAnima(numero) {
+    const num = parseInt(numero, 10);
+
+    // Priorità assoluta al ramo .anima di DESTINO_ANIMA
+    const srcTesti = window.DESTINO_ANIMA || window.TESTI_DESTINO_ANIMA || window.TESTI_PITAGORA;
+    const tMap = srcTesti?.anima;
+    
+    if (!tMap || !tMap[num]) {
+        console.warn("Testi Anima non trovati per il numero:", num);
+        return;
+    }
+
+    const t = tMap[num];
+    const nomeArchetipo = t.nome || "";
+    const nomeFormattato = (nomeArchetipo || '').replace(/\s*\(/, '<br>(');
+
+    // Contenitori DOM per la modale
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) titoloModale.innerText = `ANIMA ${num}`;
+    if (sottotitoloModale) sottotitoloModale.innerHTML = "";
+
+    // Iniezione del layout adattato per l'Anima
+    if (contenutoModale) {
+        contenutoModale.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="carte/${num}.png" alt="${nomeArchetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);" onerror="this.style.display='none';">
+            </div>
+
+            <h3 class="archetipo-nome" style="text-align: center; margin-bottom: 15px;">${nomeFormattato}</h3>
+
+            ${t.sottotitolo ? `
+            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 6px; font-size: 0.95em; text-transform: uppercase;">QUALITÀ E ANELITO PROFONDO</h4>
+                <p style="margin: 0; font-style: italic; color: #d4af37; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
+            </div>
+            ` : ''}
+
+            ${t.introduzione ? `
+            <div style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">SPINTA INTERIORE ED ESSENZA</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
+            </div>
+            ` : ''}
+
+            ${t.opportunita ? `
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">DONI SPIRITUALI E RISORSE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.opportunita}</p>
+            </div>
+            ` : ''}
+
+            ${t.sfide ? `
+            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">PROVE KARMICHE ED OMBRE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.sfide}</p>
+            </div>
+            ` : ''}
+
+            ${t.consigliPratici ? `
+            <div style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(96, 165, 250, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">CONSIGLI PER LA TRASMUTAZIONE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.consigliPratici}</p>
+            </div>
+            ` : ''}
+
+            ${t.carriera ? `
+            <div style="background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(250, 204, 21, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                <h4 style="color: #facc15; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">ESPRESSIONE NEL MONDO E VOCAZIONE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.carriera}</p>
+            </div>
+            ` : ''}
+        `;
+    }
+
+    if (modaleContainer) modaleContainer.style.display = 'flex';
+}
+window.apriModalAnima = apriModalAnima;
+
+// ============================================================================
+// RENDERING ANTEPRIMA NUMERO DELLA PERSONA (IO/MASCHERA)
+// ============================================================================
+let numPersonaVal = 0;
+
+if (typeof numeroPersona !== 'undefined' && numeroPersona) {
+    numPersonaVal = parseInt(numeroPersona, 10);
+} else if (window.numeroPersona) {
+    numPersonaVal = parseInt(window.numeroPersona, 10);
+} else if (document.getElementById('numPersona') && document.getElementById('numPersona').innerText) {
+    numPersonaVal = parseInt(document.getElementById('numPersona').innerText, 10);
+}
+
+if (numPersonaVal && !isNaN(numPersonaVal)) {
+
+    // 1. Aggiorna il numero nella card della Persona (se presente l'elemento DOM)
+    if (document.getElementById('numPersona')) {
+        document.getElementById('numPersona').innerText = numPersonaVal;
+    }
+
+    // 2. Recupero sorgente dati dal ramo .persona (priorità a DESTINO_ANIMA)
+    const mappaPersona = window.DESTINO_ANIMA?.persona || 
+                         (window.TESTI_PITAGORA || TESTI_PITAGORA)?.persona;
+
+    const datiPersona = mappaPersona ? (mappaPersona[numPersonaVal] || mappaPersona[String(numPersonaVal)]) : null;
+
+    // 3. Iniezione dell'anteprima cliccabile dentro descPersona
+    if (document.getElementById('descPersona') && datiPersona) {
+        const nomePersona = datiPersona.nome || "";
+        const nomeFormattato = (nomePersona || '').replace(/\s*\(/, '<br>(');
+
+        document.getElementById('descPersona').innerHTML = `
+            <div class="anteprima-card" onclick="apriModalPersona(${numPersonaVal})">
+                <img src="carte/${numPersonaVal}.png" alt="${nomePersona}" class="img-carta" onerror="this.style.display='none';">
+                <h4 class="titolo-archetipo">${nomeFormattato}</h4>
+                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+            </div>
+        `;
+    }
+}
+
+// ============================================================================
+// NUMERO DELLA PERSONA (FUNZIONE MODALE)
+// ============================================================================
+function apriModalPersona(numero) {
+    const num = parseInt(numero, 10);
+
+    // Priorità assoluta al ramo .persona di DESTINO_ANIMA
+    const srcTesti = window.DESTINO_ANIMA || window.TESTI_DESTINO_ANIMA || window.TESTI_PITAGORA;
+    const tMap = srcTesti?.persona;
+    
+    if (!tMap || !tMap[num]) {
+        console.warn("Testi Persona non trovati per il numero:", num);
+        return;
+    }
+
+    const t = tMap[num];
+    const nomeArchetipo = t.nome || "";
+    const nomeFormattato = (nomeArchetipo || '').replace(/\s*\(/, '<br>(');
+
+    // Contenitori DOM per la modale
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) titoloModale.innerText = `PERSONA ${num}`;
+    if (sottotitoloModale) sottotitoloModale.innerHTML = "";
+
+    // Iniezione del layout adattato per la Persona (Ego / Immagine Pubblica)
+    if (contenutoModale) {
+        contenutoModale.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="carte/${num}.png" alt="${nomeArchetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);" onerror="this.style.display='none';">
+            </div>
+
+            <h3 class="archetipo-nome" style="text-align: center; margin-bottom: 15px;">${nomeFormattato}</h3>
+
+            ${t.sottotitolo ? `
+            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 6px; font-size: 0.95em; text-transform: uppercase;">PRESENZA E IMPATTO SOCIALE</h4>
+                <p style="margin: 0; font-style: italic; color: #d4af37; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
+            </div>
+            ` : ''}
+
+            ${t.introduzione ? `
+            <div style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">IMMAGINE ESTERNA E PERCEZIONE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
+            </div>
+            ` : ''}
+
+            ${t.opportunita ? `
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">TALENTI E RISORSE DI RELAZIONE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.opportunita}</p>
+            </div>
+            ` : ''}
+
+            ${t.sfide ? `
+            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">BARRIERE DEFENSIVE ED OMBRE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.sfide}</p>
+            </div>
+            ` : ''}
+
+            ${t.consigliPratici ? `
+            <div style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(96, 165, 250, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">CONSIGLI PER LA COMUNICAZIONE E L'INTEGRAZIONE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.consigliPratici}</p>
+            </div>
+            ` : ''}
+
+            ${t.carriera ? `
+            <div style="background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(250, 204, 21, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                <h4 style="color: #facc15; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">AMBITI PROFESSIONALI E RUOLI PUBBLICI</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.carriera}</p>
+            </div>
+            ` : ''}
+        `;
+    }
+
+    if (modaleContainer) modaleContainer.style.display = 'flex';
+}
+window.apriModalPersona = apriModalPersona;
+
+// ============================================================================
+// RENDERING ANTEPRIMA NUMERO DELLA QUINTESSENZA
+// ============================================================================
+let numQuintessenzaVal = 0;
+
+// Recupero valore da variabile globale, elemento DOM o calcolo (Destino + Persona)
+if (typeof numeroQuintessenza !== 'undefined' && numeroQuintessenza) {
+    numQuintessenzaVal = parseInt(numeroQuintessenza, 10);
+} else if (window.numeroQuintessenza) {
+    numQuintessenzaVal = parseInt(window.numeroQuintessenza, 10);
+} else if (document.getElementById('numQuintessenza') && document.getElementById('numQuintessenza').innerText) {
+    numQuintessenzaVal = parseInt(document.getElementById('numQuintessenza').innerText, 10);
+} else {
+    // Calcolo di riserva: Somma di Destino e Persona (Io)
+    const dVal = parseInt(window.numeroDestino || document.getElementById('numDestino')?.innerText || 0, 10);
+    const pVal = parseInt(window.numeroPersona || document.getElementById('numPersona')?.innerText || 0, 10);
+    if (dVal && pVal) {
+        let somma = dVal + pVal;
+        // Riduzione teosofica preservando Maestri e Karmici
+        while (somma > 9 && somma !== 11 && somma !== 22 && somma !== 33 && somma !== 44 && somma !== 13 && somma !== 14 && somma !== 16 && somma !== 19) {
+            somma = String(somma).split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
+        }
+        numQuintessenzaVal = somma;
+    }
+}
+
+if (numQuintessenzaVal && !isNaN(numQuintessenzaVal)) {
+
+    // 1. Aggiorna il numero nella card della Quintessenza
+    if (document.getElementById('numQuintessenza')) {
+        document.getElementById('numQuintessenza').innerText = numQuintessenzaVal;
+    }
+
+    // 2. Recupero sorgente dati dal ramo .quintessenza
+    const mappaQuintessenza = window.DESTINO_ANIMA?.quintessenza || 
+                              (window.TESTI_PITAGORA || TESTI_PITAGORA)?.quintessenza;
+
+    const datiQuintessenza = mappaQuintessenza ? (mappaQuintessenza[numQuintessenzaVal] || mappaQuintessenza[String(numQuintessenzaVal)]) : null;
+
+    // 3. Iniezione dell'anteprima cliccabile dentro descQuintessenza
+    if (document.getElementById('descQuintessenza') && datiQuintessenza) {
+        const nomeQuintessenza = datiQuintessenza.nome || "";
+        const nomeFormattato = (nomeQuintessenza || '').replace(/\s*\(/, '<br>(');
+
+        document.getElementById('descQuintessenza').innerHTML = `
+            <div class="anteprima-card" onclick="event.stopPropagation(); apriModalQuintessenza(${numQuintessenzaVal});" style="cursor:pointer;">
+                <img src="carte/${numQuintessenzaVal}.png" alt="${nomeQuintessenza}" class="img-carta" onerror="this.style.display='none';">
+                <h4 class="titolo-archetipo">${nomeFormattato}</h4>
+                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+            </div>
+        `;
+    }
+}
+
+// ============================================================================
+// NUMERO DELLA QUINTESSENZA (FUNZIONE MODALE)
+// ============================================================================
+function apriModalQuintessenza(numero) {
+    let num = parseInt(numero, 10);
+
+    if (isNaN(num) || !num) {
+        const elNum = document.getElementById('numQuintessenza');
+        if (elNum && elNum.innerText.trim() !== "") {
+            num = parseInt(elNum.innerText.trim(), 10);
+        }
+    }
+
+    if (isNaN(num) || !num) return;
+
+    // Calcolo della riduzione (es. 13 -> 4)
+    let numRidotto = num;
+    if (num > 9 && num !== 11 && num !== 22 && num !== 33 && num !== 44) {
+        numRidotto = String(num).split('').reduce((acc, digit) => acc + parseInt(digit, 10), 0);
+    }
+
+    const etichettaNumero = (num !== numRidotto) ? `${num}/${numRidotto}` : `${num}`;
+
+    // 1. Dati Quintessenza Composta/Base
+    const tQuintessenza = (window.DESTINO_ANIMA?.quintessenza?.[num]) || (window.TESTI_DESTINO_ANIMA?.quintessenza?.[num]);
+
+    // 2. Dati Archetipo Base (recuperati dai testi generali se presente una riduzione)
+    const tBase = (num !== numRidotto) ? (window.TESTI_PITAGORA?.[numRidotto] || window.TESTI_PITAGORA?.[String(numRidotto)]) : null;
+
+    if (!tQuintessenza) {
+        console.warn("Nessun testo Quintessenza trovato per:", num);
+        return;
+    }
+
+    const nomeArchetipo = tQuintessenza.nome || "";
+    const nomeFormattato = nomeArchetipo.replace(/\s*\(/, '<br>(');
+
+    // DOM Modale
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) titoloModale.innerText = `QUINTESSENZA ${etichettaNumero}`;
+    if (sottotitoloModale) sottotitoloModale.innerHTML = "";
+
+    if (contenutoModale) {
+        let descrizione4 = "";
+        if (tBase) {
+            descrizione4 = tBase.descrizione || tBase.introduzione || tBase.lezioneKarmica || tBase.sintesi || "";
+        }
+
+        // Intestazione pulita per la sezione viola
+        const etichettaSezioneViola = (num !== numRidotto) ? `ARCHETIPO DI TRASFORMAZIONE (${num})` : `ARCHETIPO DI CENTRATURA (${num})`;
+
+        contenutoModale.innerHTML = `
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="carte/${num}.png" alt="${nomeArchetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);" onerror="this.src='carte/${numRidotto}.png'; this.onerror=null;">
+            </div>
+
+            <h3 class="archetipo-nome" style="text-align: center; margin-bottom: 15px;">${nomeFormattato}</h3>
+
+            ${tQuintessenza.sottotitolo ? `
+            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 12px; margin-bottom: 15px; text-align: center;">
+                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 6px; font-size: 0.95em; text-transform: uppercase;">CENTRO ALCHEMICO ED EQUILIBRIO</h4>
+                <p style="margin: 0; font-style: italic; color: #d4af37; font-size: 0.95em; line-height: 1.4;">${tQuintessenza.sottotitolo}</p>
+            </div>
+            ` : ''}
+
+            <!-- 1. DESCRIZIONE CON INTESTAZIONE PULITA (SENZA NOME E SOTTOTITOLO RIPETUTI) -->
+            ${tQuintessenza.introduzione ? `
+            <div style="background: rgba(147, 51, 234, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">${etichettaSezioneViola}</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${tQuintessenza.introduzione}</p>
+            </div>
+            ` : ''}
+
+            <!-- 2. DESCRIZIONE BASE (In caso di numero composto come 13/4) -->
+            ${descrizione4 ? `
+            <div style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(96, 165, 250, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">FONDAMENTO STRUTTURALE (${numRidotto} - ${tBase?.nome || ''})</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${descrizione4}</p>
+            </div>
+            ` : ''}
+
+            <!-- DONI ED EQUILIBRIO -->
+            ${tQuintessenza.opportunita ? `
+            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">DONI E POTENZIALE DI INTEGRAZIONE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${tQuintessenza.opportunita}</p>
+            </div>
+            ` : ''}
+
+            <!-- SFIDE ED OMBRE -->
+            ${tQuintessenza.sfide ? `
+            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">PUNTI DI DISEQUILIBRIO ED OMBRE</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${tQuintessenza.sfide}</p>
+            </div>
+            ` : ''}
+
+            <!-- CONSIGLI PRATICI -->
+            ${tQuintessenza.consigliPratici ? `
+            <div style="background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(250, 204, 21, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                <h4 style="color: #facc15; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">CHIAVE DI CENTRATURA</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${tQuintessenza.consigliPratici}</p>
+            </div>
+            ` : ''}
+        `;
+    }
+
+    if (modaleContainer) modaleContainer.style.display = 'flex';
+}
+window.apriModalQuintessenza = apriModalQuintessenza;
 
 // --- 1° CICLO DI REALIZZAZIONE (p1) ---
 if (document.getElementById('numCiclo1')) document.getElementById('numCiclo1').innerText = format(p1);
