@@ -775,7 +775,7 @@ function apriModalAnima(numero) {
     const contenutoModale = document.getElementById('modaleContenuto');
     const modaleContainer = document.getElementById('modaleApprofondimento');
 
-    if (titoloModale) titoloModale.innerText = `ANIMA ${num}`;
+    if (titoloModale) titoloModale.innerText = `ANIMA (Chi sei dentro) ${num}`;
     if (sottotitoloModale) sottotitoloModale.innerHTML = "";
 
     // Iniezione del layout adattato per l'Anima
@@ -901,7 +901,7 @@ function apriModalPersona(numero) {
     const contenutoModale = document.getElementById('modaleContenuto');
     const modaleContainer = document.getElementById('modaleApprofondimento');
 
-    if (titoloModale) titoloModale.innerText = `PERSONA ${num}`;
+    if (titoloModale) titoloModale.innerText = `PERSONA (Come appari) ${num}`;
     if (sottotitoloModale) sottotitoloModale.innerHTML = "";
 
     // Iniezione del layout adattato per la Persona (Ego / Immagine Pubblica)
@@ -1058,7 +1058,7 @@ function apriModalQuintessenza(numero) {
     const contenutoModale = document.getElementById('modaleContenuto');
     const modaleContainer = document.getElementById('modaleApprofondimento');
 
-    if (titoloModale) titoloModale.innerText = `QUINTESSENZA ${etichettaNumero}`;
+    if (titoloModale) titoloModale.innerText = `QUINTESSENZA (Armonia finale) ${etichettaNumero}`;
     if (sottotitoloModale) sottotitoloModale.innerHTML = "";
 
     if (contenutoModale) {
