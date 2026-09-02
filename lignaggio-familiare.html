@@ -494,6 +494,33 @@
             .card-image {
                 max-width: 110px;
             }
+
+/* CENTRAGGIO COMPLETO MODALE / POPUP */
+#modaleApprofondimento > div {
+    text-align: center !important;
+}
+
+#modaleTitolo, 
+#modaleSottotitolo {
+    text-align: center !important;
+    padding-right: 0 !important; /* Rimuove lo spazio riservato alla X sulla destra per una centratura perfetta */
+}
+
+/* Centra i testi e i titoli dei singoli box interni (Archetipo, Dono, Ombra, Integrazione) */
+.section-box {
+    text-align: center !important;
+    border-left: none !important; /* Rimuove il bordo laterale sinistro per non sbilanciare l'allineamento visivo */
+    border-top: 3px solid var(--gold-primary) !important; /* Sposta la linea d'accento in alto */
+}
+
+.section-title-modale {
+    justify-content: center !important;
+    text-align: center !important;
+}
+
+.section-text-modale {
+    text-align: center !important;
+}
         }
     </style>
 
