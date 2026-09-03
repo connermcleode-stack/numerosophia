@@ -468,6 +468,98 @@ img,
     filter: opacity(0.99) !important;
 }
 
+/* ============================================================================
+   STILE BOX INTRODUTTIVO PER LE 3 INFLUENZE FONDAMENTALI NEI POPUP
+   ============================================================================ */
+
+.box-intro-influenza {
+    background: #0f192b !important;
+    border: 1px solid rgba(22, 160, 133, 0.4) !important;
+    border-left: 4px solid #16a085 !important;
+    border-radius: 8px !important;
+    padding: 12px 15px !important;
+    margin: 10px auto 15px auto !important;
+    text-align: center !important;
+    width: 100% !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    font-size: 0.82rem !important; /* Allineato al testo dei box ~13px */
+    line-height: 1.5 !important;
+    color: #c4beb3 !important;
+}
+
+/* Titolo evidenziato dentro l'introduzione */
+.box-intro-influenza strong {
+    display: block !important;
+    font-family: 'Cinzel', serif !important;
+    color: #ebd197 !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+
+/* ============================================================================
+   CORREZIONE BOX CONTENUTI NELLA MODALE (PREVIENE LO STRABORDAMENTO)
+   ============================================================================ */
+
+/* Forza il box-sizing corretto su tutti gli elementi e box interni alla modale */
+#modaleContenuto,
+#modaleContenuto *,
+#modaleContenuto div[style*="background"] {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+}
+
+/* Regola specifica per i box con background dentro il contenuto modale */
+#modaleContenuto div[style*="background"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 12px 14px !important;
+}
+
+/* ============================================================================
+   FIX DEFINITIVO STRABORDAMENTO MODALE / POPUP
+   ============================================================================ */
+
+/* 1. Blocca lo strabordamento dell'intero contenitore popup */
+#modaleApprofondimento,
+#modaleApprofondimento * {
+    box-sizing: border-box !important;
+}
+
+/* 2. Assicura che la finestra interna del popup gestisca correttamente il padding */
+#modaleApprofondimento .modal-content,
+#modaleApprofondimento > div {
+    max-width: 90vw !important;
+    width: 600px !important;
+    padding: 20px 15px !important; /* Ridotto il padding laterale interno */
+    overflow-x: hidden !important; /* Impedisce qualsiasi fuoriuscita orizzontale */
+}
+
+/* 3. Corregge tutti i box interni (Analisi Specifica, Profilo Archetipo, ecc.) */
+#modaleContenuto {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+#modaleContenuto div {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 4. Mantiene i box interni perfettamente allineati e contenuti */
+#modaleContenuto div[style*="background"],
+#modaleContenuto .box-contenuto,
+#modaleContenuto .box-karmico {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 12px 12px !important; /* Padding contenuto */
+}
+
         /* --- MEDIA QUERY PER DISPOSITIVI MOBILI (Fino a 768px) --- */
         @media (max-width: 768px) {
             body {
@@ -699,35 +791,42 @@ img,
 </div>
                 </div>
 
-               <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb; text-align: center; margin-top: 40px;">I 3 Grandi Cicli Evolutivi</div>
+          <div class="sezione-titolo" style="color: #16a085; border-bottom-color: #d1f2eb; text-align: center; margin-top: 40px;">
+    Le 3 influenze fondamentali
+</div>
+
 <div class="grid-cards">
-    <div class="card" style="border-left-color: #16a085;" onclick="apriApprofondimento(this)">
-    <div class="card-header-flex">
-        <h3>Ciclo Formativo<br>(Mese)</h3>
-        <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085;"></div>
-    </div>
-	<div id="etaCicloForm" class="card-sottotitolo"></div>
+    <!-- Influenza Emotiva (Mese) -->
+    <div class="card" style="border-left-color: #16a085;" onclick="apriModalInfluenze('mese')">
+        <div class="card-header-flex">
+            <h3>Influenza Emotiva<br>(Mese)</h3>
+            <div id="numCicloForm" class="numero-evidenziato" style="color: #16a085;"></div>
+        </div>
+        <div class="card-sottotitolo">L'Impronta della Relazione e della Memoria</div>
         <div id="descCicloForm"></div>
     </div>
-   
- <div class="card" style="border-left-color: #16a085;" onclick="apriApprofondimento(this)">
-    <div class="card-header-flex">
-        <h3>Ciclo Produttivo<br>(Giorno)</h3>
-        <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085;"></div>
-    </div>
-	<div id="etaCicloProd" class="card-sottotitolo"></div>
+
+    <!-- Influenza Operativa (Giorno) -->
+    <div class="card" style="border-left-color: #16a085;" onclick="apriModalInfluenze('giorno')">
+        <div class="card-header-flex">
+            <h3>Influenza Operativa<br>(Giorno)</h3>
+            <div id="numCicloProd" class="numero-evidenziato" style="color: #16a085;"></div>
+        </div>
+        <div class="card-sottotitolo">L'Impronta d'Azione e il Talento Pratico</div>
         <div id="descCicloProd"></div>
     </div>
-   
- <div class="card" style="border-left-color: #16a085;" onclick="apriApprofondimento(this)">
-    <div class="card-header-flex">
-        <h3>Ciclo Conclusivo<br>(Anno)</h3>
-        <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085;"></div>
-    </div>
-	<div id="etaCicloConc" class="card-sottotitolo"></div>
+
+    <!-- Influenza Generazionale (Anno) -->
+    <div class="card" style="border-left-color: #16a085;" onclick="apriModalInfluenze('anno')">
+        <div class="card-header-flex">
+            <h3>Influenza Generazionale<br>(Anno)</h3>
+            <div id="numCicloConc" class="numero-evidenziato" style="color: #16a085;"></div>
+        </div>
+        <div class="card-sottotitolo">La Vibrazione di Sfondo e la Visione</div>
         <div id="descCicloConc"></div>
     </div>
 </div>
+
                 <div id="infoEtaGrandiCicli" style="font-size: 13px; font-style: italic; color: #7f8c8d; margin-top: 8px; text-align: center;"></div>
 
            <div class="sezione-titolo" style="color: #2980b9; border-bottom-color: #d4e6f1; text-align: center; margin-top: 40px;">I 4 Cicli di Realizzazione</div>
@@ -918,15 +1017,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Il Cammino del Costruttore",
+            livello: "1° Livello • Il Cammino del Costruttore",
             descrizione: "È concentrato principalmente sulla sicurezza materiale e sulla costruzione di una base stabile. Cerca ordine, risultati concreti e protezione attraverso il lavoro e la disciplina."
         },
         {
-            livello: "🥈 2° Livello • Le Tre Dimensioni del Costruttore",
+            livello: "2° Livello • Le Tre Dimensioni del Costruttore",
             descrizione: "Comprende che il successo non riguarda solo gli aspetti materiali, ma anche quelli familiari, sociali e interiori. Impara a unire impegno, equilibrio e responsabilità, diventando un punto di riferimento affidabile per gli altri."
         },
         {
-            livello: "🥇 3° Livello • Dalla Terra alla Giustizia",
+            livello: "3° Livello • Dalla Terra alla Giustizia",
             descrizione: "Trasforma la propria forza costruttiva in uno strumento di servizio. Le sue capacità vengono messe al servizio della collettività, contribuendo a creare ordine, prosperità e benessere con integrità, equità e senso del dovere."
         }
     ],
@@ -948,15 +1047,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Esplorazione Sensoriale",
+            livello: "1° Livello • Esplorazione Sensoriale",
             descrizione: "Scopre il mondo attraverso i sensi, il movimento e le esperienze. È guidato dalla curiosità e dal desiderio di vivere ogni emozione con intensità, cercando continuamente nuove avventure."
         },
         {
-            livello: "🥈 2° Livello • Ambizione e Limiti",
+            livello: "2° Livello • Ambizione e Limiti",
             descrizione: "Inizia a canalizzare la propria energia verso obiettivi concreti. Comprende che ogni conquista richiede impegno e che la vera crescita nasce dall'equilibrio tra desiderio, responsabilità e autocontrollo."
         },
         {
-            livello: "🥇 3° Livello • Viaggio Interiore",
+            livello: "3° Livello • Viaggio Interiore",
             descrizione: "Realizza che il viaggio più importante non è quello nel mondo esterno, ma quello dentro sé stesso. Trasforma la continua ricerca di esperienze nella ricerca della propria verità, trovando nella consapevolezza la più autentica forma di libertà."
         }
     ],
@@ -978,15 +1077,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • La Crescita Personale",
+            livello: "1° Livello • La Crescita Personale",
             descrizione: "Persona onesta, affidabile e sempre pronta ad offrire aiuto, che vive tuttavia con la sensazione interiore di non essere adeguatamente capita o ricambiata per i propri sacrifici."
         },
         {
-            livello: "🥈 2° Livello • Scelte e Confini",
+            livello: "2° Livello • Scelte e Confini",
             descrizione: "Impara a definire confini sani e ad operare scelte consapevoli, iniziando a prendersi cura di sé e integrando la fermezza necessaria per proteggere il proprio spazio vitale."
         },
         {
-            livello: "🥇 3° Livello • Il Risveglio del Guerriero Interiore",
+            livello: "3° Livello • Il Risveglio del Guerriero Interiore",
             descrizione: "Raggiunge un perfetto equilibrio tra il dare e il ricevere. Sostiene il prossimo attraverso un amore maturo e consapevole, capace sia di nutrire che di dire no quando necessario."
         }
     ],
@@ -1008,15 +1107,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Il Cercatore Spirituale",
+            livello: "1° Livello • Il Cercatore Spirituale",
             descrizione: "Incarna un misticismo o un intellettualismo teorico, profondo ma ancora immaturo, legato alla presunzione di poter comprendere il mondo escludendo la dimensione dell'amore e del contatto umano."
         },
         {
-            livello: "🥈 2° Livello • Dalla Torre d'Avorio all'Accettazione",
+            livello: "2° Livello • Dalla Torre d'Avorio all'Accettazione",
             descrizione: "Abbandona la rigida fortezza delle proprie certezze; attraverso l'umiltà impara a rispettare la varietà delle esperienze altrui e a riconoscere il valore di molteplici cammini di crescita."
         },
         {
-            livello: "🥇 3° Livello • L'Integrazione dell'Unità",
+            livello: "3° Livello • L'Integrazione dell'Unità",
             descrizione: "Raggiunge la vera illuminazione, comprendendo che la Verità trascende i singoli concetti razionali. Sviluppa una visione equanime, capace di scorgere il Sacro in ogni essere e manifestazione."
         }
     ],
@@ -1038,15 +1137,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Ambizione e Successo Personale",
+            livello: "1° Livello • Ambizione e Successo Personale",
             descrizione: "Focalizzato sul far fruttare le proprie risorse ed esprimere indipendenza; lavora duramente con elevati standard di qualità per conquistare prestigio, autonomia e stabilità materiale."
         },
         {
-            livello: "🥈 2° Livello • Responsabilità e Impegno Collettivo",
+            livello: "2° Livello • Responsabilità e Impegno Collettivo",
             descrizione: "Sposta il focus dall'interesse individuale a quello comunitario, mettendo le proprie doti organizzative e di leadership al servizio di progetti e attività socialmente utili."
         },
         {
-            livello: "🥇 3° Livello • Servizio Spirituale e Visione Planetaria",
+            livello: "3° Livello • Servizio Spirituale e Visione Planetaria",
             descrizione: "Comprende che spirito e materia sono un'unica energia e che il vero potere è servizio. Eleva la sua vibrazione (fino al numero maestro 44/Sciamano) lavorando per la prosperità e il risanamento del pianeta."
         }
     ],
@@ -1068,15 +1167,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Evasione e Negazione di Sé",
+            livello: "1° Livello • Evasione e Negazione di Sé",
             descrizione: "Inconsapevole del proprio carisma e dei talenti spirituali o artistici, evita di confrontarsi con la sofferenza e disperde energie in un'esistenza superficiale o qualunquista."
         },
         {
-            livello: "🥈 2° Livello • Risveglio e Connessione con l'Altro",
+            livello: "2° Livello • Risveglio e Connessione con l'Altro",
             descrizione: "Prende coscienza di sé e sente l'urgenza di aiutare il prossimo. Inizia ad aprire il cuore all'amore empatizzando con gli altri, ma oscilla ancora tra il desiderio di servire e il cinismo."
         },
         {
-            livello: "🥇 3° Livello • Amore Incondizionato e Armonia Creativa",
+            livello: "3° Livello • Amore Incondizionato e Armonia Creativa",
             descrizione: "Abbraccia l'amore incondizionato e il perdono assoluto. Usa la sua arte, saggezza e carisma come strumenti per guarire, ispirare e riportare armonia nella collettività."
         }
     ],
@@ -1098,15 +1197,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Scoperta di Sé e Distanza dal Mondo",
+            livello: "1° Livello • Scoperta di Sé e Distanza dal Mondo",
             descrizione: "Sperimenta un forte senso di diversità ed estraniamento a seguito di ferite personali; si rifugia nell'arte o nella spiritualità per isolarsi ed elaborare il proprio mondo interiore."
         },
         {
-            livello: "🥈 2° Livello • Trasformazione Interiore e Risveglio",
+            livello: "2° Livello • Trasformazione Interiore e Risveglio",
             descrizione: "Comprende le leggi cosmiche e impara a guarire sé stesso attraverso il perdono, sintonizzandosi con la mente universale e trasformando l'ambiente circostante a partire dal proprio cambiamento."
         },
         {
-            livello: "🥇 3° Livello • Manifestazione Creativa e Influenza Divina",
+            livello: "3° Livello • Manifestazione Creativa e Influenza Divina",
             descrizione: "Diventa canale puro per le frequenze superiori, agendo come faro di consapevolezza per la collettività. Usa la creatività per ispirare e guidare le anime nell'evoluzione."
         }
     ],
@@ -1128,15 +1227,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Ambizione e Creazione Individuale",
+            livello: "1° Livello • Ambizione e Creazione Individuale",
             descrizione: "Mossa da un forte individualismo e dall'ambizione, la persona focalizza la propria maestria realizzativa soprattutto sul successo personale, sul potere e sul guadagno materiale."
         },
         {
-            livello: "🥈 2° Livello • Risveglio del Potere Creativo",
+            livello: "2° Livello • Risveglio del Potere Creativo",
             descrizione: "Prende coscienza del potere della mente e delle leggi dell'universo; impara a dirigere il pensiero con intenzione per concretizzare i propri sogni e integrarsi in un disegno più ampio."
         },
         {
-            livello: "🥇 3° Livello • Unione con lo Spirito e Creazione Consapevole",
+            livello: "3° Livello • Unione con lo Spirito e Creazione Consapevole",
             descrizione: "Riconosce la Sorgente dentro di sé e si fa strumento dell'Architetto Celeste. Crea consapevolmente migliorando e trasformando la realtà materiale a beneficio del pianeta."
         }
     ],
@@ -1158,15 +1257,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Dedizione Familiare e Fede Tradizionale",
+            livello: "1° Livello • Dedizione Familiare e Fede Tradizionale",
             descrizione: "Sperimenta la vibrazione base dell'Angelo Custode: è dedito con spirito di sacrificio alla famiglia e ai cari, vivendo una religiosità o spiritualità ancora condizionata dai dogmi della tradizione."
         },
         {
-            livello: "🥈 2° Livello • Prove di Fede e Abbandono al Divino",
+            livello: "2° Livello • Prove di Fede e Abbandono al Divino",
             descrizione: "Attraversa prove profonde che lo spingono a rilasciare il controllo razionale. Supera le paure e compie il 'salto nella fede', affidandosi completamente alla guida della propria coscienza superiore."
         },
         {
-            livello: "🥇 3° Livello • Comunione Spirituale e Miracoli di Amore",
+            livello: "3° Livello • Comunione Spirituale e Miracoli di Amore",
             descrizione: "Sperimenta la totale unione con il Divino e riconosce la sacralità in ogni essere umano. Agisce come canale di compassione pura e guarigione, rendendo possibili trasformazioni straordinarie."
         }
     ],
@@ -1188,15 +1287,15 @@ const databaseArchetipi = {
 
     evoluzione: [
         {
-            livello: "🥉 1° Livello • Frattura Interiore e Inconsapevolezza",
+            livello: "1° Livello • Frattura Interiore e Inconsapevolezza",
             descrizione: "Sente un profondo disagio ed estraniamento ma evita il confronto interiore; l'intensa energia repressa può causare somaticità, contrazione emotiva o tendenze autodistruttive."
         },
         {
-            livello: "🥈 2° Livello • La Chiamata e il Viaggio Iniziativo",
+            livello: "2° Livello • La Chiamata e il Viaggio Iniziativo",
             descrizione: "Accoglie la 'chiamata degli spiriti', affrontando un doloroso viaggio nei recessi dell'inconscio. Attraverso la purificazione e la comprensione delle proprie ferite, accede al percorso dell'iniziato."
         },
         {
-            livello: "🥇 3° Livello • Trascesa, Potere e Guarigione",
+            livello: "3° Livello • Trascesa, Potere e Guarigione",
             descrizione: "Raggiunge uno stato di consapevolezza elevato in cui percepisce sé stesso e il mondo come un'unica energia. Attraverso le discipline olistiche e la difesa della Terra, porta vera guarigione e integrità."
         }
     ],
@@ -1866,45 +1965,45 @@ function compilaSchedaOmbra(valoreOmbra) {
 
             <!-- 1. SFIDA PRINCIPALE -->
             <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">⚠️ Sfida Principale</strong>
+                <strong style="color: #e74c3c; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Sfida Principale</strong>
                 <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${sfida}</div>
             </div>
 
             <!-- 2. MANIFESTAZIONE INCONSCIA -->
             <div style="background-color: #2b1820; border-left: 4px solid #900C3F; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                <strong style="color: #f1948a; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌑 Manifestazione Inconscia</strong>
+                <strong style="color: #f1948a; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Manifestazione Inconscia</strong>
                 <div style="color: #fadbd8; font-size: 13px; line-height: 1.4;">${manifestazione}</div>
             </div>
 
             <!-- 3. RISORSA NASCOSTA -->
             <div style="background-color: #1e372a; border-left: 4px solid #27ae60; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                <strong style="color: #2ecc71; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">💎 Risorsa Nascosta</strong>
+                <strong style="color: #2ecc71; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Risorsa Nascosta</strong>
                 <div style="color: #d4efdf; font-size: 13px; line-height: 1.4;">${risorsa}</div>
             </div>
 
             <!-- 4. STRATEGIA DI INTEGRAZIONE -->
             <div style="background-color: #1a2a3a; border-left: 4px solid #2980b9; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔑 Strategia di Integrazione</strong>
+                <strong style="color: #3498db; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Strategia di Integrazione</strong>
                 <div style="color: #d4e6f1; font-size: 13px; line-height: 1.4;">${strategia}</div>
             </div>
 
             <!-- 5. FASI DI RISOLUZIONE -->
             ${fasiHTML ? `
             <div style="background-color: #251a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                <strong style="color: #a569bd; display: block; margin-bottom: 8px; font-size: 13px; text-transform: uppercase;">📈 Fasi di Risoluzione</strong>
+                <strong style="color: #a569bd; display: block; margin-bottom: 8px; font-size: 13px; text-transform: uppercase;">Fasi di Risoluzione</strong>
                 ${fasiHTML}
             </div>` : ''}
 
             <!-- 6. CONSIGLIO PRATICO -->
             <div style="background-color: #342816; border-left: 4px solid #f39c12; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
-                <strong style="color: #f1c40f; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🌱 Consiglio Pratico</strong>
+                <strong style="color: #f1c40f; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Consiglio Pratico</strong>
                 <div style="color: #fdebd0; font-size: 13px; line-height: 1.4; font-style: italic;">"${consiglio}"</div>
             </div>
 
             <!-- 7. MANTRA DI TRASFORMAZIONE -->
             ${mantra ? `
             <div style="background-color: #2c1a32; border-left: 4px solid #8e44ad; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: center;">
-                <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">🔮 Mantra di Trasformazione</strong>
+                <strong style="color: #9b59b6; display: block; margin-bottom: 6px; font-size: 13px; text-transform: uppercase;">Mantra di Trasformazione</strong>
                 <div style="color: #f5eed3; font-size: 13px; font-style: italic; font-weight: 600;">"${mantra}"</div>
             </div>` : ''}
         </div>
@@ -1953,6 +2052,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <script src="testi_pitagora.js"></script>
 <!-- Aggiungi qui il riferimento al nuovo file dei testi -->
 <script src="destino_anima.js"></script>
+
+<script src="testi_influenze.js"></script>
 
 <!-- Collegamento al file esterno dei calcoli -->
 <script src="calcoli.js"></script>
@@ -2109,7 +2210,16 @@ function controllaParametriURL() {
 
 
 
-function apriApprofondimento(elementoCard) {
+// Dizionario con le introduzioni concettuali per le 3 influenze
+const introInfluenze = {
+    mese: `<strong>L'Influenza Emotiva (Mese):</strong><br>Il tuo Mese di Nascita è la tua Lente Emotiva e Relazionale. Rappresenta il clima interiore con cui interpreti il mondo e la modalità profonda con cui entri in contatto con gli altri. È la memoria affettiva di base che modella le tue reazioni interiori e il modo in cui cerchi o offri nutrimento emotivo nel corso di tutta la vita.`,
+    
+    giorno: `<strong>L'Influenza Operativa (Giorno):</strong><br>Il tuo Giorno di Nascita rappresenta la tua Impronta d'Azione e il tuo talento pratico innato. Non indica cosa accade oggi, ma come tu ti muovi nel mondo ogni giorno. È la frequenza con cui reagisci agli stimoli immediati, il tuo stile espressivo personale e la risorsa concreta a cui attingi spontaneamente di fronte alle sfide quotidiane.`,
+    
+    anno: `<strong>L'Influenza Generazionale (Anno):</strong><br>L'Anno di Nascita rappresenta la tua Vibrazione di Sfondo e la Visione a Lungo Termine. Collega la tua individualità al contesto generazionale e sociale in cui sei nato. È l'energia sottostante che orienta la tua maturazione negli anni, definendo come ti collochi nell'architettura più ampia della vita e quale contributo porti al collettivo.`
+};
+
+function apriApprofondimento(elementoCard, tipoInfluenza = null) {
     let titoloSezione = "Approfondimento Archetipo";
     const bloccoGenitore = elementoCard.closest('.blocco-risultato, td, div, tr'); 
     
@@ -2134,14 +2244,12 @@ function apriApprofondimento(elementoCard) {
         }
     }
 
-  // ============================================================================
+    // ============================================================================
     // REINDIRIZZAMENTO QUINTESSENZA ROBUSTO
     // ============================================================================
     if (titoloSezione.toLowerCase().includes("quintessenza")) {
-        // 1. Tenta il recupero dal DOM o da variabile globale
         let numToUse = parseInt(numeroEvidenziato || window.numeroQuintessenza || document.getElementById('numQuintessenza')?.innerText, 10);
         
-        // 2. Se è ancora NaN, effettua il calcolo di riserva (Destino + Persona)
         if (isNaN(numToUse) || !numToUse) {
             const dVal = parseInt(window.numeroDestino || document.getElementById('numDestino')?.innerText || 0, 10);
             const pVal = parseInt(window.numeroPersona || document.getElementById('numPersona')?.innerText || 0, 10);
@@ -2154,13 +2262,12 @@ function apriApprofondimento(elementoCard) {
             }
         }
 
-        // 3. Esegue l'apertura se il numero è valido
         if (!isNaN(numToUse) && numToUse > 0) {
             apriModalQuintessenza(numToUse);
         } else {
             console.error("Impossibile recuperare un numero valido per la Quintessenza:", numToUse);
         }
-        return; // Interrompe l'esecuzione del vecchio codice
+        return;
     }
 
     // ============================================================================
@@ -2170,8 +2277,17 @@ function apriApprofondimento(elementoCard) {
     let stringaNum = numeroEvidenziato ? ` ${numeroEvidenziato}` : "";
     if (titoloModaleEl) titoloModaleEl.innerText = `${titoloSezione}${stringaNum}`;
 
+    // --- GESTIONE TESTO INTRODUTTIVO INFLUENZE ---
     const sottotitoloEl = document.getElementById('modaleSottotitolo');
-    if (sottotitoloEl) sottotitoloEl.innerHTML = "";
+    if (sottotitoloEl) {
+        if (tipoInfluenza && introInfluenze[tipoInfluenza]) {
+            sottotitoloEl.innerHTML = `<div class="box-intro-influenza">${introInfluenze[tipoInfluenza]}</div>`;
+            sottotitoloEl.style.display = 'block';
+        } else {
+            sottotitoloEl.innerHTML = "";
+            sottotitoloEl.style.display = 'none';
+        }
+    }
 
     const testoSegretoEl = elementoCard.querySelector('.testo-segreto');
     if (testoSegretoEl) {
@@ -2189,17 +2305,6 @@ function apriApprofondimento(elementoCard) {
 
         const modaleContainer = document.getElementById('modaleApprofondimento');
         if (modaleContainer) modaleContainer.style.display = 'flex';
-    }
-}
-
-function chiudiModale() {
-    document.getElementById('modaleApprofondimento').style.display = 'none';
-}
-
-window.onclick = function(event) {
-    const modale = document.getElementById('modaleApprofondimento');
-    if (event.target == modale) {
-        modale.style.display = "none";
     }
 };
 

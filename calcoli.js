@@ -1134,6 +1134,97 @@ function apriModalQuintessenza(numero) {
 }
 window.apriModalQuintessenza = apriModalQuintessenza;
 
+// ============================================================================
+// INFLUENZE FONDAMENTALI (TESTO SPECIFICO CENTRATO)
+// ============================================================================
+function apriModalInfluenze(tipoInfluenza) {
+    if (!tipoInfluenza) return;
+
+    let numeroRaw = "";
+    if (tipoInfluenza === 'mese') {
+        numeroRaw = window.numeroMese || document.getElementById('numCicloForm')?.innerText || document.getElementById('numMese')?.innerText || "";
+    } else if (tipoInfluenza === 'giorno') {
+        numeroRaw = window.numeroGiorno || document.getElementById('numCicloProd')?.innerText || document.getElementById('numGiorno')?.innerText || "";
+    } else if (tipoInfluenza === 'anno') {
+        numeroRaw = window.numeroAnno || document.getElementById('numCicloConc')?.innerText || document.getElementById('numAnno')?.innerText || "";
+    }
+
+    if (!numeroRaw || numeroRaw.toString().trim() === "") {
+        console.warn("Nessun numero trovato per l'influenza:", tipoInfluenza);
+        return;
+    }
+
+    const numStr = numeroRaw.toString().trim();
+    const numPuro = parseInt(numStr.split('/')[0], 10);
+    const partiNum = numStr.split('/');
+    const numRidotto = partiNum.length > 1 ? parseInt(partiNum[1], 10) : numPuro;
+
+    const etichettaNumero = (numPuro !== numRidotto) ? `${numPuro}/${numRidotto}` : `${numPuro}`;
+
+    const titoliMap = {
+        'mese': 'INFLUENZA EMOTIVA<br>(Mese)',
+        'giorno': 'INFLUENZA OPERATIVA<br>(Giorno)',
+        'anno': 'INFLUENZA GENERAZIONALE<br>(Anno)'
+    };
+
+    const tSpecifico = window.INFLUENZE?.[tipoInfluenza]?.[numPuro] || window.INFLUENZE?.[tipoInfluenza]?.[numStr];
+    const tArchetipo = window.TESTI_PITAGORA?.[numPuro] || window.TESTI_PITAGORA?.[numRidotto];
+
+    const nomeArchetipo = tSpecifico?.titolo || tArchetipo?.titolo || tArchetipo?.nome || "";
+    const nomeFormattato = (nomeArchetipo || '').replace(/\s*\(/, '<br>(');
+
+    const titoloModale = document.getElementById('modaleTitolo');
+    const sottotitoloModale = document.getElementById('modaleSottotitolo');
+    const contenutoModale = document.getElementById('modaleContenuto');
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+
+    if (titoloModale) {
+        titoloModale.innerHTML = `${titoliMap[tipoInfluenza] || "INFLUENZA"} ${etichettaNumero}`;
+    }
+
+    if (sottotitoloModale) {
+        if (typeof introInfluenze !== 'undefined' && introInfluenze[tipoInfluenza]) {
+            sottotitoloModale.innerHTML = `<div class="box-intro-influenza">${introInfluenze[tipoInfluenza]}</div>`;
+            sottotitoloModale.style.display = 'block';
+        } else {
+            sottotitoloModale.innerHTML = "";
+            sottotitoloModale.style.display = 'none';
+        }
+    }
+
+    if (contenutoModale) {
+        contenutoModale.innerHTML = `
+            <!-- IMMAGINE CARTA ARCHETIPO -->
+            <div style="text-align: center; margin-bottom: 15px; width: 100%;">
+                <img src="carte/${numPuro}.png" alt="${nomeArchetipo}" style="max-width: 120px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);" onerror="this.src='carte/${numRidotto}.png'; this.onerror=null;">
+            </div>
+
+            <!-- NOME ARCHETIPO -->
+            ${nomeFormattato ? `<h3 class="archetipo-nome" style="text-align: center !important; margin-bottom: 15px; color: #16a085; text-transform: uppercase;">${nomeFormattato}</h3>` : ''}
+
+            <!-- 1. ANALISI SPECIFICA DELL'INFLUENZA (Box Turchese - Centrato) -->
+            ${tSpecifico ? `
+            <div class="box-contenuto" style="background: rgba(22, 160, 133, 0.12); border: 1px solid rgba(22, 160, 133, 0.4); border-radius: 8px; padding: 14px; margin-bottom: 15px; box-sizing: border-box; width: 100%; text-align: center !important;">
+                <h4 style="color: #16a085 !important; margin-top: 0; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; text-align: center !important;">ANALISI SPECIFICA DELL'INFLUENZA</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.82rem; color: #e0e0e0; text-align: center !important;">${tSpecifico.testo || tSpecifico.descrizione || tSpecifico}</p>
+            </div>
+            ` : ''}
+
+            <!-- 2. PROFILO GENERALE ARCHETIPO DALL'ARCHIVIO (Box Viola - Centrato) -->
+            ${tArchetipo ? `
+            <div class="box-contenuto" style="background: rgba(147, 51, 234, 0.12); border: 1px solid rgba(192, 132, 252, 0.4); border-radius: 8px; padding: 14px; margin-bottom: 15px; box-sizing: border-box; width: 100%; text-align: center !important;">
+                <h4 style="color: #c084fc !important; margin-top: 0; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; text-align: center !important;">PROFILO DELL'ARCHETIPO (${etichettaNumero})</h4>
+                <p style="margin: 0; line-height: 1.5; font-size: 0.82rem; color: #e0e0e0; text-align: center !important;">${tArchetipo.descrizione || tArchetipo.testo || tArchetipo.sintesi || ''}</p>
+            </div>
+            ` : ''}
+        `;
+    }
+
+    if (modaleContainer) modaleContainer.style.display = 'flex';
+}
+
+window.apriModalInfluenze = apriModalInfluenze;
+
 // --- 1° CICLO DI REALIZZAZIONE (p1) ---
 if (document.getElementById('numCiclo1')) document.getElementById('numCiclo1').innerText = format(p1);
 if (document.getElementById('etaCiclo1')) document.getElementById('etaCiclo1').innerText = `Da 0 a ${fineC1} anni`;
@@ -1400,14 +1491,14 @@ ombreSetup.forEach(ombra => {
     }
 });
 
-            testoCopiaGlobale += `Giorno di Nascita Isolato: ${format(giornoIsolato)}\n`;
-            testoCopiaGlobale += `Numero del Destino (Cammino di Vita): ${format(destino)}\n`;
-            testoCopiaGlobale += `--------------------------------------------------\n`;
-            testoCopiaGlobale += `Grandi Cicli Evolutivi -> Formativo: ${format(cForm)} | Produttivo: ${format(cProd)} | Conclusivo: ${format(cConc)}\n`;
-            testoCopiaGlobale += `Cicli di Realizzazione -> 1°: ${format(p1)} | 2°: ${format(p2)} | 3°: ${format(p3)} | 4°: ${format(p4)}\n`;
-            testoCopiaGlobale += `Ombre Numerologiche   -> Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}\n`;
-            testoCopiaGlobale += `--------------------------------------------------\n`;
-            testoCopiaGlobale += `Anno Personale: ${format(annoPersonale)} | Giorno Personale: ${format(giornoPersonale)}\n`;
+           testoCopiaGlobale += `Giorno di Nascita Isolato: ${format(giornoIsolato)}\n`;
+	   testoCopiaGlobale += `Numero del Destino (Cammino di Vita): ${format(destino)}\n`;
+	   testoCopiaGlobale += `--------------------------------------------------\n`;
+	   testoCopiaGlobale += `Le 3 Influenze Fondamentali -> Emotiva (Mese): ${format(cForm)} | Operativa (Giorno): ${format(cProd)} | Generazionale (Anno): ${format(cConc)}\n`;
+	   testoCopiaGlobale += `Cicli di Realizzazione -> 1°: ${format(p1)} | 2°: ${format(p2)} | 3°: ${format(p3)} | 4°: ${format(p4)}\n`;
+	   testoCopiaGlobale += `Ombre Numerologiche   -> Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}\n`;
+	   testoCopiaGlobale += `--------------------------------------------------\n`;
+	   testoCopiaGlobale += `Anno Personale: ${format(annoPersonale)} | Giorno Personale: ${format(giornoPersonale)}\n`;
             
             if (document.getElementById('bloccoData')) document.getElementById('bloccoData').style.display = 'block';
             haCalcolatoQualcosa = true;
