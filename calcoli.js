@@ -1289,7 +1289,8 @@ if (document.getElementById('descCiclo4')) {
     }
 }
 function ottieniNomeImmagineOmbra(valoreOmbra) {
-    return (valoreOmbra === 0 || valoreOmbra === 9) ? 'ombra9' : 'ombra' + valoreOmbra;
+    const num = parseInt(valoreOmbra, 10);
+    return (isNaN(num) || num === 0 || num === 9) ? 'ombra9' : 'ombra' + num;
 }
 
 // Mappa diretta per i nomi delle ombre se i database non sono pronti
@@ -1325,10 +1326,17 @@ function ottieniTestoEstesoCiclo(valoreNumero, chiaveCiclo) {
             const parti = valStr.split('/');
             numOriginale = parti[0].trim();
             baseMonocifra = parti[1].trim();
-        } else if (valStr.length > 1 && !['11', '22', '33'].includes(valStr)) {
-            const somma = valStr.split('').reduce((a, b) => parseInt(a || 0) + parseInt(b || 0), 0);
-            baseMonocifra = String(somma);
+        } else {
+            numOriginale = valStr;
         }
+
+        // Riduzione ricorsiva fino a ottenere SENPRE una sola cifra (1-9)
+        let temp = baseMonocifra;
+        while (temp.length > 1 && !['11', '22', '33'].includes(temp)) {
+            const somma = temp.split('').reduce((a, b) => parseInt(a || 0, 10) + parseInt(b || 0, 10), 0);
+            temp = String(somma);
+        }
+        baseMonocifra = temp;
 
         if (!tPitagora) return compilaSchedaSicura(valoreNumero);
 
@@ -1415,15 +1423,17 @@ function ottieniTestoEstesoCiclo(valoreNumero, chiaveCiclo) {
 function estraiEtichettaOmbra(valore) {
     let num = parseInt(valore, 10);
     
+    const dbOmbre = window.databaseOmbreMazzo || (typeof databaseOmbreMazzo !== 'undefined' ? databaseOmbreMazzo : null);
+    const dbArchetipi = window.databaseArchetipi || (typeof databaseArchetipi !== 'undefined' ? databaseArchetipi : null);
+
     // 1. Controlla prima se esiste nei database trasversali
-    let d = (window.databaseOmbreMazzo && (window.databaseOmbreMazzo[num] || window.databaseOmbreMazzo[valore])) || 
-            (window.databaseArchetipi && (window.databaseArchetipi[num] || window.databaseArchetipi[valore])) || null;
+    let d = (dbOmbre && (dbOmbre[num] || dbOmbre[valore])) || 
+            (dbArchetipi && (dbArchetipi[num] || dbArchetipi[valore])) || null;
 
     if (d) {
         let nome = d.nome || "";
         let titolo = d.titolo || d.sottotitolo || "";
         
-        // Se d ha sia nome sia titolo e nome non è genericamente "Ombra X"
         if (nome && !nome.toLowerCase().includes("ombra")) {
             return titolo ? `${nome} (${titolo})` : nome;
         }
@@ -1433,63 +1443,67 @@ function estraiEtichettaOmbra(valore) {
     return nomiOmbreDefault[num] || `Ombra ${num}`;
 }
 
-const ombreSetup = [
-    { idNum: 'numOmbraGiov', idDesc: 'descOmbraGiov', valore: oGiov },
-    { idNum: 'numOmbraMat', idDesc: 'descOmbraMat', valore: oMat },
-    { idNum: 'numOmbraPrinc', idDesc: 'descOmbraPrinc', valore: oPrinc }
-];
+// Inizializzazione sicura: esegue solo se le variabili delle ombre sono definite
+if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc !== 'undefined') {
+    const ombreSetup = [
+        { idNum: 'numOmbraGiov', idDesc: 'descOmbraGiov', valore: oGiov },
+        { idNum: 'numOmbraMat', idDesc: 'descOmbraMat', valore: oMat },
+        { idNum: 'numOmbraPrinc', idDesc: 'descOmbraPrinc', valore: oPrinc }
+    ];
 
-ombreSetup.forEach(ombra => {
-    const imgNome = ottieniNomeImmagineOmbra(ombra.valore);
-    const etichettaCompleta = estraiEtichettaOmbra(ombra.valore);
-    
-    // Inserisce il <br> prima della parentesi aperta
-    const etichettaFormattata = etichettaCompleta ? etichettaCompleta.replace(/\s*\(/, '<br>(') : '';
+    ombreSetup.forEach(ombra => {
+        const imgNome = ottieniNomeImmagineOmbra(ombra.valore);
+        const etichettaCompleta = estraiEtichettaOmbra(ombra.valore);
+        
+        const etichettaFormattata = etichettaCompleta ? etichettaCompleta.replace(/\s*\(/, '<br>(') : '';
 
-    if (document.getElementById(ombra.idNum)) {
-        document.getElementById(ombra.idNum).innerText = ombra.valore;
-    }
+        if (document.getElementById(ombra.idNum)) {
+            document.getElementById(ombra.idNum).innerText = ombra.valore;
+        }
 
-    const containerDesc = document.getElementById(ombra.idDesc);
-    if (containerDesc) {
-        containerDesc.innerHTML = `
-            <div class="anteprima-card" style="cursor: pointer;">
-                <img src="carte/${imgNome}.png" 
-                     onerror="this.onerror=null; this.src='carte/ombra9.png';" 
-                     alt="Ombra ${ombra.valore}" 
-                     class="img-carta">
-                <h4 class="titolo-archetipo">Archetipo: ${etichettaFormattata}</h4>
-                <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
-            </div>
+        const containerDesc = document.getElementById(ombra.idDesc);
+        if (containerDesc) {
+            containerDesc.innerHTML = `
+                <div class="anteprima-card" style="cursor: pointer;">
+                    <img src="carte/${imgNome}.png" 
+                         onerror="this.onerror=null; this.src='carte/ombra9.png';" 
+                         alt="Ombra ${ombra.valore}" 
+                         class="img-carta">
+                    <h4 class="titolo-archetipo">Archetipo: ${etichettaFormattata}</h4>
+                    <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+                </div>
 
-            <div class="testo-segreto" style="display: none;">
-                <img src="carte/${imgNome}.png" 
-                     onerror="this.onerror=null; this.src='carte/ombra9.png';" 
-                     alt="Ombra ${ombra.valore}" 
-                     class="img-carta-modale">
-                ${typeof compilaSchedaOmbra === 'function' ? compilaSchedaOmbra(ombra.valore) : 'Sfida evolutiva.'}
-            </div>
-        `;
+                <div class="testo-segreto" style="display: none;">
+                    <img src="carte/${imgNome}.png" 
+                         onerror="this.onerror=null; this.src='carte/ombra9.png';" 
+                         alt="Ombra ${ombra.valore}" 
+                         class="img-carta-modale">
+                    ${typeof compilaSchedaOmbra === 'function' ? compilaSchedaOmbra(ombra.valore) : 'Sfida evolutiva.'}
+                </div>
+            `;
 
-        // Attacca l'evento di Apertura Popup direttamente all'elemento creato
-        containerDesc.onclick = function() {
-            const contenutoModal = this.querySelector('.testo-segreto').innerHTML;
-            
-            if (typeof apriModal === 'function') {
-                apriModal(contenutoModal);
-            } else if (typeof mostraPopup === 'function') {
-                mostraPopup(contenutoModal);
-            } else {
-                const modalElement = document.getElementById('modalOmbra') || document.getElementById('modalGenerico');
-                if (modalElement) {
-                    const modalBody = modalElement.querySelector('.modal-body') || modalElement;
-                    modalBody.innerHTML = contenutoModal;
-                    modalElement.style.display = 'block';
+            // Attacca l'evento di Apertura Popup
+            containerDesc.onclick = function() {
+                const elSegreto = this.querySelector('.testo-segreto');
+                if (!elSegreto) return;
+                const contenutoModal = elSegreto.innerHTML;
+                
+                if (typeof apriModal === 'function') {
+                    apriModal(contenutoModal);
+                } else if (typeof mostraPopup === 'function') {
+                    mostraPopup(contenutoModal);
+                } else {
+                    const modalElement = document.getElementById('modalOmbra') || document.getElementById('modalGenerico');
+                    if (modalElement) {
+                        const modalBody = modalElement.querySelector('.modal-body') || modalElement;
+                        modalBody.innerHTML = contenutoModal;
+                        modalElement.style.display = 'block';
+                    }
                 }
-            }
-        };
-    }
-});
+            };
+        }
+    });
+}
 
            testoCopiaGlobale += `Giorno di Nascita Isolato: ${format(giornoIsolato)}\n`;
 	   testoCopiaGlobale += `Numero del Destino (Cammino di Vita): ${format(destino)}\n`;

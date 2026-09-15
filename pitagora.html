@@ -1922,8 +1922,9 @@ function compilaSchedaOmbra(valoreOmbra) {
     // 1. Convertiamo valoreOmbra in numero puro
     let num = parseInt(valoreOmbra, 10);
     
-    // 2. Cerchiamo nel database
-    let d = databaseOmbreMazzo[num] || databaseOmbreMazzo[valoreOmbra];
+    // 2. Cerchiamo nel database in modo sicuro (evita ReferenceError)
+    const dbOmbre = window.databaseOmbreMazzo || (typeof databaseOmbreMazzo !== 'undefined' ? databaseOmbreMazzo : {});
+    let d = dbOmbre[num] || dbOmbre[valoreOmbra];
 
     // Fallback se l'ombra non viene trovata
     if (!d) {
@@ -1958,10 +1959,10 @@ function compilaSchedaOmbra(valoreOmbra) {
 
     // Costruzione dei quadranti uniformati allo stile compilaScheda
     return `
-       <div class="scheda-ombra-container">
-    <span class="archetipo-nome">
-        Archetipo: ${nomeCompleto}
-    </span>
+        <div class="scheda-ombra-container">
+            <span class="archetipo-nome">
+                Archetipo: ${nomeCompleto}
+            </span>
 
             <!-- 1. SFIDA PRINCIPALE -->
             <div style="background-color: #3a1c1d; border-left: 4px solid #c0392b; padding: 12px; border-radius: 6px; margin-top: 15px; text-align: left;">
@@ -2011,22 +2012,22 @@ function compilaSchedaOmbra(valoreOmbra) {
 }
 
 function creaAnteprimaOmbra(numeroOmbra) {
-    if (!numeroOmbra) return '';
+    // Gestisce lo 0 permettendo il passaggio, ed esce solo se undefined, null o stringa vuota
+    if (numeroOmbra === undefined || numeroOmbra === null || numeroOmbra === '') return '';
     
-    // Recupera l'ombra dal database dedicato o dal database archetipi
     let num = parseInt(numeroOmbra, 10);
-    let d = (typeof databaseOmbreMazzo !== 'undefined' && databaseOmbreMazzo[num]) || 
-            (typeof databaseArchetipi !== 'undefined' && databaseArchetipi[num]) || null;
+    const dbOmbre = window.databaseOmbreMazzo || (typeof databaseOmbreMazzo !== 'undefined' ? databaseOmbreMazzo : null);
+    const dbArchetipi = window.databaseArchetipi || (typeof databaseArchetipi !== 'undefined' ? databaseArchetipi : null);
+
+    let d = (dbOmbre && dbOmbre[num]) || (dbArchetipi && dbArchetipi[num]) || null;
     
     if (!d) return `<div class="scheda-preview">Archetipo non trovato (${num})</div>`;
 
     let nome = d.nome || `Ombra ${num}`;
     let titolo = d.titolo || d.sottotitolo || "";
     
-    // Se c'è un titolo/sottotitolo lo compone come nei Picchi: Nome (Titolo)
     let etichettaArchetipo = titolo ? `${nome} (${titolo})` : nome;
 
-    // Restituisce la dicitura "Archetipo: Nome (Titolo)" con colore bianco/oro coordinato
     return `
         <div class="scheda-preview">
             <span class="archetipo-nome" style="display: block; font-weight: bold; margin-bottom: 4px; color: #ffffff;">
@@ -2036,6 +2037,7 @@ function creaAnteprimaOmbra(numeroOmbra) {
         </div>
     `;
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     const inputData = document.getElementById('dataNascita');
     if (inputData) {
@@ -2046,7 +2048,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
 </script>
 
 <script src="testi_pitagora.js"></script>
