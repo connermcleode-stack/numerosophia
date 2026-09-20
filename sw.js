@@ -1,12 +1,11 @@
-const CACHE_NAME = 'numerosophia-cache-v4';
+const CACHE_NAME = 'numerosophia-cache-v5';
 
-// Elenco completo di file dell'app + tutte le 27 carte
+// Elenco esatto dei file presenti nella cartella di progetto
 const FILES_TO_CACHE = [
   './',
   './index.html',
-  './caldea.html',
   './pitagora.html',
-  './testi_pitagora.html',
+  './caldea.html',
   './archivio.html',
   './compatibilita.html',
   './condividi-compatibilita.html',
@@ -16,6 +15,9 @@ const FILES_TO_CACHE = [
   './app.js',
   './calcoli.js',
   './db.js',
+  './testi_pitagora.js',
+  './testi_influenze.js',
+  './destino_anima.js',
   './manifest.json',
   './icona-numerosophia.png',
 
@@ -51,39 +53,19 @@ const FILES_TO_CACHE = [
   './carte/ombra9.png'
 ];
 
-// 1. Installazione e salvataggio in Cache
+// 1. Installazione sicura e tollerante
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Salvataggio risorse e carte in cache per offline...');
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );
-  self.skipWaiting();
-});
-
-// 2. Attivazione e pulizia vecchie cache
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(
-        keyList.map((key) => {
-          if (key !== CACHE_NAME) {
-            console.log('Rimozione vecchia cache:', key);
-            return caches.delete(key);
-          }
-        })
+      console.log('Salvataggio risorse e carte in cache...');
+      return Promise.allSettled(
+        FILES_TO_CACHE.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn(`[SW] Impossibile aggiungere alla cache: ${url}`, err);
+          })
+        )
       );
     })
   );
-  self.clients.claim();
-});
-
-// 3. Intercettazione richieste: serve prima dalla cache, poi da rete
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
+  self.skipWaiting();
 });
