@@ -1,6 +1,6 @@
-const CACHE_NAME = 'numerosophia-cache-v5';
+const CACHE_NAME = 'numerosophia-cache-v6';
 
-// Elenco esatto dei file presenti nella cartella di progetto
+// Elenco esatto dei file locali + Font di Google
 const FILES_TO_CACHE = [
   './',
   './index.html',
@@ -20,6 +20,9 @@ const FILES_TO_CACHE = [
   './destino_anima.js',
   './manifest.json',
   './icona-numerosophia.png',
+
+  // --- FONT GOOGLE PER OFFLINE ---
+  'https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital@1&display=swap',
 
   // --- CARTE BASE & MAESTRE ---
   './carte/0.png',
@@ -57,7 +60,7 @@ const FILES_TO_CACHE = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Salvataggio risorse e carte in cache...');
+      console.log('Salvataggio risorse e carte in cache per offline...');
       return Promise.allSettled(
         FILES_TO_CACHE.map((url) =>
           cache.add(url).catch((err) => {
@@ -68,4 +71,51 @@ self.addEventListener('install', (event) => {
     })
   );
   self.skipWaiting();
+});
+
+// 2. Attivazione e pulizia vecchie cache
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keyList) => {
+      return Promise.all(
+        keyList.map((key) => {
+          if (key !== CACHE_NAME) {
+            console.log('Rimozione vecchia cache:', key);
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
+});
+
+// 3. Intercettazione richieste: ricerca in cache, poi rete con salvataggio automatico
+self.addEventListener('fetch', (event) => {
+  // Ignora richieste non-GET o schemi non supportati
+  if (event.request.method !== 'GET' || !event.request.url.startsWith('http')) return;
+
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      return fetch(event.request).then((networkResponse) => {
+        // Se la richiesta va a buon fine, memorizzala dinamicamente in cache
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      }).catch(() => {
+        // Fallback per navigazione pagine se la rete fallisce
+        if (event.request.mode === 'navigate') {
+          return caches.match('./pitagora.html') || caches.match('./index.html');
+        }
+      });
+    })
+  );
 });
