@@ -2048,12 +2048,17 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+
+
+
+
+
 </script>
 
 <script src="testi_pitagora.js"></script>
 <!-- Aggiungi qui il riferimento al nuovo file dei testi -->
 <script src="destino_anima.js"></script>
-
 <script src="testi_influenze.js"></script>
 
 <!-- Collegamento al file esterno dei calcoli -->
@@ -2075,46 +2080,43 @@ request.onupgradeneeded = function(event) {
     }
 };
 
-// Gestione della formattazione automatica della data (agganciata a calcoli.js)
+request.onsuccess = function(event) {
+    db = event.target.result;
+    controllaParametriURL();
+};
+
+request.onerror = function(event) {
+    console.error("Errore critico nell'apertura dell'archivio locale IndexedDB:", event.target.error);
+};
+
+// Listener unico per la formattazione automatica della data all'avvio
 document.addEventListener("DOMContentLoaded", function() {
     const inputData = document.getElementById('dataNascita');
     if (inputData) {
         inputData.addEventListener('input', function() {
-            if (typeof formattaEValidaData === 'function') {
+            if (typeof window.formattaEValidaData === 'function') {
+                window.formattaEValidaData(this);
+            } else if (typeof formattaEValidaData === 'function') {
                 formattaEValidaData(this);
             }
         });
     }
 });
 
-request.onsuccess = function(event) {
-    db = event.target.result;
-    controllaParametriURL();
-
-};
-request.onerror = function(event) {
-    console.error("Errore critico nell'apertura dell'archivio locale IndexedDB:", event.target.error);
-};
-
-
 function salvaNelDatabase() {
     const nome = document.getElementById('nome').value.trim();
     const cognome = document.getElementById('cognome').value.trim();
     const dataNascita = document.getElementById('dataNascita').value.trim();
-
 
     if (!nome && !cognome && !dataNascita) {
         alert("Inserisci almeno un dato identificativo per poter eseguire il salvataggio.");
         return;
     }
 
-
     if (dataNascita && dataNascita.length < 10) {
         alert("Per favore, specifica una data di nascita completa (GG/MM/AAAA).");
         return;
     }
-
-
 
     const anima = document.getElementById('numAnima')?.innerText || "";
     const persona = document.getElementById('numPersona')?.innerText || "";
@@ -2130,27 +2132,28 @@ function salvaNelDatabase() {
     const cConc = document.getElementById('numCicloConc')?.innerText || "";
     const grandiCicli = `Formativo: ${cForm} | Produttivo: ${cProd} | Conclusivo: ${cConc}`;
 
-
-
     const p1 = document.getElementById('numCiclo1')?.innerText || "";
     const p2 = document.getElementById('numCiclo2')?.innerText || "";
     const p3 = document.getElementById('numCiclo3')?.innerText || "";
     const p4 = document.getElementById('numCiclo4')?.innerText || "";
     const cicliRealizzazione = `1°: ${p1} | 2°: ${p2} | 3°: ${p3} | 4°: ${p4}`;
 
-
-
     const oGiov = document.getElementById('numOmbraGiov')?.innerText || "";
     const oMat = document.getElementById('numOmbraMat')?.innerText || "";
     const oPrinc = document.getElementById('numOmbraPrinc')?.innerText || "";
     
-    document.getElementById('descOmbraGiov').innerHTML = creaAnteprimaOmbra(oGiov);
-    document.getElementById('descOmbraMat').innerHTML = creaAnteprimaOmbra(oMat);
-    document.getElementById('descOmbraPrinc').innerHTML = creaAnteprimaOmbra(oPrinc);
+    // Aggiornamento/Garantisce la presenza dell'anteprima ombra se la funzione esiste
+    if (typeof creaAnteprimaOmbra === 'function') {
+        const elGiov = document.getElementById('descOmbraGiov');
+        const elMat = document.getElementById('descOmbraMat');
+        const elPrinc = document.getElementById('descOmbraPrinc');
+
+        if (elGiov) elGiov.innerHTML = creaAnteprimaOmbra(oGiov);
+        if (elMat) elMat.innerHTML = creaAnteprimaOmbra(oMat);
+        if (elPrinc) elPrinc.innerHTML = creaAnteprimaOmbra(oPrinc);
+    }
 
     const ombre = `Giovinezza: ${oGiov} | Maturità: ${oMat} | Principale: ${oPrinc}`;
-
-
 
     const transaction = db.transaction(['clienti'], 'readwrite');
     const store = transaction.objectStore('clienti');
@@ -2161,8 +2164,7 @@ function salvaNelDatabase() {
         data_nascita: dataNascita,
         metodo: 'pitagora', 
         data_salvataggio: new Date().toISOString(),
-       
-	anima: anima,
+        anima: anima,
         persona: persona,
         io: io,
         giorno_nascita: giornoNascita,
@@ -2173,13 +2175,11 @@ function salvaNelDatabase() {
         cicli_realizzazione: cicliRealizzazione,
         ombre: ombre,
         quintessenza: quintessenza
-
     };
 
     const requestAdd = store.add(nuovoCliente);
 
     requestAdd.onsuccess = function() {
-
         alert(`Il quadro completo di ${nome} ${cognome} è stato correttamente archiviato!`);
     };
 
@@ -2188,7 +2188,6 @@ function salvaNelDatabase() {
         alert("Impossibile salvare i dati nell'archivio locale.");
     };
 }
-
 
 function controllaParametriURL() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -2204,12 +2203,14 @@ function controllaParametriURL() {
         if (typeof eseguiCalcoloCompleto === "function") {
             eseguiCalcoloCompleto();
         } else {
-            window.addEventListener('load', () => eseguiCalcoloCompleto());
+            window.addEventListener('load', () => {
+                if (typeof eseguiCalcoloCompleto === "function") {
+                    eseguiCalcoloCompleto();
+                }
+            });
         }
     }
 }
-
-
 
 // Dizionario con le introduzioni concettuali per le 3 influenze
 const introInfluenze = {
@@ -2264,7 +2265,9 @@ function apriApprofondimento(elementoCard, tipoInfluenza = null) {
         }
 
         if (!isNaN(numToUse) && numToUse > 0) {
-            apriModalQuintessenza(numToUse);
+            if (typeof apriModalQuintessenza === 'function') {
+                apriModalQuintessenza(numToUse);
+            }
         } else {
             console.error("Impossibile recuperare un numero valido per la Quintessenza:", numToUse);
         }
@@ -2307,9 +2310,8 @@ function apriApprofondimento(elementoCard, tipoInfluenza = null) {
         const modaleContainer = document.getElementById('modaleApprofondimento');
         if (modaleContainer) modaleContainer.style.display = 'flex';
     }
-};
+}
 
 </script>
 </body>
-</html> 
-
+</html>

@@ -1443,8 +1443,11 @@ function estraiEtichettaOmbra(valore) {
     return nomiOmbreDefault[num] || `Ombra ${num}`;
 }
 
-// Inizializzazione sicura: esegue solo se le variabili delle ombre sono definite
-if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc !== 'undefined') {
+window.aggiornaGraficaOmbre = function(oGiov, oMat, oPrinc) {
+    if (typeof oGiov === 'undefined' || typeof oMat === 'undefined' || typeof oPrinc === 'undefined') {
+        return;
+    }
+
     const ombreSetup = [
         { idNum: 'numOmbraGiov', idDesc: 'descOmbraGiov', valore: oGiov },
         { idNum: 'numOmbraMat', idDesc: 'descOmbraMat', valore: oMat },
@@ -1452,8 +1455,13 @@ if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc
     ];
 
     ombreSetup.forEach(ombra => {
-        const imgNome = ottieniNomeImmagineOmbra(ombra.valore);
-        const etichettaCompleta = estraiEtichettaOmbra(ombra.valore);
+        const imgNome = typeof ottieniNomeImmagineOmbra === 'function' 
+            ? ottieniNomeImmagineOmbra(ombra.valore) 
+            : `ombra${ombra.valore}`;
+            
+        const etichettaCompleta = typeof estraiEtichettaOmbra === 'function' 
+            ? estraiEtichettaOmbra(ombra.valore) 
+            : `Ombra ${ombra.valore}`;
         
         const etichettaFormattata = etichettaCompleta ? etichettaCompleta.replace(/\s*\(/, '<br>(') : '';
 
@@ -1492,17 +1500,24 @@ if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc
                     apriModal(contenutoModal);
                 } else if (typeof mostraPopup === 'function') {
                     mostraPopup(contenutoModal);
+                } else if (typeof apriApprofondimento === 'function') {
+                    apriApprofondimento(this);
                 } else {
-                    const modalElement = document.getElementById('modalOmbra') || document.getElementById('modalGenerico');
+                    const modalElement = document.getElementById('modalOmbra') || document.getElementById('modalGenerico') || document.getElementById('modaleApprofondimento');
                     if (modalElement) {
-                        const modalBody = modalElement.querySelector('.modal-body') || modalElement;
+                        const modalBody = modalElement.querySelector('.modal-body') || document.getElementById('modaleContenuto') || modalElement;
                         modalBody.innerHTML = contenutoModal;
-                        modalElement.style.display = 'block';
+                        modalElement.style.display = 'flex';
                     }
                 }
             };
         }
     });
+};
+
+// Esecuzione automatica solo se le tre variabili sono già definite all'avvio
+if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc !== 'undefined') {
+    window.aggiornaGraficaOmbre(oGiov, oMat, oPrinc);
 }
 
            testoCopiaGlobale += `Giorno di Nascita Isolato: ${format(giornoIsolato)}\n`;
