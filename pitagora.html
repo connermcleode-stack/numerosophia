@@ -2200,14 +2200,35 @@ function controllaParametriURL() {
         document.getElementById('cognome').value = cognomeUrl || "";
         document.getElementById('dataNascita').value = dataUrl || "";
 
-        if (typeof eseguiCalcoloCompleto === "function") {
-            eseguiCalcoloCompleto();
-        } else {
-            window.addEventListener('load', () => {
-                if (typeof eseguiCalcoloCompleto === "function") {
-                    eseguiCalcoloCompleto();
+        const eseguiEPopolaOmbre = () => {
+            if (typeof eseguiCalcoloCompleto === "function") {
+                eseguiCalcoloCompleto();
+
+                const oGiov = document.getElementById('numOmbraGiov')?.innerText?.trim() || "";
+                const oMat = document.getElementById('numOmbraMat')?.innerText?.trim() || "";
+                const oPrinc = document.getElementById('numOmbraPrinc')?.innerText?.trim() || "";
+
+                const elGiov = document.getElementById('descOmbraGiov');
+                const elMat = document.getElementById('descOmbraMat');
+                const elPrinc = document.getElementById('descOmbraPrinc');
+
+                // Usiamo compilaSchedaSicura per garantire la presenza del div .testo-segreto completo
+                const renderFn = typeof compilaSchedaSicura === 'function' 
+                    ? compilaSchedaSicura 
+                    : (typeof creaAnteprimaOmbra === 'function' ? creaAnteprimaOmbra : null);
+
+                if (renderFn) {
+                    if (elGiov && oGiov && !elGiov.innerHTML.trim()) elGiov.innerHTML = renderFn(oGiov);
+                    if (elMat && oMat && !elMat.innerHTML.trim()) elMat.innerHTML = renderFn(oMat);
+                    if (elPrinc && oPrinc && !elPrinc.innerHTML.trim()) elPrinc.innerHTML = renderFn(oPrinc);
                 }
-            });
+            }
+        };
+
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            eseguiEPopolaOmbre();
+        } else {
+            window.addEventListener('load', eseguiEPopolaOmbre);
         }
     }
 }
@@ -2222,11 +2243,23 @@ const introInfluenze = {
 };
 
 function apriApprofondimento(elementoCard, tipoInfluenza = null) {
+    // ============================================================================
+    // RESET PREVENTIVO MODALE
+    // ============================================================================
+    const contenutoReset = document.getElementById('modaleContenuto');
+    if (contenutoReset) contenutoReset.innerHTML = "";
+    
+    const titoloReset = document.getElementById('modaleTitolo');
+    if (titoloReset) titoloReset.innerText = "";
+
+    // ============================================================================
+    // ESTRAZIONE TITOLO E NUMERO EVIDENZIATO
+    // ============================================================================
     let titoloSezione = "Approfondimento Archetipo";
-    const bloccoGenitore = elementoCard.closest('.blocco-risultato, td, div, tr'); 
+    const bloccoGenitore = elementoCard.closest('.blocco-risultato, td, div, tr, .card'); 
     
     if (bloccoGenitore) {
-        const h3 = bloccoGenitore.querySelector('h3');
+        const h3 = bloccoGenitore.querySelector('h3, .card-title, strong');
         if (h3) {
             const cloneH3 = h3.cloneNode(true);
             const numInside = cloneH3.querySelector('.numero-evidenziato, div');
@@ -2284,7 +2317,7 @@ function apriApprofondimento(elementoCard, tipoInfluenza = null) {
     // --- GESTIONE TESTO INTRODUTTIVO INFLUENZE ---
     const sottotitoloEl = document.getElementById('modaleSottotitolo');
     if (sottotitoloEl) {
-        if (tipoInfluenza && introInfluenze[tipoInfluenza]) {
+        if (tipoInfluenza && typeof introInfluenze !== 'undefined' && introInfluenze[tipoInfluenza]) {
             sottotitoloEl.innerHTML = `<div class="box-intro-influenza">${introInfluenze[tipoInfluenza]}</div>`;
             sottotitoloEl.style.display = 'block';
         } else {
@@ -2294,22 +2327,32 @@ function apriApprofondimento(elementoCard, tipoInfluenza = null) {
     }
 
     const testoSegretoEl = elementoCard.querySelector('.testo-segreto');
-    if (testoSegretoEl) {
-        const contenutoEl = document.getElementById('modaleContenuto');
-        if (contenutoEl) {
+    const contenutoEl = document.getElementById('modaleContenuto');
+
+    if (contenutoEl) {
+        if (testoSegretoEl) {
             contenutoEl.innerHTML = testoSegretoEl.innerHTML;
-            
-            // --- FORMATTAZIONE AUTOMATICA PARENTESI A CAPO ---
-            contenutoEl.querySelectorAll('h3, h4, .titolo-karmico, .archetipo-nome').forEach(el => {
-                if (el.innerHTML.includes('(') && !el.innerHTML.includes('<br>')) {
-                    el.innerHTML = el.innerHTML.replace(/\s*\(/g, '<br>(');
+        } else {
+            // Estragga il contenuto pulendolo da inviti al click / bottoni
+            const cloneCard = elementoCard.cloneNode(true);
+            cloneCard.querySelectorAll('.clicca-approfondimento, [onclick], p:last-child').forEach(el => {
+                if (el.innerText.includes('Clicca qui') || el.getAttribute('onclick')) {
+                    el.remove();
                 }
             });
+            contenutoEl.innerHTML = cloneCard.innerHTML;
         }
-
-        const modaleContainer = document.getElementById('modaleApprofondimento');
-        if (modaleContainer) modaleContainer.style.display = 'flex';
+        
+        // --- FORMATTAZIONE AUTOMATICA PARENTESI A CAPO ---
+        contenutoEl.querySelectorAll('h3, h4, .titolo-karmico, .archetipo-nome').forEach(el => {
+            if (el.innerHTML.includes('(') && !el.innerHTML.includes('<br>')) {
+                el.innerHTML = el.innerHTML.replace(/\s*\(/g, '<br>(');
+            }
+        });
     }
+
+    const modaleContainer = document.getElementById('modaleApprofondimento');
+    if (modaleContainer) modaleContainer.style.display = 'flex';
 }
 
 </script>

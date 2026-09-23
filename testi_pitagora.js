@@ -368,7 +368,7 @@ window.TESTI_PITAGORA = {
 16: {
         nome: "Il Perfezionista (Prova karmica del Saggio)",
         sottotitolo: "Gli anni del risveglio interiore e del crollo delle illusioni",
-        introduzione: "Il numero karmico 16 attiva l'archetipo del Perfezionista e della Torre, rappresentando la distruzione delle maschere dell'ego per far emergere la verità profonda dell'anima. Nasce dalla necessità di superare l'orgoglio, l'idealizzazione e la rigidità razionale dell'1 e del 6, trovando la vera saggezza nella vibrazione del 7. È un ciclo di forte risveglio spirituale, spesso innescato da eventi imprevisti che abbattono le vecchie certezze materiali e gli attaccamenti illusori. La lezione principale è imparare la resa, l'umiltà e l'ascolto interiore, comprendendo che la dissoluzione delle false strutture è la premessa indispensabile per una rinascita autentica.",
+        introduzione: "Il numero karmico 16 attiva l'archetipo del Perfezionista, rappresentando la distruzione delle maschere dell'ego per far emergere la verità profonda dell'anima. Nasce dalla necessità di superare l'orgoglio, l'idealizzazione e la rigidità razionale dell'1 e del 6, trovando la vera saggezza nella vibrazione del 7. È un ciclo di forte risveglio spirituale, spesso innescato da eventi imprevisti che abbattono le vecchie certezze materiali e gli attaccamenti illusori. La lezione principale è imparare la resa, l'umiltà e l'ascolto interiore, comprendendo che la dissoluzione delle false strutture è la premessa indispensabile per una rinascita autentica.",
         cicli: {
             ciclo1: {
                 titolo: "1° Ciclo di Vita (Infanzia e Giovinezza)",
