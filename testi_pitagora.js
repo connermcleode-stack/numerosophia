@@ -60,7 +60,7 @@ window.TESTI_PITAGORA = {
 3: {
   nome: "Il Giullare (Artista e Comunicatore)",
   sottotitolo: "Gli anni dell’espressione di sé",
-  introduzione: "Questa fase invita a uscire dall’ombra, abbandonare l'autocritica e celebrare se stessi con gioia e spontaneità. È un periodo favorevole per la creatività, la comunicazione, la scrittura, lo studio e i viaggi intesi come ampliamento della mente. Negare la propria voce o reprimere l'autoespressione in questo ciclo rischia di sfociare in frustrazione o iper-criticismo: occorre lasciar emergere il proprio carisma e imparare a godersi la vita.",
+  introduzione: "Questa fase invita a uscire dall’ombra, abbandonare l'autocritica e celebrare sè stessi con gioia e spontaneità. È un periodo favorevole per la creatività, la comunicazione, la scrittura, lo studio e i viaggi intesi come ampliamento della mente. Negare la propria voce o reprimere l'autoespressione in questo ciclo rischia di sfociare in frustrazione o iper-criticismo: occorre lasciar emergere il proprio carisma e imparare a godersi la vita.",
   cicli: {
     ciclo1: {
       titolo: "1° Ciclo di Vita (Infanzia e Giovinezza)",
@@ -195,7 +195,7 @@ window.TESTI_PITAGORA = {
 8: {
   nome: "Il Sovrano (Realizzatore e Stratega)",
   sottotitolo: "Gli anni del potere personale",
-  introduzione: "Questo ciclo invita a riconoscere il proprio potere personale e la capacità di trasformare le idee in realtà concreta, fungendo da ponte tra visione spirituale e mondo materiale. È un periodo orientato all'indipendenza, all'organizzazione e al successo (finanziario, professionale o artistico a seconda dei propri numeri). La lezione centrale è valorizzare se stessi e reclamatare ciò che spetta, ricordando che la vera autorevolezza e l'abbondanza si ottengono ponendosi al servizio di una causa superiore con integrità e distacco.",
+  introduzione: "Questo ciclo invita a riconoscere il proprio potere personale e la capacità di trasformare le idee in realtà concreta, fungendo da ponte tra visione spirituale e mondo materiale. È un periodo orientato all'indipendenza, all'organizzazione e al successo (finanziario, professionale o artistico a seconda dei propri numeri). La lezione centrale è valorizzare sè stessi e reclamare ciò che spetta, ricordando che la vera autorevolezza e l'abbondanza si ottengono ponendosi al servizio di una causa superiore con integrità e distacco.",
   cicli: {
     ciclo1: {
       titolo: "1° Ciclo di Vita (Infanzia e Giovinezza)",
@@ -269,7 +269,7 @@ window.TESTI_PITAGORA = {
     ciclo4: {
       titolo: "4° Ciclo di Vita (Integrazione e Nuova Saggezza)",
       lezioni: "Occorre rilasciare il controllo della mente razionale, superando il senso di inadeguatezza legato al non sentirsi conformi alla massa. La sfida è lasciar risplendere la propria luce interiore e accettare la propria unicità per integrarsi serenamente nel mondo.",
-      potenziali: "Con la maturità si affinano spiccati doni di intuizione e percezione. La propria presenza diventa un catalizzatore per il risveglio altrui: ci si trasforma in veri e propri canali di Luce, grado di ispirare e accompagnare gli altri verso il benessere."
+      potenziali: "Con la maturità si affinano spiccati doni di intuizione e percezione. La propria presenza diventa un catalizzatore per il risveglio altrui: ci si trasforma in veri e propri canali di Luce, in grado di ispirare e accompagnare gli altri verso il benessere."
     }
 }
   },
@@ -368,7 +368,7 @@ window.TESTI_PITAGORA = {
 16: {
         nome: "Il Perfezionista (Prova karmica del Saggio)",
         sottotitolo: "Gli anni del risveglio interiore e del crollo delle illusioni",
-        introduzione: "Il numero karmico 16 attiva l'archetipo del Perfezionista e della Torre, rappresentando la distruzione delle maschere dell'ego per far emergere la verità profonda dell'anima. Nasce dalla necessità di superare l'orgoglio, l'idealizzazione e la rigidità razionale dell'1 e del 6, trovando la vera saggezza nella vibrazione del 7. È un ciclo di forte risveglio spirituale, spesso innescato da eventi imprevisti che abbattono le vecchie certezze materiali e gli attaccamenti illusori. La lezione principale è imparare la resa, l'umiltà e l'ascolto interiore, comprendendo che la dissoluzione delle false strutture è la premessa indispensabile per una rinascita autentica.",
+        introduzione: "Il numero karmico 16 attiva l'archetipo del Perfezionista, rappresentando la distruzione delle maschere dell'ego per far emergere la verità profonda dell'anima. Nasce dalla necessità di superare l'orgoglio, l'idealizzazione e la rigidità razionale dell'1 e del 6, trovando la vera saggezza nella vibrazione del 7. È un ciclo di forte risveglio spirituale, spesso innescato da eventi imprevisti che abbattono le vecchie certezze materiali e gli attaccamenti illusori. La lezione principale è imparare la resa, l'umiltà e l'ascolto interiore, comprendendo che la dissoluzione delle false strutture è la premessa indispensabile per una rinascita autentica.",
         cicli: {
             ciclo1: {
                 titolo: "1° Ciclo di Vita (Infanzia e Giovinezza)",
