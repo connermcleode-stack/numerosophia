@@ -150,7 +150,7 @@ window.TESTI_PITAGORA = {
     },
     ciclo2: {
       titolo: "2° Ciclo di Vita (Costruzione e Affermazione)",
-      lezioni: "Si lascia da parte un atteggiamento troppo mentale o distaccato per ritrovare sensibilità, tolleranza e un senso di 'ritorno a casa'. La lezione è cadere le maschere e adottare uno stile di vita armonioso e sano, curando l'ambiente domestico come specchio dell'anima.",
+      lezioni: "Si lascia da parte un atteggiamento troppo mentale o distaccato per ritrovare sensibilità, tolleranza e un senso di 'ritorno a casa'. La lezione è far cadere le maschere e adottare uno stile di vita armonioso e sano, curando l'ambiente domestico come specchio dell'anima.",
       potenziali: "Sintonizzandosi sulla frequenza del cuore, cresce il desiderio di aiutare il prossimo. È il momento ideale per attrarre relazioni affini, formare un'unione, sposarsi, creare casa o assumere ruoli di responsabilità e supporto sociale."
     },
     ciclo3: {
@@ -714,7 +714,7 @@ annoPersonale: {
 6: {
   nome: "Archetipo 6: L'Angelo Custode (Protettivo e Mediatore)",
   sottotitolo: "Scelte importanti, affetti, responsabilità e creatività",
-  introduzione: "L'Anno Personale 6 pone al centro dell'attenzione la casa, la famiglia, le relazioni intime e l'espressione della creatività. Dopo i cambiamenti e la spinta all'avventura del periodo precedente, senti il bisogno di trovare stabilità, bellezza e armonia nel tuo ambiente. È un momento di maturazione e di 'ritorno in se stessi', caratterizzato da scelte fondamentali per il futuro. Questa vibrazione ti chiama ad assumerti nuove responsabilità e a prenderti cura di chi ami, ponendo però al primo posto il rispetto per la tua dignità e la tua autostima.",
+  introduzione: "L'Anno Personale 6 pone al centro dell'attenzione la casa, la famiglia, le relazioni intime e l'espressione della creatività. Dopo i cambiamenti e la spinta all'avventura del periodo precedente, senti il bisogno di trovare stabilità, bellezza e armonia nel tuo ambiente. È un momento di maturazione e di 'ritorno in sè stessi', caratterizzato da scelte fondamentali per il futuro. Questa vibrazione ti chiama ad assumerti nuove responsabilità e a prenderti cura di chi ami, ponendo però al primo posto il rispetto per la tua dignità e la tua autostima.",
   opportunita: "Fase estremamente propizia per consolidare relazioni d'amore, sposarsi, ingrandire la famiglia o cambiare/arredare casa rendendola più accogliente. In ambito lavorativo o personale, è un anno fortunato per avviare progetti creativi di valore, assumere ruoli di guida o consulenza e raggiungere un solido successo economico. Si creano legami autentici e nascono amicizie basate sulla condivisione sincera.",
   sfide: "La spiccata sensibilità emotiva può portare a un aumento dell'ansia, delle preoccupazioni o della tendenza all'iperprotettività e all'interferenza nelle vite altrui. Il rischio è di creare rapporti di dipendenza o di annullarsi per gli altri. Le relazioni oramai tossiche o prive di integrità potrebbero giungere a un punto di crisi definitiva: persistendo nella falsità o nelle polemiche si rischia solo di generare conflitti e isolamento.",
   consigliPratici: "Impara a bilanciare l'aiuto verso gli altri con la tua libertà personale, evitando di diventare invadente. Dedicati ad attività artistiche, alla cura degli spazi di casa e al tuo senso estetico. Per rafforzare la tua autostima, fai un elenco delle tue qualità migliori, dei motivi per cui apprezzi te stesso e dei complimento sinceri che ricevi più di frequente."
