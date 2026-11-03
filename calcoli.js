@@ -243,16 +243,16 @@ function eseguiCalcoloCompleto() {
 	   giornoPersonale = riduciMonocifraStretta(riduciMonocifraStretta(annoPersonale) + rOggiGiorno + rOggiMese);
 
 // ============================================================================
-// RENDERING GIORNO DI NASCITA (ANTEPRIMA E MODALE CORRETTA)
+// RENDERING GIORNO DI NASCITA (ANTEPRIMA E MODALE UNIFICATA)
 // ============================================================================
 if (document.getElementById('numGiornoIsolato')) {
-    document.getElementById('numGiornoIsolato').innerText = g; // Es. 27
+    document.getElementById('numGiornoIsolato').innerText = g; // Es. 20
 }
 
 const sorgenteTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
 
 if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTesti.GIORNI_NASCITA && sorgenteTesti.GIORNI_NASCITA[g]) {
-    const datiG = sorgenteTesti.GIORNI_NASCITA[g];
+    const t = sorgenteTesti.GIORNI_NASCITA[g];
     const archetipoG = sorgenteTesti.ARCHETIPI_GIORNI[g] || "";
 
     // Calcolo del numero della carta
@@ -267,88 +267,47 @@ if (document.getElementById('descGiornoIsolato') && sorgenteTesti && sorgenteTes
         numeroCarta = somma;
     }
 
-// Percorso blindato: cartella "carte/", nome numerico, formato ".png"
-const archetipoGFormattato = (archetipoG || '').replace(/\s*\(/, '<br>(');
+    const archetipoGFormattato = (archetipoG || '').replace(/\s*\(/, '<br>(');
 
-document.getElementById('descGiornoIsolato').innerHTML = `
-    <div class="anteprima-card" onclick="apriModalGiorno(${g})">
-        <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" onerror="this.style.display='none';">
-        <h4 class="titolo-archetipo">Archetipo: ${archetipoGFormattato}</h4>
-        <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
-    </div>
-`;
+    // Inserimento HTML con .testo-segreto incluso per la modale unica
+    document.getElementById('descGiornoIsolato').innerHTML = `
+        <div class="anteprima-card" onclick="apriApprofondimento(this, 'giorno')">
+            <img src="carte/${numeroCarta}.png" alt="${archetipoG}" class="img-carta" onerror="this.style.display='none';">
+            <h4 class="titolo-archetipo">Archetipo: ${archetipoGFormattato}</h4>
+            <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+            
+            <div class="testo-segreto" style="display:none;">
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="carte/${numeroCarta}.png" alt="${archetipoG}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                </div>
+
+                <h3 class="archetipo-nome">
+                    Archetipo: ${archetipoGFormattato}
+                </h3>
+
+                <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                    <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Doti</h4>
+                    <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo || ''}</p>
+                </div>
+
+                <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                    <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Significato</h4>
+                    <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione || ''}</p>
+                </div>
+
+                <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                    <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">PUNTI DEBOLI</h4>
+                    <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.puntiDeboli || ''}</p>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; text-align: left;">
+                    <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">PROFESSIONI IDEALI</h4>
+                    <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.professioniIdeali || ''}</p>
+                </div>
+            </div>
+        </div>
+    `;
 }
-
-function apriModalGiorno(giorno) {
-    const sorgenteTesti = window.TESTI_PITAGORA || TESTI_PITAGORA;
-    if (!sorgenteTesti || !sorgenteTesti.GIORNI_NASCITA || !sorgenteTesti.GIORNI_NASCITA[giorno]) return;
-
-    const t = sorgenteTesti.GIORNI_NASCITA[giorno];
-    const archetipo = sorgenteTesti.ARCHETIPI_GIORNI[giorno] || "";
-    const archetipoFormattato = archetipo.replace(/\s*\(/, '<br>(');
-
-    let numeroCarta = giorno;
-    const karmiciEMaestri = [11, 13, 14, 16, 19, 22, 33, 44];
-    if (!karmiciEMaestri.includes(giorno) && giorno > 9) {
-        let somma = giorno;
-        while (somma > 9 && !karmiciEMaestri.includes(somma)) {
-            somma = String(somma).split('').reduce((acc, digit) => acc + parseInt(digit), 0);
-        }
-        numeroCarta = somma;
-    }
-
-    // Impostiamo direttamente il titolo e i contenuti usando gli ID nativi della modale del tuo sito
-    const titoloModale = document.getElementById('modaleTitolo');
-    const sottotitoloModale = document.getElementById('modaleSottotitolo');
-    const contenutoModale = document.getElementById('modaleContenuto');
-    const modaleContainer = document.getElementById('modaleApprofondimento');
-
-    if (titoloModale) {
-        titoloModale.innerText = `Giorno di Nascita ${giorno}`;
-    }
-    
-    if (sottotitoloModale) {
-        sottotitoloModale.innerHTML = "";
-    }
-
-    if (contenutoModale) {
-        contenutoModale.innerHTML = `
-            <div style="text-align: center; margin-bottom: 20px;">
-                <img src="carte/${numeroCarta}.png" alt="${archetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
-            </div>
-
-            <h3 class="archetipo-nome">
-                Archetipo: ${archetipoFormattato}
-            </h3>
-
-            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Doti</h4>
-                <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
-            </div>
-
-            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Significato</h4>
-                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
-            </div>
-
-            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">PUNTI DEBOLI</h4>
-                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.puntiDeboli}</p>
-            </div>
-
-            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
-                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">PROFESSIONI IDEALI</h4>
-                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.professioniIdeali}</p>
-            </div>
-        `;
-    }
-
-    if (modaleContainer) {
-        modaleContainer.style.display = 'flex';
-    }
-}
-
-window.apriModalGiorno = apriModalGiorno;
             if (document.getElementById('numCammino')) document.getElementById('numCammino').innerText = format(destino);
             if (document.getElementById('descCammino')) document.getElementById('descCammino').innerHTML = compilaSchedaSicura(destino);
             
@@ -358,94 +317,41 @@ window.apriModalGiorno = apriModalGiorno;
             if (document.getElementById('numGiornoPers')) document.getElementById('numGiornoPers').innerText = format(giornoPersonale);
             if (document.getElementById('descGiornoPers')) document.getElementById('descGiornoPers').innerHTML = compilaSchedaSicura(giornoPersonale);
 
-            const fineC1 = 36 - riduciMonocifraStretta(destino);
-            const fineC2 = fineC1 + 9;
-            const fineC3 = fineC2 + 9;
-            if (document.getElementById('etaCicloForm')) document.getElementById('etaCicloForm').innerText = `Da 0 a ${fineC1} anni`;
-	    if (document.getElementById('etaCicloProd')) document.getElementById('etaCicloProd').innerText = `Da ${fineC1 + 1} a ${fineC2} anni`;
-	    if (document.getElementById('etaCicloConc')) document.getElementById('etaCicloConc').innerText = `Da ${fineC2 + 1} anni in poi`;
+            const maestriEKarmiciValidi = [11, 22, 13, 14, 16, 19];
 
-            if (document.getElementById('numCicloForm')) document.getElementById('numCicloForm').innerText = format(cForm);
-            if (document.getElementById('descCicloForm')) document.getElementById('descCicloForm').innerHTML = compilaSchedaSicura(cForm);
+const valDestinoCiclo = maestriEKarmiciValidi.includes(destino) 
+    ? destino 
+    : riduciMonocifraStretta(destino);
 
-            if (document.getElementById('numCicloProd')) document.getElementById('numCicloProd').innerText = format(cProd);
-            if (document.getElementById('descCicloProd')) document.getElementById('descCicloProd').innerHTML = compilaSchedaSicura(cProd);
+const fineC1 = 36 - valDestinoCiclo;
+const fineC2 = fineC1 + 9;
+const fineC3 = fineC2 + 9;
 
-            if (document.getElementById('numCicloConc')) document.getElementById('numCicloConc').innerText = format(cConc);
-            if (document.getElementById('descCicloConc')) document.getElementById('descCicloConc').innerHTML = compilaSchedaSicura(cConc);
+if (document.getElementById('etaCicloForm')) document.getElementById('etaCicloForm').innerText = `Da 0 a ${fineC1} anni`;
+if (document.getElementById('etaCicloProd')) document.getElementById('etaCicloProd').innerText = `Da ${fineC1 + 1} a ${fineC2} anni`;
+if (document.getElementById('etaCicloConc')) document.getElementById('etaCicloConc').innerText = `Da ${fineC2 + 1} anni in poi`;
 
-// ============================================================================
-// ANNO PERSONALE: FUNZIONE MODALE
-// ============================================================================
-function apriModalAnnoPersonale(anno) {
-    const srcTesti = window.TESTI_PITAGORA || window.TESTI_CICLI || (typeof TESTI_CICLI !== 'undefined' ? TESTI_CICLI : null);
-    const tMap = srcTesti?.annoPersonale || srcTesti?.ANNI_PERSONALI;
-    
-    if (!tMap || !tMap[anno]) return;
-
-    const t = tMap[anno];
-    const archetipo = t.nome || "";
-    const archetipoFormattato = (archetipo || '').replace(/\s*\(/, '<br>(');
-
-    const titoloModale = document.getElementById('modaleTitolo');
-    const sottotitoloModale = document.getElementById('modaleSottotitolo');
-    const contenutoModale = document.getElementById('modaleContenuto');
-    const modaleContainer = document.getElementById('modaleApprofondimento');
-
-    if (titoloModale) titoloModale.innerText = `Anno Personale ${anno}`;
-    if (sottotitoloModale) sottotitoloModale.innerHTML = "";
-
-    if (contenutoModale) {
-        contenutoModale.innerHTML = `
-            <div style="text-align: center; margin-bottom: 20px;">
-                <img src="carte/${anno}.png" alt="${archetipo}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
-            </div>
-
-            <h3 class="archetipo-nome">${archetipoFormattato}</h3>
-
-            ${t.sottotitolo ? `
-            <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Doti & Energia</h4>
-                <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
-            </div>
-            ` : ''}
-
-            ${t.introduzione ? `
-            <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Significato dell'Anno</h4>
-                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
-            </div>
-            ` : ''}
-
-            ${t.opportunita ? `
-            <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">OPPORTUNITÀ</h4>
-                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.opportunita}</p>
-            </div>
-            ` : ''}
-
-            ${t.sfide ? `
-            <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
-                <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">SFIDE</h4>
-                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.sfide}</p>
-            </div>
-            ` : ''}
-
-            ${t.consigliPratici ? `
-            <div style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
-                <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">CONSIGLI PRATICI</h4>
-                <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.consigliPratici}</p>
-            </div>
-            ` : ''}
-        `;
-    }
-
-    if (modaleContainer) modaleContainer.style.display = 'flex';
+// Aggiornamento schede e garanzia di sincronizzazione del contenuto modale (.testo-segreto)
+if (document.getElementById('numCicloForm')) document.getElementById('numCicloForm').innerText = format(cForm);
+if (document.getElementById('descCicloForm')) {
+    const elC1 = document.getElementById('descCicloForm');
+    elC1.innerHTML = compilaSchedaSicura(cForm);
 }
-window.apriModalAnnoPersonale = apriModalAnnoPersonale;
+
+if (document.getElementById('numCicloProd')) document.getElementById('numCicloProd').innerText = format(cProd);
+if (document.getElementById('descCicloProd')) {
+    const elC2 = document.getElementById('descCicloProd');
+    elC2.innerHTML = compilaSchedaSicura(cProd);
+}
+
+if (document.getElementById('numCicloConc')) document.getElementById('numCicloConc').innerText = format(cConc);
+if (document.getElementById('descCicloConc')) {
+    const elC3 = document.getElementById('descCicloConc');
+    elC3.innerHTML = compilaSchedaSicura(cConc);
+}
 
 // ============================================================================
-// ANNO PERSONALE: RENDERING ANTEPRIMA CARD
+// ANNO PERSONALE (RENDERING ANTEPRIMA E MODALE UNIFICATA)
 // ============================================================================
 if (document.getElementById('numAnnoPers')) {
     document.getElementById('numAnnoPers').innerText = format(annoPersonale);
@@ -456,15 +362,58 @@ if (document.getElementById('descAnnoPers')) {
     const mapData = srcText?.annoPersonale || srcText?.ANNI_PERSONALI;
 
     if (mapData && mapData[annoPersonale]) {
-        const datiAP = mapData[annoPersonale];
-        const archetipoAP = datiAP.nome || "";
+        const t = mapData[annoPersonale];
+        const archetipoAP = t.nome || "";
         const archetipoAPFormattato = (archetipoAP || '').replace(/\s*\(/, '<br>(');
 
         document.getElementById('descAnnoPers').innerHTML = `
-            <div class="anteprima-card" onclick="apriModalAnnoPersonale(${annoPersonale})">
+            <div class="anteprima-card" onclick="apriApprofondimento(this, 'anno')">
                 <img src="carte/${annoPersonale}.png" alt="${archetipoAP}" class="img-carta" onerror="this.style.display='none';">
                 <h4 class="titolo-archetipo">${archetipoAPFormattato}</h4>
                 <p class="testo-clicca">➔ Clicca qui per leggere l'analisi completa</p>
+                
+                <div class="testo-segreto" style="display:none;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img src="carte/${annoPersonale}.png" alt="${archetipoAP}" style="max-width: 130px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
+                    </div>
+
+                    <h3 class="archetipo-nome">${archetipoAPFormattato}</h3>
+
+                    ${t.sottotitolo ? `
+                    <div style="background: rgba(212, 175, 55, 0.06); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                        <h4 style="color: #d4af37; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Doti & Energia</h4>
+                        <p style="margin: 0; font-style: italic; opacity: 0.9; font-size: 0.95em; line-height: 1.4;">${t.sottotitolo}</p>
+                    </div>
+                    ` : ''}
+
+                    ${t.introduzione ? `
+                    <div style="background: rgba(30, 58, 138, 0.25); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                        <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 8px; font-size: 0.95em; text-transform: uppercase;">Significato dell'Anno</h4>
+                        <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.introduzione}</p>
+                    </div>
+                    ` : ''}
+
+                    ${t.opportunita ? `
+                    <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                        <h4 style="color: #34d399; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">OPPORTUNITÀ</h4>
+                        <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.opportunita}</p>
+                    </div>
+                    ` : ''}
+
+                    ${t.sfide ? `
+                    <div style="background: rgba(185, 28, 28, 0.15); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 15px; margin-bottom: 15px; text-align: left;">
+                        <h4 style="color: #f87171; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">SFIDE</h4>
+                        <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.sfide}</p>
+                    </div>
+                    ` : ''}
+
+                    ${t.consigliPratici ? `
+                    <div style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 15px; text-align: left;">
+                        <h4 style="color: #c084fc; margin-top: 0; margin-bottom: 8px; font-size: 0.95em;">CONSIGLI PRATICI</h4>
+                        <p style="margin: 0; line-height: 1.5; font-size: 0.95em;">${t.consigliPratici}</p>
+                    </div>
+                    ` : ''}
+                </div>
             </div>
         `;
     } else {
@@ -1443,8 +1392,11 @@ function estraiEtichettaOmbra(valore) {
     return nomiOmbreDefault[num] || `Ombra ${num}`;
 }
 
-// Inizializzazione sicura: esegue solo se le variabili delle ombre sono definite
-if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc !== 'undefined') {
+window.aggiornaGraficaOmbre = function(oGiov, oMat, oPrinc) {
+    if (typeof oGiov === 'undefined' || typeof oMat === 'undefined' || typeof oPrinc === 'undefined') {
+        return;
+    }
+
     const ombreSetup = [
         { idNum: 'numOmbraGiov', idDesc: 'descOmbraGiov', valore: oGiov },
         { idNum: 'numOmbraMat', idDesc: 'descOmbraMat', valore: oMat },
@@ -1452,8 +1404,13 @@ if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc
     ];
 
     ombreSetup.forEach(ombra => {
-        const imgNome = ottieniNomeImmagineOmbra(ombra.valore);
-        const etichettaCompleta = estraiEtichettaOmbra(ombra.valore);
+        const imgNome = typeof ottieniNomeImmagineOmbra === 'function' 
+            ? ottieniNomeImmagineOmbra(ombra.valore) 
+            : `ombra${ombra.valore}`;
+            
+        const etichettaCompleta = typeof estraiEtichettaOmbra === 'function' 
+            ? estraiEtichettaOmbra(ombra.valore) 
+            : `Ombra ${ombra.valore}`;
         
         const etichettaFormattata = etichettaCompleta ? etichettaCompleta.replace(/\s*\(/, '<br>(') : '';
 
@@ -1492,17 +1449,24 @@ if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc
                     apriModal(contenutoModal);
                 } else if (typeof mostraPopup === 'function') {
                     mostraPopup(contenutoModal);
+                } else if (typeof apriApprofondimento === 'function') {
+                    apriApprofondimento(this);
                 } else {
-                    const modalElement = document.getElementById('modalOmbra') || document.getElementById('modalGenerico');
+                    const modalElement = document.getElementById('modalOmbra') || document.getElementById('modalGenerico') || document.getElementById('modaleApprofondimento');
                     if (modalElement) {
-                        const modalBody = modalElement.querySelector('.modal-body') || modalElement;
+                        const modalBody = modalElement.querySelector('.modal-body') || document.getElementById('modaleContenuto') || modalElement;
                         modalBody.innerHTML = contenutoModal;
-                        modalElement.style.display = 'block';
+                        modalElement.style.display = 'flex';
                     }
                 }
             };
         }
     });
+};
+
+// Esecuzione automatica solo se le tre variabili sono già definite all'avvio
+if (typeof oGiov !== 'undefined' && typeof oMat !== 'undefined' && typeof oPrinc !== 'undefined') {
+    window.aggiornaGraficaOmbre(oGiov, oMat, oPrinc);
 }
 
            testoCopiaGlobale += `Giorno di Nascita Isolato: ${format(giornoIsolato)}\n`;
