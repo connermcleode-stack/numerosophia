@@ -23,16 +23,16 @@ window.DESTINO_ANIMA = {
   sottotitolo: "Sensibilità, intuito, cooperazione e ricerca dell'armonia",
   introduzione: "Il Destino 2 vi chiama a comprendere l'umiltà, la pazienza e l'arte della collaborazione disinteressata. Dotati di profonda sensibilità e intuito, il vostro scopo principale in questa vita è creare ponti, portare pace ed equilibrio tra dare e ricevere, offrendo un supporto prezioso e fedele senza annullare voi stessi.",
   opportunita: "Straordinario intuito, naturale attitudine al lavoro di squadra e di supporto. Personalità pacifica, diplomatica, estremamente affidabile, compassionevole ed onesta. Spiccate inclinazioni artistiche ed espressive (musica, pittura, scrittura).",
-  sfide: "Tendenza a compiacere troppo gli altri o a cadere nel ruolo di vittima. Rischio di cedere all'insicurezza se sotto pressione o affrettati. Possibile insoddisfazione o errore di valutazione quando si affida solo alla mente razionale ignorando l'intuito.",
+  sfide: "Tendenza a compiacere troppo gli altri o a cadere nel ruolo di vittima. Rischio di cedere all'insicurezza se sotto pressione. Possibile insoddisfazione o errore di valutazione quando ci si affida solo alla mente razionale ignorando l'intuito.",
   consigliPratici: "Impara a comunicare apertamente i tuoi bisogni senza covare risentimento. Procedi sempre al tuo ritmo naturale ed evita lo stress da urgenza. Nutri la fiducia in te stesso e coltiva relazioni con persone che sappiano apprezzare la tua sensibilità.",
-  carriera: "Assistenza personale e dirigenziale, diplomazia, lavoro sociale, segreteria, organizzazioni benefiche o educative, arte di gruppo (musica, danza, pittura, canto)."
+  carriera: "Assistenza personale, ruoli diplomatici, lavoro sociale, segreteria, organizzazioni benefiche o educative, arte di gruppo (musica, danza, pittura, canto)."
 },
 3: {
   nome: "Il Giullare (Artista e Comunicatore)",
   sottotitolo: "Autoespressione, ottimismo, brillantezza mentale e gioia di vivere",
   introduzione: "Il Destino 3 vi invita ad abbracciare il valore della gioia, della leggerezza e del pensiero positivo. Grazie a una mente vivace e a un naturale carisma, il vostro scopo principale è comunicare, far divertire e portare entusiasmo ed energia nel mondo, esprimendo liberamente i vostri talenti creativi e intellettuali.",
-  opportunita: "Lucidità mentale acuta, brillantezza, grande socievolezza ed estro. Naturale senso dell'umorismo ed spiccata capacità di autoespressione. Mente veloce nel pianificare, analizzare e memorizzare, con forti attitudini artistiche e comunicative.",
-  sfide: "Dipendenza dal plauso altrui ed insofferenza verso la routine. Rischio di assumere un'aria di superiorità, diventando troppo critici o intolleranti verso i limiti altrui, specialmente in famiglia. Tendenza ad essere troppo teorici e poco pratici.",
+  opportunita: "Lucidità mentale acuta, brillantezza, grande socievolezza ed estro. Naturale senso dell'umorismo e spiccata capacità di autoespressione. Mente veloce nel pianificare, analizzare e memorizzare, con forti attitudini artistiche e comunicative.",
+  sfide: "Dipendenza dall'approvazione altrui ed insofferenza verso la routine. Incapacità di affronta di problemi in maniera matura. Tendenza ad essere troppo teorici e poco pratici.",
   consigliPratici: "Sviluppa sensibilità ed empatia verso i sentimenti degli altri. Evita le critiche logoranti tra le mura domestiche e coltiva la pazienza. Bilancia la tua vivacità mentale imparando ad usare l'intuito e mettendoti in gioco in modo concreto nella vita di tutti i giorni.",
   carriera: "Spettacolo, recitazione, scrittura, critica d'arte, ambiente accademico, ricerca scientifica, contabilità, programmazione, analisi di sistemi e gestione aziendale."
 },
@@ -41,7 +41,7 @@ window.DESTINO_ANIMA = {
   sottotitolo: "Stabilità, disciplina, concretezza e senso dell'ordine",
   introduzione: "Il Destino 4 vi chiama a costruire fondamenta solide per il vostro futuro attraverso la pazienza, il metodo e il rispetto delle regole. Con i piedi ben piantati a terra, il vostro scopo principale in questa vita è trasformare le idee in realtà concrete, offrendo affidabilità, struttura e supporto sistematico a voi stessi e agli altri.",
   opportunita: "Straordinaria abilità pratica, precisione ed efficienza organizzativa. Personalità affidabile, metodica, leale, paziente nei dettagli e orientata all'azione concreta. Grande manualità e spiccate capacità nella gestione della materia e del lavoro ben fatto.",
-  sfide: "Insofferenza verso la routine se nel quadro prevalgono numeri dispari. Rischio di attaccamento materiale, rigidità, stakanovismo ed eccessivo stress per ambizioni frustrate, a scapito dell'equilibrio familiare ed emotivo.",
+  sfide: "Insofferenza verso la routine se nel quadro prevalgono numeri dispari. Rischio di attaccamento materiale, rigidità, stakanovismo ed eccessivo stress dato da ambizioni frustranti, a scapito dell'equilibrio familiare ed emotivo.",
   consigliPratici: "Impara a rilassarti e stacca la spina attraverso la meditazione o il contatto con la natura (ideale una casa in campagna). Sviluppa l'intuito e non fermarti al puro guadagno economico: bilancia la praticità con l'affetto, la flessibilità mentale e la crescita spirituale.",
   carriera: "Artigianato, edilizia, architettura, ingegneria, economia e finanza, dirigenza aziendale, medicina/chiropratica, insegnamento di arti manuali o fitness, professionismo sportivo e stesura di manuali tecnici."
 },
@@ -69,7 +69,7 @@ window.DESTINO_ANIMA = {
   introduzione: "Il Destino 7 vi chiama a superare le illusioni materiali per cercare la verità profonda delle cose. Spinti da un forte spirito analitico e dal bisogno di comprendere ogni 'perché', il vostro scopo è trasformare le lezioni della vita in profonda saggezza, imparando attraverso l'esperienza diretta, la solitudine interiore e la condivisione dell'insegnamento.",
   opportunita: "Profonda forza d'animo, attitudine stoica e innata vocazione filosofica. Mente analitica, perfezionista e votata allo studio. Grande affidabilità, forte senso della giustizia e naturale predisposizione a diventare maestri ed esperti del proprio settore.",
   sfide: "Tendenza al rifiuto dei consigli altrui e insofferenza verso la disciplina imposta dall'esterno. Rischio di dover affrontare sacrifici (in salute, amore o denaro) per la costrizione di dover 'sperimentare tutto sulla propria pelle'. Possibile rigidità o ribellione.",
-  consigliPratici: "Pratica la meditazione e il distacco per connetterti al tuo intuito. Applica a te stesso la stessa disciplina che richiedi agli altri ed evita di giudicare impulsivamente le persone o il mondo degli affari. Accetta i momenti di solitudine come spazi sacri di ascolto.",
+  consigliPratici: "Pratica la meditazione e il distacco per connetterti al tuo intuito. Applica a te stesso la stessa disciplina che richiedi agli altri ed evita di giudicare impulsivamente le persone o il mondo. Accetta i momenti di solitudine come spazi sacri di ascolto.",
   carriera: "Insegnamento, ricerca scientifica, filosofia, settore legale e giudiziario, ambito spirituale e umanitario, chirurgia, falegnameria e professioni che richiedono l'uso di strumenti di precisione."
 },
 8: {
