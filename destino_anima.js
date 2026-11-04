@@ -79,14 +79,14 @@ window.DESTINO_ANIMA = {
   opportunita: "Straordinaria forza di carattere, indipendenza e capacità organizzative. Naturale predisposizione per ruoli di alta responsabilità, prestigio e finanza. Forte sensibilità ed innata protezione verso le creature vulnerabili (bambini, anziani, animali).",
   sfide: "Difficoltà nell'esprimere affetto e apprezzamento, che può sfociare in freddezza o apparente indifferenza con i cari. Intolleranza alle interferenze esterne e rischio di oscillare tra severità estrema e troppa indulgenza.",
   consigliPratici: "Sforzati di abbattere le barriere emotive e fai apprezzamenti sinceri alle persone che ami. Non temere che la vulnerabilità comprometta la tua indipendenza. Usa i viaggi come strumento di crescita e applica la tua saggezza sia nel lavoro che nella vita privata.",
-  carriera: "Dirigenza aziendale, finanza, banche, Borsa, imprenditoria, marina o aviazione commerciale, turismo, recitazione, protezione degli animali ed enti benefici o assistenziali."
+  carriera: "Dirigenza aziendale, finanza, banche, imprenditoria, turismo, recitazione, protezione degli animali ed enti benefici o assistenziali."
 },
 9: {
   nome: "Il Liberatore (Ispiratore e Umanitario)",
   sottotitolo: "Idealismo, responsabilità, amore incondizionato e vocazione artistica",
   introduzione: "Il Destino 9 vi invita a guidare ed ispirare gli altri ponendo sempre l'essere umano al di sopra della materia. Dotati di profonda sensibilità e vena drammatica, il vostro scopo è risvegliare le coscienze, superare i limiti dell'ego e portare armonia nel mondo traducendo i vostri elevati ideali in azioni concrete.",
   opportunita: "Forte carisma magnetico, spiccato senso di responsabilità, estrema onestà e profondo idealismo. Innata predisposizione per l'arte drammatica, la medicina e il servizio umanitario. Straordinario dono di ispirare, ascoltare ed elevare i talenti altrui.",
-  sfide: "Difficoltà nel gestire il denaro e gli affari materiali. Rischio di profondo cinismo e delusione quando si scopre che gli altri non condividono la stessa onestà. Tendenza all'ipocrisia, all'egocentrismo o a critiche severe se dominati da ambizioni frustrate.",
+  sfide: "Difficoltà nel gestire il denaro e gli affari materiali. Rischio di profondo cinismo e delusione quando si scopre che gli altri non condividono la stessa onestà. Tendenza all'ipocrisia, all'egocentrismo o a critiche severe se dominati da ambizioni troppo elevate che se non soddisfatte portano a frustrazione.",
   consigliPratici: "Impara a tradurre l'idealismo sul piano pratico ed evita giudizi affrettati sulle persone. Coltiva la pazienza, la tenacia e impara a ridere di più per alleggerire la tua innata serietà. Avvaliti di strumenti come la numerologia per comprendere meglio te stesso e gli altri.",
   carriera: "Attività umanitarie e sociali, arte e teatro drammatico, medicina e terapie olistiche, ricerca e investigazione, istituzioni religiose, amministrazione scolastica e scientifica."
 },
@@ -104,9 +104,9 @@ window.DESTINO_ANIMA = {
   sottotitolo: "Potenziale illimitato, visione globale, leadership strategica e pragmatismo",
   introduzione: "Il Destino 22 vi affida la straordinaria missione di dare forma concreta a grandi progetti destinati al beneficio della collettività. Unendo la profonda intuizione spirituale (doppio 2) con una straordinaria forza pratica (vibrazione del 4), il vostro scopo è orchestrare e realizzare idee astratte su scala globale con efficienza e tenacia.",
   opportunita: "Apprendimento sorprendentemente rapido, eccezionali doti organizzative, leadership naturale e autocontrollo emotivo. Grande sensibilità e intuito orientati al benessere dell'umanità. Capacità di gestire enormi responsabilità rimanendo caldi, lucidi e focalizzati anche in situazioni complesse.",
-  sfide: "Tendenza al workaholism e all'ossessione per i risultati a discapito degli affetti e del relax. Rischio di cadere in un grave disadattamento, apatia o depressione se ci si lascia sviare dal materialismo e dall'egocentrismo.",
+  sfide: "Tendenza al workaholism (dipendenza dal lavoro) e all'ossessione per i risultati a discapito degli affetti e del relax. Rischio di cadere in un grave disadattamento, apatia o depressione se ci si lascia sviare dal materialismo e dall'egocentrismo.",
   consigliPratici: "Mantieni un rigoroso equilibrio tra lavoro e vita privata dedicando spazio all'arte, alla musica e alla danza per sciogliere le tensioni emotive. Continua ad investire nella tua formazione interiore e accetta il supporto pratico altrui senza voler controllare ogni cosa da solo.",
-  carriera: "Leadership ed alta dirigenza aziendale, politica e diplomazia, regia, grandi opere umanitarie o culturali, architettura e ingegneria, informatica e tecnologia avanzata, insegnamento e scrittura."
+  carriera: "Leadership nell'alta dirigenza aziendale, politica e diplomazia, regia, grandi opere umanitarie o culturali, architettura e ingegneria, informatica e tecnologia avanzata, insegnamento e scrittura."
 },
 33: {
   nome: "Il Maestro (Guida Spirituale e Amore Cristico)",
