@@ -272,10 +272,10 @@ anima: {
   nome: "Il Maestro (L'Anelito alla Compassione Incondizionata e alla Redenzione dell'Amore)",
   sottotitolo: "Spinta alla vibrazione cristica, alla coerenza spirituale e alla comunione profonda",
   introduzione: "Nel profondo dell'Anima, il Numero Maestro 33 (chiamato anche 'Vibrazione di Cristo') aspira all'unione sacra con il Verbo/Logos per mezzo dell'amore assoluto. È la spinta mistica a calarsi nel dolore dell'umanità e ad agire come specchio di luce, guidando gli altri con l'esempio verso la soglia della propria sapienza interiore.",
-  opportunita: "Immensa capacita di immedesimazione ed empatia senza giudizio, carisma spirituale ed educativo, naturale inclinazione alla comunione con il Sé (Brahman) e facoltà di compiere 'miracoli' tramite il salto quantico della fede pura.",
+  opportunita: "Immensa capacità di immedesimazione ed empatia senza giudizio, carisma spirituale ed educativo, naturale inclinazione alla comunione con il Sé (Brahman) e facoltà di compiere 'miracoli' tramite il salto quantico della fede pura.",
   sfide: "La caduta nella 'psicopatologia del sublime' (caricature messianiche o moralismo retorico), le trappole del masochismo e del martirio personale, e il rischio opposto dell'orgoglio spirituale o presunzione di avere sempre la verità.",
   consigliPratici: "Pratica l'umiltà come primo gradino per la conoscenza vera e accogli ogni lezione di vita senza rigidità. Ricorda di non disperderti nel sacrificio di te stesso: l'amore autentico include anche il rispetto per il tuo tempio interiore.",
-  carriera: "Guida e insegnamento spirituale, aiuto ed educazione di categorie vulnerabili (assistenza sociale, psicologia del profondo, filantropia), leadership olistica e caritatevole, e percorsi di consapevolezza orientati al risveglio delle coscienze."
+  carriera: "Guida e insegnamento spirituale, aiuto ed educazione di categorie vulnerabili (assistenza sociale, psicologica, filantropia), leadership olistica e caritatevole, e percorsi di consapevolezza orientati al risveglio delle coscienze."
 },
 44: {
   nome: "Lo Sciamano (L'Anelito al Ripristino dell'Equilibrio e alla Guarigione della Terra)",
@@ -302,13 +302,13 @@ anima: {
   opportunita: "Elevata sensibilità ed empatia magnetica nelle relazioni, naturale capacità di godere della bellezza e della vita senza colpa, e intuito sottile nell'armonizzare le polarità della materia e dello spirito.",
   sfide: "La tentazione di cedere all'indigestione sensoriale o alla frenesia per paura di 'perdersi qualcosa', il rischio di dipendenze emotive/sessuali e la scissione interiore tra il bisogno d'amore e la ricerca del piacere puro.",
   consigliPratici: "Vivi ogni esperienza con 'totalità' evitando la fretta e l'accumulo di stimoli. Nutri la tua mente e il tuo corpo solo con energie che sostengono la tua crescita e pratica ogni sera il ringraziamento per i doni ricevuti.",
-  carriera: "Arti espressive e sensoria (musica, danza, pittura), percorsi di benessere olistico e tantra, relazioni pubbliche, mediazione affettiva/di coppia e ogni professione che richieda magnetismo e sensibilità emotiva."
+  carriera: "Arti espressive e sensorie (musica, danza, pittura), percorsi di benessere olistico e tantra, relazioni pubbliche, mediazione affettiva/di coppia e ogni professione che richieda magnetismo e sensibilità emotiva."
 },
 16: {
   nome: "Il Perfezionista (La Prova Karmica della Mente e della Caduta dell'Ego)",
   sottotitolo: "Spinta al bilanciamento tra mente e cuore, all'umiltà e all'integrazione dell'Ombra",
   introduzione: "Nel profondo dell'Anima, il Numero Karmico 16 affronta la prova del regno mentale e della presunzione dell'Io. È l'anelito a superare il perfezionismo nevrotico e la spinta all'assolutismo, comprendendo che la vera conoscenza nasce dalla sintesi tra l'intelletto e la compassione del cuore, radicata nella terra.",
-  opportunita: "Elevate capacità analitiche e intuitive, potenziale di profonda rinascita dopo il crollo delle illusioni egoiche, e naturale predisposizione al risveglio spirituale attraverso la via dell'umiltà.",
+  opportunita: "Elevate capacità analitiche e intuitive, potenziale capacità di profonda rinascita dopo il crollo delle illusioni egoiche, e naturale predisposizione al risveglio spirituale attraverso la via dell'umiltà.",
   sfide: "La tentazione di isolarsi nell'orgoglio o nella ricerca di una perfezione rigida che nega la vita, l'alternanza tra deliri di onnipotenza e senso di impotenza, e il rischio di perdere il contatto con l'armonia relazionale per voler 'avere sempre ragione'.",
   consigliPratici: "Pratica la tenerezza verso il tuo bambino interiore ed evita di rimandare la felicità al raggiungimento di un'ideale perfezione. Sintonizzati sulle affinità con gli altri anziché sulle differenze e mantieni il radicamento fisico con lunghe passeggiate nella natura.",
   carriera: "Percorsi di ricerca filosofica o spirituale, psicologia e integrazione dell'Ombra, architettura o ristrutturazione trasformativa, e ogni ambito professionale che richieda discernimento analitico unito a una guida etica ed empatica."
@@ -317,7 +317,7 @@ anima: {
   nome: "Il Condottiero (La Prova Karmica dell'Ego e dell'Azione Ispirata)",
   sottotitolo: "Spinta alla resa alla volontà divina, al servizio disinteressato e al distacco dai risultati",
   introduzione: "Nel profondo dell'Anima, il Numero Karmico 19 affronta la prova finale del viaggio dell'Eroe: il superamento delle pretese dell'ego. È l'anelito spirituale a porsi al servizio dell'umanità, apprendendo l'arte del 'fare senza fare' e agendo non per ambizione o ansia da prestazione, ma come strumento dell'amore universale e della volontà cosmica.",
-  opportunita: "Straordinaria forza di visione e leadership etica, capacita di agire con totale determinazione ed efficacia rimanendo centrato nel Sé, e potenziale di profonda trasformazione spirituale attraverso il servizio.",
+  opportunita: "Straordinaria forza di visione e leadership etica, capacità di agire con totale determinazione ed efficacia rimanendo centrato nel Sé, e potenziale di profonda trasformazione spirituale attraverso il servizio.",
   sfide: "La trappola dell'orgoglio o della falsa modestia (l'ego che si maschera da santità), la frustrazione legata al timore dell'insuccesso o all'attaccamento ai risultati, e la sofferenza generata dal conflitto tra le leggi dell'Io e la voce del cuore.",
   consigliPratici: "Assicurati che le tue azioni nascano dalla gioia interiore e non dal solo dovere mentale. Quando ti senti in stallo, medita ed eleva la prospettiva per allinearti alla volontà del cielo, lasciando andare l'attaccamento a vittoria e sconfitta.",
   carriera: "Leadership sociale, etica e spirituale, guida di progetti filantropici o comunitari ad ampio raggio, insegnamento orientato alla crescita personale e ogni ruolo di guida in cui il coraggio individuale si traduce in beneficio collettivo."
